@@ -1,0 +1,23 @@
+{
+  "name": "stream-chat-docusaurus-cli",
+  "version": "1.0.0",
+  "description": "Stream Chat Docusaurus CLI",
+  "main": "index.js",
+  "bin": {
+    "stream-chat-docusaurus": "./init.sh"
+  },
+  "scripts": {
+    "compress": "rm docusaurus.tar.gz; tar -czf docusaurus.tar.gz ./docusaurus",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GetStream/stream-chat-docusaurus-cli.git"
+  },
+  "author": "GetStream",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/GetStream/stream-chat-docusaurus-cli/issues"
+  },
+  "homepage": "https://github.com/GetStream/stream-chat-docusaurus-cli#readme"
+}

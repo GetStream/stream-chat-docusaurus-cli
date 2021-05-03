@@ -1,0 +1,5 @@
+node_modules/
+npm-debug.*
+yarn-error.log
+.DS_Store
+docusaurus
