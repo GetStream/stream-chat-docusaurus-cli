@@ -26,7 +26,7 @@ You can add your own plugins in addition to the default set by creating a `docus
 
 ## Sidebars
 
-You can add your own sidebar instead of the auto-generated default by creating a `sidebars{SDK_NAME}.js` file within your `docusaurus` directory. For example on `React` the file would be `sidebarsReact.js` and for SDKs with spaces within their names like `React Native` you would do `sidebarsReactNative.js`.
+You can add your own sidebar instead of the auto-generated default by creating a `sidebars{SDK_NAME}.json` file within your `docusaurus` directory. For example on `React` the file would be `sidebarsReact.json` and for SDKs with spaces within their names like `React Native` you would do `sidebarsReactNative.json`.
 
 ## Installation and Using the CLI
  
@@ -47,6 +47,10 @@ To locally run the docusaurus setup and see your documentation you can run `npx 
 ### Versioning
 
 To cut a new version of your docs simply type in `npx stream-chat-docusaurus -nv NEW_VERSION SDK_NAME` like this: `npx stream-chat-docusaurus -nv 2.0.0-rc.0 ReactNative`.
+
+### Building
+
+To locally build your docusaurus static files to see if it succeeds and how it looks you should run `npx stream-chat-docusaurus -b -t`. The `-b` flag builds the static files and the `-t` command serves the files locally.
 
 ### MDX
 

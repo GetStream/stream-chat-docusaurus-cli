@@ -1,6 +1,18 @@
 #!/bin/bash
 package=stream-chat-docusaurus
 
+build() {
+    if [ ! -d "docusaurus" ]; then
+        init
+    fi
+
+    echo "build docusaurus static files..."
+
+    cd docusaurus
+    yarn clear; yarn build;
+    cd ..
+}
+
 init() {
     echo "initializing..."
 
@@ -19,6 +31,16 @@ init() {
         echo "Found custom plugins to install: $CUSTOM_INSTALLS"
         yarn add $CUSTOM_INSTALLS
     fi
+    cd ..
+}
+
+serve() {
+    if [ ! -d "build" ]; then
+        build
+    fi
+
+    cd docusaurus
+    yarn serve
     cd ..
 }
 
@@ -57,24 +79,30 @@ usage() {
     echo "-h, --help                                show brief help"
     echo "-i, --init                                initialize docusaurus workspace"
     echo "-c, --custom-install=PACKAGES             specify any custom packages to install in docusaurus"
+    echo "-b, --build                               build docusaurus static files for deployment"
     echo "-nv, --new-version NEW_VERSION SDK_NAME   specify and cut a new docs version of an SDK"
     echo "-s, --start                               start docusaurus server"
+    echo "-t, --test-build                          serve built docusaurus to locally test production build"
 }
 
 main() {
     while test $# -gt 0;
     do
         case $1 in
+            -b|--build)
+                BUILD='true'
+                shift
+                ;;
+            -c=*|--custom-installs=*)
+                CUSTOM_INSTALLS=`echo "${1#*=}" | tr ',' ' '`
+                shift
+                ;;
             -h|--help)
                 usage
                 exit 0
                 ;;
             -i|--init)
                 INIT='true'
-                shift
-                ;;
-            -c=*|--custom-installs=*)
-                CUSTOM_INSTALLS=`echo "${1#*=}" | tr ',' ' '`
                 shift
                 ;;
             -nv|--new-version)
@@ -85,6 +113,10 @@ main() {
                 ;;
             -s|--start)
                 START='true'
+                shift
+                ;;
+            -t|--test-build)
+                SERVE='true'
                 shift
                 ;;
             *)
@@ -115,6 +147,14 @@ main() {
 
     if [[ ${START} == true ]]; then
         start_server
+    fi
+
+    if [[ ${BUILD} == true ]]; then
+        build
+    fi
+
+    if [[ ${SERVE} == true ]]; then
+        serve
     fi
 }
 
