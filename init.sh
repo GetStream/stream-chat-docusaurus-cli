@@ -21,8 +21,8 @@ init() {
 
     cd docusaurus
 
-    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -type d -exec ln -s {} \;
-    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -type f -exec ln -s {} \;
+    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type d -exec ln -s {} \;
+    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type f -exec ln -s {} \;
 
     yarn
     if [[ -z "${CUSTOM_INSTALLS}" ]]; then
@@ -67,8 +67,8 @@ version() {
     if [ ! -d "$STREAM_SDK_PATH/docusaurus/${SDK_NAME}_versioned_docs" ]; then
         cp -r $SDK_NAME* $STREAM_SDK_PATH/docusaurus
         rm -rf $SDK_NAME*
-        find $STREAM_SDK_PATH/docusaurus -type d -regex ".*/${SDK_NAME}_version.*" -d 1 -exec ln -s {} \;
-        find $STREAM_SDK_PATH/docusaurus -type f -regex ".*/${SDK_NAME}_version.*" -d 1 -exec ln -s {} \;
+        find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type d -regex ".*/${SDK_NAME}_version.*" -exec ln -s {} \;
+        find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type f -regex ".*/${SDK_NAME}_version.*" -exec ln -s {} \;
     fi
 }
 
