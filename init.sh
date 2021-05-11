@@ -21,8 +21,8 @@ init() {
 
     cd docusaurus
 
-    find $STREAM_SDK_PATH/docusaurus -d 1 -type d -exec ln -s {} \;
-    find $STREAM_SDK_PATH/docusaurus -d 1 -type f -exec ln -s {} \;
+    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -type d -exec ln -s {} \;
+    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -type f -exec ln -s {} \;
 
     yarn
     if [[ -z "${CUSTOM_INSTALLS}" ]]; then
