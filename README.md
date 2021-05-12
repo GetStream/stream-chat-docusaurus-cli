@@ -50,7 +50,7 @@ To cut a new version of your docs simply type in `npx stream-chat-docusaurus -nv
 
 ### Building
 
-To locally build your docusaurus static files to see if it succeeds and how it looks you should run `npx stream-chat-docusaurus -b -t`. The `-b` flag builds the static files and the `-t` command serves the files locally.
+To locally build your docusaurus static files to see if it succeeds you should run `npx stream-chat-docusaurus -b`. The `-b` flag builds the static files.
 
 ### MDX
 

@@ -89,7 +89,7 @@ usage() {
     echo "-b, --build                               build docusaurus static files for deployment"
     echo "-nv, --new-version NEW_VERSION SDK_NAME   specify and cut a new docs version of an SDK"
     echo "-s, --start                               start docusaurus server"
-    echo "-t, --test-build                          serve built docusaurus to locally test production build"
+    echo "-t, --test-build                          BETA (not working correctly): serve built docusaurus to locally test production build"
 }
 
 main() {
