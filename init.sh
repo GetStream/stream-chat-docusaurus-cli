@@ -35,11 +35,18 @@ init() {
 }
 
 serve() {
-    if [ ! -d "build" ]; then
-        build
+    if [ ! -d "docusaurus" ]; then
+        init
     fi
 
     cd docusaurus
+
+    if [ ! -d "build" ]; then
+        cd ..
+        build
+        cd docusaurus
+    fi
+
     yarn serve
     cd ..
 }
