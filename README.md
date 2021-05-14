@@ -4,11 +4,11 @@ This is a CLI tool to help locally run docusaurus and show SDK documentation
 
 ## Local SDK setup
 
-You should have a documentation directory structure starting from a `docusaurus` directory in your SDK. Within that there should be a `docs` directory. Within that should be a directory named for your SDK (ex: `iOS` or `Android` or `React Native`). All of your markdown documentation should live within that directory and you can feel free to use any additional directory structure you see fit for sectioning your docs. Note: each directory you have will become it's own url path. For instance, if you have this `docusaurus/docs/Android/classes/some-doc.md` file path then the url path for that markdown file will be `{url}/chat/docs/sdk/Android/classes/some-doc`. Below is an example of this directory structure. Locally you should only need your individual SDK directory and contents.
+You should have a documentation directory structure starting from a `docusaurus` directory in your SDK. Within that there should be a `docs` directory. Within that should be a directory named for your SDK (ex: `iOS` or `Android` or `ReactNative`). All of your markdown documentation should live within that directory and you can feel free to use any additional directory structure you see fit for sectioning your docs. Note: each directory you have will become it's own url path. For instance, if you have this `docusaurus/docs/Android/classes/some-doc.md` file path then the url path for that markdown file will be `{url}/chat/docs/sdk/android/classes/some-doc`. Below is an example of this directory structure. Locally you should only need your individual SDK directory and contents.
 
 ![Example Directory Structure](./assets/images/Example_Directory_Structure.png)
 
-The markdown file which you want to be the starting page (ex: `{url}/chat/docs/sdk/Android` or `{url}/chat/docs/sdk/iOS`) for your SDK docs should have this at the top of the file and be in the root of your doc SDK directory (ex: `docusaurus/docs/Android/example.md` or `docusaurus/docs/iOS/example.md`):
+The markdown file which you want to be the starting page (ex: `{url}/chat/docs/sdk/android` or `{url}/chat/docs/sdk/ios`) for your SDK docs should have this at the top of the file and be in the root of your doc SDK directory (ex: `docusaurus/docs/Android/example.md` or `docusaurus/docs/iOS/example.md`):
 
 ```
 ---
@@ -26,7 +26,7 @@ You can add your own plugins in addition to the default set by creating a `docus
 
 ## Sidebars
 
-You can add your own sidebar instead of the auto-generated default by creating a `sidebars{SDK_NAME}.json` file within your `docusaurus` directory. For example on `React` the file would be `sidebarsReact.json` and for SDKs with spaces within their names like `React Native` you would do `sidebarsReactNative.json`.
+You can add your own sidebar instead of the auto-generated default by creating a `sidebars{SDK_NAME}.json` file within your `docusaurus` directory. For example on `React` the file would be `sidebarsReact.json` and for `React Native` you would do `sidebarsReactNative.json`.
 
 ## Installation and Using the CLI
  
@@ -46,7 +46,7 @@ To locally run the docusaurus setup and see your documentation you can run `npx 
 
 ### Versioning
 
-To cut a new version of your docs simply type in `npx stream-chat-docusaurus -nv NEW_VERSION SDK_NAME` like this: `npx stream-chat-docusaurus -nv 2.0.0-rc.0 ReactNative`.
+To cut a new version of your docs simply type in `npx stream-chat-docusaurus -nv NEW_VERSION SDK_NAME` like this (SDK_NAME all lowercase with no spaces): `npx stream-chat-docusaurus -nv 2.0.0-rc.0 reactnative`.
 
 ### Building
 
