@@ -24,6 +24,31 @@ You can add local assets to your docs by adding them within an `assets` folder w
 
 You can add your own plugins in addition to the default set by creating a `docusaurus{SDK_NAME}.plugin.js` file within your `docusaurus` directory.
 
+The custom plugin file (example name: `docusaurusReact.plugin.js`) should be in a format like this where you can add multiple plugins. `cwd` is the root path to your SDK (outside of the `docusaurus` directory described in [Local SDK setup](#Local-SDK-setup))
+```js
+const cwd = process.env.STREAM_SDK_PATH;
+module.exports = () => {
+  return {
+    plugins: [
+      [
+        path.join(cwd, "docusaurus/node_modules/docusaurus-plugin-typedoc"),
+
+        {
+          entryPoints: [path.join(cwd, "docusaurus/src/index.ts")],
+          tsconfig: path.join(cwd, "docusaurus/tsconfig.json"),
+          docsRoot: path.join(cwd, "docusaurus/docs"),
+          out: "docusaurus/api",
+          sidebar: {
+            sidebarFile: path.join(cwd, "docusaurus/typedoc-sidebar.js"),
+            fullNames: false,
+          },
+        },
+      ],
+    ],
+  };
+};
+```
+
 ## Sidebars
 
 You can add your own sidebar instead of the auto-generated default by creating a `sidebars{SDK_NAME}.json` file within your `docusaurus` directory. For example on `React` the file would be `sidebarsReact.json` and for `React Native` you would do `sidebarsReactNative.json`.

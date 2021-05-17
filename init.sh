@@ -21,6 +21,7 @@ init() {
 
     cd docusaurus
 
+    # finding and symlinking directorys (d) and files (f) within the SDK repo docusaurus directory
     find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type d -exec ln -s {} \;
     find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type f -exec ln -s {} \;
 
@@ -87,7 +88,7 @@ usage() {
     echo "-i, --init                                initialize docusaurus workspace"
     echo "-c, --custom-install=PACKAGES             specify any custom packages to install in docusaurus"
     echo "-b, --build                               build docusaurus static files for deployment"
-    echo "-nv, --new-version NEW_VERSION SDK_NAME   specify and cut a new docs version of an SDK"
+    echo "-nv, --new-version NEW_VERSION SDK_NAME   specify and cut a new docs version of an SDK. SDK_NAME should be lowercase without spaces"
     echo "-s, --start                               start docusaurus server"
     echo "-t, --test-build                          BETA (not working correctly): serve built docusaurus to locally test production build"
 }
