@@ -1,0 +1,14 @@
+# Git ignore everything
+*
+
+# Other than these
+!src
+!src/**/*
+!static
+!static/**/*
+!.gitignore
+!babel.config.js
+!docusaurus.config.js
+!package.json
+!README.md
+!yarn.lock

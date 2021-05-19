@@ -1,0 +1,44 @@
+{
+  "name": "docusaurus",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "docusaurus build",
+    "clear": "docusaurus clear",
+    "deploy": "docusaurus deploy",
+    "docusaurus": "docusaurus",
+    "serve": "docusaurus serve --host 0.0.0.0",
+    "start": "docusaurus start --poll --host 0.0.0.0",
+    "swizzle": "docusaurus swizzle",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids"
+  },
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-beta.0",
+    "@docusaurus/plugin-content-docs": "2.0.0-beta.0",
+    "@docusaurus/plugin-content-pages": "2.0.0-beta.0",
+    "@docusaurus/theme-classic": "2.0.0-beta.0",
+    "@docusaurus/theme-live-codeblock": "2.0.0-beta.0",
+    "@mdx-js/react": "1.6.22",
+    "clsx": "1.1.1",
+    "html-react-parser": "1.2.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "cheerio": "1.0.0-rc.9",
+    "node-fetch": "2.6.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
