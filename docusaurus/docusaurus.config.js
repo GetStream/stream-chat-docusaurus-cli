@@ -6,8 +6,7 @@ const path = require('path');
 
 const { folderMapping, languageMapping } = require('./constants');
 
-// const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
-const STREAM_SDK_DOCUSAURUS_PATH = '../../stream-chat-docusaurus/docusaurus';
+const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
