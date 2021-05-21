@@ -1,0 +1,39 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+:root {
+  --docsearch-primary-color: var(--ifm-color-primary);
+  --docsearch-text-color: var(--ifm-font-color-base);
+  --docsearch-modal-width: 630px;
+  --docsearch-modal-background: #ffffff;
+  --docsearch-searchbox-height: 42px;
+}
+
+.DocSearch-Button {
+  transition: all var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+}
+
+.DocSearch-LoadingIndicator svg,
+.DocSearch-MagnifierLabel svg {
+  height: 18px;
+  width: 18px;
+}
+
+.DocSearch-Input {
+  font-size: inherit;
+}
+
+.DocSearch-Container {
+  z-index: calc(var(--ifm-z-index-fixed) + 1);
+}
+
+.DocSearch-PlatformLabel {
+  color: var(--docsearch-muted-color);
+  font-style: italic;
+  padding: 5px;
+}

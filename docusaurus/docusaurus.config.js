@@ -4,15 +4,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const folderMapping = {
-  android: 'Android',
-  flutter: 'Flutter',
-  ios: 'iOS',
-  react: 'React',
-  reactnative: 'React Native',
-};
+const { folderMapping } = require('./constants');
 
-const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
+// const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
+const STREAM_SDK_DOCUSAURUS_PATH = '../../stream-chat-docusaurus/docusaurus';
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
@@ -84,6 +79,12 @@ module.exports = {
   projectName: 'stream-chat',
   tagline: 'Stream Chat official component SDKs',
   themeConfig: {
+    algolia: {
+      apiKey: 'fd1b03de28081b5aa29dbccced4620b9',
+      indexName: 'DOCS',
+      appId: '7RY30ISS74',
+      // contextualSearch: true,
+    },
     footer: {
       copyright: '© Stream.IO, Inc. All Rights Reserved.',
       links: [
@@ -132,7 +133,11 @@ module.exports = {
       title: 'stream',
     },
   },
-  themes: ['@docusaurus/theme-classic', '@docusaurus/theme-live-codeblock'],
+  themes: [
+    '@docusaurus/theme-classic',
+    '@docusaurus/theme-live-codeblock',
+    '@docusaurus/theme-search-algolia',
+  ],
   title: 'Stream Chat - Component SDK Docs',
   url: 'https://getstream.io',
 };

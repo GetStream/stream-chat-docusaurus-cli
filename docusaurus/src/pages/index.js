@@ -7,13 +7,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useGlobalData from '@docusaurus/useGlobalData';
 import styles from './styles.module.css';
 
-const folderMapping = {
-  android: 'Android',
-  flutter: 'Flutter',
-  ios: 'iOS',
-  react: 'React',
-  reactnative: 'React Native',
-};
+import { folderMapping } from '../../constants';
 
 const Feature = ({ title }) => (
   <div className={clsx('col col--2', styles.feature)}>
@@ -21,7 +15,7 @@ const Feature = ({ title }) => (
       <Link
         className={clsx(
           'button button--outline button--secondary button--lg',
-          styles.getStarted,
+          styles.getStarted
         )}
         to={useBaseUrl(`${title.toLowerCase().replace(' ', '')}/`)}
       >
@@ -36,11 +30,12 @@ export const Home = () => {
   const globalData = useGlobalData();
 
   const SDK_FOLDERS = Object.values(
-    globalData['docusaurus-plugin-content-docs'],
+    globalData['docusaurus-plugin-content-docs']
   ).map(({ path }) => folderMapping[path.substring(path.lastIndexOf('/') + 1)]);
 
   return (
     <Layout
+
       description='Description will go into a meta tag in <head />'
       title={`Hello from ${siteConfig.title}`}
     >
@@ -48,6 +43,7 @@ export const Home = () => {
         <div className='container'>
           <h1 className='hero__title'>{siteConfig.title}</h1>
           <p className='hero__subtitle'>{siteConfig.tagline}</p>
+
         </div>
       </header>
       <main>

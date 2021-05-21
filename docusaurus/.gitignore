@@ -6,9 +6,12 @@
 !src/**/*
 !static
 !static/**/*
+!constants.js
 !.gitignore
 !babel.config.js
 !docusaurus.config.js
 !package.json
 !README.md
 !yarn.lock
+
+.DS_Store
