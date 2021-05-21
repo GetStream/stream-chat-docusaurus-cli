@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { folderMapping } = require('./constants');
+const { folderMapping, languageMapping } = require('./constants');
 
 // const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
 const STREAM_SDK_DOCUSAURUS_PATH = '../../stream-chat-docusaurus/docusaurus';
@@ -54,7 +54,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   const readableSDK = folderMapping[strippedSDK] || SDK;
   return {
     label: readableSDK,
-    to: `${strippedSDK}/`,
+    to: `${strippedSDK}/?language=${languageMapping[strippedSDK]}`,
     type: 'doc',
   };
 });

@@ -14,7 +14,16 @@ const platformMapping = {
   reactnative: 'react-native',
 };
 
+const languageMapping = {
+  android: 'kotlin',
+  flutter: 'dart',
+  ios: 'swift',
+  react: 'javascript',
+  reactnative: 'javascript',
+};
+
 module.exports = {
   folderMapping,
   platformMapping,
+  languageMapping,
 };
