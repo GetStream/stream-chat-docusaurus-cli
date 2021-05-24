@@ -1,6 +1,6 @@
 const algoliasearch = require('algoliasearch/lite');
 
-const json = require('../algolia-objects.json');
+const json = require('./algolia-objects.json');
 
 const client = algoliasearch(
   process.env.ALGOLIA_APP_ID,
@@ -8,7 +8,7 @@ const client = algoliasearch(
 );
 const index = client.initIndex('DOCUSSAURUS');
 
-return index
+index
   .replaceAllObjects(json)
   .then(({ objectIDs }) => {
     console.log('Updated Algolia index for: ', objectIDs);
