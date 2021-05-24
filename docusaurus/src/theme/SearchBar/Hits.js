@@ -43,7 +43,14 @@ export function Hits(props) {
   ));
 }
 
-export function Hit({ hit, platform, cmsPlatform, locationQuery, closeSearchModal, children }) {
+export function Hit({
+  hit,
+  platform,
+  cmsPlatform,
+  locationQuery,
+  closeSearchModal,
+  children,
+}) {
   const headerId = hit.header_id.replace('_', '-');
 
   if (hit.index === 'DOCS') {

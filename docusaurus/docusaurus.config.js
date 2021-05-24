@@ -74,6 +74,7 @@ module.exports = {
     ...CUSTOM_PLUGINS,
     '@docusaurus/plugin-content-pages',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
+    path.resolve(__dirname, 'src/algolia-index'),
   ],
   projectName: 'stream-chat',
   tagline: 'Stream Chat official component SDKs',
