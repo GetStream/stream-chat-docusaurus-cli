@@ -19,7 +19,8 @@ export function Hits(props) {
   return props.collections.map((collection) => (
     <section className="DocSearch-Hits" key={collection.source.sourceId}>
       <div className="DocSearch-Hit-source">
-        {collection.items[0].section_name}
+        {collection.items[0].section_name}{' '}
+        {collection.items[0].index === 'DOCS' && '(old website)'}
       </div>
 
       <ul {...props.getListProps()}>
