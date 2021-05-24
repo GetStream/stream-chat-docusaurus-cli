@@ -158,7 +158,7 @@ module.exports = function (context, options) {
         const docsData = await extractDocsData(docsContent);
         return new Promise((res, rej) => {
           fs.writeFile(
-            'algolia-objects.json',
+            './algolia-objects.json',
             JSON.stringify(docsData),
             (err) => {
               if (err) {
