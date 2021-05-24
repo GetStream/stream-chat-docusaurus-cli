@@ -34,6 +34,7 @@ export function Hits(props) {
               cmsPlatform={props.cmsPlatform}
               locationQuery={props.locationQuery}
               getItemProps={props.getItemProps}
+              closeSearchModal={props.closeSearchModal}
             />
           );
         })}
@@ -42,9 +43,10 @@ export function Hits(props) {
   ));
 }
 
-export function Hit({ hit, platform, cmsPlatform, locationQuery, children }) {
-  if ((hit.index = 'DOCS')) {
-    const headerId = hit.header_id.replace('_', '-');
+export function Hit({ hit, platform, cmsPlatform, locationQuery, closeSearchModal, children }) {
+  const headerId = hit.header_id.replace('_', '-');
+
+  if (hit.index === 'DOCS') {
     return (
       <a
         target="_blank"
@@ -60,10 +62,12 @@ export function Hit({ hit, platform, cmsPlatform, locationQuery, children }) {
   }
   return (
     <Link
-      to={url.format({
-        pathname: `/${platform}/${hit.slug}/`,
+      to={`${url.format({
+        pathname:
+          hit.slug === '' ? `/${platform}/` : `/${platform}/${hit.slug}/`,
         query: locationQuery,
-      })}
+      })}${!!headerId ? `#${headerId}` : ''}`}
+      onClick={closeSearchModal}
       style={{ textDecoration: 'none' }}
     >
       {children}
@@ -79,12 +83,14 @@ function Result({
   platform,
   cmsPlatform,
   locationQuery,
+  closeSearchModal,
 }) {
   const action = React.useRef(null);
   const title = item._highlightResult.name;
   const path = item._snippetResult.content_serialized_text;
   const codeSnippet =
-    item._snippetResult[`code_sample_${locationQuery.language}`];
+    item._snippetResult[`code_sample_${locationQuery.language}`] ||
+    item._snippetResult.code_sample;
 
   const istLastItemOnSlug = item.slug !== collection.items[index + 1]?.slug;
 
@@ -113,6 +119,7 @@ function Result({
         platform={platform}
         cmsPlatform={cmsPlatform}
         locationQuery={locationQuery}
+        closeSearchModal={closeSearchModal}
       >
         <div className="DocSearch-Hit-Container">
           <>

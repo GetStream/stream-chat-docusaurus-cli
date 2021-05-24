@@ -19,7 +19,7 @@ const algoliaClient = algoliasearch(
   'fd1b03de28081b5aa29dbccced4620b9'
 );
 
-const index = algoliaClient.initIndex('DOCS');
+const index = algoliaClient.initIndex('DOCUSSAURUS');
 
 export function DocSearchModal({
   onClose = () => null,
@@ -97,7 +97,7 @@ export function DocSearchModal({
         getSources({ query }) {
           return index
             .search(query, {
-              filters: `parent_section_slug:chat_docs AND platforms:${platformMapping[locationPlatform]}`,
+              filters: `parent_section_slug:chat_docs AND platform:${platformMapping[locationPlatform]}`,
             })
             .then(({ hits }) => {
               const grouped = hits.reduce((acc, hit) => {
@@ -109,7 +109,9 @@ export function DocSearchModal({
                 // index: "DOCS" is used later in order to redirect to
                 // old cms website
                 if (!acc[hit.section_slug][hit.slug])
-                  acc[hit.section_slug][hit.slug] = [{ ...hit, index: 'DOCS' }];
+                  acc[hit.section_slug][hit.slug] = [
+                    { ...hit, index: 'DOCUSSAURUS' },
+                  ];
                 else {
                   if (!hit.header_id) {
                     // If no header_id is present, it means that the result is linked
@@ -117,12 +119,12 @@ export function DocSearchModal({
                     // Docusaurus and our design always shows the page first, then a list of headers
                     acc[hit.section_slug][hit.slug].unshift({
                       ...hit,
-                      index: 'DOCS',
+                      index: 'DOCUSSAURUS',
                     });
                   } else {
                     acc[hit.section_slug][hit.slug].push({
                       ...hit,
-                      index: 'DOCS',
+                      index: 'DOCUSSAURUS',
                     });
                   }
                 }
@@ -201,6 +203,7 @@ export function DocSearchModal({
             cmsPlatform={platformMapping[locationPlatform]}
             locationQuery={locationQuery}
             collections={state.collections}
+            closeSearchModal={onClose}
             {...autocomplete}
           />
         </div>
