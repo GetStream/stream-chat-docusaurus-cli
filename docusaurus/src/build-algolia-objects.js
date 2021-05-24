@@ -1,6 +1,5 @@
 const fs = require('fs');
 const mdx = require('@mdx-js/mdx');
-const algoliasearch = require('algoliasearch/lite');
 
 const {
   parseFrontMatter,
@@ -149,24 +148,30 @@ module.exports = function (context, options) {
   return {
     name: 'algolia-index',
     async contentLoaded({ allContent: loadedContent }) {
-      allContent = loadedContent;
+      if (process.env.NODE_ENV === 'production') {
+        allContent = loadedContent;
+      }
     },
     async postBuild() {
-      if (process.env.ALGOLIA_APP_ID && process.env.ALGOLIA_API_WRITE_KEY) {
-        const client = algoliasearch(
-          process.env.ALGOLIA_APP_ID,
-          process.env.ALGOLIA_API_WRITE_KEY
-        );
+      if (process.env.NODE_ENV === 'production') {
         const docsContent = allContent['docusaurus-plugin-content-docs'];
         const docsData = await extractDocsData(docsContent);
-        const index = client.initIndex('DOCUSSAURUS');
-
-        return index
-          .replaceAllObjects(docsData)
-          .then(({ objectIDs }) => {
-            console.log('Updated Algolia index for: ', objectIDs);
-          })
-          .catch((e) => console.log('ERROR: ', e));
+        return new Promise((res, rej) => {
+          fs.writeFile(
+            'algolia-objects.json',
+            JSON.stringify(docsData),
+            (err) => {
+              if (err) {
+                throw rej(err);
+              }
+              console.log(
+                'algolia json data generated for: ',
+                docsData.map((doc) => doc.objectID)
+              );
+              res();
+            }
+          );
+        });
       }
     },
   };
