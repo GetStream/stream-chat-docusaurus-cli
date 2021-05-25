@@ -132,7 +132,12 @@ module.exports = {
       title: 'stream',
     },
   },
-  themes: ['@docusaurus/theme-classic', '@docusaurus/theme-live-codeblock'],
+  themes: [
+    ['@docusaurus/theme-classic', { 
+      customCss: [require.resolve('./src/css/custom.css')]
+    }],
+    '@docusaurus/theme-live-codeblock'
+  ],
   title: 'Stream Chat - Component SDK Docs',
   url: 'https://getstream.io',
 };
