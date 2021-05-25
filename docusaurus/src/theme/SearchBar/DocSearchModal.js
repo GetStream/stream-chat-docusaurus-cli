@@ -11,11 +11,11 @@ import { useTouchEvents } from './useTouchEvents';
 import { useTrapFocus } from './useTrapFocus';
 
 import { platformMapping, folderMapping } from '../../../constants';
-import environment from '.,/../../environment';
+import environment from '../../environment';
 
 const algoliaClient = algoliasearch(
-  environment.algoliaAppId,
-  environment.algoliaApiKey
+  environment.ALGOLIA_APP_ID,
+  environment.ALGOLIA_API_KEY
 );
 
 const index = algoliaClient.initIndex('DOCUSSAURUS');

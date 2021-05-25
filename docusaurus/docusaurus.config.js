@@ -5,9 +5,12 @@ const fs = require('fs');
 const path = require('path');
 
 const { folderMapping, languageMapping } = require('./constants');
-const environment = require('./environment');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
+
+require('dotenv').config({
+  path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
+});
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
@@ -75,15 +78,17 @@ module.exports = {
     ...CUSTOM_PLUGINS,
     '@docusaurus/plugin-content-pages',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
+    path.resolve(__dirname, 'src/define-env-vars-plugin'),
   ],
   projectName: 'stream-chat',
   tagline: 'Stream Chat official component SDKs',
   themeConfig: {
+    // Docusaurus forces us to pass these values even if they are not internally used.
+    // Theyre only used to show/hide the search bar in our case.
     algolia: {
-      apiKey: environment.algoliaApiKey,
-      indexName: 'DOCS',
-      appId: environment.algoliaAppId,
-      // contextualSearch: true,
+      appId: 'MOCK',
+      apiKey: 'MOCK',
+      indexName: 'MOCK',
     },
     footer: {
       copyright: '© Stream.IO, Inc. All Rights Reserved.',

@@ -20,15 +20,16 @@
     "@docusaurus/theme-classic": "2.0.0-beta.0",
     "@docusaurus/theme-live-codeblock": "2.0.0-beta.0",
     "@docusaurus/theme-search-algolia": "^2.0.0-beta.0",
+    "@mdx-js/react": "1.6.22",
     "algoliasearch": "^4.9.1",
+    "clsx": "1.1.1",
+    "dotenv": "^10.0.0",
+    "html-react-parser": "1.2.6",
     "lodash.debounce": "^4.0.8",
     "lodash.orderby": "^4.6.0",
-    "react-instantsearch-dom": "^6.11.0",
-    "@mdx-js/react": "1.6.22",
-    "clsx": "1.1.1",
-    "html-react-parser": "1.2.6",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-instantsearch-dom": "^6.11.0"
   },
   "devDependencies": {
     "cheerio": "1.0.0-rc.9",
