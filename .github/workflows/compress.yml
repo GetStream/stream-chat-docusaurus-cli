@@ -6,7 +6,7 @@ on:
       - algolia-search # default branch name for each repo that docs should be push from
 
 jobs:
-  build_docusaurus:
+  compress_docusaurus:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
