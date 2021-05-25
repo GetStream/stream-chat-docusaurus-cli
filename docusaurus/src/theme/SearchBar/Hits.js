@@ -7,9 +7,9 @@ import { Snippet } from './Snippet';
 import { SourceIcon } from './icons/SourceIcon';
 import { GoToExternal } from './icons/GoToExternal';
 
-import('./hits.css');
+import { CMS_DOCS_ENDPOINT } from '../../../constants';
 
-const CMS_DOCS_ENDPOINT = 'https://getstream.io/chat/docs';
+import('./hits.css');
 
 export function Hits(props) {
   if (!props.collections) {
@@ -43,7 +43,14 @@ export function Hits(props) {
   ));
 }
 
-export function Hit({ hit, platform, cmsPlatform, locationQuery, closeSearchModal, children }) {
+export function Hit({
+  hit,
+  platform,
+  cmsPlatform,
+  locationQuery,
+  closeSearchModal,
+  children,
+}) {
   const headerId = hit.header_id.replace('_', '-');
 
   if (hit.index === 'DOCS') {

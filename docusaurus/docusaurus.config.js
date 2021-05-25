@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { folderMapping, languageMapping } = require('./constants');
+const { BASE_URL, folderMapping, languageMapping } = require('./constants');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
 
@@ -68,7 +68,7 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
 }));
 
 module.exports = {
-  baseUrl: '/chat/docs/sdk/',
+  baseUrl: BASE_URL,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -140,12 +140,14 @@ module.exports = {
     },
   },
   themes: [
-    ['@docusaurus/theme-classic', { 
-      customCss: [require.resolve('./src/css/custom.scss')]
-    }],
+    [
+      '@docusaurus/theme-classic',
+      {
+        customCss: [require.resolve('./src/css/custom.scss')],
+      },
+    ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
-
   ],
   title: 'Stream Chat - Component SDK Docs',
   url: 'https://getstream.io',
