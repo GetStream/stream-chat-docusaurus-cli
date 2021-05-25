@@ -16,7 +16,7 @@ jobs:
       - name: Build
         id: build
         run: |
-          yarn compress
+          rm docusaurus.tar.gz; tar --exclude='./docusaurus/node_modules' -czf docusaurus.tar.gz ./docusaurus
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add docusaurus.tar.gz

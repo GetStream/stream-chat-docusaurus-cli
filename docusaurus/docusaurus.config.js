@@ -77,6 +77,7 @@ module.exports = {
     ...defaultPlugins,
     ...CUSTOM_PLUGINS,
     '@docusaurus/plugin-content-pages',
+    'docusaurus-plugin-sass',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
     path.resolve(__dirname, 'src/define-env-vars-plugin'),
   ],
@@ -139,14 +140,12 @@ module.exports = {
     },
   },
   themes: [
-    [
-      '@docusaurus/theme-classic',
-      {
-        customCss: [require.resolve('./src/css/custom.css')],
-      },
-    ],
+    ['@docusaurus/theme-classic', { 
+      customCss: [require.resolve('./src/css/custom.scss')]
+    }],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
+
   ],
   title: 'Stream Chat - Component SDK Docs',
   url: 'https://getstream.io',
