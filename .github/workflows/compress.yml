@@ -3,7 +3,7 @@ name: compress
 on:
   push:
     branches:
-      - algolia-search # default branch name for each repo that docs should be push from
+      - main # default branch name for each repo that docs should be push from
 
 jobs:
   compress_docusaurus:
