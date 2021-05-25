@@ -134,7 +134,12 @@ module.exports = {
     },
   },
   themes: [
-    '@docusaurus/theme-classic',
+    [
+      '@docusaurus/theme-classic',
+      {
+        customCss: [require.resolve('./src/css/custom.css')],
+      },
+    ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
