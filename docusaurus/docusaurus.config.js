@@ -79,6 +79,7 @@ module.exports = {
     ...defaultPlugins,
     ...CUSTOM_PLUGINS,
     '@docusaurus/plugin-content-pages',
+    'docusaurus-plugin-sass',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
   ],
   projectName: 'stream-chat',
@@ -134,7 +135,7 @@ module.exports = {
   },
   themes: [
     ['@docusaurus/theme-classic', { 
-      customCss: [require.resolve('./src/css/custom.css')]
+      customCss: [require.resolve('./src/css/custom.scss')]
     }],
     '@docusaurus/theme-live-codeblock'
   ],
