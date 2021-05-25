@@ -4,6 +4,7 @@
 # Other than these
 !src
 !src/**/*
+!environment.js
 !static
 !static/**/*
 !constants.js

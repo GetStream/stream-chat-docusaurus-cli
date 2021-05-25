@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { folderMapping, languageMapping } = require('./constants');
+const environment = require('./environment');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
 
@@ -79,9 +80,9 @@ module.exports = {
   tagline: 'Stream Chat official component SDKs',
   themeConfig: {
     algolia: {
-      apiKey: 'fd1b03de28081b5aa29dbccced4620b9',
+      apiKey: environment.algoliaApiKey,
       indexName: 'DOCS',
-      appId: '7RY30ISS74',
+      appId: environment.algoliaAppId,
       // contextualSearch: true,
     },
     footer: {
