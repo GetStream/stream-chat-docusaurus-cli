@@ -3,7 +3,44 @@
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
- */
+**/
+
+@font-face {
+  font-family: 'Inter';
+  font-display: fallback;
+  font-weight: 400;
+  src:  url('../../static/fonts/inter/Inter-Regular.otf') format('otf'),
+        url('../../static/fonts/inter/Inter-Regular.woff2') format('woff2'),
+        url('../../static/fonts/inter/Inter-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-display: fallback;
+  font-weight: 500;
+  src:  url('../../static/fonts/inter/Inter-Medium.otf') format('otf'),
+        url('../../static/fonts/inter/Inter-Medium.woff2') format('woff2'),
+        url('../../static/fonts/inter/Inter-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-display: fallback;
+  font-weight: 700;
+  src:  url('../../static/fonts/inter/Inter-Bold.otf') format('otf'),
+        url('../../static/fonts/inter/Inter-Bold.woff2') format('woff2'),
+        url('../../static/fonts/inter/Inter-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-display: fallback;
+  font-style: italic;
+  font-weight: 400;
+  src:  url('../../static/fonts/inter/Inter-Italic.otf') format('otf'),
+        url('../../static/fonts/inter/Inter-Italic.woff2') format('woff2'),
+        url('../../static/fonts/inter/Inter-Italic.woff') format('woff');
+}
 
 /* You can override the default Infima variables here. */
 :root {
@@ -16,6 +53,7 @@
   --ifm-color-primary-lightest: #4D8FFF;
   --ifm-code-font-size: 95%;
   --ifm-toc-border-color: rgba(0,0,0,0.03);
+  --ifm-font-family-base: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'sans-serif';
   /* Stream custom variables */
   --xtm-color-highlight: #00DFFF;
 }
