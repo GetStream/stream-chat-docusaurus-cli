@@ -4,11 +4,15 @@
 # Other than these
 !src
 !src/**/*
+!environment.js
 !static
 !static/**/*
+!constants.js
 !.gitignore
 !babel.config.js
 !docusaurus.config.js
 !package.json
 !README.md
 !yarn.lock
+
+.DS_Store

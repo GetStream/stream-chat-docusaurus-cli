@@ -69,6 +69,10 @@ To initialize the docusaurus setup (which you will need to always do before anyt
 
 To locally run the docusaurus setup and see your documentation you can run `npx stream-chat-docusaurus -s`. This command can be chained with the `-i` initialization command in 1 step by running `npx stream-chat-docusaurus -i -s`.
 
+### Environment variables
+
+In order to run the searching functionality, you need to add the Algolia env vars in your `/docusaurus/.env` file. Please remember to add it to `.gitignore` and you can have a list of required variables in our `docusaurus/src/environment.js` file.
+
 ### Versioning
 
 To cut a new version of your docs simply type in `npx stream-chat-docusaurus -nv NEW_VERSION SDK_NAME` like this (SDK_NAME all lowercase with no spaces): `npx stream-chat-docusaurus -nv 2.0.0-rc.0 reactnative`.

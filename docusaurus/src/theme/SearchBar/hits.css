@@ -1,0 +1,92 @@
+html[data-theme='light'] .DocSearch-Hit {
+  --codeblock-background: rgba(0, 18, 49, 1);
+  --docsearch-modal-background: white;
+  --docsearch-hit-background: #fafafa;
+  --docsearch-selected-item-background: #e3e3e3;
+}
+
+html[data-theme='dark'] .DocSearch-Hit {
+  --codeblock-background: rgba(230, 230, 230, 0.1);
+  --docsearch-selected-item-background: black;
+}
+
+.DocSearch-Hit-source {
+  color: var(--docsearch-muted-color);
+  padding-left: 10px;
+}
+
+.DocSearch-Hit a {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.DocSearch-Hit[aria-selected='true'] a {
+  background-color: var(--docsearch-selected-item-background);
+  color: var(--docsearch-text-color);
+}
+
+.DocSearch-Hit-Container {
+  height: auto;
+  padding: var(--docsearch-spacing) 0 var(--docsearch-spacing) 0;
+}
+
+.DocSearch-Hit-Container em {
+  color: var(--docsearch-highlight-color);
+}
+
+.DocSearch-Hit-icon {
+  color: var(--docsearch-text-color);
+}
+
+.DocSearch-Hit-icon,
+.DocSearch-Hit-Tree,
+.DocSearch-Hit-type-icon {
+  margin-right: 10px;
+}
+
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon {
+  color: var(--docsearch-text-color);
+}
+
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-Tree {
+  color: var(--docsearch-muted-color) !important;
+}
+
+.DocSearch-Hit-title {
+  color: var(--docsearch-text-color);
+}
+
+.DocSearch-Hit-path {
+  color: var(--docsearch-text-color);
+}
+
+.DocSearch-Hit-code {
+  background-color: var(--codeblock-background);
+  border-radius: 0.375rem;
+  padding: 1rem;
+  width: 100%;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: initial;
+  color: var(--docsearch-muted-color);
+}
+
+.DocSearch-Hit-external-icon {
+  display: flex;
+  padding-right: 23px;
+  padding-left: 13px;
+  visibility: hidden;
+}
+
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-external-icon {
+  visibility: visible;
+}
+
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-action,
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon,
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-text,
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-title,
+.DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-path,
+.DocSearch-Hit[aria-selected='true'] mark {
+  color: var(--docsearch-text-color) !important;
+}

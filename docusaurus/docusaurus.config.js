@@ -4,15 +4,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const folderMapping = {
-  android: 'Android',
-  flutter: 'Flutter',
-  ios: 'iOS',
-  react: 'React',
-  reactnative: 'React Native',
-};
+const { BASE_URL, folderMapping, languageMapping } = require('./constants');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
+
+require('dotenv').config({
+  path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
+});
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
@@ -59,7 +57,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   const readableSDK = folderMapping[strippedSDK] || SDK;
   return {
     label: readableSDK,
-    to: `${strippedSDK}/`,
+    to: `${strippedSDK}/?language=${languageMapping[strippedSDK]}`,
     type: 'doc',
   };
 });
@@ -70,7 +68,7 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
 }));
 
 module.exports = {
-  baseUrl: '/chat/docs/sdk/',
+  baseUrl: BASE_URL,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -81,10 +79,18 @@ module.exports = {
     '@docusaurus/plugin-content-pages',
     'docusaurus-plugin-sass',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
+    path.resolve(__dirname, 'src/define-env-vars-plugin'),
   ],
   projectName: 'stream-chat',
   tagline: 'Stream Chat official component SDKs',
   themeConfig: {
+    // Docusaurus forces us to pass these values even if they are not internally used.
+    // Theyre only used to show/hide the search bar in our case.
+    algolia: {
+      appId: 'MOCK',
+      apiKey: 'MOCK',
+      indexName: 'MOCK',
+    },
     footer: {
       copyright: '© Stream.IO, Inc. All Rights Reserved.',
       links: [
@@ -134,10 +140,14 @@ module.exports = {
     },
   },
   themes: [
-    ['@docusaurus/theme-classic', { 
-      customCss: [require.resolve('./src/css/custom.scss')]
-    }],
-    '@docusaurus/theme-live-codeblock'
+    [
+      '@docusaurus/theme-classic',
+      {
+        customCss: [require.resolve('./src/css/custom.scss')],
+      },
+    ],
+    '@docusaurus/theme-live-codeblock',
+    '@docusaurus/theme-search-algolia',
   ],
   title: 'Stream Chat - Component SDK Docs',
   url: 'https://getstream.io',
