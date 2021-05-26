@@ -10,7 +10,12 @@ import { Hits } from './Hits';
 import { useTouchEvents } from './useTouchEvents';
 import { useTrapFocus } from './useTrapFocus';
 
-import { platformMapping, folderMapping } from '../../../constants';
+import {
+  platformMapping,
+  folderMapping,
+  DOCUSAURUS_INDEX,
+  CMS_INDEX,
+} from '../../../constants';
 import environment from '../../environment';
 
 const algoliaClient = algoliasearch(
@@ -18,7 +23,17 @@ const algoliaClient = algoliasearch(
   environment.ALGOLIA_API_KEY
 );
 
-const index = algoliaClient.initIndex('DOCUSSAURUS');
+const mergeResults = (results) => {
+  const docussaurusHits = results[0].hits.map((item) => ({
+    ...item,
+    index: DOCUSAURUS_INDEX,
+  }));
+  const docsHits = results[1].hits.map((item) => ({
+    ...item,
+    index: CMS_INDEX,
+  }));
+  return [...docussaurusHits, ...docsHits];
+};
 
 export function DocSearchModal({
   onClose = () => null,
@@ -97,7 +112,7 @@ export function DocSearchModal({
           return algoliaClient
             .multipleQueries([
               {
-                indexName: 'DOCUSSAURUS',
+                indexName: DOCUSAURUS_INDEX,
                 type: 'default',
                 query,
                 params: {
@@ -106,7 +121,7 @@ export function DocSearchModal({
                 getRankingInfo: true,
               },
               {
-                indexName: 'DOCS',
+                indexName: CMS_INDEX,
                 type: 'default',
                 query,
                 params: {
@@ -116,15 +131,7 @@ export function DocSearchModal({
               },
             ])
             .then(({ results }) => {
-              const docussaurusHits = results[0].hits.map((item) => ({
-                ...item,
-                index: 'DOCUSSAURUS',
-              }));
-              const docsHits = results[1].hits.map((item) => ({
-                ...item,
-                index: 'DOCS',
-              }));
-              const hits = [...docussaurusHits, ...docsHits];
+              const hits = mergeResults(results);
 
               const grouped = hits.reduce((acc, hit) => {
                 // If section slug doesnt exist, initialize
