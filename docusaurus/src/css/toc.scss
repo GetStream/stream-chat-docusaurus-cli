@@ -1,0 +1,46 @@
+@use './mixins.scss';
+
+:root {
+  --ifm-toc-padding-vertical: 0.5rem;
+  --ifm-toc-padding-horizontal: 0.75rem;
+  --ifm-toc-link-color: #000000;
+}
+
+html[data-theme='dark'] {
+  --ifm-toc-link-color: #C4C4C4;
+}
+
+.table-of-contents {
+  padding: 0;
+
+  li {
+    position: relative;
+    padding: 0 var(--ifm-toc-padding-horizontal);
+    margin: var(--ifm-toc-padding-vertical) 0;
+    
+    ul {
+      position: relative;
+      padding-left: 0;
+      margin-left: calc(-1 * var(--ifm-toc-padding-horizontal));
+      margin-top: calc(-1 * var(--ifm-toc-padding-vertical));
+      background: var(--ifm-background-color);
+      
+      li {
+        padding: 0 calc(2 * var(--ifm-toc-padding-horizontal));
+
+        &:first-of-type {
+          margin-top: calc(1.5 * var(--ifm-toc-padding-vertical));
+        }
+      }
+    }
+  }
+
+  &__link {
+
+    &--active {
+      color: var(--ifm-toc-link-color);
+      font-weight: 700;
+      @include mixins.active-item;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@mixin active-item($width: 2px, $height: 100%) {
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: $height;
+    width: $width;
+    background-color: var(--xtm-color-highlight);
+  }
+}
