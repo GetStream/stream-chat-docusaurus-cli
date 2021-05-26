@@ -7,9 +7,9 @@ import { Snippet } from './Snippet';
 import { SourceIcon } from './icons/SourceIcon';
 import { GoToExternal } from './icons/GoToExternal';
 
-import('./hits.css');
+import { CMS_DOCS_ENDPOINT } from '../../../constants';
 
-const CMS_DOCS_ENDPOINT = 'https://getstream.io/chat/docs';
+import('./hits.css');
 
 export function Hits(props) {
   if (!props.collections) {

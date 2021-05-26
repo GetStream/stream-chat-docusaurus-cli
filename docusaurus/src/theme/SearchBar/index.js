@@ -17,7 +17,7 @@ import { DocSearchModal } from './DocSearchModal';
 import('@docsearch/react/style');
 import('./styles.css');
 
-const baseUrl = '/chat/docs/sdk/';
+import { BASE_URL } from '../../../constants';
 
 function DocSearch({ contextualSearch, ...props }) {
   const searchButtonRef = useRef(null);
@@ -25,7 +25,7 @@ function DocSearch({ contextualSearch, ...props }) {
 
   const location = useLocation();
   const locationPlatform = useMemo(() => {
-    const [urlPlatform] = location.pathname.replace(baseUrl, '').split('/');
+    const [urlPlatform] = location.pathname.replace(BASE_URL, '').split('/');
     return urlPlatform;
   }, [location.pathname]);
 

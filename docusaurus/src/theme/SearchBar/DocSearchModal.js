@@ -11,12 +11,11 @@ import { useTouchEvents } from './useTouchEvents';
 import { useTrapFocus } from './useTrapFocus';
 
 import { platformMapping, folderMapping } from '../../../constants';
+import environment from '../../environment';
 
-// It doesnt make sense to use env vars for this while we are still
-// keeping the zipped file on the repo
 const algoliaClient = algoliasearch(
-  '7RY30ISS74',
-  'fd1b03de28081b5aa29dbccced4620b9'
+  environment.ALGOLIA_APP_ID,
+  environment.ALGOLIA_API_KEY
 );
 
 const index = algoliaClient.initIndex('DOCUSSAURUS');

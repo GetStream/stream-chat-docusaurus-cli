@@ -22,7 +22,12 @@ const languageMapping = {
   reactnative: 'javascript',
 };
 
+const BASE_URL = '/chat/docs/sdk/'
+const CMS_DOCS_ENDPOINT = 'https://getstream.io/chat/docs';
+
 module.exports = {
+  BASE_URL,
+  CMS_DOCS_ENDPOINT,
   folderMapping,
   platformMapping,
   languageMapping,

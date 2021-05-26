@@ -4,9 +4,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const { folderMapping, languageMapping } = require('./constants');
+const { BASE_URL, folderMapping, languageMapping } = require('./constants');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
+
+require('dotenv').config({
+  path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
+});
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
@@ -64,7 +68,7 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
 }));
 
 module.exports = {
-  baseUrl: '/chat/docs/sdk/',
+  baseUrl: BASE_URL,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -75,16 +79,18 @@ module.exports = {
     '@docusaurus/plugin-content-pages',
     'docusaurus-plugin-sass',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
+    path.resolve(__dirname, 'src/define-env-vars-plugin'),
     path.resolve(__dirname, 'src/build-algolia-objects'),
   ],
   projectName: 'stream-chat',
   tagline: 'Stream Chat official component SDKs',
   themeConfig: {
+    // Docusaurus forces us to pass these values even if they are not internally used.
+    // Theyre only used to show/hide the search bar in our case.
     algolia: {
-      apiKey: 'fd1b03de28081b5aa29dbccced4620b9',
-      indexName: 'DOCS',
-      appId: '7RY30ISS74',
-      // contextualSearch: true,
+      appId: 'MOCK',
+      apiKey: 'MOCK',
+      indexName: 'MOCK',
     },
     footer: {
       copyright: '© Stream.IO, Inc. All Rights Reserved.',
@@ -135,9 +141,12 @@ module.exports = {
     },
   },
   themes: [
-    ['@docusaurus/theme-classic', { 
-      customCss: [require.resolve('./src/css/custom.scss')]
-    }],
+    [
+      '@docusaurus/theme-classic',
+      {
+        customCss: [require.resolve('./src/css/custom.scss')],
+      },
+    ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
