@@ -6,7 +6,7 @@ const client = algoliasearch(
   process.env.ALGOLIA_APP_ID,
   process.env.ALGOLIA_API_WRITE_KEY
 );
-const index = client.initIndex('DOCUSSAURUS');
+const index = client.initIndex('DOCUSAURUS');
 
 index
   .replaceAllObjects(json)

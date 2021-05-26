@@ -4,7 +4,7 @@
 # Other than these
 !src
 !src/**/*
-!build-algolia-objects.js
+!replace-algolia-objects.js
 !environment.js
 !static
 !static/**/*
