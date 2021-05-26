@@ -1,0 +1,21 @@
+name: Triggers docs deployment workflow
+
+on:
+  workflow_run:
+    workflows:
+      - compress
+    types: 
+      - completed
+    branches:
+      - main
+
+jobs:
+  trigger_docs_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Triggers docs deployment workflow
+        run: |
+          curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/docusaurus-build.yml/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
+          --data '{"event_type": "trigger_docs_deploy"}'
