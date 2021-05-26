@@ -5,12 +5,23 @@
   --ifm-menu-color: #000000;
   --ifm-menu-color-active: #000000;
   --ifm-menu-link-padding-vertical: 0.25rem;
-  --ifm-menu-link-padding-horizontal: 1.875rem;
+  --ifm-menu-link-padding-horizontal: 1rem;
 }
 
 html[data-theme='dark'] {
   --ifm-menu-color: #c4c4c4;
   --ifm-menu-color-active: #FFFFFF;
+}
+
+@media (min-width: 997px) {
+  :root {
+    --ifm-menu-link-padding-horizontal: 1.875rem;
+  }
+
+  .menu {
+    // overwriting default
+    padding: 1.125rem 0 0 0!important;
+  }
 }
 
 .menu {
@@ -63,11 +74,8 @@ html[data-theme='dark'] {
       }
     }
   }
-}
 
-@media (min-width: 997px) {
-  .menu {
-    // overwriting default
-    padding: 1.125rem 0 0 0!important;
+  &--show {
+    padding: 0;
   }
 }
