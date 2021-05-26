@@ -4,10 +4,10 @@ on:
   workflow_run:
     workflows:
       - compress
-    types: 
+    types:
       - completed
     branches:
-      - trigger-docs-deploy
+      - main
 
 jobs:
   trigger_docs_deploy:
@@ -20,4 +20,4 @@ jobs:
           curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/docusaurus-build.yml/dispatches \
           -H 'Accept: application/vnd.github.v3+json' \
           -u ":$PAT_TOKEN" \
-          --data '{"ref": "workflow-dispatch-trigger"}'
+          --data '{"ref": "main"}'
