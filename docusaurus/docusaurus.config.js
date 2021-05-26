@@ -135,7 +135,10 @@ module.exports = {
   },
   themes: [
     ['@docusaurus/theme-classic', { 
-      customCss: [require.resolve('./src/css/custom.scss')]
+      customCss: [
+        require.resolve('./src/css/custom.scss'),
+        require.resolve('./src/css/menu.scss')
+      ]
     }],
     '@docusaurus/theme-live-codeblock'
   ],
