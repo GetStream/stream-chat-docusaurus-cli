@@ -7,15 +7,17 @@ on:
     types: 
       - completed
     branches:
-      - main
+      - trigger-docs-deploy
 
 jobs:
   trigger_docs_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Triggers docs deployment workflow
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/docusaurus-build.yml/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
-          --data '{"event_type": "trigger_docs_deploy"}'
+          -H 'Accept: application/vnd.github.v3+json' \
+          -u ":$PAT_TOKEN" \
+          --data '{"ref": "workflow-dispatch-trigger"}'
