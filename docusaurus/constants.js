@@ -25,9 +25,14 @@ const languageMapping = {
 const BASE_URL = '/chat/docs/sdk/'
 const CMS_DOCS_ENDPOINT = 'https://getstream.io/chat/docs';
 
+const DOCUSAURUS_INDEX = 'DOCUSAURUS';
+const CMS_INDEX = 'DOCS';
+
 module.exports = {
   BASE_URL,
   CMS_DOCS_ENDPOINT,
+  DOCUSAURUS_INDEX,
+  CMS_INDEX,
   folderMapping,
   platformMapping,
   languageMapping,

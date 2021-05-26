@@ -80,6 +80,7 @@ module.exports = {
     'docusaurus-plugin-sass',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
     path.resolve(__dirname, 'src/define-env-vars-plugin'),
+    path.resolve(__dirname, 'src/build-algolia-objects'),
   ],
   projectName: 'stream-chat',
   tagline: 'Stream Chat official component SDKs',

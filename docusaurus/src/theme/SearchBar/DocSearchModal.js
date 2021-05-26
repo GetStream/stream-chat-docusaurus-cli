@@ -10,7 +10,12 @@ import { Hits } from './Hits';
 import { useTouchEvents } from './useTouchEvents';
 import { useTrapFocus } from './useTrapFocus';
 
-import { platformMapping, folderMapping } from '../../../constants';
+import {
+  platformMapping,
+  folderMapping,
+  DOCUSAURUS_INDEX,
+  CMS_INDEX,
+} from '../../../constants';
 import environment from '../../environment';
 
 const algoliaClient = algoliasearch(
@@ -18,7 +23,17 @@ const algoliaClient = algoliasearch(
   environment.ALGOLIA_API_KEY
 );
 
-const index = algoliaClient.initIndex('DOCUSSAURUS');
+const mergeResults = (results) => {
+  const docussaurusHits = results[0].hits.map((item) => ({
+    ...item,
+    index: DOCUSAURUS_INDEX,
+  }));
+  const docsHits = results[1].hits.map((item) => ({
+    ...item,
+    index: CMS_INDEX,
+  }));
+  return [...docussaurusHits, ...docsHits];
+};
 
 export function DocSearchModal({
   onClose = () => null,
@@ -94,11 +109,30 @@ export function DocSearchModal({
           setState(state);
         },
         getSources({ query }) {
-          return index
-            .search(query, {
-              filters: `parent_section_slug:chat_docs AND platform:${platformMapping[locationPlatform]}`,
-            })
-            .then(({ hits }) => {
+          return algoliaClient
+            .multipleQueries([
+              {
+                indexName: DOCUSAURUS_INDEX,
+                type: 'default',
+                query,
+                params: {
+                  filters: `parent_section_slug:chat_docs AND platform:${platformMapping[locationPlatform]}`,
+                },
+                getRankingInfo: true,
+              },
+              {
+                indexName: CMS_INDEX,
+                type: 'default',
+                query,
+                params: {
+                  filters: `parent_section_slug:chat_docs AND platforms:${platformMapping[locationPlatform]}`,
+                },
+                getRankingInfo: true,
+              },
+            ])
+            .then(({ results }) => {
+              const hits = mergeResults(results);
+
               const grouped = hits.reduce((acc, hit) => {
                 // If section slug doesnt exist, initialize
                 if (!acc[hit.section_slug]) acc[hit.section_slug] = {};
@@ -108,23 +142,15 @@ export function DocSearchModal({
                 // index: "DOCS" is used later in order to redirect to
                 // old cms website
                 if (!acc[hit.section_slug][hit.slug])
-                  acc[hit.section_slug][hit.slug] = [
-                    { ...hit, index: 'DOCUSSAURUS' },
-                  ];
+                  acc[hit.section_slug][hit.slug] = [hit];
                 else {
                   if (!hit.header_id) {
                     // If no header_id is present, it means that the result is linked
                     // to the page itself and not a header inside the page.
                     // Docusaurus and our design always shows the page first, then a list of headers
-                    acc[hit.section_slug][hit.slug].unshift({
-                      ...hit,
-                      index: 'DOCUSSAURUS',
-                    });
+                    acc[hit.section_slug][hit.slug].unshift(hit);
                   } else {
-                    acc[hit.section_slug][hit.slug].push({
-                      ...hit,
-                      index: 'DOCUSSAURUS',
-                    });
+                    acc[hit.section_slug][hit.slug].push(hit);
                   }
                 }
                 return acc;

@@ -7,7 +7,7 @@ import { Snippet } from './Snippet';
 import { SourceIcon } from './icons/SourceIcon';
 import { GoToExternal } from './icons/GoToExternal';
 
-import { CMS_DOCS_ENDPOINT } from '../../../constants';
+import { CMS_DOCS_ENDPOINT, CMS_INDEX } from '../../../constants';
 
 import('./hits.css');
 
@@ -19,7 +19,8 @@ export function Hits(props) {
   return props.collections.map((collection) => (
     <section className="DocSearch-Hits" key={collection.source.sourceId}>
       <div className="DocSearch-Hit-source">
-        {collection.items[0].section_name}
+        {collection.items[0].section_name}{' '}
+        {collection.items[0].index === CMS_INDEX && '(old website)'}
       </div>
 
       <ul {...props.getListProps()}>
@@ -53,7 +54,7 @@ export function Hit({
 }) {
   const headerId = hit.header_id.replace('_', '-');
 
-  if (hit.index === 'DOCS') {
+  if (hit.index === CMS_INDEX) {
     return (
       <a
         target="_blank"
