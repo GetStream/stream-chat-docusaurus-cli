@@ -1,0 +1,46 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+.heading {
+  position: relative;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -0.5rem;
+}
+
+.hash-link:focus,
+*:hover > .hash-link {
+  opacity: 0.7;
+}
+
+.hash-link {
+  opacity: 0;
+  transition: opacity var(--ifm-transition-fast);
+  font-weight: 300;
+  padding-left: 0.5rem;
+  
+  &:hover {
+    opacity: 1;
+    text-decoration: none;
+  }
+}
+
+.enhancedAnchor {
+  top: calc(var(--ifm-navbar-height) * -1 - 0.5rem);
+}
+
+@media (min-width: 1600px) {
+  .hash-link {
+    padding-left: 0;
+    left: -1.5rem;
+    position: absolute;
+  }
+}
