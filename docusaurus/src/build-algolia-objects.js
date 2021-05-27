@@ -97,7 +97,15 @@ const extractDocsData = async (docsContent) => {
         const version = sdkDocVersion.version;
         const page_id = parseInt(`${platformIndex}${versionIndex}${pageIndex}`);
         const name = sdkDocVersion.title;
-        const slug = sdkDocVersion.slug.substring(1);
+        // Last version urls actually have no versions
+        // We use the label here instead of the name because the
+        // url is based on the lab ex: current version has the next label
+        // and in the url it uses next
+        const slug = sdkContentVersion.isLast
+          ? sdkDocVersion.slug.substring(1)
+          : `${sdkContentVersion.versionLabel.toLowerCase()}/${sdkDocVersion.slug.substring(
+              1
+            )}`;
         const section_name = sections
           .map((section_slug) => capitalizeFirstLetter(section_slug))
           .join(' > ');
