@@ -39,7 +39,7 @@ const extractMdxData = async (path) => {
   // mdast-util-to-string once its an es6-only module
   // and our plugins only use commonjs modules
   return (async () => {
-    const { default: toString } = await import('mdast-util-to-string');
+    const { toString } = await import('mdast-util-to-string');
     const syntaxTree = await extractSyntaxTree(path);
 
     let lastHeaderId = null;
