@@ -3,6 +3,7 @@ import algoliasearch from 'algoliasearch/lite';
 import { createAutocomplete } from '@algolia/autocomplete-core';
 import url from 'url';
 import { useLocation } from '@docusaurus/router';
+import { useActivePlugin, useActiveVersion } from '@theme/hooks/useDocs';
 import { Footer } from './Footer';
 import { SearchBox } from './SearchBox';
 import { Hits } from './Hits';
@@ -56,6 +57,9 @@ export function DocSearchModal({
   const [state, setState] = React.useState({
     query: locationQuery.query || '',
   });
+  const { pluginId } = useActivePlugin({ failfast: true });
+
+  const activeVersion = useActiveVersion(pluginId);
 
   React.useEffect(() => {
     document.body.classList.add('DocSearch--active');
@@ -116,9 +120,8 @@ export function DocSearchModal({
                 type: 'default',
                 query,
                 params: {
-                  filters: `parent_section_slug:chat_docs AND platform:${platformMapping[locationPlatform]}`,
+                  filters: `parent_section_slug:chat_docs AND platform:${platformMapping[locationPlatform]} AND version:${activeVersion.name}`,
                 },
-                getRankingInfo: true,
               },
               {
                 indexName: CMS_INDEX,
@@ -127,7 +130,6 @@ export function DocSearchModal({
                 params: {
                   filters: `parent_section_slug:chat_docs AND platforms:${platformMapping[locationPlatform]}`,
                 },
-                getRankingInfo: true,
               },
             ])
             .then(({ results }) => {
@@ -171,7 +173,7 @@ export function DocSearchModal({
             });
         },
       }),
-    [locationPlatform]
+    [locationPlatform, activeVersion]
   );
 
   const { getEnvironmentProps, getRootProps } = autocomplete;

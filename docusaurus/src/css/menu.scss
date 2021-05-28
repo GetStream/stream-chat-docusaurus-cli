@@ -27,48 +27,61 @@ html[data-theme='dark'] {
 }
 
 .menu {
-  .menu__list {
-    margin-bottom: 1.25rem;
-  
-    &-item {
-      margin: 0.5rem 0;
+  padding: 1.125rem 0;
+  font-size: 0.875rem;
 
-      & > .menu__link.menu__link--sublist {
-        color: #C4C4C4;
-        font-weight: bold;
-        font-size: 0.688rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-  
-        &:after {
-          opacity: 0.6;
-          background-size: 1rem 1rem;
+  .menu__link:hover {
+    background: none;
+    color: var(--ifm-color-primary);
+  }
+
+  > .menu__list {
+    > .menu__list-item {
+      // main item style is only applied to first items
+      margin-bottom: 1.5rem;
+      > .menu__link {
+        @include mixins.menu-main-item;
+
+        &--active:not(&--sublist) {
+          color: var(--ifm-menu-color-active);
+          @include mixins.active-item(3px);
         }
-  
-        &:hover {
-          background: transparent;
+
+        &:after {
+          background: none;
         }
       }
       
-      > .menu__list {
+      .menu__list {
         margin-left: 0;
+        &-item {
+          a.menu__link {
+            &--active {
+              font-weight: bold;
+            }
 
-        .menu__link {
-          border-radius: 0;
-          font-size: 0.875rem;
-          line-height: 1.2;
-          padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+            &--sublist {
+              @include mixins.menu-sublist-icon;
+            }
 
-          &--active:not(.menu__link--sublist) {
-            font-weight: bold;
-            @include mixins.active-item(3px);
+            &--active:not(&--sublist) {
+              @include mixins.active-item(3px);
+            }
+          }
+
+          a.menu__link--sublist + ul.menu__list {
+            .menu__list-item {
+              .menu__link {
+                // needed to keep the active higlight line on the left 😩
+                padding:  var(--ifm-menu-link-padding-vertical)
+                          calc(var(--ifm-menu-link-padding-horizontal) + 1.25rem)
+                          var(--ifm-menu-link-padding-vertical)
+                          calc(var(--ifm-menu-link-padding-horizontal) + 0.938rem)
+              }
+            }
           }
         }
       }
     }
-  }
-
-  &--show {
-    padding: 0;
   }
 }

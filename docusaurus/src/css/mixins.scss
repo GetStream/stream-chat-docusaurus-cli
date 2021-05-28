@@ -9,3 +9,18 @@
     background-color: var(--ifm-color-info);
   }
 }
+
+@mixin menu-main-item {
+  color: var(--ifm-color-secondary-darker);
+  font-weight: bold;
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+@mixin menu-sublist-icon {
+  &::after {
+    opacity: 0.6;
+    background-size: 1rem 1rem;
+  }
+}
