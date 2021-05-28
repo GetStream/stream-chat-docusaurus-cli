@@ -141,13 +141,17 @@ module.exports = {
     },
   },
   themes: [
-    ['@docusaurus/theme-classic', { 
-      customCss: [
-        require.resolve('./src/css/custom.scss'),
-        require.resolve('./src/css/menu.scss'),
-        require.resolve('./src/css/toc.scss'),
-      ]
-    }],
+    [
+      '@docusaurus/theme-classic',
+      { 
+        customCss: [
+          require.resolve('./src/css/custom.scss'),
+          require.resolve('./src/css/menu.scss'),
+          require.resolve('./src/css/toc.scss'),
+          require.resolve('./src/css/admonition.scss'),
+        ],
+      }
+    ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
