@@ -30,6 +30,9 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
   return sdkConfig.plugins;
 }).flat();
 
+const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css');
+const CUSTOM_CSS_FILES = fs.readdirSync(CUSTOM_CSS_PATH).map(file => `${CUSTOM_CSS_PATH}/${file}`);
+
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
   const sidebarPath = `${STREAM_SDK_DOCUSAURUS_PATH}/sidebars${folderMapping[
@@ -145,10 +148,7 @@ module.exports = {
       '@docusaurus/theme-classic',
       { 
         customCss: [
-          require.resolve('./src/css/custom.scss'),
-          require.resolve('./src/css/menu.scss'),
-          require.resolve('./src/css/toc.scss'),
-          require.resolve('./src/css/admonition.scss'),
+          ...CUSTOM_CSS_FILES,
         ],
       }
     ],

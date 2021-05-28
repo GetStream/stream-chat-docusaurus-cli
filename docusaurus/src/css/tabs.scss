@@ -1,0 +1,22 @@
+:root {
+  --ifm-tabs-color-active: var(--ifm-font-color-base);
+  --ifm-tabs-color: var(--ifm-color-gray-600);
+  --ifm-tabs-padding-vertical: 0.625rem;
+}
+
+.tabs-container {
+  .tabs {
+    & + div.margin-vert--md {
+      margin-top: 0.625rem!important;
+    }
+
+    &__item {
+      border-radius: 0;
+      font-size: 0.875rem;
+  
+      &--active {
+        border-bottom-color: var(--ifm-color-info);
+      }
+    }
+  }
+}
