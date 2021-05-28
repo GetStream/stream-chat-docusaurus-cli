@@ -94,6 +94,7 @@
   --ifm-color-danger-background: #fcf5ef;
   --ifm-color-secondary-darkest: #acacac;
   --ifm-color-secondary-background: #f6f6f6;
+
   --ifm-code-font-size: 95%;
   --ifm-background-color: rgba(252, 252, 252, 1);
   --ifm-toc-border-color: rgba(0,0,0,0.03);
@@ -104,12 +105,19 @@
   --ifm-h1-font-size: 2.25rem;
   --ifm-h2-font-size: 1.75rem;
 
-  /* Stream custom variables */
-  --xtm-color-highlight: #00DFFF;
+  /* Table variables */
+  --ifm-table-background: #FCFCFC;
+  --ifm-table-stripe-background: #FCFCFC;
+  --ifm-table-head-background: #FAFAFA;
+  --ifm-table-border-color: #ececec;
 }
 
 html[data-theme='dark'] {
   --ifm-toc-border-color: rgba(255,255,255,0.05);
+  --ifm-table-background: transparent;
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: rgba(255,255,255,0.05);
+  --ifm-table-border-color: rgba(255,255,255,0.2);
 }
 
 .docusaurus-highlight-code-line {
@@ -122,4 +130,17 @@ html[data-theme='dark'] {
 // overwriting docusaurus theme classic styles
 h1.docTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-DocItem- {
   font-size: var(--ifm-h1-font-size);
+}
+
+/* Table styles */
+table {
+  font-size: 0.875rem;
+}
+
+table tr {
+  border: var(--ifm-table-border-width) solid var(--ifm-table-border-color);
+}
+
+table th, table td {
+  border: none;
 }
