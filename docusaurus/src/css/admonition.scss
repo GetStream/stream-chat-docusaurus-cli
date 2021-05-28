@@ -18,7 +18,7 @@
   --xtm-alert-font-size: 0.938rem;
 }
 
-.alert {
+.admonition {
   margin-bottom: 1.5rem;
 
   .admonition-heading {
@@ -45,23 +45,23 @@
     }
   }
 
-  &--secondary {
+  &-note {
     @include admonition-config(var(--ifm-color-secondary-background), var(--ifm-color-secondary-darkest));
   }
   
-  &--info {
+  &-info {
     @include admonition-config(var(--ifm-color-info-background), var(--ifm-color-info-dark));
   }
   
-  &--success {
+  &-tip {
     @include admonition-config(var(--ifm-color-success-background), var(--ifm-color-success));
   }
   
-  &--warning {
+  &-caution {
     @include admonition-config(var(--ifm-color-warning-background), var(--ifm-color-warning));
   }
   
-  &--danger {
+  &-danger {
     @include admonition-config(var(--ifm-color-danger-background), var(--ifm-color-danger));
   }
 }
