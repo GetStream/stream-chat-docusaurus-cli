@@ -92,30 +92,6 @@ module.exports = {
       apiKey: 'MOCK',
       indexName: 'MOCK',
     },
-    footer: {
-      copyright: '© Stream.IO, Inc. All Rights Reserved.',
-      links: [
-        {
-          items: [
-            {
-              href: 'https://twitter.com/getstream_io',
-              label: 'Twitter',
-            },
-          ],
-          title: 'Community',
-        },
-        {
-          items: [
-            {
-              href: 'https://github.com/GetStream',
-              label: 'GitHub',
-            },
-          ],
-          title: 'More',
-        },
-      ],
-      style: 'dark',
-    },
     liveCodeBlock: {
       playgroundPosition: 'bottom',
     },
