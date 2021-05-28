@@ -127,9 +127,10 @@ html[data-theme='dark'] {
   padding: 0 var(--ifm-pre-padding);
 }
 
-// overwriting docusaurus theme classic styles
-h1.docTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-DocItem- {
-  font-size: var(--ifm-h1-font-size);
+@media (min-width: 1440px) {
+  .main-wrapper.docs-wrapper.doc-page {
+    .container {
+      padding-top: 3.75rem!important;
+    }
+  }
 }
-
-/* Table styles */

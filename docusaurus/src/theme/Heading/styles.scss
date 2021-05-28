@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// overwriting docusaurus theme classic styles
+h1.docTitle_node_modules-\@docusaurus-theme-classic-lib-next-theme-DocItem- {
+  font-size: var(--ifm-h1-font-size);
+}
 
 .heading {
   position: relative;
