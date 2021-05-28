@@ -5,4 +5,16 @@
   ol {
     list-style-type: decimal;
   }
+
+  table {
+    font-size: 0.875rem;
+  }
+  
+  table tr {
+    border: var(--ifm-table-border-width) solid var(--ifm-table-border-color);
+  }
+  
+  table th, table td {
+    border: none;
+  }
 }
