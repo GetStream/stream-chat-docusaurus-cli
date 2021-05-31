@@ -8,7 +8,7 @@ const WEB_LINKS = [
 ]
 
 export default function DocSidebar({ sidebar, ...props }) {
-  const sidebarItems = useMemo(() => sidebar.map(category => ({ ...category, collapsed: false  })));
+  const sidebarItems = useMemo(() => sidebar.map(category => ({ ...category, collapsed: false  })), [sidebar]);
 
   return <>
     <OriginalDocSidebar {...props} sidebar={sidebarItems}/>
