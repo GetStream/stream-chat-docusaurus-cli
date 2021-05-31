@@ -1,0 +1,24 @@
+.markdown {
+  ul, ol {
+    font-size: 0.875rem;
+  }
+  ol {
+    list-style-type: decimal;
+  }
+
+  table {
+    font-size: 0.875rem;
+  }
+  
+  table tr {
+    border: var(--ifm-table-border-width) solid var(--ifm-table-border-color);
+  }
+  
+  table th, table td {
+    border: none;
+  }
+
+  h2 {
+    --ifm-h2-font-size: 1.75rem;
+  }
+}
