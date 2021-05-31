@@ -9,7 +9,7 @@ import { GoToExternal } from './icons/GoToExternal';
 
 import { CMS_DOCS_ENDPOINT, CMS_INDEX } from '../../../constants';
 
-import('./hits.css');
+import './hits.scss';
 
 export function Hits(props) {
   if (!props.collections) {
