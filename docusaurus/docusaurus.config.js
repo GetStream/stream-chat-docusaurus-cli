@@ -32,11 +32,11 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
-  const sidebarPath = `${STREAM_SDK_DOCUSAURUS_PATH}/sidebars${folderMapping[
+  const sidebarPath = `${STREAM_SDK_DOCUSAURUS_PATH}/sidebars-${folderMapping[
     strippedSDK
   ]
-    .replace(' ', '')
-    .replace(/^\w/, (c) => c.toUpperCase())}.json`;
+    .toLowerCase()
+    .replace(' ', '-')}.json`;
   return [
     '@docusaurus/plugin-content-docs',
     {
