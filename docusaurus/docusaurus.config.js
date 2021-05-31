@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { BASE_URL, folderMapping, languageMapping } = require('./constants');
+const Icons = require('./admonition-icons');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
 
@@ -30,6 +31,9 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
   return sdkConfig.plugins;
 }).flat();
 
+const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css');
+const CUSTOM_CSS_FILES = fs.readdirSync(CUSTOM_CSS_PATH).map(file => `${CUSTOM_CSS_PATH}/${file}`);
+
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
   const sidebarPath = `${STREAM_SDK_DOCUSAURUS_PATH}/sidebars-${folderMapping[
@@ -48,6 +52,32 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
             sidebarPath: require.resolve(sidebarPath),
           }
         : {}),
+      admonitions: {
+        infima: true,
+        customTypes: {
+          note: {
+            ifmClass: 'note',
+            svg: Icons.note
+          },
+          info: {
+            ifmClass: 'info',
+            svg: Icons.info
+          },
+          tip: {
+            ifmClass: 'success',
+            svg: Icons.tip
+          },
+          caution: {
+            ifmClass: 'warning',
+            svg: Icons.caution
+          },
+          danger: {
+            ifmClass: 'danger',
+            svg: Icons.danger
+          }
+        }
+
+      }
     },
   ];
 });
@@ -141,13 +171,14 @@ module.exports = {
     },
   },
   themes: [
-    ['@docusaurus/theme-classic', { 
-      customCss: [
-        require.resolve('./src/css/custom.scss'),
-        require.resolve('./src/css/menu.scss'),
-        require.resolve('./src/css/toc.scss'),
-      ]
-    }],
+    [
+      '@docusaurus/theme-classic',
+      { 
+        customCss: [
+          ...CUSTOM_CSS_FILES,
+        ],
+      }
+    ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],

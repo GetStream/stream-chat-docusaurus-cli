@@ -35,6 +35,15 @@
 @font-face {
   font-family: 'Inter';
   font-display: fallback;
+  font-weight: 800;
+  src:  url('../../static/fonts/inter/Inter-Black.otf') format('otf'),
+        url('../../static/fonts/inter/Inter-Black.woff2') format('woff2'),
+        url('../../static/fonts/inter/Inter-Black.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-display: fallback;
   font-style: italic;
   font-weight: 400;
   src:  url('../../static/fonts/inter/Inter-Italic.otf') format('otf'),
@@ -51,16 +60,62 @@
   --ifm-color-primary-light: #1A6FFF;
   --ifm-color-primary-lighter: #2677FF;
   --ifm-color-primary-lightest: #4D8FFF;
+  --ifm-color-info: #00dfff;
+  --ifm-color-info-dark: #00CCEA;
+  --ifm-color-info-darker: #00bed9;
+  --ifm-color-info-darkest: #009cb3;
+  --ifm-color-info-light: #1ae2ff;
+  --ifm-color-info-lighter: #26e4ff;
+  --ifm-color-info-lightest: #78eeff;
+  --ifm-color-info-background: #effbfc;
+  --ifm-color-success: #40df01;
+  --ifm-color-success-dark: #3ac901;
+  --ifm-color-success-darker: #36be01;
+  --ifm-color-success-darkest: #2d9c01;
+  --ifm-color-success-light: #46f501;
+  --ifm-color-success-lighter: #4bfe04;
+  --ifm-color-success-lightest: #7efe4b;
+  --ifm-color-success-background: #eefbe8;
+  --ifm-color-warning: #fecf29;
+  --ifm-color-warning-dark: #fec80c;
+  --ifm-color-warning-darker: #fac301;
+  --ifm-color-warning-darkest: #cea001;
+  --ifm-color-warning-light: #fed646;
+  --ifm-color-warning-lighter: #fed955;
+  --ifm-color-warning-lightest: #ffeeb3;
+  --ifm-color-warning-background: #fcfbef;
+  --ifm-color-danger: #ff6b00;
+  --ifm-color-danger-dark: #e66000;
+  --ifm-color-danger-darker: #d95b00;
+  --ifm-color-danger-darkest: #b34b00;
+  --ifm-color-danger-light: #ff7a1a;
+  --ifm-color-danger-lighter: #ff8126;
+  --ifm-color-danger-lightest: #ffb178;
+  --ifm-color-danger-background: #fcf5ef;
+  --ifm-color-secondary-darkest: #acacac;
+  --ifm-color-secondary-background: #f6f6f6;
+
   --ifm-code-font-size: 95%;
   --ifm-background-color: rgba(252, 252, 252, 1);
   --ifm-toc-border-color: rgba(0,0,0,0.03);
   --ifm-font-family-base: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'sans-serif';
-  /* Stream custom variables */
-  --xtm-color-highlight: #00DFFF;
+
+  /* Headings variables */
+  --ifm-heading-font-weight: 800;
+
+  /* Table variables */
+  --ifm-table-background: #FCFCFC;
+  --ifm-table-stripe-background: #FCFCFC;
+  --ifm-table-head-background: #FAFAFA;
+  --ifm-table-border-color: #ececec;
 }
 
 html[data-theme='dark'] {
   --ifm-toc-border-color: rgba(255,255,255,0.05);
+  --ifm-table-background: transparent;
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: rgba(255,255,255,0.05);
+  --ifm-table-border-color: rgba(255,255,255,0.2);
 }
 
 .docusaurus-highlight-code-line {
@@ -68,4 +123,12 @@ html[data-theme='dark'] {
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+@media (min-width: 1440px) {
+  .main-wrapper.docs-wrapper.doc-page {
+    .container {
+      padding-top: 3.75rem!important;
+    }
+  }
 }
