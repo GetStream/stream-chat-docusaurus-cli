@@ -6,16 +6,24 @@ const environment = require('./environment');
 
 const OPTIONAL_VARIABLES = ['ALGOLIA_APP_ID', 'ALGOLIA_API_KEY'];
 
-const filteredVariables = Object.keys(environment).filter((item) =>
-  OPTIONAL_VARIABLES.includes(item) ? !!process.env[item] : true
-);
+const filteredVariables = Object.keys(environment).reduce((acc, item) => {
+  if (OPTIONAL_VARIABLES.includes(item)) return acc;
+  acc[item] = process.env[item];
+  return acc;
+}, {});
 
 module.exports = function () {
   return {
     name: 'define-env-vars-plugin',
     configureWebpack() {
       return {
-        plugins: [new webpack.EnvironmentPlugin(filteredVariables)],
+        plugins: [
+          new webpack.EnvironmentPlugin({
+            ...filteredVariables,
+            ALGOLIA_APP_ID: 'DEFAULT',
+            ALGOLIA_API_KEY: 'DEFAULT',
+          }),
+        ],
         module: {
           rules: [],
         },
