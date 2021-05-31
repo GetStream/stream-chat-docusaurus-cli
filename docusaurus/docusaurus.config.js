@@ -92,6 +92,9 @@ module.exports = {
       apiKey: 'MOCK',
       indexName: 'MOCK',
     },
+    colorMode: {
+      disableSwitch: true,
+    },
     footer: {
       copyright: '© Stream.IO, Inc. All Rights Reserved.',
       links: [
