@@ -139,9 +139,10 @@ module.exports = {
     navbar: {
       items: [
         {
-          href: 'https://github.com/GetStream',
-          label: 'GitHub',
+          href: 'https://getstream.io/try-for-free/',
+          label: 'Sign Up',
           position: 'right',
+          className: 'navbar__link__sign-up'
         },
         {
           items: navbarSDKItems,
@@ -153,8 +154,9 @@ module.exports = {
       logo: {
         alt: 'stream',
         src: 'img/logo.svg',
+        href: 'https://getstream.io/'
       },
-      title: 'stream',
+      title: 'Chat Messaging',
     },
   },
   themes: [

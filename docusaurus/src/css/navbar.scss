@@ -1,0 +1,50 @@
+:root {
+  --ifm-navbar-shadow: 0px 2px 18px rgba(0, 0, 0, 0.04);
+}
+
+@media (min-width: 997px) {
+  :root {
+    --ifm-navbar-height: 4.5rem;
+    --ifm-navbar-padding-vertical: 1.25rem;
+    --ifm-navbar-padding-horizontal: 1.875rem;
+  }
+}
+
+.navbar {
+  &__logo {
+    height: 1.25rem;
+    transform: translateY(-0.25rem);
+    margin-right: 0.2rem;
+  }
+
+  &__title {
+    color: var(--ifm-color-black);
+
+    &::after {
+      display: inline-block;
+      content: 'docs';
+      text-transform: uppercase;
+      font-size: 0.5rem;
+      color: var(--ifm-color-primary);
+      letter-spacing: 0.83px;
+      background-color: var(--ifm-color-primary-background);
+      transform: translate(1px, -10px);
+      font-weight: 800;
+      padding: 0 2px;
+    }
+  }
+
+  &__link {
+    font-size: 0.813rem;
+    &:hover {
+      color: var(--ifm-color-primary-darkest);
+    }
+
+    &__sign-up {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.32px;
+      color: var(--ifm-color-primary);
+    }
+  }
+}
