@@ -36,11 +36,19 @@ const CUSTOM_CSS_FILES = fs.readdirSync(CUSTOM_CSS_PATH).map(file => `${CUSTOM_C
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
-  const sidebarPath = `${STREAM_SDK_DOCUSAURUS_PATH}/sidebars-${folderMapping[
+  const sidebarPathWithoutExtension = `${STREAM_SDK_DOCUSAURUS_PATH}/sidebars-${folderMapping[
     strippedSDK
   ]
     .toLowerCase()
-    .replace(' ', '-')}.json`;
+    .replace(' ', '-')}`;
+
+  const jsSidebarPath = `${sidebarPathWithoutExtension}.js`;
+  const jsonSidebarPath = `${sidebarPathWithoutExtension}.json`;
+
+  const sidebarPath = fs.existsSync(jsSidebarPath)
+    ? jsSidebarPath
+    : jsonSidebarPath;
+
   return [
     '@docusaurus/plugin-content-docs',
     {
@@ -124,30 +132,6 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: true,
-    },
-    footer: {
-      copyright: '© Stream.IO, Inc. All Rights Reserved.',
-      links: [
-        {
-          items: [
-            {
-              href: 'https://twitter.com/getstream_io',
-              label: 'Twitter',
-            },
-          ],
-          title: 'Community',
-        },
-        {
-          items: [
-            {
-              href: 'https://github.com/GetStream',
-              label: 'GitHub',
-            },
-          ],
-          title: 'More',
-        },
-      ],
-      style: 'dark',
     },
     liveCodeBlock: {
       playgroundPosition: 'bottom',

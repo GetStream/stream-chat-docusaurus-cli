@@ -51,7 +51,7 @@ module.exports = () => {
 
 ## Sidebars
 
-You can add your own sidebar instead of the auto-generated default by creating a `sidebars{SDK_NAME}.json` file within your `docusaurus` directory. For example on `React` the file would be `sidebarsReact.json` and for `React Native` you would do `sidebarsReactNative.json`.
+You can add your own sidebar instead of the auto-generated default by creating a `sidebars-{SDK_NAME}.(js|json)` file within your `docusaurus` directory. For example on `React` the file would be `sidebars-react.(js|json)` and for `React Native` you would do `sidebars-react-native.(js|json)`.
 
 ## Installation and Using the CLI
  
