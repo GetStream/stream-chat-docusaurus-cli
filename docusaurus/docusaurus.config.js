@@ -132,7 +132,7 @@ module.exports = {
       indexName: 'MOCK',
     },
     gtag: {
-      trackingID: process.env.GOOGLE_TAG_TRACKING_ID,
+      trackingID: process.env.GOOGLE_TAG_TRACKING_ID || 'DEFAULT',
     },
     liveCodeBlock: {
       playgroundPosition: 'bottom',
