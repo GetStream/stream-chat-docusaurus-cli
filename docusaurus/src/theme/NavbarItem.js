@@ -9,7 +9,7 @@ export default function NavbarItem(props) {
   const { pathname } = useLocation();
   
   if (label === 'SDK' && props.items.length) {
-    const selectedSDK = props.items.find(item => pathname.includes(`${baseUrl}/${item.id}`));
+    const selectedSDK = props.items.find(item => pathname.includes(`${baseUrl}/${item.id}/`));
     const sdks = useMemo(() => props.items.map(sdk => ({ ...sdk, label: PlatformLabel(sdk)  })), [props.items]);
 
     return (
