@@ -114,6 +114,7 @@ module.exports = {
   plugins: [
     ...defaultPlugins,
     ...CUSTOM_PLUGINS,
+    '@docusaurus/plugin-google-gtag',
     '@docusaurus/plugin-content-pages',
     'docusaurus-plugin-sass',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
@@ -129,6 +130,9 @@ module.exports = {
       appId: 'MOCK',
       apiKey: 'MOCK',
       indexName: 'MOCK',
+    },
+    gtag: {
+      trackingID: process.env.GOOGLE_TAG_TRACKING_ID,
     },
     liveCodeBlock: {
       playgroundPosition: 'bottom',

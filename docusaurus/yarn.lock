@@ -1337,6 +1337,13 @@
     tslib "^2.1.0"
     webpack "^5.28.0"
 
+"@docusaurus/plugin-google-gtag@^2.0.0-beta.0":
+  version "2.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@docusaurus/plugin-google-gtag/-/plugin-google-gtag-2.0.0-beta.0.tgz#4836770130cf54ff2cd83affbff9644ee7293e9e"
+  integrity sha512-V7zaYbhAMv0jexm5H/5sAnoM1GHibcn9QQk5UWC++x1kE0KRuLDZHV+9OyvW5wr0wWFajod/b88SpUpSMF5u+g==
+  dependencies:
+    "@docusaurus/core" "2.0.0-beta.0"
+
 "@docusaurus/react-loadable@5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/react-loadable/-/react-loadable-5.5.0.tgz#6d6f0c8fd9a434b62a1ab1f8645ee7bde5a9ec21"
