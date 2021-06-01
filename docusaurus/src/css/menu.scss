@@ -125,7 +125,7 @@ div[class^='docPage'] {
   // Making space for external links
   [class^='docSidebarContainer'] {
     div[class^='sidebar'] {
-      height: calc(100vh - 12.5rem);
+      height: calc(100vh - var(--xtm-sidebar-footer-height) - var(--xtm-site-navbar-height));
     }
   }
   
