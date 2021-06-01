@@ -58,7 +58,7 @@ div[class^='docPage'] {
   }
 }
 
-.menu {
+div:not(.navbar-sidebar__items) > .menu {
   padding: 1.125rem 0;
   font-size: 0.875rem;
 
