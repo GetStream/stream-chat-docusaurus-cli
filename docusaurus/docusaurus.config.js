@@ -95,6 +95,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   const readableSDK = folderMapping[strippedSDK] || SDK;
   return {
     label: readableSDK,
+    id: strippedSDK,
     to: `${strippedSDK}/?language=${languageMapping[strippedSDK]}`,
     type: 'doc',
   };
@@ -139,7 +140,7 @@ module.exports = {
     navbar: {
       items: [
         {
-          href: 'https://getstream.io/try-for-free/',
+          href: 'https://getstream.io/accounts/signup/',
           label: 'Sign Up',
           position: 'right',
           className: 'navbar__link__sign-up'
@@ -147,6 +148,7 @@ module.exports = {
         {
           items: navbarSDKItems,
           label: 'SDK',
+          className: 'navbar__link__custom-dropdown',
           position: 'left',
         },
         ...navbarVersionItems,

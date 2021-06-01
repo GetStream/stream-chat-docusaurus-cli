@@ -2,7 +2,7 @@
   "main":[
      {
         "returnLink":true,
-        "label":"Return to site",
+        "label":"Return to Stream",
         "href":"https://getstream.io/chat/docs/"
      },
      {
