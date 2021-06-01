@@ -1,46 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
-
 import OriginalNavbar from '@theme-original/Navbar';
+import SITE_LINKS from './site-links.json';
 
 import './styles.scss';
-
-const SITE_LINKS = {
-  main: [
-    {
-      returnLink: true,
-      label: 'Return to site',
-      href: 'https://getstream.io/chat/docs/', 
-    },
-    {
-      label: 'Chat Overview',
-      href: 'https://getstream.io/chat/', 
-    },
-    {
-      label: 'Chat Pricing',
-      href: 'https://getstream.io/chat/pricing/', 
-    },
-    {
-      label: 'Chat Demos',
-      href: 'https://getstream.io/chat/demos/messaging/', 
-    },
-    {
-      label: 'Chat UI Kits',
-      href: 'https://getstream.io/chat/ui-kit/',
-    },
-    {
-      label: 'Solutions',
-      href: 'https://getstream.io/chat/solutions/',
-    },
-  ],
-  secondary: [
-    {
-      contact: true,
-      label: 'Contact Sales',
-      href: 'https://getstream.io/contact/',
-    },
-  ]
-};
 
 export default function Navbar(props) {
   return <>
@@ -53,11 +16,28 @@ const SiteNavbar = () => (
   <nav className='site-navbar'>
     <div className='site-navbar__inner'>
       <ul className='site-navbar__main'>
-        {SITE_LINKS.main.map(({ returnLink, label, href }, i) => (
+        {SITE_LINKS.main.map(({ returnLink, label, href, items }, i) => (
           <li
-            className={clsx('site-navbar__item', {'site-navbar__item--return': returnLink})} key={i}
+            className={clsx(
+              'site-navbar__item', {
+                'site-navbar__item--return': !!returnLink,
+                'dropdown--hoverable': !!items,
+              }
+            )}
+            key={i}
           >
             <a href={href}>{label}</a>
+            {items && (
+              <ul className='site-navbar__dropdown dropdown__menu'>
+                {
+                  items.map((item, j) => (
+                    <li className='site-navbar__dropdown__item' key={j}>
+                      <a href={item.href}>{item.label}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+            )}
           </li>
         ))}
       </ul>
@@ -79,4 +59,4 @@ const SiteNavbar = () => (
       </ul>
     </div>
   </nav>
-)
+);
