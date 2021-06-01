@@ -104,6 +104,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
 const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   docsPluginId: SDK.toLowerCase().replace(' ', ''),
   type: 'docsVersionDropdown',
+  className: 'navbar__link__custom-dropdown',
 }));
 
 module.exports = {
