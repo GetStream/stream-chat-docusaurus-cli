@@ -116,6 +116,7 @@ module.exports = {
   plugins: [
     ...defaultPlugins,
     ...CUSTOM_PLUGINS,
+    '@docusaurus/plugin-google-gtag',
     '@docusaurus/plugin-content-pages',
     'docusaurus-plugin-sass',
     path.resolve(__dirname, 'src/symlink-docusaurus'),
@@ -134,6 +135,9 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: true,
+    },
+    gtag: {
+      trackingID: process.env.GOOGLE_TAG_TRACKING_ID || 'DEFAULT',
     },
     liveCodeBlock: {
       playgroundPosition: 'bottom',
