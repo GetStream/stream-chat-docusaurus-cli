@@ -4,7 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const { BASE_URL, WEBSITE_URL, GITHUB_URLS, folderMapping, languageMapping } = require('./constants');
+const { BASE_URL, WEBSITE_URL, folderMapping, languageMapping } = require('./constants');
+const { GITHUB, WEBSITE } = require('./urls');
 const Icons = require('./admonition-icons');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
@@ -108,12 +109,19 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
 }));
 
 const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
-  href: GITHUB_URLS[id],
+  href: GITHUB[id],
   platform: id,
   label: 'github',
   position: 'left',
   className: 'navbar__link__github',
-  'aria-label': 'Github repository'
+  'aria-label': 'Github repository',
+  mobile: false,
+}));
+
+const navbarMobileItems = WEBSITE.main.map((item) => ({
+  href: item.href,
+  label: item.label,
+  className: 'navbar__link__mobile',
 }));
 
 module.exports = {
@@ -168,6 +176,7 @@ module.exports = {
         },
         ...navbarVersionItems,
         ...navbarGithubItems,
+        ...navbarMobileItems,
       ],
       logo: {
         alt: 'stream',

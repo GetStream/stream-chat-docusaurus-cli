@@ -9,6 +9,7 @@
 !static
 !static/**/*
 !constants.js
+!urls.js
 !.gitignore
 !babel.config.js
 !docusaurus.config.js

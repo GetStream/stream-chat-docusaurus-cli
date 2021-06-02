@@ -76,6 +76,10 @@
         opacity: 0.8;
       }
     }
+
+    &__mobile {
+      display: none;
+    }
   }
 
   .dropdown {
@@ -146,8 +150,19 @@
     }
 
     &__items {
-      > .menu > .menu__list > * {
-        margin-bottom: 1.325rem;
+      padding: 1rem;
+
+      > .menu > .menu__list {
+        > * {
+          margin-bottom: 1.325rem;
+          .menu__link:not(.menu__link--sublist) {
+            padding-left: 0;
+          }
+        }
+
+        .navbar__link__mobile {
+          display: block;
+        }
       } 
     }
   }
