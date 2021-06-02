@@ -59,7 +59,7 @@ export function Hit({
     return (
       <a
         target="_blank"
-        href={`${website.docs}${url.format({
+        href={`${website.cms_docs}${url.format({
           pathname: `/${cmsPlatform}/${hit.slug}/`,
           query: locationQuery,
         })}${!!headerId ? `#${headerId}` : ''}`}

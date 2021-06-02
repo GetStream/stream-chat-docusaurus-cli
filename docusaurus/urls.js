@@ -8,7 +8,7 @@ module.exports = {
   },
   website: {
     root: `${ROOT}/`,
-    docs: `${ROOT}/chat/docs/`,
+    cms_docs: `${ROOT}/chat/docs/`,
     signup: `${ROOT}/signup/`,
     main: [
       {
