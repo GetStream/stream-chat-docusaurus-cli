@@ -32,3 +32,15 @@
   border-left: $height solid transparent;
   border-right: $height solid transparent;
 }
+
+@mixin faux-select {
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid #E4E4E4;
+  cursor: pointer;
+  transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+  
+  &:hover {
+    box-shadow: var(--docsearch-searchbox-shadow);
+  }
+}

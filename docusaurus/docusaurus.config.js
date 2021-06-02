@@ -104,7 +104,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
 const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   docsPluginId: SDK.toLowerCase().replace(' ', ''),
   type: 'docsVersionDropdown',
-  className: 'navbar__link__custom-dropdown',
+  className: 'navbar__link__custom-dropdown--version',
 }));
 
 const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
@@ -157,12 +157,13 @@ module.exports = {
           href: `${WEBSITE_URL}signup/`,
           label: 'Sign Up',
           position: 'right',
-          className: 'navbar__link__sign-up'
+          className: 'navbar__link__sign-up',
+          mobile: false,
         },
         {
           items: navbarSDKItems,
           label: 'SDK',
-          className: 'navbar__link__custom-dropdown',
+          className: 'navbar__link__custom-dropdown--sdks',
           position: 'left',
         },
         ...navbarVersionItems,
