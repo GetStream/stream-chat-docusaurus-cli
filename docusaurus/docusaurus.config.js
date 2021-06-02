@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { BASE_URL, folderMapping, languageMapping } = require('./constants');
+const { BASE_URL, WEBSITE_URL, folderMapping, languageMapping } = require('./constants');
 const Icons = require('./admonition-icons');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
@@ -145,7 +145,7 @@ module.exports = {
     navbar: {
       items: [
         {
-          href: 'https://getstream.io/accounts/signup/',
+          href: `${WEBSITE_URL}signup/`,
           label: 'Sign Up',
           position: 'right',
           className: 'navbar__link__sign-up'
@@ -161,7 +161,7 @@ module.exports = {
       logo: {
         alt: 'stream',
         src: 'img/logo.svg',
-        href: 'https://getstream.io/'
+        href: WEBSITE_URL
       },
       title: 'Chat Messaging',
     },
@@ -179,5 +179,5 @@ module.exports = {
     '@docusaurus/theme-search-algolia',
   ],
   title: 'Stream Chat - Component SDK Docs',
-  url: 'https://getstream.io',
+  url: WEBSITE_URL,
 };
