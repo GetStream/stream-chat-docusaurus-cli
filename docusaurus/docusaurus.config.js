@@ -4,8 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const { BASE_URL, WEBSITE_URL, folderMapping, languageMapping } = require('./constants');
-const { GITHUB, WEBSITE } = require('./urls');
+const { folderMapping, languageMapping } = require('./constants');
+const URLS = require('./urls');
 const Icons = require('./admonition-icons');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
@@ -109,7 +109,7 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
 }));
 
 const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
-  href: GITHUB[id],
+  href: URLS.github[id],
   platform: id,
   label: 'github',
   position: 'left',
@@ -118,14 +118,14 @@ const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
   mobile: false,
 }));
 
-const navbarMobileItems = WEBSITE.main.map((item) => ({
+const navbarMobileItems = URLS.website.main.map((item) => ({
   href: item.href,
   label: item.label,
   className: 'navbar__link__mobile',
 }));
 
 module.exports = {
-  baseUrl: BASE_URL,
+  baseUrl: URLS.docs.root,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -162,7 +162,7 @@ module.exports = {
     navbar: {
       items: [
         {
-          href: `${WEBSITE_URL}signup/`,
+          href: URLS.website.signup,
           label: 'Sign Up',
           position: 'right',
           className: 'navbar__link__sign-up',
@@ -181,7 +181,7 @@ module.exports = {
       logo: {
         alt: 'stream',
         src: 'img/logo.svg',
-        href: WEBSITE_URL
+        href: URLS.website.root
       },
       title: 'Chat Messaging',
     },
@@ -190,14 +190,12 @@ module.exports = {
     [
       '@docusaurus/theme-classic',
       { 
-        customCss: [
-          ...CUSTOM_CSS_FILES,
-        ],
+        customCss: CUSTOM_CSS_FILES,
       }
     ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
   title: 'Stream Chat - Component SDK Docs',
-  url: WEBSITE_URL,
+  url: URLS.website.root,
 };

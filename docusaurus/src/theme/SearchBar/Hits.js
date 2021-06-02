@@ -7,7 +7,8 @@ import { Snippet } from './Snippet';
 import { SourceIcon } from './icons/SourceIcon';
 import { GoToExternal } from './icons/GoToExternal';
 
-import { CMS_DOCS_ENDPOINT, CMS_INDEX } from '../../../constants';
+import { CMS_INDEX } from '../../../constants';
+import { website } from '../../../urls';
 
 import './hits.scss';
 
@@ -58,7 +59,7 @@ export function Hit({
     return (
       <a
         target="_blank"
-        href={`${CMS_DOCS_ENDPOINT}${url.format({
+        href={`${website.docs}${url.format({
           pathname: `/${cmsPlatform}/${hit.slug}/`,
           query: locationQuery,
         })}${!!headerId ? `#${headerId}` : ''}`}

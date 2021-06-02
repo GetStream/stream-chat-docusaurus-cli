@@ -1,93 +1,99 @@
 const ROOT = 'https://getstream.io';
 const GITHUB_ROOT = 'https://github.com/GetStream';
 
+
 module.exports = {
-  WEBSITE: {
+  docs: {
+    root: '/chat/docs/sdk/',
+  },
+  website: {
     root: `${ROOT}/`,
+    docs: `${ROOT}/chat/docs/`,
+    signup: `${ROOT}/signup/`,
     main: [
       {
         returnLink: true,
-        label: "Return to Stream",
+        label: 'Return to Stream',
         href: `${ROOT}/chat/docs/`,
       },
       {
-        label: "Chat Overview",
+        label: 'Chat Overview',
         href: `${ROOT}/chat/`,
       },
       {
-        label: "Chat Pricing",
+        label: 'Chat Pricing',
         href: `${ROOT}/chat/pricing/`,
       },
       {
-        label: "Chat Demos",
+        label: 'Chat Demos',
         href: `${ROOT}/chat/demos/messaging/`,
         items: [
           {
-            label: "Social Messenger",
+            label: 'Social Messenger',
             href: `${ROOT}/chat/demos/messaging/`,
           },
           {
-            label: "Team Collaboration",
+            label: 'Team Collaboration',
             href: `${ROOT}/chat/demos/team/`,
           },
           {
-            label: "Customer Support",
+            label: 'Customer Support',
             href: `${ROOT}/chat/demos/customers/`,
           },
           {
-            label: "Livestream Gaming",
+            label: 'Livestream Gaming',
             href: `${ROOT}/chat/demos/gaming/`,
           },
           {
-            label: "Virtual Event",
+            label: 'Virtual Event',
             href: `${ROOT}/chat/demos/livestream/`,
           }
         ]
       },
       {
-        label: "Chat UI Kits",
+        label: 'Chat UI Kits',
         href: `${ROOT}/chat/ui-kit/`,
         items: [
           {
-            label: "UI Design Kits",
+            label: 'UI Design Kits',
             href: `${ROOT}/chat/ui-kit/`,
           },
           {
-            label: "Mobile Chat Kit",
+            label: 'Mobile Chat Kit',
             href: `${ROOT}/chat/ux-kit/`,
           }
         ]
       },
       {
-        label: "Solutions",
+        label: 'Solutions',
         href: `${ROOT}/chat/solutions/`,
         items: [
           {
-            label: "Social & team",
+            label: 'Social & team',
             href: `${ROOT}/chat/solutions/social/`,
           },
           {
-            label: "Virtual Events",
+            label: 'Virtual Events',
             href: `${ROOT}/chat/solutions/virtual-events/`,
           },
           {
-            label: "Social & team",
+            label: 'Social & team',
             href: `${ROOT}/chat/solutions/`,
           },
           {
-            label: "Education",
+            label: 'Education',
             href: `${ROOT}/chat/solutions/ed-tech/`,
           },
           {
-            label: "Telehealth",
+            label: 'Telehealth',
             href: `${ROOT}/chat/solutions/telemedicine/`,
           },
           {
-            label: "Customer Support",
+            label: 'Customer Support',
             href: `${ROOT}/chat/solutions/customer-support/`,
           },
           {
-            label: "Marketplaces",
+            label: 'Marketplaces',
             href: `${ROOT}/chat/solutions/marketplaces/`,
           }
         ]
@@ -96,12 +102,12 @@ module.exports = {
     secondary: [
       {
         contact: true,
-        label: "Contact Sales",
+        label: 'Contact Sales',
         href: `${ROOT}/contact/`,
       }
     ],
   },
-  GITHUB: {
+  github: {
     android: `${GITHUB_ROOT}/stream-chat-android/`,
     flutter: `${GITHUB_ROOT}/stream-chat-flutter/`,
     ios: `${GITHUB_ROOT}/stream-chat-swift/`,
