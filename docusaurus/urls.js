@@ -9,7 +9,7 @@ module.exports = {
   website: {
     root: `${ROOT}/`,
     cms_docs: `${ROOT}/chat/docs/`,
-    signup: `${ROOT}/signup/`,
+    signup: `${ROOT}/accounts/signup/`,
     main: [
       {
         returnLink: true,
