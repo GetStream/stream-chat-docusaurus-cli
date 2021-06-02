@@ -179,9 +179,8 @@ module.exports = {
         ...navbarMobileItems,
       ],
       logo: {
-        alt: 'stream',
+        alt: 'Chat docs logo',
         src: 'img/logo.svg',
-        href: URLS.website.root
       },
       title: 'Chat Messaging',
     },
