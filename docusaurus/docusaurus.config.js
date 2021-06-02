@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { BASE_URL, WEBSITE_URL, folderMapping, languageMapping } = require('./constants');
+const { BASE_URL, WEBSITE_URL, GITHUB_URLS, folderMapping, languageMapping } = require('./constants');
 const Icons = require('./admonition-icons');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
@@ -107,6 +107,15 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   className: 'navbar__link__custom-dropdown',
 }));
 
+const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
+  href: GITHUB_URLS[id],
+  platform: id,
+  label: 'github',
+  position: 'left',
+  className: 'navbar__link__github',
+  'aria-label': 'Github repository'
+}));
+
 module.exports = {
   baseUrl: BASE_URL,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
@@ -157,6 +166,7 @@ module.exports = {
           position: 'left',
         },
         ...navbarVersionItems,
+        ...navbarGithubItems,
       ],
       logo: {
         alt: 'stream',

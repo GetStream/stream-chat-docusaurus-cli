@@ -22,6 +22,14 @@ const languageMapping = {
   reactnative: 'javascript',
 };
 
+const GITHUB_URLS = {
+  android: 'https://github.com/GetStream/stream-chat-android/',
+  flutter: 'https://github.com/GetStream/stream-chat-flutter/',
+  ios: 'https://github.com/GetStream/stream-chat-swift/',
+  react: 'https://github.com/GetStream/stream-chat-react/',
+  reactnative: 'https://github.com/GetStream/stream-chat-react-native/',
+};
+
 const BASE_URL = '/chat/docs/sdk/'
 const CMS_DOCS_ENDPOINT = 'https://getstream.io/chat/docs';
 const WEBSITE_URL = 'https://getstream.io/';
@@ -30,6 +38,7 @@ const DOCUSAURUS_INDEX = 'DOCUSAURUS';
 const CMS_INDEX = 'DOCS';
 
 module.exports = {
+  GITHUB_URLS,
   BASE_URL,
   CMS_DOCS_ENDPOINT,
   WEBSITE_URL,

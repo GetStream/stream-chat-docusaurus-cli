@@ -55,6 +55,7 @@
 
   &__link {
     font-size: 0.813rem;
+
     &:hover {
       color: var(--ifm-color-primary-darkest);
     }
@@ -64,6 +65,16 @@
       text-transform: uppercase;
       letter-spacing: 0.32px;
       color: var(--ifm-color-primary);
+    }
+
+    &__github {
+      width: 13px;
+      height: 13px;
+      background: url('/icon/github.svg') no-repeat;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 
