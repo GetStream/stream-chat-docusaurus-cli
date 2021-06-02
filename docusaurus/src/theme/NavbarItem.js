@@ -1,42 +1,46 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useLocation } from '@docusaurus/router';
-import OriginalNavBarItem from '@theme-original/NavbarItem';
+import OriginalNavbarItem from '@theme-original/NavbarItem';
 
 const baseUrl = '/chat/docs/sdk';
 
 export default function NavbarItem(props) {
-  const { docsPluginId, items, label, type } = props;
+  const {
+    docsPluginId, label, type, items,
+  } = props;
   const { pathname } = useLocation();
+  const selectedSDK = useMemo(() => {
+    if (label === 'SDK' && props.items.length) {
+      return items.find((item) => pathname.includes(`${baseUrl}/${item.id}/`));
+    }
+  }, [items, label, pathname]);
+
+  if (selectedSDK) {
+    return <PlatformNavbarItem {...props} label={PlatformLabel(selectedSDK)} />;
+  }
 
   if (
-    type === 'docsVersionDropdown' &&
-    pathname
+    type === 'docsVersionDropdown'
+    && pathname
       .replace(' ', '')
       .search(new RegExp(`${baseUrl}/${docsPluginId}/.*`, 'g')) === -1
   ) {
     return null;
   }
 
-  if (
-    label === 'SDK' &&
-    items.length > 0 &&
-    items.some((item) => pathname.includes(`${baseUrl}/${item.to}/`))
-  ) {
-    const SDK = items.find(
-      (item) =>
-        pathname.search(new RegExp(`${baseUrl}/${item.to}/.*`, 'g')) !== -1
-    );
-
-    return (
-      <>
-        <OriginalNavBarItem {...props} label={SDK.label} />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <OriginalNavBarItem {...props} />
-    </>
-  );
+  return <OriginalNavbarItem {...props} />;
 }
+
+const PlatformNavbarItem = ({ items, ...props }) => {
+  const sdks = useMemo(
+    () => items.map((sdk) => ({ ...sdk, label: PlatformLabel(sdk) })), [items],
+  );
+  return <OriginalNavbarItem {...props} items={sdks} />;
+};
+
+const PlatformLabel = ({ id, label }) => (
+  <span className="navbar__link__sdk">
+    <img src={`${baseUrl}/icon/${id}.svg`} alt={`${label} logo`} className="navbar__link__sdk__icon" />
+    {label}
+  </span>
+);

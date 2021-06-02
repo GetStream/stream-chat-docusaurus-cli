@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { BASE_URL, folderMapping, languageMapping } = require('./constants');
+const { BASE_URL, WEBSITE_URL, folderMapping, languageMapping } = require('./constants');
 const Icons = require('./admonition-icons');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
@@ -95,6 +95,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   const readableSDK = folderMapping[strippedSDK] || SDK;
   return {
     label: readableSDK,
+    id: strippedSDK,
     to: `${strippedSDK}/?language=${languageMapping[strippedSDK]}`,
     type: 'doc',
   };
@@ -103,6 +104,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
 const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   docsPluginId: SDK.toLowerCase().replace(' ', ''),
   type: 'docsVersionDropdown',
+  className: 'navbar__link__custom-dropdown',
 }));
 
 module.exports = {
@@ -131,6 +133,9 @@ module.exports = {
       apiKey: 'MOCK',
       indexName: 'MOCK',
     },
+    colorMode: {
+      disableSwitch: true,
+    },
     gtag: {
       trackingID: process.env.GOOGLE_TAG_TRACKING_ID || 'DEFAULT',
     },
@@ -140,13 +145,15 @@ module.exports = {
     navbar: {
       items: [
         {
-          href: 'https://github.com/GetStream',
-          label: 'GitHub',
+          href: `${WEBSITE_URL}signup/`,
+          label: 'Sign Up',
           position: 'right',
+          className: 'navbar__link__sign-up'
         },
         {
           items: navbarSDKItems,
           label: 'SDK',
+          className: 'navbar__link__custom-dropdown',
           position: 'left',
         },
         ...navbarVersionItems,
@@ -154,8 +161,9 @@ module.exports = {
       logo: {
         alt: 'stream',
         src: 'img/logo.svg',
+        href: WEBSITE_URL
       },
-      title: 'stream',
+      title: 'Chat Messaging',
     },
   },
   themes: [
@@ -171,5 +179,5 @@ module.exports = {
     '@docusaurus/theme-search-algolia',
   ],
   title: 'Stream Chat - Component SDK Docs',
-  url: 'https://getstream.io',
+  url: WEBSITE_URL,
 };

@@ -19,6 +19,9 @@ html[data-theme='dark'] {
 
 div[class^='docPage'] {
   flex-direction: var(--xtm-layout-direction);
+  > main {
+    flex: 1;
+  }
 }
 
 .menu-footer {
@@ -55,7 +58,7 @@ div[class^='docPage'] {
   }
 }
 
-.menu {
+div:not(.navbar-sidebar__items) > .menu {
   padding: 1.125rem 0;
   font-size: 0.875rem;
 
@@ -113,6 +116,20 @@ div[class^='docPage'] {
       }
     }
   }
+
+  &--responsive {
+    .menu__button {
+      background-color: var(--ifm-color-primary);
+      border-color: var(--ifm-color-primary);
+      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.32) 0px 3px 13px 0px;
+      color: var(--ifm-color-white);
+      padding: 0.5rem 1rem;
+      border-radius: 99px;
+      svg path {
+        stroke-width: 4px;
+      }
+    }
+  }
 }
 
 @media (min-width: 997px) {
@@ -125,7 +142,7 @@ div[class^='docPage'] {
   // Making space for external links
   [class^='docSidebarContainer'] {
     div[class^='sidebar'] {
-      height: calc(100vh - 12.5rem);
+      height: calc(100vh - var(--xtm-sidebar-footer-height) - var(--xtm-site-navbar-height));
     }
   }
   

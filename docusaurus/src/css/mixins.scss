@@ -24,3 +24,11 @@
     background-size: 1rem 1rem;
   }
 }
+
+@mixin down-arrow($color, $width, $height) {
+  width: 0; 
+  height: 0;
+  border-top: $width solid $color;
+  border-left: $height solid transparent;
+  border-right: $height solid transparent;
+}
