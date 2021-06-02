@@ -25,7 +25,7 @@ function DocSearch({ contextualSearch, ...props }) {
 
   const location = useLocation();
   const locationPlatform = useMemo(() => {
-    const [urlPlatform] = location.pathname.replace(URLS.website.docs, '').split('/');
+    const [urlPlatform] = location.pathname.replace(URLS.docs.root, '').split('/');
     return urlPlatform;
   }, [location.pathname]);
 
