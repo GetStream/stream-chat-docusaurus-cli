@@ -55,6 +55,7 @@
 
   &__link {
     font-size: 0.813rem;
+
     &:hover {
       color: var(--ifm-color-primary-darkest);
     }
@@ -65,18 +66,29 @@
       letter-spacing: 0.32px;
       color: var(--ifm-color-primary);
     }
+
+    &__github {
+      width: 13px;
+      height: 13px;
+      background: url('/icon/github.svg') no-repeat;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    &__mobile {
+      display: none;
+    }
   }
 
   .dropdown {
-    position: relative;
-    border-radius: 6px;
-    border: 1px solid #E4E4E4;
+    @include mixins.faux-select;
     min-width: 11.25rem;
-    cursor: pointer;
     margin-right: 1.25rem;
-    transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
 
-    > .navbar__link__custom-dropdown {
+    > .navbar__link__custom-dropdown--sdks,
+    > .navbar__link__custom-dropdown--version {
       width: 100%;
       color: var(--ifm-color-content);
 
@@ -104,8 +116,54 @@
       }
     }
 
-    &:hover {
-      box-shadow: var(--docsearch-searchbox-shadow);
+  }
+
+  // Mobile sidebar
+  .navbar-sidebar {
+    .menu {
+      &__link {
+        &--sublist {
+          @include mixins.menu-sublist-icon;
+
+          &.navbar__link__custom-dropdown--sdks,
+          &.navbar__link__custom-dropdown--version {
+            @include mixins.faux-select;
+          }
+        }
+
+        &--active {
+          color: var(--ifm-color-primary);
+          font-weight: 700;
+        }
+
+        &.navbar__link__custom-dropdown--sdks {
+          margin-top: 1.325rem;
+          &::before {
+            @include mixins.menu-main-item;
+            content: 'SDKS';
+            position: absolute;
+            top: -1.325rem;
+            left: 0;
+          }
+        }
+      }
+    }
+
+    &__items {
+      padding: 1rem;
+
+      > .menu > .menu__list {
+        > * {
+          margin-bottom: 1.325rem;
+          .menu__link:not(.menu__link--sublist) {
+            padding-left: 0;
+          }
+        }
+
+        .navbar__link__mobile {
+          display: block;
+        }
+      } 
     }
   }
 }

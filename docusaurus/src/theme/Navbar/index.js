@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import OriginalNavbar from '@theme-original/Navbar';
-import SITE_LINKS from './site-links.json';
+import URLS from '../../../urls';
 
 import './styles.scss';
 
@@ -16,7 +16,7 @@ const SiteNavbar = () => (
   <nav className='site-navbar'>
     <div className='site-navbar__inner'>
       <ul className='site-navbar__main'>
-        {SITE_LINKS.main.map(({ returnLink, label, href, items }, i) => (
+        {URLS.website.main.map(({ returnLink, label, href, items }, i) => (
           <li
             className={clsx(
               'site-navbar__item', {
@@ -42,7 +42,7 @@ const SiteNavbar = () => (
         ))}
       </ul>
       <ul className='site-navbar__secondary'>
-        {SITE_LINKS.secondary.map(({ contact, label, href }, i) => (
+        {URLS.website.secondary.map(({ contact, label, href }, i) => (
           <li
           className={clsx('site-navbar__item', {'site-navbar__item--contact': contact})} key={i}
         >

@@ -6,11 +6,11 @@ const baseUrl = '/chat/docs/sdk';
 
 export default function NavbarItem(props) {
   const {
-    docsPluginId, label, type, items,
+    docsPluginId, label, type, items
   } = props;
   const { pathname } = useLocation();
   const selectedSDK = useMemo(() => {
-    if (label === 'SDK' && props.items.length) {
+    if (label === 'SDK' && items.length) {
       return items.find((item) => pathname.includes(`${baseUrl}/${item.id}/`));
     }
   }, [items, label, pathname]);
@@ -26,6 +26,10 @@ export default function NavbarItem(props) {
       .search(new RegExp(`${baseUrl}/${docsPluginId}/.*`, 'g')) === -1
   ) {
     return null;
+  }
+
+  if (label === 'github') {
+    return !pathname.includes(`/${props.platform}/`) ? null : <OriginalNavbarItem {...props} label='' />;
   }
 
   return <OriginalNavbarItem {...props} />;

@@ -4,7 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const { BASE_URL, WEBSITE_URL, folderMapping, languageMapping } = require('./constants');
+const { folderMapping, languageMapping } = require('./constants');
+const URLS = require('./urls');
 const Icons = require('./admonition-icons');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
@@ -104,11 +105,27 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
 const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   docsPluginId: SDK.toLowerCase().replace(' ', ''),
   type: 'docsVersionDropdown',
-  className: 'navbar__link__custom-dropdown',
+  className: 'navbar__link__custom-dropdown--version',
+}));
+
+const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
+  href: URLS.github[id],
+  platform: id,
+  label: 'github',
+  position: 'left',
+  className: 'navbar__link__github',
+  'aria-label': 'Github repository',
+  mobile: false,
+}));
+
+const navbarMobileItems = URLS.website.main.map((item) => ({
+  href: item.href,
+  label: item.label,
+  className: 'navbar__link__mobile',
 }));
 
 module.exports = {
-  baseUrl: BASE_URL,
+  baseUrl: URLS.docs.root,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -145,23 +162,25 @@ module.exports = {
     navbar: {
       items: [
         {
-          href: `${WEBSITE_URL}signup/`,
+          href: URLS.website.signup,
           label: 'Sign Up',
           position: 'right',
-          className: 'navbar__link__sign-up'
+          className: 'navbar__link__sign-up',
+          mobile: false,
         },
         {
           items: navbarSDKItems,
           label: 'SDK',
-          className: 'navbar__link__custom-dropdown',
+          className: 'navbar__link__custom-dropdown--sdks',
           position: 'left',
         },
         ...navbarVersionItems,
+        ...navbarGithubItems,
+        ...navbarMobileItems,
       ],
       logo: {
-        alt: 'stream',
+        alt: 'Chat docs logo',
         src: 'img/logo.svg',
-        href: WEBSITE_URL
       },
       title: 'Chat Messaging',
     },
@@ -170,14 +189,12 @@ module.exports = {
     [
       '@docusaurus/theme-classic',
       { 
-        customCss: [
-          ...CUSTOM_CSS_FILES,
-        ],
+        customCss: CUSTOM_CSS_FILES,
       }
     ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
   title: 'Stream Chat - Component SDK Docs',
-  url: WEBSITE_URL,
+  url: URLS.website.root,
 };
