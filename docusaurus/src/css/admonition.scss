@@ -1,5 +1,6 @@
-@mixin admonition-config($bgColor, $headerColor) {
+@mixin admonition-config($bgColor, $headerColor, $contentColor: var(--ifm-color-black)) {
   & {
+    --ifm-alert-color: #{$contentColor};
     --ifm-alert-background-color: #{$bgColor};
     --ifm-alert-border-color: #{$bgColor};
     --ra-admonition-icon-color: #{$headerColor};
@@ -8,6 +9,11 @@
   .admonition-heading {
     color: $headerColor;
   }
+
+  .admonition-content {
+    color: $contentColor;
+  }
+
 }
 
 /* Alert variables */
@@ -18,7 +24,7 @@
   --xtm-alert-font-size: 0.938rem;
 }
 
-.admonition {
+.alert {
   margin-bottom: 1.5rem;
 
   .admonition-heading {
@@ -28,7 +34,7 @@
 
   .admonition-content {
     font-size: var(--xtm-alert-font-size);
-    color: var(--ifm-color-black);
+    font-weight: 500;
   }
 
   .admonition-icon svg {
@@ -45,23 +51,23 @@
     }
   }
 
-  &-note {
-    @include admonition-config(var(--ifm-color-secondary-background), var(--ifm-color-secondary-darkest));
+  &--secondary {
+    @include admonition-config(var(--ifm-color-secondary), var(--ifm-color-black));
   }
   
-  &-info {
-    @include admonition-config(var(--ifm-color-info-background), var(--ifm-color-info-dark));
+  &--info {
+    @include admonition-config(var(--ifm-color-info-background), var(--ifm-color-info-font));
   }
   
-  &-tip {
-    @include admonition-config(var(--ifm-color-success-background), var(--ifm-color-success));
+  &--success {
+    @include admonition-config(var(--ifm-color-success-background), var(--ifm-color-success-font));
   }
   
-  &-caution {
-    @include admonition-config(var(--ifm-color-warning-background), var(--ifm-color-warning));
+  &--warning {
+    @include admonition-config(var(--ifm-color-warning-background), var(--ifm-color-black));
   }
   
-  &-danger {
-    @include admonition-config(var(--ifm-color-danger-background), var(--ifm-color-danger));
+  &--danger {
+    @include admonition-config(var(--ifm-color-danger-background), var(--ifm-color-white), var(--ifm-color-white));
   }
 }
