@@ -1,3 +1,5 @@
+@use './mixins.scss';
+
 .markdown {
   ul, ol {
     font-size: 0.875rem;

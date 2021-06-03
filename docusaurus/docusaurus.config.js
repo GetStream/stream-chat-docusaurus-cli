@@ -32,7 +32,7 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
   return sdkConfig.plugins;
 }).flat();
 
-const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css');
+const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css/components');
 const CUSTOM_CSS_FILES = fs.readdirSync(CUSTOM_CSS_PATH).map(file => `${CUSTOM_CSS_PATH}/${file}`);
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
@@ -189,7 +189,10 @@ module.exports = {
     [
       '@docusaurus/theme-classic',
       { 
-        customCss: CUSTOM_CSS_FILES,
+        customCss: [
+          require.resolve('./src/css/custom.scss'),
+          ...CUSTOM_CSS_FILES
+        ],
       }
     ],
     '@docusaurus/theme-live-codeblock',
