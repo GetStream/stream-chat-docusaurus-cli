@@ -22,6 +22,7 @@
   --xtm-alert-heading-spacing: 0.12rem;
   --xtm-alert-heading-font-size: 0.75rem;
   --xtm-alert-font-size: 0.938rem;
+  --xtm-alert-info-color: #37FF87;
 }
 
 .alert {
@@ -50,19 +51,19 @@
       text-decoration: underline;
     }
   }
-
-  &--secondary {
-    @include admonition-config(var(--ifm-color-secondary), var(--ifm-color-black));
-  }
   
-  &--info {
+  &--note {
     @include admonition-config(var(--ifm-color-info-background), var(--ifm-color-info-font));
   }
-  
-  &--success {
+
+  &--tip {
     @include admonition-config(var(--ifm-color-success-background), var(--ifm-color-success-font));
   }
   
+  &--info {
+    @include admonition-config(var(--xtm-alert-info-color), var(--ifm-color-black));
+  }
+
   &--warning {
     @include admonition-config(var(--ifm-color-warning-background), var(--ifm-color-black));
   }

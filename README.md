@@ -115,7 +115,7 @@ And you will also see the following style in the ToC
 
 ![Example label in ToC](./assets/images/Example_label_toc.png)
 
-### Types
+#### Types
 
 Similar to [admonitions/notes](https://docusaurus.io/docs/next/markdown-features/admonitions), we defined 5 label types:
   - required
@@ -125,7 +125,3 @@ Similar to [admonitions/notes](https://docusaurus.io/docs/next/markdown-features
   - success
 
 ![Example of label types](./assets/images/Label_types.png)
-
-
-
-

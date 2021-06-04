@@ -65,16 +65,16 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
         infima: true,
         customTypes: {
           note: {
-            ifmClass: 'secondary',
+            ifmClass: 'note',
             svg: Icons.note
+          },
+          tip: {
+            ifmClass: 'tip',
+            svg: Icons.tip
           },
           info: {
             ifmClass: 'info',
             svg: Icons.info
-          },
-          tip: {
-            ifmClass: 'success',
-            svg: Icons.tip
           },
           caution: {
             ifmClass: 'warning',
