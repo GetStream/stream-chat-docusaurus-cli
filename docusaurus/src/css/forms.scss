@@ -1,0 +1,20 @@
+.input {
+  padding: 0.5rem;
+  appearance: none;
+  border: 1px solid #E9EBEE;
+  border-radius: var(--ifm-global-radius);
+  background: var(--ifm-color-white);
+  transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+  font-family: inherit;
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+
+  &:focus {
+    box-shadow: var(--docsearch-searchbox-shadow);
+    outline: none;
+  }
+}
+
+textarea.input {
+  resize: none;
+}

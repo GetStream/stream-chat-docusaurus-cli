@@ -1,0 +1,17 @@
+.inputField {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  .input {
+    margin-bottom: 0;
+    &.inputField-error {
+      border-color: red;
+    }
+  }
+
+  .errorMessage {
+    color: red;
+    font-size: 11px;
+  }
+}
