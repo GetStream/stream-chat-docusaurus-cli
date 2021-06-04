@@ -4,7 +4,11 @@ const environment = require('./environment');
 // This plugin defines which env vars will be exposed to the webpack build
 // We are limiting ourselves to the ones declared in the environment.js file
 
-const OPTIONAL_VARIABLES = ['ALGOLIA_APP_ID', 'ALGOLIA_API_KEY'];
+const OPTIONAL_VARIABLES = [
+  'ALGOLIA_APP_ID',
+  'ALGOLIA_API_KEY',
+  'WEBSITE_BASE_URL',
+];
 
 const filteredVariables = Object.keys(environment).reduce((acc, item) => {
   if (OPTIONAL_VARIABLES.includes(item)) return acc;
@@ -22,6 +26,7 @@ module.exports = function () {
             ...filteredVariables,
             ALGOLIA_APP_ID: 'DEFAULT',
             ALGOLIA_API_KEY: 'DEFAULT',
+            WEBSITE_BASE_URL: 'DEFAULT',
           }),
         ],
         module: {
