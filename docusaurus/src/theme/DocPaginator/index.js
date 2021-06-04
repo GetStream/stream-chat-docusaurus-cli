@@ -7,7 +7,7 @@ import { FeedbackForm } from '../../components/FeedbackForm';
 export default function DocPaginator(props) {
   return (
     <>
-      <FeedbackForm title={props.metadata.title} />
+      <FeedbackForm />
       <OriginalDocPaginator {...props} />
     </>
   );

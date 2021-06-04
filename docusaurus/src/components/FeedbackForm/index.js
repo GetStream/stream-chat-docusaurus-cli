@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  useMemo,
-} from 'react';
+import React, { useCallback, useContext, useState, useMemo } from 'react';
 import clsx from 'clsx';
 import uuid from 'uuid';
 
@@ -18,17 +12,15 @@ import './styles.scss';
 
 const FeedbackFormContext = React.createContext();
 
-export const FeedbackFormProvider = ({ children }) => {
+export const FeedbackFormProvider = ({ children, title }) => {
   const [openDialog, setOpenDialog] = useState(null);
   // We need to keep the title in the context provider because
   // Not all elements invoking the feedback form have access
   // to the page title.
-  const [title, setTitle] = useState('');
   const value = useMemo(() => ({
     openDialog,
     setOpenDialog,
     title,
-    setTitle,
   }));
   return (
     <FeedbackFormContext.Provider value={value}>
@@ -37,25 +29,15 @@ export const FeedbackFormProvider = ({ children }) => {
   );
 };
 
-const useFeedbackFormContext = (title) => {
+const useFeedbackFormContext = () => {
   // small hack to give an unique id to each component using the hook
   // so we can keep only one dialog open
   const [id] = useState(uuid());
   const {
     openDialog: openDialogFromContext,
     setOpenDialog: setOpenDialogFromContext,
-    setTitle,
-    title: titleFromContext,
+    title,
   } = useContext(FeedbackFormContext);
-
-  useEffect(() => {
-    if (title) {
-      // If components has the title, then we update it
-      // in the context so all other components that doesnt
-      // have acces to it can use it
-      setTitle(title);
-    }
-  }, []);
 
   const openDialog = openDialogFromContext === id;
 
@@ -67,15 +49,11 @@ const useFeedbackFormContext = (title) => {
     return setOpenDialogFromContext(id);
   }, [id, setOpenDialogFromContext, openDialog]);
 
-  return { openDialog, setOpenDialog, title: titleFromContext };
+  return { openDialog, setOpenDialog, title };
 };
 
-export const FeedbackForm = ({ title }) => {
-  const {
-    openDialog,
-    setOpenDialog,
-    title: titleFromContext,
-  } = useFeedbackFormContext(title);
+export const FeedbackForm = () => {
+  const { openDialog, setOpenDialog, title } = useFeedbackFormContext();
   const { submitHandler, loading, success, error, data, fieldChangeHandler } =
     useFeedbackForm({ email: '', feedback: '' });
 
@@ -93,7 +71,7 @@ export const FeedbackForm = ({ title }) => {
           openDialog && 'docFeedback__dialog--open'
         )}
       >
-        <h5>Confused about “{titleFromContext}“?</h5>
+        <h5>Confused about “{title}“?</h5>
         <p>Let us know how we can improve:</p>
         <form onSubmit={submitHandler}>
           <InputField
