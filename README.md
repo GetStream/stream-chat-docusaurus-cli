@@ -94,3 +94,34 @@ title: Getting Started
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+ 
+## Markdown Features Stream theme
+
+Aside from [Docusaurus' components](https://docusaurus.io/docs/next/markdown-features/), you can use our customized components.
+
+### Labels in headers
+
+Labels can be used inside headers to give them emphasis. This will add styles in the Header and ToC.
+
+```md
+### <div class="label required">required</div> **Consequat deserunt**
+```
+
+> NOTE: It is mandatory to put the `label` __before__ your Heading title. See [this](docusaurus/src/css/components/label.scss#L8) for design implementation.
+
+![Example label in markdown header](./assets/images/Example_label_header.png)
+
+And you will also see the following style in the ToC
+
+![Example label in ToC](./assets/images/Example_label_toc.png)
+
+#### Types
+
+Similar to [admonitions/notes](https://docusaurus.io/docs/next/markdown-features/admonitions), we defined 5 label types:
+  - required
+  - note
+  - info
+  - caution
+  - success
+
+![Example of label types](./assets/images/Label_types.png)

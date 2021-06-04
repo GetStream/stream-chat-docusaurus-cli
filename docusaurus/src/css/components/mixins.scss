@@ -11,7 +11,7 @@
 }
 
 @mixin menu-main-item {
-  color: var(--ifm-color-secondary-darker);
+  color: var(--xtm-secondary-color);
   font-weight: bold;
   font-size: 0.688rem;
   text-transform: uppercase;
@@ -20,7 +20,6 @@
 
 @mixin menu-sublist-icon {
   &::after {
-    opacity: 0.6;
     background-size: 1rem 1rem;
   }
 }
