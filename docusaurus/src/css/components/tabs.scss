@@ -2,10 +2,13 @@
   --ifm-tabs-color-active: var(--ifm-font-color-base);
   --ifm-tabs-color: var(--ifm-color-gray-600);
   --ifm-tabs-padding-vertical: 0.625rem;
+  --ifm-hover-overlay: transparent;
 }
 
 .tabs-container {
   .tabs {
+    margin: 0 0.625rem;
+
     & + div.margin-vert--md {
       margin-top: 0.625rem!important;
     }
@@ -16,6 +19,11 @@
   
       &--active {
         border-bottom-color: var(--ifm-color-info);
+      }
+      
+      &:hover:not(&--active) {
+        color: rgba(0,0,0,0.60);
+        border-bottom-color: #e6e6e6;
       }
     }
   }
