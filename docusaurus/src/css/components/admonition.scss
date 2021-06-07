@@ -57,11 +57,11 @@
   }
 
   &--tip {
-    @include admonition-config(var(--ifm-color-success-background), var(--ifm-color-success-font));
+    @include admonition-config(var(--xtm-alert-info-color), var(--ifm-color-black));
   }
   
   &--info {
-    @include admonition-config(var(--xtm-alert-info-color), var(--ifm-color-black));
+    @include admonition-config(var(--ifm-color-success-background), var(--ifm-color-success-font));
   }
 
   &--warning {
