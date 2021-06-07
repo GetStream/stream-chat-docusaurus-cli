@@ -1,0 +1,22 @@
+@media (min-width: 997px) and (max-width: 1440px) {
+  main[class^="docMainContainer"] {
+    .container {
+      max-width: none;   
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  main[class^="docMainContainer"] {
+    .container {
+      .row {
+        justify-content: space-between;
+
+        & .col.col--3 {
+          // ToC design size + padding
+          --ifm-col-width: calc(200px + 2rem);
+        }
+      }
+    }
+  }
+}
