@@ -124,6 +124,7 @@
   --ifm-global-shadow-md: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
   /* Headings variables */
+  --ifm-heading-color: var(--ifm-color-black);
   --ifm-heading-font-weight: 800;
   --ifm-h1-font-size: 2.25rem;
 
@@ -132,6 +133,7 @@
   --ifm-table-stripe-background: #FCFCFC;
   --ifm-table-head-background: #FAFAFA;
   --ifm-table-border-color: #ececec;
+  --ifm-table-cell-padding: 0.5rem 1rem;
 
   --xtm-secondary-color: rgba(0,0,0,0.5);
 }

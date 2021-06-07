@@ -11,6 +11,7 @@
   }
 
   table {
+    display: table;
     font-size: 0.875rem;
   }
   
@@ -19,6 +20,7 @@
   }
   
   table th, table td {
+    text-align: unset;
     border: none;
   }
 

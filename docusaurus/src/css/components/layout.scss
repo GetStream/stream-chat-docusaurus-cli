@@ -1,3 +1,7 @@
+:root {
+  --xtm-doc-column-size: calc(100% / 10); 
+}
+
 @media (min-width: 997px) and (max-width: 1440px) {
   main[class^="docMainContainer"] {
     .container {
@@ -6,15 +10,27 @@
   }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 997px) {
   main[class^="docMainContainer"] {
     .container {
       .row {
-        justify-content: space-between;
+        & > .col:first-child {
+          max-width: calc(var(--xtm-doc-column-size) * 6) !important;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
 
+@media (min-width: 1400px) {
+  main[class^="docMainContainer"] {
+    .container {
+      --ifm-container-width-xl: none;
+
+      .row {
         & .col.col--3 {
-          // ToC design size + padding
-          --ifm-col-width: calc(200px + 2rem);
+          --ifm-col-width: calc(var(--xtm-doc-column-size) * 2);
         }
       }
     }
