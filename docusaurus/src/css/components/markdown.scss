@@ -18,7 +18,11 @@
     border: none;
   }
 
-  h2 {
+  h2.heading {
     --ifm-h2-font-size: 1.75rem;
   }
+ 
+   h3.heading {
+     --ifm-h3-font-size: 1.375rem;
+   }
 }
