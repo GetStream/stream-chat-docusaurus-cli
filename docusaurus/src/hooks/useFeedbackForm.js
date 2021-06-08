@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 import { apiDocFeedback, getAPIErrorMsg } from '../api';
 
-export const useFeedbackForm = (initialState) => {
+export const useFeedbackForm = (initialState, section) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(undefined);
@@ -25,7 +25,9 @@ export const useFeedbackForm = (initialState) => {
         formData.append(key, data[key]);
       }
 
-      formData.append('page_url', window.location.href);
+      const sectionHash = section ? `#${section}` : '';
+
+      formData.append('page_url', `${window.location.href}${sectionHash}`);
 
       setLoading(true);
 

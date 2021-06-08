@@ -10,8 +10,9 @@ import React from 'react';
 import clsx from 'clsx';
 import { translate } from '@docusaurus/Translate';
 import { useThemeConfig } from '@docusaurus/theme-common';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-import { FeedbackForm } from '../../components/FeedbackForm';
+import { FeedbackFormButton } from '../../components/FeedbackFormButton';
 
 import './styles.scss';
 
@@ -31,7 +32,9 @@ const Heading = (Tag) =>
 
     return (
       <>
-        {Tag === 'h2' && <FeedbackForm />}
+        {Tag === 'h2' && (
+          <FeedbackFormButton lastHeaderTitle={props.children} />
+        )}
         <Tag className="heading" {...props}>
           <a
             aria-hidden="true"
