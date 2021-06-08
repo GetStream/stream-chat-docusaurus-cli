@@ -1,11 +1,11 @@
 @use '../../css/components/mixins.scss';
 
 .docFeedback {
-  position: relative;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 4rem;
-  font-size: 0.875rem;
+  padding-bottom: 1.563rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 3.75rem;
 
   &__button {
     color: var(--ifm-color-base);

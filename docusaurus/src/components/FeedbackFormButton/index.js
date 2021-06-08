@@ -10,14 +10,16 @@ export const FeedbackFormButton = ({ lastHeaderTitle }) => {
   const { goToFeedbackForm } = useFeedbackFormData(lastHeaderTitle);
 
   return (
-    <button
-      type="button"
-      aria-label="Feedback button"
-      className="docFeedback__button"
-      onClick={goToFeedbackForm}
-    >
-      <ConfusedIcon />
-      Feedback
-    </button>
+    <div className='docFeedback'>
+      <button
+        type="button"
+        aria-label="Feedback button"
+        className="docFeedback__button"
+        onClick={goToFeedbackForm}
+      >
+        <ConfusedIcon />
+        Feedback
+      </button>
+    </div>
   );
 };
