@@ -1,0 +1,33 @@
+@use '../../css/components/mixins.scss';
+
+.docFeedback {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4rem;
+  font-size: 0.875rem;
+
+  &__button {
+    color: var(--ifm-color-base);
+    opacity: 0.3;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color,
+      opacity var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    svg {
+      margin-right: 10px;
+    }
+
+    &:hover,
+    .docsFeedback__dialog--active + & {
+      opacity: 1;
+      svg {
+        fill: var(--ifm-color-primary);
+      }
+    }
+  }
+}

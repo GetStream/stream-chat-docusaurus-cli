@@ -1,8 +1,12 @@
-import React, { useCallback, useContext, useState, useMemo } from 'react';
-import clsx from 'clsx';
-import uuid from 'uuid';
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useMemo,
+  useEffect,
+} from 'react';
+import { useHistory } from '@docusaurus/router';
 
-import ConfusedIcon from './confused-icon.svg';
 import { LoadingSpinner } from '../LoadingSpinner';
 import { InputField } from '../InputField';
 import { useFeedbackForm } from '../../hooks/useFeedbackForm';
@@ -13,14 +17,13 @@ import './styles.scss';
 const FeedbackFormContext = React.createContext();
 
 export const FeedbackFormProvider = ({ children, title }) => {
-  const [openDialog, setOpenDialog] = useState(null);
+  const [clickedButtonHeader, setClickedButtonHeader] = useState(title);
   // We need to keep the title in the context provider because
   // Not all elements invoking the feedback form have access
   // to the page title.
   const value = useMemo(() => ({
-    openDialog,
-    setOpenDialog,
-    title,
+    clickedButtonHeader,
+    setClickedButtonHeader,
   }));
   return (
     <FeedbackFormContext.Provider value={value}>
@@ -29,33 +32,60 @@ export const FeedbackFormProvider = ({ children, title }) => {
   );
 };
 
-const useFeedbackFormContext = () => {
-  // small hack to give an unique id to each component using the hook
-  // so we can keep only one dialog open
-  const [id] = useState(uuid());
-  const {
-    openDialog: openDialogFromContext,
-    setOpenDialog: setOpenDialogFromContext,
-    title,
-  } = useContext(FeedbackFormContext);
+export const useFeedbackFormData = (lastHeaderTitle) => {
+  const history = useHistory();
+  const { clickedButtonHeader, setClickedButtonHeader, title } =
+    useContext(FeedbackFormContext);
 
-  const openDialog = openDialogFromContext === id;
+  const [data, setData] = useState({
+    currentHeaderTitle: title,
+    headers: [title],
+    isPageHeader: true,
+  });
 
-  const setOpenDialog = useCallback(() => {
-    if (openDialog) {
-      return setOpenDialogFromContext(null);
+  useEffect(() => {
+    const pageHeader = document.querySelector('h1');
+    const headersAnchors = Array.from(document.querySelectorAll('h2.heading'));
+    const headers = headersAnchors.map((item) =>
+      item.innerText.substring(0, item.innerText.indexOf('#'))
+    );
+    if (pageHeader) {
+      headers.unshift(pageHeader.innerText);
     }
+    const headerIndex = headers.findIndex((item) => item === lastHeaderTitle);
+    const prevHeader = lastHeaderTitle
+      ? headers[headerIndex - 1]
+      : headers[headers.length - 1];
 
-    return setOpenDialogFromContext(id);
-  }, [id, setOpenDialogFromContext, openDialog]);
+    setData({
+      currentHeaderTitle: prevHeader,
+      headers,
+      isPageHeader: pageHeader && headerIndex - 1 === 0,
+    });
+  }, []);
 
-  return { openDialog, setOpenDialog, title };
+  const goToFeedbackForm = useCallback(() => {
+    console.log(history);
+    history.push(
+      `${history.location.pathname}${history.location.search}#feedback-form`
+    );
+    setClickedButtonHeader(data.currentHeaderTitle);
+  }, [data.currentHeaderTitle]);
+
+  return {
+    goToFeedbackForm,
+    title: clickedButtonHeader,
+    setTitle: setClickedButtonHeader,
+    headers: data.headers,
+    isPageHeader: data.isPageHeader,
+  };
 };
 
 export const FeedbackForm = () => {
-  const { openDialog, setOpenDialog, title } = useFeedbackFormContext();
+  const { title, setTitle, headers, isPageHeader } = useFeedbackFormData();
+  const section = isPageHeader ? null : title;
   const { submitHandler, loading, success, error, data, fieldChangeHandler } =
-    useFeedbackForm({ email: '', feedback: '' });
+    useFeedbackForm({ email: '', feedback: '' }, section);
 
   useToast(
     error && error.detail,
@@ -64,49 +94,42 @@ export const FeedbackForm = () => {
   );
 
   return (
-    <div className="docFeedback">
-      <div
-        className={clsx(
-          'docFeedback__dialog',
-          openDialog && 'docFeedback__dialog--open'
-        )}
-      >
-        <h5>Confused about “{title}“?</h5>
-        <p>Let us know how we can improve:</p>
-        <form onSubmit={submitHandler}>
-          <InputField
-            name="email"
-            className="input"
-            type="email"
-            placeholder="Email"
-            required
-            onChange={fieldChangeHandler}
-            value={data.email}
-            error={error && error.email}
-          />
-          <textarea
-            name="feedback"
-            className="input"
-            placeholder="Let us know what we can do"
-            onChange={fieldChangeHandler}
-            value={data.feedback}
-            rows="4"
-            required
-          />
-          <button className="button button--primary" type="submit">
-            {loading ? <LoadingSpinner size={18} /> : 'SEND'}
-          </button>
-        </form>
-      </div>
-      <button
-        type="button"
-        aria-label="Feedback dialog"
-        className="docFeedback__button"
-        onClick={setOpenDialog}
-      >
-        <ConfusedIcon />
-        Feedback
-      </button>
+    <div className="docFeedback" id="feedback-form">
+      <h5>Confused about “{title}“?</h5>
+      <p>Let us know how we can improve:</p>
+      <form onSubmit={submitHandler}>
+        <InputField
+          name="email"
+          className="input"
+          type="email"
+          placeholder="Email"
+          required
+          onChange={fieldChangeHandler}
+          value={data.email}
+          error={error && error.email}
+        />
+        <select
+          name="sections"
+          value={title}
+          onChange={(a) => setTitle(a.target.value)}
+        >
+          {headers.map((header) => (
+            <option value={header}>{header}</option>
+          ))}
+        </select>
+        <textarea
+          name="feedback"
+          className="input"
+          placeholder="Let us know what we can do"
+          onChange={fieldChangeHandler}
+          value={data.feedback}
+          rows="4"
+          required
+        />
+        <button className="button button--primary" type="submit">
+          {loading ? <LoadingSpinner size={18} /> : 'SEND'}
+        </button>
+      </form>
     </div>
   );
 };
