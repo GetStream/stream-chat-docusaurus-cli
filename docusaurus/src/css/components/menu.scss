@@ -9,19 +9,11 @@
   --ifm-menu-link-padding-vertical: 0.25rem;
   --ifm-menu-link-padding-horizontal: 1rem;
   --xtm-sidebar-footer-height: auto;
-  --xtm-layout-direction: column-reverse;
 }
 
 html[data-theme='dark'] {
   --ifm-menu-color: #c4c4c4;
   --ifm-menu-color-active: #FFFFFF;
-}
-
-div[class^='docPage'] {
-  flex-direction: var(--xtm-layout-direction);
-  > main {
-    flex: 1;
-  }
 }
 
 .menu-footer {
@@ -64,17 +56,41 @@ div:not(.navbar-sidebar__items) > .menu {
 
   .menu__link:hover {
     background: none;
-    color: var(--ifm-color-primary);
+    color: var(--ifm-link-hover-color);
   }
 
   > .menu__list {
-    > .menu__list-item {
+    // custom Stream footer with website's links
+    > .menu__list-item:nth-last-child(-n+4):not(:last-child) {
+      .menu__link {
+        --ifm-menu-color: var(--ifm-link-color);
+        font-weight: 700;
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    > .menu__list-item:last-child {
+      margin: 1rem 0;
+
+      .menu__link {
+        --ifm-menu-color: rgba(0,0,0,0.6);
+        font-size: 0.813rem;
+        pointer-events: none;
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    > .menu__list-item:not(:nth-last-child(-n+4)) {
       // main item style is only applied to first items
       margin-bottom: 1.5rem;
       > .menu__link {
         @include mixins.menu-main-item;
 
-        &--active:not(&--sublist) {
+        .menu__link--active:not(.menu__link--sublist) {
           color: var(--ifm-menu-color-active);
           @include mixins.active-item(3px);
         }
@@ -134,16 +150,7 @@ div:not(.navbar-sidebar__items) > .menu {
 
 @media (min-width: 997px) {
   :root {
-    --xtm-sidebar-footer-height: 12.5rem;
     --ifm-menu-link-padding-horizontal: 1.875rem;
-    --xtm-layout-direction: row;
-  }
-
-  // Making space for external links
-  [class^='docSidebarContainer'] {
-    div[class^='sidebar'] {
-      height: calc(100vh - var(--xtm-sidebar-footer-height) - var(--xtm-site-navbar-height));
-    }
   }
   
   // overwriting defaults
@@ -151,19 +158,4 @@ div:not(.navbar-sidebar__items) > .menu {
     padding: 1.125rem 0 0 0!important;
   }
 
-  .menu-footer {
-    position: fixed;
-    width: var(--doc-sidebar-width);
-
-    &__links {
-      &__item {
-        display: block;
-        margin-bottom: 0.25rem;
-
-        &:after {
-          display: none;
-        }
-      }
-    }
-  }
 }

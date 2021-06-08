@@ -6,16 +6,9 @@
   main[class^="docMainContainer"] {
     .container {
       max-width: none;   
-    }
-  }
-}
-
-@media (min-width: 997px) {
-  main[class^="docMainContainer"] {
-    .container {
       .row {
         & > .col:first-child {
-          max-width: calc(var(--xtm-doc-column-size) * 6) !important;
+          max-width: calc(var(--xtm-doc-column-size) * 7) !important;
           margin: auto;
         }
       }
@@ -27,8 +20,12 @@
   main[class^="docMainContainer"] {
     .container {
       --ifm-container-width-xl: none;
-
       .row {
+        & > .col:first-child {
+          max-width: calc(var(--xtm-doc-column-size) * 6) !important;
+          margin: auto;
+        }
+
         & .col.col--3 {
           --ifm-col-width: calc(var(--xtm-doc-column-size) * 2);
         }

@@ -4,28 +4,19 @@ import OriginalDocSidebar from '@theme-original/DocSidebar';
 const WEB_LINKS = [
   ['Contact Support', 'https://getstream.io/contact/support/'],
   ['Maker Account', 'https://getstream.io/maker-account/'],
-  ['Mobile Chat Kit', 'https://getstream.io/chat/ux-kit/']
+  ['Mobile Chat Kit', 'https://getstream.io/chat/ux-kit/'],
+  [<>© Stream.IO, Inc. <br/> All Rights Reserved.</>, '']
 ]
 
 export default function DocSidebar({ sidebar, ...props }) {
-  const sidebarItems = useMemo(() => sidebar.map(category => ({ ...category, collapsed: false  })), [sidebar]);
+  const sidebarItems = useMemo(() => ([
+    ...sidebar.map(category => ({ ...category, collapsed: false  })),
+    ...WEB_LINKS.map(([label, href]) => ({
+      type: 'link',
+      label,
+      href
+    }))
+  ]), [sidebar]);
 
-  return <>
-    <OriginalDocSidebar {...props} sidebar={sidebarItems}/>
-    <div className='menu-footer'>
-      <ul className='menu-footer__links'>
-        {
-          WEB_LINKS.map(([label, link]) => (
-            <li key={link} className='menu-footer__links__item'>
-              <a href={link}>{label}</a>
-            </li>
-          ))
-        }
-      </ul>
-      <p className='menu-footer__disclaimer'>
-        <span>© Stream.IO, Inc.</span>{' '}
-        <span>All Rights Reserved.</span>
-      </p>
-    </div>
-  </>
+  return <OriginalDocSidebar {...props} sidebar={sidebarItems}/>;
 }
