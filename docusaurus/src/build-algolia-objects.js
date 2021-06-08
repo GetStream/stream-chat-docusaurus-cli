@@ -35,8 +35,31 @@ const extractSyntaxTree = (path) => {
   });
 };
 
-const parseMdxData = (toString, syntaxTree, lastHeaderIdParam) => {
+const mergeChildTree = (curr, childrenItem) => {
+  Object.values(childrenItem).forEach((childrenData) => {
+    if (!curr[childrenData.headerId]) {
+      curr[childrenData.headerId] = {
+        headerId: childrenData.headerId,
+        text: [],
+        code: [],
+      };
+    }
+    curr[childrenData.headerId].text.push(childrenData.text.join(' '));
+    curr[childrenData.headerId].code.push(...childrenData.code);
+  });
+
+  return curr;
+};
+
+const parseMdxData = (
+  path,
+  toString,
+  syntaxTree,
+  lastHeaderIdParam,
+  mdxImportedComponentsParam
+) => {
   let lastHeaderId = undefined;
+  let mdxImportedComponents = mdxImportedComponentsParam || {};
   const initialReduceValue = {};
   // When calling this function recursively we will receive the
   // "lastHeaderIdParam" param and it means we need to
@@ -54,7 +77,28 @@ const parseMdxData = (toString, syntaxTree, lastHeaderIdParam) => {
   // nodes and pick only paragraphs and code, categorizing them
   // by header id. This will allow us to later have search results
   // that leads us to specific page headers in the docs
-  return syntaxTree.children.reduce((curr, item) => {
+  return syntaxTree.children.reduce(async (currP, item) => {
+    let curr = await currP;
+
+    // If import, we get every mdx imported component and save it on a map
+    if (item.type === 'import') {
+      const imports = item.value.split('\n').filter((item) => {
+        const extension = item.split('.').pop();
+        return extension.includes('mdx');
+      });
+      // [import Component from path] should become {[Component]: path}
+      // This is safe because mdx imports have to use default
+      imports.forEach((item) => {
+        const [, importComponent, _, path] = item.split(' ');
+        mdxImportedComponents = {
+          ...mdxImportedComponents,
+          [importComponent]: path.replace(/('|;|")/gi, ''),
+        };
+      });
+
+      return curr;
+    }
+
     // If heading, we initialize the heading object and set it
     // as lastHeaderId so next items in the tree can use it as
     // key
@@ -75,7 +119,13 @@ const parseMdxData = (toString, syntaxTree, lastHeaderIdParam) => {
     // text before starting the headers. We need to create a specific page key in order to
     // put the text/code available in that page.
     if (!curr[lastHeaderId]) {
-      const pageItem = parseMdxData(toString, { children: [item] }, 'page');
+      const pageItem = await parseMdxData(
+        path,
+        toString,
+        { children: [item] },
+        'page',
+        mdxImportedComponents
+      );
 
       if (!curr.page) {
         curr.page = {
@@ -94,17 +144,50 @@ const parseMdxData = (toString, syntaxTree, lastHeaderIdParam) => {
     // "toString" method on it, it will end up returning a string containing
     // code mdx code comments and jsx tags, etc
     if (item.children) {
-      const admonitionItem = parseMdxData(toString, item, lastHeaderId);
-      curr[lastHeaderId].text.push(admonitionItem[lastHeaderId].text.join(' '));
-      curr[lastHeaderId].code.push(...admonitionItem[lastHeaderId].code);
-      return curr;
+      const childrenItem = await parseMdxData(
+        path,
+        toString,
+        item,
+        lastHeaderId,
+        mdxImportedComponents
+      );
+
+      return mergeChildTree(curr, childrenItem);
     }
 
     // If type is jsx, it can two things: It is some component being used
-    // or some html tags wrapping text. Either way we just remove
-    // any kind of jsx tag and only leave its content as text
-    // and then push it.
+    // or some html tags wrapping text. If its a component, we check if its
+    // a mdx component and if so, we extract its syntax tree recursively.
+    // Any other kind of jsx tag is removed, only leaving its content as text
     if (item.type === 'jsx') {
+      const usedImportedComponents = Object.keys(mdxImportedComponents).filter(
+        (component) => new RegExp(`(<${component}([^>]+)>)`).test(item.value)
+      );
+
+      if (usedImportedComponents.length > 0) {
+        // If this node is using an imported mdx component, then we go through all used
+        // components and parse it as mdx in order to extract its data for the search
+        await Promise.all(
+          usedImportedComponents.map(async (usedImportedComponent) => {
+            const componentPath = `${path}/${mdxImportedComponents[usedImportedComponent]}`;
+            const importedComponentSyntaxTree = await extractSyntaxTree(
+              componentPath
+            );
+            const importedComponentData = await parseMdxData(
+              componentPath,
+              toString,
+              importedComponentSyntaxTree,
+              lastHeaderId,
+              mdxImportedComponents
+            );
+            curr = mergeChildTree(curr, importedComponentData);
+          })
+        );
+
+        return curr;
+      }
+
+      // Any other kind of jsx tag is removed, only leaving its content as text
       const jsxString = toString(item).replace(/(<([^>]+)>)/gi, '');
 
       // Cleanup empty strings and solo line breaks after tags removal
@@ -134,18 +217,25 @@ const parseMdxData = (toString, syntaxTree, lastHeaderIdParam) => {
     curr[lastHeaderId].text.push(toString(item));
 
     return curr;
-  }, initialReduceValue);
+  }, Promise.resolve(initialReduceValue));
 };
 
 const extractMdxData = async (path) => {
-  // This IIFE is needed in order to perform the import from
-  // mdast-util-to-string once its an es6-only module
-  // and our plugins only use commonjs modules
   return (async () => {
     const { toString } = await import('mdast-util-to-string');
     const syntaxTree = await extractSyntaxTree(path);
 
-    const { page, ...headers } = parseMdxData(toString, syntaxTree);
+    const splitDirPath = path.split('/');
+
+    // pops filename from path
+    splitDirPath.pop();
+
+    const { page, ...headers } = await parseMdxData(
+      splitDirPath.join('/'),
+      toString,
+      syntaxTree
+    );
+
     return { page, headers: Object.values(headers) };
   })();
 };
