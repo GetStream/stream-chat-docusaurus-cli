@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useFeedbackFormData } from '../FeedbackForm';
+import { useFeedbackFormData } from '../../hooks/useFeedbackFormData';
 
 import ConfusedIcon from './confused-icon.svg';
 

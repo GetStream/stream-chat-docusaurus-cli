@@ -25,9 +25,7 @@ export const useFeedbackForm = (initialState, section) => {
         formData.append(key, data[key]);
       }
 
-      const sectionHash = section
-        ? `#${section.replace(/\s+/g, '-').toLowerCase()}`
-        : '';
+      const sectionHash = section ? `#${section}` : '';
 
       formData.append('page_url', `${window.location.href}${sectionHash}`);
 

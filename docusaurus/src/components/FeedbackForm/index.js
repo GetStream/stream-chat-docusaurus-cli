@@ -1,90 +1,27 @@
-import React, {
-  useCallback,
-  useContext,
-  useState,
-  useMemo,
-  useEffect,
-} from 'react';
-import { useHistory } from '@docusaurus/router';
+import React, { useMemo } from 'react';
 
 import { LoadingSpinner } from '../LoadingSpinner';
 import { InputField } from '../InputField';
 import { useFeedbackForm } from '../../hooks/useFeedbackForm';
+import { useFeedbackFormData } from '../../hooks/useFeedbackFormData';
 import { useToast } from '../../hooks/useToast';
 
 import './styles.scss';
 
-const FeedbackFormContext = React.createContext();
-
-export const FeedbackFormProvider = ({ children, title }) => {
-  const [clickedButtonHeader, setClickedButtonHeader] = useState(title);
-  // We need to keep the title in the context provider because
-  // Not all elements invoking the feedback form have access
-  // to the page title.
-  const value = useMemo(() => ({
-    clickedButtonHeader,
-    setClickedButtonHeader,
-  }));
-  return (
-    <FeedbackFormContext.Provider value={value}>
-      {children}
-    </FeedbackFormContext.Provider>
-  );
-};
-
-export const useFeedbackFormData = (lastHeaderTitle) => {
-  const history = useHistory();
-  const { clickedButtonHeader, setClickedButtonHeader } =
-    useContext(FeedbackFormContext);
-
-  const [data, setData] = useState({
-    currentHeaderTitle: clickedButtonHeader,
-    headers: [clickedButtonHeader],
-    isPageHeader: true,
-  });
-
-  useEffect(() => {
-    const pageHeader = document.querySelector('h1');
-    const headersAnchors = Array.from(document.querySelectorAll('h2.heading'));
-    const headers = headersAnchors.map((item) =>
-      item.innerText.substring(0, item.innerText.indexOf('#'))
-    );
-    if (pageHeader) {
-      headers.unshift(pageHeader.innerText);
-    }
-    const headerIndex = headers.findIndex((item) => item === lastHeaderTitle);
-    const prevHeader = lastHeaderTitle
-      ? headers[headerIndex - 1]
-      : headers[headers.length - 1];
-
-    setData({
-      currentHeaderTitle: prevHeader,
-      headers,
-      isPageHeader: pageHeader && headerIndex - 1 === 0,
-    });
-  }, []);
-
-  const goToFeedbackForm = useCallback(() => {
-    history.push(
-      `${history.location.pathname}${history.location.search}#feedback-form`
-    );
-    setClickedButtonHeader(data.currentHeaderTitle);
-  }, [data.currentHeaderTitle]);
-
-  return {
-    goToFeedbackForm,
-    title: clickedButtonHeader,
-    setTitle: setClickedButtonHeader,
-    headers: data.headers,
-    isPageHeader: data.isPageHeader,
-  };
-};
-
 export const FeedbackForm = () => {
-  const { title, setTitle, headers, isPageHeader } = useFeedbackFormData();
-  const section = isPageHeader ? null : title;
+  const { header, setHeader, headers } = useFeedbackFormData();
+  const sections = useMemo(() => {
+    return headers.map((headerItem) => ({
+      label: headerItem.isPageHeader ? 'Whole page' : headerItem.value,
+      value: headerItem.value,
+    }));
+  }, [headers]);
+
   const { submitHandler, loading, success, error, data, fieldChangeHandler } =
-    useFeedbackForm({ email: '', feedback: '' }, section);
+    useFeedbackForm(
+      { email: '', feedback: '' },
+      header.isPageHeader && header.value.replace(/\s+/g, '-').toLowerCase()
+    );
 
   useToast(
     error && error.detail,
@@ -94,8 +31,7 @@ export const FeedbackForm = () => {
 
   return (
     <div className="docFeedback" id="feedback-form">
-      <h5>Confused about “{title}“?</h5>
-      <p>Let us know how we can improve:</p>
+      <h5>Are you confused or have feedback to share?</h5>
       <form onSubmit={submitHandler}>
         <InputField
           name="email"
@@ -109,12 +45,12 @@ export const FeedbackForm = () => {
         />
         <select
           name="sections"
-          value={title}
-          onChange={(a) => setTitle(a.target.value)}
+          value={header.value}
+          onChange={(a) => setHeader(a.target.value)}
         >
-          {headers.map((header) => (
-            <option key={header.replace(/\s+/g, '-')} value={header}>
-              {header}
+          {sections.map((sectionItem) => (
+            <option key={sectionItem.value} value={sectionItem.value}>
+              {sectionItem.label}
             </option>
           ))}
         </select>
