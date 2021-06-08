@@ -53,6 +53,13 @@
     }
   }
 
+  // Hide DocVersion link if there aren't any
+  &__items {
+    > a.navbar__link__custom-dropdown--version {
+      display: none;
+    }
+  }
+
   &__link {
     font-size: 0.813rem;
 
@@ -145,6 +152,11 @@
             top: -1.325rem;
             left: 0;
           }
+        }
+
+        // Hide DocVersion link if there aren't any
+        &.navbar__link__custom-dropdown--version:not([role="button"]) {
+          display: none;
         }
       }
     }

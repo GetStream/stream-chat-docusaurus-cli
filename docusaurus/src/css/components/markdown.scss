@@ -1,4 +1,8 @@
 .markdown {
+  > p:first-child {
+    font-size: 1.125rem;
+  }
+
   ul, ol {
     font-size: 0.875rem;
   }
@@ -7,6 +11,7 @@
   }
 
   table {
+    display: table;
     font-size: 0.875rem;
   }
   
@@ -15,10 +20,15 @@
   }
   
   table th, table td {
+    text-align: unset;
     border: none;
   }
 
-  h2 {
+  h2.heading {
     --ifm-h2-font-size: 1.75rem;
   }
+ 
+   h3.heading {
+     --ifm-h3-font-size: 1.375rem;
+   }
 }
