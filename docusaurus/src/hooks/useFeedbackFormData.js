@@ -47,7 +47,7 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
     const pageHeader = document.querySelector('h1');
     const headersAnchors = Array.from(document.querySelectorAll('h2.heading'));
     const headers = headersAnchors.map((item) => ({
-      value: item.innerText.substring(0, item.innerText.indexOf('#')),
+      value: item.innerText.substring(0, item.innerText.indexOf('#') - 1),
       isPageHeader: false,
     }));
     if (pageHeader) {
@@ -56,6 +56,7 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
         isPageHeader: true,
       });
     }
+
     const headerIndex = headers.findIndex(
       (item) => item.value === lastHeaderTitle
     );
