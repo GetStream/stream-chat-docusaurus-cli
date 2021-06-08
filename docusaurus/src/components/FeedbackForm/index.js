@@ -34,12 +34,12 @@ export const FeedbackFormProvider = ({ children, title }) => {
 
 export const useFeedbackFormData = (lastHeaderTitle) => {
   const history = useHistory();
-  const { clickedButtonHeader, setClickedButtonHeader, title } =
+  const { clickedButtonHeader, setClickedButtonHeader } =
     useContext(FeedbackFormContext);
 
   const [data, setData] = useState({
-    currentHeaderTitle: title,
-    headers: [title],
+    currentHeaderTitle: clickedButtonHeader,
+    headers: [clickedButtonHeader],
     isPageHeader: true,
   });
 
@@ -65,7 +65,6 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
   }, []);
 
   const goToFeedbackForm = useCallback(() => {
-    console.log(history);
     history.push(
       `${history.location.pathname}${history.location.search}#feedback-form`
     );
@@ -114,7 +113,9 @@ export const FeedbackForm = () => {
           onChange={(a) => setTitle(a.target.value)}
         >
           {headers.map((header) => (
-            <option value={header}>{header}</option>
+            <option key={header.replace(/\s+/g, '-')} value={header}>
+              {header}
+            </option>
           ))}
         </select>
         <textarea
