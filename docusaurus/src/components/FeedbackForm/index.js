@@ -11,9 +11,9 @@ import './styles.scss';
 export const FeedbackForm = () => {
   const { header, setHeader, headers } = useFeedbackFormData();
   const sections = useMemo(() => {
-    return headers.map((headerItem) => ({
-      label: headerItem.isPageHeader ? 'Whole page' : headerItem.value,
-      value: headerItem.value,
+    return headers.map(({ value }) => ({
+      label: value,
+      value,
     }));
   }, [headers]);
 
@@ -30,24 +30,26 @@ export const FeedbackForm = () => {
   );
 
   return (
-    <div className="docFeedback" id="feedback-form">
-      <h5>Are you confused or have feedback to share?</h5>
+    <div className="docFeedback__form" id="feedback-form">
+      <h3>Are you confused or have feedback to share?</h3>
       <form onSubmit={submitHandler}>
         <InputField
           name="email"
           className="input"
           type="email"
-          placeholder="Email"
+          placeholder="Email Address"
           required
           onChange={fieldChangeHandler}
           value={data.email}
           error={error && error.email}
         />
         <select
+          className="input"
           name="sections"
           value={header.value}
           onChange={(a) => setHeader(a.target.value)}
         >
+          <option value="Select section" disabled>Section:</option>
           {sections.map((sectionItem) => (
             <option key={sectionItem.value} value={sectionItem.value}>
               {sectionItem.label}
@@ -64,7 +66,7 @@ export const FeedbackForm = () => {
           required
         />
         <button className="button button--primary" type="submit">
-          {loading ? <LoadingSpinner size={18} /> : 'SEND'}
+          {loading ? <LoadingSpinner size={18} /> : 'SUBMIT'}
         </button>
       </form>
     </div>
