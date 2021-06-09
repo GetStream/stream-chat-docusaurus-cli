@@ -16,40 +16,6 @@ html[data-theme='dark'] {
   --ifm-menu-color-active: #FFFFFF;
 }
 
-.menu-footer {
-  height: var(--xtm-sidebar-footer-height);
-  padding: var(--ifm-menu-link-padding-horizontal);
-  justify-content: space-between;
-  box-shadow: inset 0px 1px 0px rgba(0,0,0,0.03);
-
-  &__links {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 var(--ifm-menu-link-padding-horizontal) 0;
-
-    &__item {
-      font-weight: 700;
-      font-size: 0.875rem;
-      display: inline;
-
-      &:not(:last-of-type):after {
-        content: "\B7";
-        margin: 0 .625rem;
-      }
-    }
-  }
-
-  &__disclaimer {
-    margin: 0;
-    opacity: 0.6;
-    font-size: 0.813rem;
-
-    span {
-      white-space: nowrap;
-    }
-  }
-}
-
 div:not(.navbar-sidebar__items) > .menu {
   padding: 1.125rem 0;
   font-size: 0.875rem;
@@ -57,6 +23,18 @@ div:not(.navbar-sidebar__items) > .menu {
   .menu__link:hover {
     background: none;
     color: var(--ifm-link-hover-color);
+  }
+
+  .menu__link {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+
+    &--sublist {
+      padding-right: calc(var(--ifm-menu-link-padding-horizontal) + 0.5rem);
+    }
   }
 
   > .menu__list {
@@ -78,6 +56,7 @@ div:not(.navbar-sidebar__items) > .menu {
         --ifm-menu-color: rgba(0,0,0,0.6);
         font-size: 0.813rem;
         pointer-events: none;
+
         &::after {
           display: none;
         }
@@ -89,6 +68,7 @@ div:not(.navbar-sidebar__items) > .menu {
       margin-bottom: 1.5rem;
       > .menu__link {
         @include mixins.menu-main-item;
+        white-space: normal;
 
         .menu__link--active:not(.menu__link--sublist) {
           color: var(--ifm-menu-color-active);
@@ -110,6 +90,10 @@ div:not(.navbar-sidebar__items) > .menu {
 
             &--sublist {
               @include mixins.menu-sublist-icon;
+              &::after {
+                right: 1rem;
+              }
+
             }
 
             &--active:not(&--sublist) {
