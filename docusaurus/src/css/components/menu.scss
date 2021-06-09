@@ -135,17 +135,16 @@ div:not(.navbar-sidebar__items) > .menu {
 @media (min-width: 997px) {
   :root {
     --ifm-menu-link-padding-horizontal: 1.875rem;
-    --doc-sidebar-width: calc((100vw / 12) * 2)!important;
-  }
-  
-  [class^="docSidebarContainer"],
-  [class^="sidebar"] {
-    min-width: 265px;
   }
   
   // overwriting defaults
   .menu {
     padding: 1.125rem 0 0 0!important;
   }
+}
 
+@media (min-width: 1600px) {
+  :root {
+    --doc-sidebar-width: calc((100vw / 12) * 2)!important;
+  }
 }
