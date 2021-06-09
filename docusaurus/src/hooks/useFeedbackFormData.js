@@ -30,6 +30,12 @@ export const FeedbackFormProvider = ({ children, title }) => {
   );
 };
 
+const extractTitle = (element) =>
+  element &&
+  element.innerText
+    .substring(0, element.innerText.indexOf('#'))
+    .replace('\n', '');
+
 export const useFeedbackFormData = (lastHeaderTitle) => {
   const history = useHistory();
   const { clickedButtonHeader, setClickedButtonHeader } =
@@ -50,9 +56,7 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
     const pageHeader = document.querySelector('h1');
     const headersAnchors = Array.from(document.querySelectorAll('h2.heading'));
     const headers = headersAnchors.map((item) => ({
-      value: item.innerText
-        .substring(0, item.innerText.indexOf('#'))
-        .replace('\n', ''),
+      value: extractTitle(item),
       isPageHeader: false,
     }));
     if (pageHeader) {
@@ -62,15 +66,17 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
       });
     }
 
+    const lastHeaderTitleString = extractTitle(lastHeaderTitle);
+
     const headerIndex = headers.findIndex(
-      (item) => item.value === lastHeaderTitle
+      (item) => item.value === lastHeaderTitleString
     );
     const prevHeader = lastHeaderTitle
       ? headers[headerIndex - 1]
       : headers[headers.length - 1];
 
     setHeaders(headers);
-    setCurrentHeader(prevHeader.value);
+    setCurrentHeader(prevHeader);
   }, []);
 
   const header = useMemo(() => {
@@ -81,7 +87,7 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
     history.push(
       `${history.location.pathname}${history.location.search}#feedback-form`
     );
-    setClickedButtonHeader(currentHeader);
+    setClickedButtonHeader(currentHeader.value);
   }, [currentHeader]);
 
   return {

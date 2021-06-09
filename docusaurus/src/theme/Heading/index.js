@@ -6,11 +6,10 @@
  */
 
 /* eslint-disable jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import clsx from 'clsx';
 import { translate } from '@docusaurus/Translate';
 import { useThemeConfig } from '@docusaurus/theme-common';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import { FeedbackFormButton } from '../../components/FeedbackFormButton';
 
@@ -22,6 +21,15 @@ const Heading = (Tag) =>
       navigator?.clipboard?.writeText(e.target.href);
     };
 
+    const [title, setTitle] = useState();
+    const headingRef = useRef(null);
+
+    useEffect(() => {
+      if (Tag === 'h2') {
+        setTitle(headingRef.current);
+      }
+    }, []);
+
     const {
       navbar: { hideOnScroll },
     } = useThemeConfig();
@@ -32,10 +40,10 @@ const Heading = (Tag) =>
 
     return (
       <>
-        {Tag === 'h2' && (
-          <FeedbackFormButton lastHeaderTitle={props.children} />
+        {Tag === 'h2' && title && (
+          <FeedbackFormButton lastHeaderTitle={title} />
         )}
-        <Tag className="heading" {...props}>
+        <Tag className="heading" ref={headingRef} {...props}>
           <a
             aria-hidden="true"
             tabIndex={-1}
