@@ -15,10 +15,13 @@ export const FeedbackFormProvider = ({ children, title }) => {
   // once user clicks on the feedback button it will lose reference to the
   // current page header
 
-  const value = useMemo(() => ({
-    clickedButtonHeader,
-    setClickedButtonHeader,
-  }));
+  const value = useMemo(
+    () => ({
+      clickedButtonHeader,
+      setClickedButtonHeader,
+    }),
+    [clickedButtonHeader]
+  );
 
   return (
     <FeedbackFormContext.Provider value={value}>
@@ -47,7 +50,9 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
     const pageHeader = document.querySelector('h1');
     const headersAnchors = Array.from(document.querySelectorAll('h2.heading'));
     const headers = headersAnchors.map((item) => ({
-      value: item.innerText.substring(0, item.innerText.indexOf('#') - 1),
+      value: item.innerText
+        .substring(0, item.innerText.indexOf('#'))
+        .replace('\n', ''),
       isPageHeader: false,
     }));
     if (pageHeader) {
