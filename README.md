@@ -125,3 +125,27 @@ Similar to [admonitions/notes](https://docusaurus.io/docs/next/markdown-features
   - success
 
 ![Example of label types](./assets/images/Label_types.png)
+
+### Image Showcase
+
+Component created to display images inside a flex container, fully responsive and interactive (hover the images to slightly expand them) out of the box 🙂
+
+To make use of the `<ImageShowcase />` component, remember to add the correct import at the beginning of your `.mdx` file.
+
+Example of how to use it:
+
+```jsx
+import ImageShowcase from '@site/src/components/ImageShowcase';
+
+import channelList from '../assets/channel_list.png'
+import messageInput from '../assets/message_input.png'
+import messageList from '../assets/message_list.png'
+
+<ImageShowcase items={[
+  { image: channelList, caption: <span><code>ChannelList</code> can be used with no props</span>, alt: 'Example of how to use channelList component' },
+  { image: messageInput, caption: 'Message input design' },
+  { image: messageList, caption: 'Message list sample' }
+]} />
+```
+
+![Example ImageShowcase desktop](./assets/images/Example_showcase.png)
