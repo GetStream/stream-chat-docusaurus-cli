@@ -31,7 +31,7 @@ export const FeedbackForm = () => {
 
   return (
     <div className="docFeedback__form" id="feedback-form">
-      <h3>Are you confused or have feedback to share?</h3>
+      <h3>Did you find this page helpful?</h3>
       <form onSubmit={submitHandler}>
         <InputField
           name="email"
