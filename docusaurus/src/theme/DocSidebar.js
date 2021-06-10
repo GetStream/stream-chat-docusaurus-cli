@@ -8,9 +8,16 @@ const WEB_LINKS = [
   [<>© Stream.IO, Inc. <br/> All Rights Reserved.</>, '/']
 ]
 
+const addTitle = (sidebarItems) =>
+  sidebarItems.map(({ label, items, ...props }) => ({ 
+    ...props,
+    ...(items && { items: addTitle(items) }),
+    label: <span title={label}>{label}</span>
+  }));
+
 export default function DocSidebar({ sidebar, ...props }) {
-  const sidebarItems = useMemo(() => ([
-    ...sidebar.map(category => ({ ...category, collapsed: false  })),
+  const sidebarItems = useMemo(() => addTitle([
+    ...sidebar.map(category => ({ ...category, collapsed: false })),
     ...WEB_LINKS.map(([label, href]) => ({
       type: 'link',
       label,
@@ -18,5 +25,5 @@ export default function DocSidebar({ sidebar, ...props }) {
     }))
   ]), [sidebar]);
 
-  return <OriginalDocSidebar {...props} sidebar={sidebarItems}/>;
+  return <OriginalDocSidebar {...props} sidebar={sidebarItems} />;
 }
