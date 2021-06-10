@@ -5,9 +5,14 @@
   text-transform: uppercase;
   font-size: small;
 
-  & + *::after {
-    content: '*';
-    color: $color;
+  & + * {
+    // Avoid changing element weight if a <strong> is used
+    font-weight: inherit;
+
+    &::after {
+      content: '*';
+      color: $color;
+    }
   }
 }
 
