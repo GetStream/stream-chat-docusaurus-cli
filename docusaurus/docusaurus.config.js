@@ -4,7 +4,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const { folderMapping, languageMapping } = require('./constants');
+const {
+  folderMapping,
+  languageMapping,
+  IGNORED_DIRECTORIES,
+} = require('./constants');
 const URLS = require('./urls');
 const Icons = require('./admonition-icons');
 
@@ -33,7 +37,9 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
 }).flat();
 
 const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css/components');
-const CUSTOM_CSS_FILES = fs.readdirSync(CUSTOM_CSS_PATH).map(file => `${CUSTOM_CSS_PATH}/${file}`);
+const CUSTOM_CSS_FILES = fs
+  .readdirSync(CUSTOM_CSS_PATH)
+  .map((file) => `${CUSTOM_CSS_PATH}/${file}`);
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
@@ -53,6 +59,15 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   return [
     '@docusaurus/plugin-content-docs',
     {
+      sidebarItemsGenerator: async function ({
+        defaultSidebarItemsGenerator,
+        ...args
+      }) {
+        const sidebarItems = await defaultSidebarItemsGenerator(args);
+        return sidebarItems.filter((item) => {
+          return !IGNORED_DIRECTORIES.includes(item.label);
+        });
+      },
       id: strippedSDK,
       path: `${STREAM_SDK_DOCUSAURUS_PATH}/docs/${SDK}`,
       routeBasePath: strippedSDK,
@@ -66,27 +81,26 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
         customTypes: {
           note: {
             ifmClass: 'note',
-            svg: Icons.note
+            svg: Icons.note,
           },
           tip: {
             ifmClass: 'tip',
-            svg: Icons.tip
+            svg: Icons.tip,
           },
           info: {
             ifmClass: 'info',
-            svg: Icons.info
+            svg: Icons.info,
           },
           caution: {
             ifmClass: 'warning',
-            svg: Icons.caution
+            svg: Icons.caution,
           },
           danger: {
             ifmClass: 'danger',
-            svg: Icons.danger
-          }
-        }
-
-      }
+            svg: Icons.danger,
+          },
+        },
+      },
     },
   ];
 });
@@ -188,12 +202,12 @@ module.exports = {
   themes: [
     [
       '@docusaurus/theme-classic',
-      { 
+      {
         customCss: [
           require.resolve('./src/css/custom.scss'),
-          ...CUSTOM_CSS_FILES
+          ...CUSTOM_CSS_FILES,
         ],
-      }
+      },
     ],
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',

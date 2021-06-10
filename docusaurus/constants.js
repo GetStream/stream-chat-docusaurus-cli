@@ -25,7 +25,10 @@ const languageMapping = {
 const DOCUSAURUS_INDEX = 'DOCUSAURUS';
 const CMS_INDEX = 'DOCS';
 
+const IGNORED_DIRECTORIES = ['common-content'];
+
 module.exports = {
+  IGNORED_DIRECTORIES,
   DOCUSAURUS_INDEX,
   CMS_INDEX,
   folderMapping,
