@@ -66,6 +66,7 @@ div:not(.navbar-sidebar__items) > .menu {
     > .menu__list-item:not(:nth-last-child(-n+4)) {
       // main item style is only applied to first items
       margin-bottom: 1.5rem;
+
       > .menu__link {
         @include mixins.menu-main-item;
         white-space: normal;
@@ -75,9 +76,20 @@ div:not(.navbar-sidebar__items) > .menu {
           @include mixins.active-item(3px);
         }
 
-        &:after {
-          background: none;
+        &--sublist {
+          @include mixins.menu-sublist-icon;
+          
+          &::after {
+            right: 1rem;
+            opacity: 0;
+            transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+          }
+          
+          &:hover::after {
+            opacity: 1;
+          }
         }
+
       }
       
       .menu__list {
@@ -139,7 +151,7 @@ div:not(.navbar-sidebar__items) > .menu {
   
   // overwriting defaults
   .menu {
-    padding: 1.125rem 0 0 0!important;
+    padding: 1.125rem 4px 0 0!important;
   }
 }
 
