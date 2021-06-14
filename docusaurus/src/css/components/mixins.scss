@@ -1,8 +1,8 @@
-@mixin active-item($width: 2px, $height: 100%) {
+@mixin active-item($width: 2px, $height: 100%, $top: 0) {
   &::before {
     position: absolute;
     content: '';
-    top: 0;
+    top: $top;
     left: 0;
     height: $height;
     width: $width;
