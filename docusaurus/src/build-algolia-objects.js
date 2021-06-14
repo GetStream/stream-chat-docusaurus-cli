@@ -252,7 +252,7 @@ const extractDocsData = async (docsContent) => {
       return sdkContentVersion.docs
         .filter((sdkDocVersion) => {
           // Filters ignored directories
-          return IGNORED_DIRECTORIES.find((ignoredDir) =>
+          return !IGNORED_DIRECTORIES.find((ignoredDir) =>
             sdkDocVersion.sourceDirName.includes(ignoredDir)
           );
         })
