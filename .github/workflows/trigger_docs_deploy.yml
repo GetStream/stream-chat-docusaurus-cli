@@ -20,4 +20,4 @@ jobs:
           curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/docusaurus-build.yml/dispatches \
           -H 'Accept: application/vnd.github.v3+json' \
           -u ":$PAT_TOKEN" \
-          --data '{"ref": "main"}'
+          --data '{"ref": "staging"}'
