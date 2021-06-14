@@ -27,7 +27,7 @@ const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
 const SDK_FOLDERS = DOCS_DIR.filter((file) => {
   return (
     fs.lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`).isDirectory() &&
-    !NOT_READY_SDKS.includes(file)
+    !NOT_READY_SDKS.includes(file.toLocaleLowerCase())
   );
 });
 
