@@ -60,7 +60,7 @@ export function Hit({
       <a
         target="_blank"
         href={`${website.cms_docs}${url.format({
-          pathname: `/${cmsPlatform}/${hit.slug}/`,
+          pathname: `${cmsPlatform}/${hit.slug}/`,
           query: locationQuery,
         })}${!!headerId ? `#${headerId}` : ''}`}
         style={{ textDecoration: 'none' }}
