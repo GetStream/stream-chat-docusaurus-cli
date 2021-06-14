@@ -167,22 +167,27 @@ navbarItems.push(
   ...navbarMobileItems
 );
 
+const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS];
+
+if (process.env.DEPLOYMENT_ENV === 'production') {
+  plugins.push('@docusaurus/plugin-google-gtag');
+}
+
+plugins.push(
+  '@docusaurus/plugin-content-pages',
+  'docusaurus-plugin-sass',
+  path.resolve(__dirname, 'src/symlink-docusaurus'),
+  path.resolve(__dirname, 'src/define-env-vars-plugin'),
+  path.resolve(__dirname, 'src/build-algolia-objects')
+);
+
 module.exports = {
   baseUrl: URLS.docs.root,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   organizationName: 'GetStream',
-  plugins: [
-    ...defaultPlugins,
-    ...CUSTOM_PLUGINS,
-    '@docusaurus/plugin-google-gtag',
-    '@docusaurus/plugin-content-pages',
-    'docusaurus-plugin-sass',
-    path.resolve(__dirname, 'src/symlink-docusaurus'),
-    path.resolve(__dirname, 'src/define-env-vars-plugin'),
-    path.resolve(__dirname, 'src/build-algolia-objects'),
-  ],
+  plugins,
   projectName: 'stream-chat',
   tagline: 'Stream Chat official component SDKs',
   themeConfig: {
