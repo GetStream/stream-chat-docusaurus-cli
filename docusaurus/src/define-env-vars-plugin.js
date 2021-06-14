@@ -8,6 +8,7 @@ const OPTIONAL_VARIABLES = [
   'ALGOLIA_APP_ID',
   'ALGOLIA_API_KEY',
   'WEBSITE_BASE_URL',
+  'DEPLOYMENT_ENV',
 ];
 
 const filteredVariables = Object.keys(environment).reduce((acc, item) => {
@@ -27,6 +28,7 @@ module.exports = function () {
             ALGOLIA_APP_ID: 'DEFAULT',
             ALGOLIA_API_KEY: 'DEFAULT',
             WEBSITE_BASE_URL: 'DEFAULT',
+            DEPLOYMENT_ENV: 'staging',
           }),
         ],
         module: {
