@@ -1,11 +1,7 @@
 name: Triggers production deployment workflow
 
 on:
-  workflow_run:
-    workflows:
-      - compress
-    types:
-      - completed
+  push:
     branches:
       - main
 
