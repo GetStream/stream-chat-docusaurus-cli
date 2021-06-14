@@ -16,129 +16,137 @@ html[data-theme='dark'] {
   --ifm-menu-color-active: #FFFFFF;
 }
 
-div:not(.navbar-sidebar__items) > .menu {
-  padding: 1.125rem 0;
-  font-size: 0.875rem;
-
-  .menu__link:hover {
-    background: none;
-    color: var(--ifm-link-hover-color);
-  }
-
-  .menu__link {
-    display: block;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
-
-    &--sublist {
-      padding-right: calc(var(--ifm-menu-link-padding-horizontal) + 0.5rem);
+[class^="docSidebarContainer"] {
+  .menu {
+    padding: 1.125rem 4px 0 0;
+    font-size: 0.875rem;
+  
+    .menu__link:hover {
+      background: none;
+      color: var(--ifm-link-hover-color);
     }
-  }
-
-  > .menu__list {
-    // custom Stream footer with website's links
-    > .menu__list-item:nth-last-child(-n+4):not(:last-child) {
-      .menu__link {
-        --ifm-menu-color: var(--ifm-link-color);
-        font-weight: 700;
-        &::after {
-          display: none;
-        }
+  
+    .menu__link {
+      display: block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+      border-radius: 0;
+  
+      &--sublist {
+        padding-right: calc(var(--ifm-menu-link-padding-horizontal) + 0.5rem);
       }
     }
-
-    > .menu__list-item:last-child {
-      margin: 1rem 0;
-
-      .menu__link {
-        --ifm-menu-color: rgba(0,0,0,0.6);
-        font-size: 0.813rem;
-        pointer-events: none;
-
-        &::after {
-          display: none;
-        }
-      }
-    }
-
-    > .menu__list-item:not(:nth-last-child(-n+4)) {
-      // main item style is only applied to first items
-      margin-bottom: 1.5rem;
-
-      > .menu__link {
-        @include mixins.menu-main-item;
-        white-space: normal;
-
-        .menu__link--active:not(.menu__link--sublist) {
-          color: var(--ifm-menu-color-active);
-          @include mixins.active-item(3px);
-        }
-
-        &--sublist {
-          @include mixins.menu-sublist-icon;
-          
+  
+    > .menu__list {
+      // custom Stream footer with website's links
+      > .menu__list-item:nth-last-child(-n+4):not(:last-child) {
+        .menu__link {
+          --ifm-menu-color: var(--ifm-link-color);
+          font-weight: 700;
           &::after {
-            right: 1rem;
-            opacity: 0;
-            transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
-          }
-          
-          &:hover::after {
-            opacity: 1;
+            display: none;
           }
         }
-
       }
-      
-      .menu__list {
-        margin-left: 0;
-        &-item {
-          a.menu__link {
-            &--active {
-              font-weight: bold;
+  
+      > .menu__list-item:last-child {
+        margin: 1rem 0;
+  
+        .menu__link {
+          --ifm-menu-color: rgba(0,0,0,0.6);
+          font-size: 0.813rem;
+          pointer-events: none;
+  
+          &::after {
+            display: none;
+          }
+        }
+      }
+  
+      > .menu__list-item:not(:nth-last-child(-n+4)) {
+        // main item style is only applied to first items
+        margin-bottom: 1.5rem;
+  
+        > .menu__link {
+          @include mixins.menu-main-item;
+          white-space: normal;
+
+          .menu__link--active:not(.menu__link--sublist) {
+            color: var(--ifm-menu-color-active);
+            @include mixins.active-item(3px);
+          }
+  
+          &--sublist {
+            @include mixins.menu-sublist-icon;
+            
+            &::after {
+              right: 1rem;
+              opacity: 0;
+              transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
             }
-
-            &--sublist {
-              @include mixins.menu-sublist-icon;
-              &::after {
-                right: 1rem;
-              }
-
-            }
-
-            &--active:not(&--sublist) {
-              @include mixins.active-item(3px);
+            
+            &:hover::after {
+              opacity: 1;
             }
           }
+  
+        }
+        
+        .menu__list {
+          margin-left: 0px;
+          position: relative;
 
-          a.menu__link--sublist + ul.menu__list {
-            .menu__list-item {
-              .menu__link {
-                // needed to keep the active higlight line on the left 😩
-                padding:  var(--ifm-menu-link-padding-vertical)
-                          calc(var(--ifm-menu-link-padding-horizontal) + 1.25rem)
-                          var(--ifm-menu-link-padding-vertical)
-                          calc(var(--ifm-menu-link-padding-horizontal) + 0.938rem)
+          &-item {
+            a.menu__link {
+              &--active {
+                font-weight: bold;
+              }
+              
+              &--sublist {
+                @include mixins.menu-sublist-icon;
+                &::after {
+                  right: 1rem;
+                }
+              }
+              
+              &--active[tabindex="0"]:not(&--sublist) {
+                // active-item's height is calculated based on line-height: 20px + vertical padding
+                @include mixins.active-item(3px, calc(2 * var(--ifm-menu-link-padding-vertical) + 20px), unset);
+                &::before {
+                  // vertically align vertical line based on li margin
+                  transform: translate(0px, -4px);
+                }
+              }
+            }
+            
+            // needed to keep the active higlight line on the left 😩
+            a.menu__link--sublist + ul.menu__list {
+              margin-left: 10px;
+              position: unset;
+              .menu__list-item {
+                .menu__link:not(.menu__link--sublist) {
+                  position: unset;
+                }
               }
             }
           }
         }
       }
     }
-  }
-
-  &--responsive {
-    .menu__button {
-      background-color: var(--ifm-color-primary);
-      border-color: var(--ifm-color-primary);
-      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.32) 0px 3px 13px 0px;
-      color: var(--ifm-color-white);
-      padding: 0.5rem 1rem;
-      border-radius: 99px;
-      svg path {
-        stroke-width: 4px;
+  
+    &--responsive {
+      .menu__button {
+        background-color: var(--ifm-color-primary);
+        border-color: var(--ifm-color-primary);
+        box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.32) 0px 3px 13px 0px;
+        color: var(--ifm-color-white);
+        padding: 0.5rem 1rem;
+        border-radius: 99px;
+        svg path {
+          stroke-width: 4px;
+        }
       }
     }
   }
@@ -147,11 +155,6 @@ div:not(.navbar-sidebar__items) > .menu {
 @media (min-width: 997px) {
   :root {
     --ifm-menu-link-padding-horizontal: 1.875rem;
-  }
-  
-  // overwriting defaults
-  .menu {
-    padding: 1.125rem 4px 0 0!important;
   }
 }
 
