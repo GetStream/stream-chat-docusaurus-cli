@@ -17,7 +17,7 @@ jobs:
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/docusaurus-build.yml/dispatches \
+          curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/deploy-staging.yml/dispatches \
           -H 'Accept: application/vnd.github.v3+json' \
           -u ":$PAT_TOKEN" \
           --data '{"ref": "staging"}'
