@@ -1,6 +1,12 @@
 /* eslint-disable no-undef */
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 
+const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
+
+require('dotenv').config({
+  path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
+});
+
 const fs = require('fs');
 const path = require('path');
 
@@ -11,21 +17,19 @@ const {
 } = require('./constants');
 const URLS = require('./urls');
 const Icons = require('./admonition-icons');
-
-const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
-
-require('dotenv').config({
-  path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
-});
+const { NOT_READY_SDKS } = require('./not-ready-sdks');
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
 const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
 
-const SDK_FOLDERS = DOCS_DIR.filter((file) =>
-  fs.lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`).isDirectory()
-);
+const SDK_FOLDERS = DOCS_DIR.filter((file) => {
+  return (
+    fs.lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`).isDirectory() &&
+    !NOT_READY_SDKS.includes(file)
+  );
+});
 
 const CUSTOM_PLUGIN_FILES = DOCUSAURUS_DIR.filter((file) =>
   CUSTOM_PLUGIN_REGEX.test(file)
@@ -138,6 +142,31 @@ const navbarMobileItems = URLS.website.main.map((item) => ({
   className: 'navbar__link__mobile',
 }));
 
+const navbarItems = [
+  {
+    href: URLS.website.signup,
+    label: 'Sign Up',
+    position: 'right',
+    className: 'navbar__link__sign-up',
+    mobile: false,
+  },
+];
+
+if (navbarSDKItems.length > 1) {
+  navbarItems.push({
+    items: navbarSDKItems,
+    label: 'SDK',
+    className: 'navbar__link__custom-dropdown--sdks',
+    position: 'left',
+  });
+}
+
+navbarItems.push(
+  ...navbarVersionItems,
+  ...navbarGithubItems,
+  ...navbarMobileItems
+);
+
 module.exports = {
   baseUrl: URLS.docs.root,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
@@ -174,24 +203,7 @@ module.exports = {
       playgroundPosition: 'bottom',
     },
     navbar: {
-      items: [
-        {
-          href: URLS.website.signup,
-          label: 'Sign Up',
-          position: 'right',
-          className: 'navbar__link__sign-up',
-          mobile: false,
-        },
-        {
-          items: navbarSDKItems,
-          label: 'SDK',
-          className: 'navbar__link__custom-dropdown--sdks',
-          position: 'left',
-        },
-        ...navbarVersionItems,
-        ...navbarGithubItems,
-        ...navbarMobileItems,
-      ],
+      items: navbarItems,
       logo: {
         alt: 'Chat docs logo',
         src: 'img/logo.svg',

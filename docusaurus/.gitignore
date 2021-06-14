@@ -17,5 +17,6 @@
 !README.md
 !yarn.lock
 !admonition-icons.js
+!not-ready-sdks.js
 
 .DS_Store

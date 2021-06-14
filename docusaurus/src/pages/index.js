@@ -33,7 +33,7 @@ export const Home = () => {
   const globalData = useGlobalData();
 
   const SDK_FOLDERS = Object.values(
-    globalData['docusaurus-plugin-content-docs']
+    globalData['docusaurus-plugin-content-docs'] || {}
   ).map(({ path }) => folderMapping[path.substring(path.lastIndexOf('/') + 1)]);
 
   return (

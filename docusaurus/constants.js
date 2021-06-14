@@ -22,7 +22,8 @@ const languageMapping = {
   reactnative: 'javascript',
 };
 
-const DOCUSAURUS_INDEX = 'DOCUSAURUS';
+const DOCUSAURUS_INDEX =
+  process.env.DEPLOYMENT_ENV === 'production' ? 'DOCUSAURUS' : 'DOCUSAURUS_STG';
 const CMS_INDEX = 'DOCS';
 
 const IGNORED_DIRECTORIES = ['common-content'];
