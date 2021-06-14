@@ -3,7 +3,6 @@ name: compress
 on:
   push:
     branches:
-      - main
       - staging
 
 jobs:
