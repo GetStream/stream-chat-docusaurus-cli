@@ -3,7 +3,8 @@ name: compress
 on:
   push:
     branches:
-      - main # default branch name for each repo that docs should be push from
+      - main
+      - staging
 
 jobs:
   compress_docusaurus:
