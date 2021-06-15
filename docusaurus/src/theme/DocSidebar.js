@@ -21,7 +21,7 @@ const addTrailingSlash = (sidebarItems) => {
       return { ...props, items: addTrailingSlash(props.items), href };
     }
 
-    if (href[href.lenght - 1] !== '/') {
+    if (href[href.length - 1] !== '/') {
       href = href + '/';
     }
 
