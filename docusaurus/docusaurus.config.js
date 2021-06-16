@@ -17,7 +17,6 @@ const {
 } = require('./constants');
 const URLS = require('./urls');
 const Icons = require('./admonition-icons');
-const { NOT_READY_SDKS } = require('./not-ready-sdks');
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
@@ -25,10 +24,9 @@ const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
 
 const SDK_FOLDERS = DOCS_DIR.filter((file) => {
-  return (
-    fs.lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`).isDirectory() &&
-    !NOT_READY_SDKS.includes(file.toLocaleLowerCase())
-  );
+  return fs
+    .lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`)
+    .isDirectory();
 });
 
 const CUSTOM_PLUGIN_FILES = DOCUSAURUS_DIR.filter((file) =>
