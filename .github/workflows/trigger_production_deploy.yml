@@ -3,7 +3,7 @@ name: Triggers production deployment workflow
 on:
   push:
     branches:
-      - main
+      - production
 
 jobs:
   trigger_docs_deploy:
