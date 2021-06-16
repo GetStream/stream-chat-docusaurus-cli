@@ -1,14 +1,13 @@
 import React from 'react';
 
 import Link from '@docusaurus/Link';
-import url from 'url';
 
 import { Snippet } from './Snippet';
 import { SourceIcon } from './icons/SourceIcon';
 import { GoToExternal } from './icons/GoToExternal';
+import { getItemUrl } from './getItemUrl';
 
 import { CMS_INDEX } from '../../../constants';
-import { website } from '../../../urls';
 
 import './hits.scss';
 
@@ -53,29 +52,18 @@ export function Hit({
   closeSearchModal,
   children,
 }) {
-  const headerId = hit.header_id.replace('_', '-');
+  const url = getItemUrl({ item: hit, platform, cmsPlatform, locationQuery });
 
   if (hit.index === CMS_INDEX) {
     return (
-      <a
-        target="_blank"
-        href={`${website.cms_docs}${url.format({
-          pathname: `${cmsPlatform}/${hit.slug}/`,
-          query: locationQuery,
-        })}${!!headerId ? `#${headerId}` : ''}`}
-        style={{ textDecoration: 'none' }}
-      >
+      <a target="_blank" href={url} style={{ textDecoration: 'none' }}>
         {children}
       </a>
     );
   }
   return (
     <Link
-      to={`${url.format({
-        pathname:
-          hit.slug === '' ? `/${platform}/` : `/${platform}/${hit.slug}/`,
-        query: locationQuery,
-      })}${!!headerId ? `#${headerId}` : ''}`}
+      to={url}
       onClick={closeSearchModal}
       style={{ textDecoration: 'none' }}
     >

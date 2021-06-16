@@ -10,6 +10,7 @@ import { Hits } from './Hits';
 
 import { useTouchEvents } from './useTouchEvents';
 import { useTrapFocus } from './useTrapFocus';
+import { getItemUrl } from './getItemUrl';
 
 import {
   platformMapping,
@@ -168,6 +169,14 @@ export function DocSearchModal({
                       // Needed in order to know if it should show the tree icon in search results
                       includes_slug_parent: !group[item.slug][0].header_id,
                     }));
+                },
+                getItemUrl({ item }) {
+                  return getItemUrl({
+                    item,
+                    platform: locationPlatform,
+                    cmsPlatform: platformMapping[locationPlatform],
+                    locationQuery,
+                  });
                 },
               }));
             });
