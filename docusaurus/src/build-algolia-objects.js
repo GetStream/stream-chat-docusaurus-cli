@@ -4,7 +4,9 @@ const admonitions = require('remark-admonitions');
 const {
   parseFrontMatter,
   parseMarkdownContentTitle,
+  parseMarkdownHeadingId,
 } = require('@docusaurus/utils');
+const slugs = require('github-slugger')();
 const { platformMapping, IGNORED_DIRECTORIES } = require('../constants');
 
 const extractSyntaxTree = (path) => {
@@ -110,7 +112,12 @@ const parseMdxData = (
         // cleanup empty items from last iteration
         delete curr[lastHeaderId];
       }
-      lastHeaderId = toString(item).replace(/\s/g, '-');
+
+      // Support explicit heading IDs
+      const heading = toString(item);
+      const parsedHeading = parseMarkdownHeadingId(heading);
+
+      lastHeaderId = parsedHeading.id || slugs.slug(heading);
       curr[lastHeaderId] = { headerId: lastHeaderId, text: [], code: [] };
     }
 
@@ -316,7 +323,8 @@ const extractDocsData = async (docsContent) => {
             ...pageHeadersData.map((headerData) => {
               const header_id = headerData.headerId
                 .toLowerCase()
-                .replace(/\s/g, '-');
+                .replace(/\s/g, '-')
+                .replace(/\//g, '');
               return {
                 version,
                 page_id,
