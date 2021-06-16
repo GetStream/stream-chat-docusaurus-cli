@@ -321,14 +321,10 @@ const extractDocsData = async (docsContent) => {
           return [
             pageObject,
             ...pageHeadersData.map((headerData) => {
-              const header_id = headerData.headerId
-                .toLowerCase()
-                .replace(/\s/g, '-')
-                .replace(/\//g, '');
               return {
                 version,
                 page_id,
-                header_id,
+                header_id: headerData.headerId,
                 name,
                 slug,
                 section_name,
@@ -340,7 +336,7 @@ const extractDocsData = async (docsContent) => {
                 platform,
                 content_serialized_text: headerData.text.join('\n'),
                 code_sample: headerData.code.join('\n'),
-                objectID: `${pageObjectID}${header_id}`,
+                objectID: `${pageObjectID}${headerData.headerId}`,
               };
             }),
           ];
