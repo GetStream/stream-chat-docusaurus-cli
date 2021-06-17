@@ -9,7 +9,7 @@
   appearance: none;
   border: 1px solid #E9EBEE;
   border-radius: var(--ifm-global-radius);
-  background: var(--ifm-color-white);
+  background-color: var(--ifm-color-white);
   transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
   font-family: inherit;
   font-size: 0.875rem;
@@ -26,7 +26,9 @@ textarea.input {
 }
 
 select.input {
-  background: url('/icon/select-arrow.png') no-repeat right 1rem top 50%;
+  background-repeat: no-repeat;
+  background-position: right 1rem top 50%;
+  background-image: url('/icon/select-arrow.png');
 }
 
 button.button {
