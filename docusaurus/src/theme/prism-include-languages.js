@@ -19,6 +19,7 @@ const prismIncludeLanguages = (PrismObject) => {
     require("prismjs/components/prism-kotlin");
     require("prismjs/components/prism-swift");
     require("prismjs/components/prism-java");
+    require("prismjs/components/prism-dart");
 
     delete window.Prism;
   }
