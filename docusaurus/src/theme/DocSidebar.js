@@ -13,22 +13,6 @@ const WEB_LINKS = [
   ],
 ];
 
-// TODO: Remove it once
-// https://github.com/facebook/docusaurus/issues/3372#issuecomment-857931379 its released
-const addTrailingSlash = (sidebarItems) => {
-  return sidebarItems.map(({ href, ...props }) => {
-    if (props.items) {
-      return { ...props, items: addTrailingSlash(props.items), href };
-    }
-
-    if (href[href.length - 1] !== '/') {
-      href = href + '/';
-    }
-
-    return { href, ...props };
-  });
-};
-
 const addTitle = (sidebarItems) => {
   return sidebarItems.map(({ label, items, ...props }) => ({
     ...props,
@@ -40,16 +24,14 @@ const addTitle = (sidebarItems) => {
 export default function DocSidebar({ sidebar, ...props }) {
   const sidebarItems = useMemo(
     () =>
-      addTitle(
-        addTrailingSlash([
-          ...sidebar.map((category) => ({ ...category, collapsed: false })),
-          ...WEB_LINKS.map(([label, href]) => ({
-            type: 'link',
-            label,
-            href,
-          })),
-        ])
-      ),
+      addTitle([
+        ...sidebar.map((category) => ({ ...category, collapsed: false })),
+        ...WEB_LINKS.map(([label, href]) => ({
+          type: 'link',
+          label,
+          href,
+        })),
+      ]),
     [sidebar]
   );
 
