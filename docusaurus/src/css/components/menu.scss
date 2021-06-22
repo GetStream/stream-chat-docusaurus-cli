@@ -80,11 +80,16 @@ html[data-theme='dark'] {
   
           &--sublist {
             @include mixins.menu-sublist-icon;
+
+            span {
+              vertical-align: middle;
+            }
             
             &::after {
               right: 1rem;
               opacity: 0;
               transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+              vertical-align: middle;
             }
             
             &:hover::after {
