@@ -108,6 +108,7 @@ html[data-theme='dark'] {
                 @include mixins.menu-sublist-icon;
                 &::after {
                   right: 1rem;
+                  vertical-align: middle;
                 }
               }
               
