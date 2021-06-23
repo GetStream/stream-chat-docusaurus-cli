@@ -243,13 +243,21 @@ const extractMdxData = async (path) => {
       // pops filename from path
       splitDirPath.pop();
 
-      const { page, ...headers } = await parseMdxData(
+      let { page, ...headers } = await parseMdxData(
         splitDirPath.join('/'),
         toString,
         syntaxTree
       );
 
-      return { page, headers: Object.values(headers) };
+      const headersArr = Object.values(headers);
+
+      // If there is no page, it means that the mdx file has a custom h1 header
+      // which should represent the page info and it will be used as page.
+      if (!page) {
+        page = headersArr.shift();
+      }
+
+      return { page, headers: headersArr };
     }
   })();
 };
