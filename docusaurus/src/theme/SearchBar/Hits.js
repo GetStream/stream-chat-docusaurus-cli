@@ -84,10 +84,12 @@ function Result({
 }) {
   const action = React.useRef(null);
   const title = item._highlightResult.name;
-  const path = item._snippetResult.content_serialized_text;
+  const snippetResult = item._snippetResult;
+  const path = snippetResult && snippetResult.content_serialized_text;
   const codeSnippet =
-    item._snippetResult[`code_sample_${locationQuery.language}`] ||
-    item._snippetResult.code_sample;
+    snippetResult &&
+    (snippetResult[`code_sample_${locationQuery.language}`] ||
+      snippetResult.code_sample);
 
   const istLastItemOnSlug = item.slug !== collection.items[index + 1]?.slug;
 
