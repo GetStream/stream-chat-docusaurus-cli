@@ -8,7 +8,7 @@ import { FeedbackFormButton } from '../../components/FeedbackFormButton';
 export default function DocPaginator(props) {
   return (
     <>
-      <FeedbackFormButton beforePaginator />
+      <FeedbackFormButton />
       <OriginalDocPaginator {...props} />
       <FeedbackForm />
     </>

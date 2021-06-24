@@ -6,16 +6,11 @@ import ConfusedIcon from './confused-icon.svg';
 
 import './styles.scss';
 
-export const FeedbackFormButton = ({ lastHeaderTitle, beforePaginator }) => {
+export const FeedbackFormButton = ({ lastHeaderTitle }) => {
   const { goToFeedbackForm } = useFeedbackFormData(lastHeaderTitle);
-  const classNames = ['docFeedback'];
-
-  if (beforePaginator) {
-    classNames.push('beforePaginator');
-  }
 
   return (
-    <div className={classNames.join(' ')}>
+    <div className='docFeedback'>
       <button
         type="button"
         aria-label="Feedback button"
