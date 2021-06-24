@@ -88,7 +88,7 @@ function Result({
   const path = snippetResult && snippetResult.content_serialized_text;
   const codeSnippet =
     snippetResult &&
-    (snippetResult[`code_sample_${locationQuery.language}`] ||
+    (snippetResult[`code_sample_${languageMapping[platform]}`] ||
       snippetResult.code_sample);
 
   const istLastItemOnSlug = item.slug !== collection.items[index + 1]?.slug;
