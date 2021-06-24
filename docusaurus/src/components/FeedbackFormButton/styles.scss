@@ -30,4 +30,8 @@
       }
     }
   }
+
+  &.beforePaginator {
+    margin-top: var(--ifm-spacing-vertical);
+  }
 }
