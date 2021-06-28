@@ -16,6 +16,11 @@ html[data-theme='dark'] {
   --ifm-menu-color-active: #FFFFFF;
 }
 
+// Remove external links from menu & mobile menu 
+.menu__link {
+  @include mixins.remove-external-icon;
+}
+
 [class^="docSidebarContainer"] {
   .menu {
     padding: 1.125rem 4px 0 0;

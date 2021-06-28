@@ -61,6 +61,7 @@
   }
 
   &__link {
+    @include mixins.remove-external-icon;
     font-size: 0.813rem;
 
     &:hover {
@@ -132,7 +133,7 @@
     .menu {
       &__link {
         &--sublist {
-          @include mixins.menu-sublist-icon;
+          @include mixins.menu-sublist-icon(relative);
 
           &.navbar__link__custom-dropdown--sdks,
           &.navbar__link__custom-dropdown--version {
