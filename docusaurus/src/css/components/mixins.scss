@@ -43,3 +43,9 @@
     box-shadow: var(--docsearch-searchbox-shadow);
   }
 }
+
+@mixin remove-external-icon {
+  & svg[class^=iconExternalLink] {
+    display: none;
+  }
+}
