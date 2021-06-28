@@ -7,7 +7,7 @@ import { SourceIcon } from './icons/SourceIcon';
 import { GoToExternal } from './icons/GoToExternal';
 import { getItemUrl } from './getItemUrl';
 
-import { CMS_INDEX } from '../../../constants';
+import { CMS_INDEX, languageMapping } from '../../../constants';
 
 import './hits.scss';
 
