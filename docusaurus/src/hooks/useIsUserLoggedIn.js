@@ -1,7 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { apiGetUser } from '../api';
 
+const isBrowser = typeof window !== `undefined`;
+
 const getUser = () => {
+  if (!isBrowser) return {};
   return JSON.parse(window.localStorage.getItem('stream_user') || '{}');
 };
 
