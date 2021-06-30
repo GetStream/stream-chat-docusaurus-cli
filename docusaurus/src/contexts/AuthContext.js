@@ -38,7 +38,9 @@ export const AuthContextProvider = ({ children }) => {
       setLogin(user);
       return user;
     } catch (err) {
-      setLogout();
+      if (err.status !== 429) {
+        setLogout();
+      }
     }
   }, [setLogin, setLogout]);
 
@@ -48,6 +50,7 @@ export const AuthContextProvider = ({ children }) => {
     if (isLoggedIn) {
       getUserData();
     }
+
     apiGetPublicUserToken()
       .then((data) => {
         if (data) {
