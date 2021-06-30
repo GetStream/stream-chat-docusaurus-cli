@@ -2,13 +2,14 @@ import React, { useMemo } from 'react';
 import { useLocation } from '@docusaurus/router';
 import OriginalNavbarItem from '@theme-original/NavbarItem';
 
-import { useIsUserLoggedIn } from '../hooks/useIsUserLoggedIn';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const baseUrl = '/chat/docs/sdk';
 
 export default function NavbarItem(props) {
   const { docsPluginId, label, type, items } = props;
   const { pathname } = useLocation();
+
   const selectedSDK = useMemo(() => {
     if (label === 'SDK' && items.length) {
       return items.find((item) => pathname.includes(`${baseUrl}/${item.id}/`));
@@ -34,10 +35,10 @@ export default function NavbarItem(props) {
     );
   }
 
-  const isUserLoggedIn = useIsUserLoggedIn();
+  const { isLoggedIn } = useAuthContext();
 
   if (label === 'Sign Up') {
-    if (isUserLoggedIn) {
+    if (isLoggedIn) {
       return null;
     }
   }

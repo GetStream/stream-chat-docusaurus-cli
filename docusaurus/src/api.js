@@ -47,3 +47,6 @@ export const apiDocFeedback = (data) => {
 };
 
 export const apiGetUser = () => fetchApi('GET', 'api/accounts/user');
+
+export const apiGetPublicUserToken = () =>
+  fetchApi('GET', 'api/core/chat_docs_credentials');
