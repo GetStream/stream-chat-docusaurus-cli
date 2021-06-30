@@ -27,22 +27,11 @@ export const AuthContextProvider = ({ children }) => {
     setState((prevState) => ({ ...prevState, ...user }));
   }, []);
 
-  const setLogout = useCallback(() => {
-    setUser({});
-    setState({});
-  }, []);
-
   const getUserData = useCallback(async () => {
-    try {
       const user = await apiGetUser();
       setLogin(user);
       return user;
-    } catch (err) {
-      if (err.status !== 429) {
-        setLogout();
-      }
-    }
-  }, [setLogin, setLogout]);
+  }, [setLogin]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return; // Skip async for SSR
@@ -93,7 +82,6 @@ export const AuthContextProvider = ({ children }) => {
       publicAppToken,
       isLoggedIn,
       setLogin,
-      setLogout,
       getSelectedOrg,
       getSelectedApp,
       getUserData,
@@ -103,7 +91,6 @@ export const AuthContextProvider = ({ children }) => {
       publicAppToken,
       isLoggedIn,
       setLogin,
-      setLogout,
       getSelectedOrg,
       getSelectedApp,
       getUserData,
