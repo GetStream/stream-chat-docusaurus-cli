@@ -22,7 +22,7 @@
     font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: none;
-  
+
     font-size: x-small;
     position: absolute;
     right: 0;
@@ -31,9 +31,9 @@
   }
 }
 
-
 .label {
-  &, &.note {
+  &,
+  &.note {
     @include label(var(--xtm-secondary-color));
   }
 
@@ -66,7 +66,8 @@
 
 .table-of-contents {
   &__link {
-    .label {
+    .label,
+    .description {
       display: none;
     }
   }
