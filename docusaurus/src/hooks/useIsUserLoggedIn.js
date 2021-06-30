@@ -27,7 +27,7 @@ export const useIsUserLoggedIn = () => {
     if (isLoggedIn) {
       refreshUserData();
     }
-  }, [isLoggedIn]);
+  }, []);
 
   return isLoggedIn;
 };
