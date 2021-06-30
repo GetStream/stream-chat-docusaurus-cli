@@ -18,9 +18,10 @@
   letter-spacing: 0.12em;
 }
 
-@mixin menu-sublist-icon {
+@mixin menu-sublist-icon($position: absolute) {
   &::after {
     background-size: 1rem 1rem;
+    position: $position;
   }
 }
 
@@ -41,5 +42,11 @@
   
   &:hover {
     box-shadow: var(--docsearch-searchbox-shadow);
+  }
+}
+
+@mixin remove-external-icon {
+  & svg[class^=iconExternalLink] {
+    display: none;
   }
 }

@@ -15,7 +15,20 @@ import { FeedbackFormButton } from '../../components/FeedbackFormButton';
 
 import './styles.scss';
 
-const Heading = (Tag) =>
+export const MainHeading = function MainHeading({ ...props }) {
+  return (
+    <header>
+      <h1
+        {...props}
+        id={undefined} // h1 headings do not need an id because they don't appear in the TOC
+      >
+        {props.children}
+      </h1>
+    </header>
+  );
+};
+
+export const Heading = (Tag) =>
   function TargetComponent({ id, ...props }) {
     const copyLink = (e) => {
       navigator?.clipboard?.writeText(e.target.href);

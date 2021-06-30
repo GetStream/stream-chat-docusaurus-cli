@@ -10,11 +10,7 @@ require('dotenv').config({
 const fs = require('fs');
 const path = require('path');
 
-const {
-  folderMapping,
-  languageMapping,
-  IGNORED_DIRECTORIES,
-} = require('./constants');
+const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
 const URLS = require('./urls');
 const Icons = require('./admonition-icons');
 
@@ -113,7 +109,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   return {
     label: readableSDK,
     id: strippedSDK,
-    to: `${strippedSDK}/?language=${languageMapping[strippedSDK]}`,
+    to: `${strippedSDK}/`,
     type: 'doc',
   };
 });
@@ -181,6 +177,7 @@ plugins.push(
 
 module.exports = {
   baseUrl: URLS.docs.root,
+  trailingSlash: true,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',

@@ -154,6 +154,13 @@ html[data-theme='dark'] {
   padding: 0 var(--ifm-pre-padding);
 }
 
+// Overrides default from infima once we need this spacing otherwise feedback form button
+// gets too close to the markdown section
+// !important needed because new docusaurus version sets it to 0 with a !important flag
+.markdown > *:last-child {
+  margin-bottom: var(--ifm-spacing-vertical) !important;
+}
+
 @media (min-width: 1440px) {
   .main-wrapper.docs-wrapper.doc-page {
     .container {

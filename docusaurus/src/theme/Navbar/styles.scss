@@ -61,6 +61,7 @@
   }
 
   &__link {
+    @include mixins.remove-external-icon;
     font-size: 0.813rem;
 
     &:hover {
@@ -98,12 +99,14 @@
     > .navbar__link__custom-dropdown--version {
       width: 100%;
       color: var(--ifm-color-content);
+      padding-right: calc(var(--ifm-navbar-item-padding-horizontal) + 1.1em);
 
       &:after {
         @include mixins.down-arrow(var(--ifm-color-secondary-darker), 4px, 3px);
         right: 1rem;
+        position: absolute;
+        top: 55%;
       }
-
     }
 
     &__menu {
@@ -130,7 +133,7 @@
     .menu {
       &__link {
         &--sublist {
-          @include mixins.menu-sublist-icon;
+          @include mixins.menu-sublist-icon(relative);
 
           &.navbar__link__custom-dropdown--sdks,
           &.navbar__link__custom-dropdown--version {

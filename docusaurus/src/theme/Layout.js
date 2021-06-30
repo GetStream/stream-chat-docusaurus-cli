@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import OriginalLayout from '@theme-original/Layout';
 import { ToastContainer } from 'react-toastify';
+import { AuthContextProvider } from '../contexts/AuthContext';
 
 export default function Layout(props) {
   const [canRender, setCanRender] = useState(
@@ -26,8 +27,10 @@ export default function Layout(props) {
 
   return (
     <>
-      <ToastContainer />
-      <OriginalLayout {...props} />
+      <AuthContextProvider>
+        <ToastContainer />
+        <OriginalLayout {...props} />
+      </AuthContextProvider>
     </>
   );
 }

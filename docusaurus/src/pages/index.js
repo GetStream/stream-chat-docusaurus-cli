@@ -7,7 +7,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useGlobalData from '@docusaurus/useGlobalData';
 import styles from './styles.module.css';
 
-import { folderMapping, languageMapping } from '../../constants';
+import { folderMapping } from '../../constants';
 
 const Feature = ({ title }) => {
   const platform = `${title.toLowerCase().replace(' ', '')}`;
@@ -19,7 +19,7 @@ const Feature = ({ title }) => {
             'button button--outline button--secondary button--lg',
             styles.getStarted
           )}
-          to={useBaseUrl(`${platform}/?language=${languageMapping[platform]}`)}
+          to={useBaseUrl(`${platform}/`)}
         >
           {title}
         </Link>

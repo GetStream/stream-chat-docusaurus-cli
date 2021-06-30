@@ -45,3 +45,8 @@ export const getAPIErrorMsg = (error) => {
 export const apiDocFeedback = (data) => {
   return fetchApi('POST', 'api/docs_cms/feedback', data);
 };
+
+export const apiGetUser = () => fetchApi('GET', 'api/accounts/user');
+
+export const apiGetPublicUserToken = () =>
+  fetchApi('GET', 'api/core/chat_docs_credentials');

@@ -149,3 +149,15 @@ import messageList from '../assets/message_list.png'
 ```
 
 ![Example ImageShowcase desktop](./assets/images/Example_showcase.png)
+
+### Hide page from search
+
+If you're working on a page and want its content to be hidden from our search, you can add the flag `hide_from_search`
+to your frontmatter and this file will be ignored during the search indexing:
+
+```jsx
+---
+slug: /
+hide_from_search: true
+---
+```
