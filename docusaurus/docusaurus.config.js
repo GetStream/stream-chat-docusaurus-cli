@@ -210,6 +210,7 @@ module.exports = {
       },
       title: 'Chat Messaging',
     },
+    metadatas: [{ name: 'twitter:card', content: 'summary_large_image' }],
   },
   themes: [
     [
