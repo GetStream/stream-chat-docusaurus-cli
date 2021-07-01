@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import OriginalLayout from '@theme-original/Layout';
 import { ToastContainer } from 'react-toastify';
+
+import { DocusaurusContextProvider } from '../contexts/DocusaurusContext';
 import { AuthContextProvider } from '../contexts/AuthContext';
 
 const isBrowser = typeof window !== `undefined`;
@@ -11,6 +12,7 @@ export default function Layout(props) {
   const isRootPath =
     isBrowser && window.location.pathname === '/chat/docs/sdk/';
   const [canRender, setCanRender] = useState(!isProd || !isRootPath);
+
   // whick redirect for home page. this should happen here in order to avoid
   // rendering the layout when redirecting.
   useEffect(() => {
@@ -26,11 +28,11 @@ export default function Layout(props) {
   }
 
   return (
-    <>
+    <DocusaurusContextProvider>
       <AuthContextProvider>
         <ToastContainer />
         <OriginalLayout {...props} />
       </AuthContextProvider>
-    </>
+    </DocusaurusContextProvider>
   );
 }
