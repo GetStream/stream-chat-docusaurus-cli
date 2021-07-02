@@ -69,14 +69,18 @@ const SiteNavbar = () => {
           <li>
             <Link to={docs.root}>Docs</Link>
           </li>
-          <li className="separator">»</li>
-          <li>
-            <Link to={`${docs.root}${locationPlatform}`}>
-              {platform} UI Components
-            </Link>
-          </li>
-          <li className="separator">»</li>
-          {breadcrumbItems.map((item) => item)}
+          {platform && (
+            <>
+              <li className="separator">»</li>
+              <li>
+                <Link to={`${docs.root}${locationPlatform}`}>
+                  {platform} UI Components
+                </Link>
+              </li>
+              <li className="separator">»</li>
+              {breadcrumbItems.map((item) => item)}
+            </>
+          )}
         </ul>
         <ul className="site-navbar__secondary">
           {URLS.website.secondary.map(({ contact, label, href }, i) => (

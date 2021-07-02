@@ -1,10 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import { useLocation } from '@docusaurus/router';
 
 export const BreadcrumbsContext = React.createContext();
-
-const findActiveItem = (sidebarItem) => {
-  return sidebarItem.href === window.location.pathname;
-};
 
 const removeTrailingSlash = (string) => {
   return string && string[string.length - 1] === '/'
@@ -12,7 +9,7 @@ const removeTrailingSlash = (string) => {
     : string;
 };
 
-const extractPathObjects = (sidebar) => {
+const extractPathObjects = (sidebar, pathname) => {
   const path = [];
 
   const recursiveDeepFind = (sidebar, pathAcc) => {
@@ -23,7 +20,7 @@ const extractPathObjects = (sidebar) => {
       } else {
         if (
           removeTrailingSlash(sidebarItem.href) ===
-          removeTrailingSlash(window.location.pathname)
+          removeTrailingSlash(pathname)
         ) {
           item = sidebarItem;
         }
@@ -42,11 +39,17 @@ const extractPathObjects = (sidebar) => {
 
 export const BreadcrumbsContextProvider = ({ children }) => {
   const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [sidebar, setSidebar] = useState([]);
+  const { pathname } = useLocation();
 
-  const setSidebar = useCallback((sidebar) => {
-    const pathObjects = extractPathObjects(sidebar);
+  const extarctBreadcrumbs = useCallback((localSidebar, localPathname) => {
+    const pathObjects = extractPathObjects(localSidebar, localPathname);
     return setBreadcrumbs(pathObjects);
   }, []);
+
+  useEffect(() => {
+    extarctBreadcrumbs(sidebar, pathname);
+  }, [sidebar, pathname]);
 
   const value = useMemo(
     () => ({
