@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import OriginalDocSidebar from '@theme-original/DocSidebar';
+import { useBreadcrumbsContext } from '../hooks/useBreadcrumbsContext';
 
 const WEB_LINKS = [
   ['Contact Support', 'https://getstream.io/contact/support/'],
@@ -22,6 +23,12 @@ const addTitle = (sidebarItems) => {
 };
 
 export default function DocSidebar({ sidebar, ...props }) {
+  const { setSidebar } = useBreadcrumbsContext();
+
+  useEffect(() => {
+    setSidebar(sidebar);
+  }, [sidebar]);
+
   const sidebarItems = useMemo(
     () =>
       addTitle([
