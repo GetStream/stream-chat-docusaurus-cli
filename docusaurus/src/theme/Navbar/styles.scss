@@ -186,13 +186,13 @@
 }
 
 @media (min-width: 997px) {
-  .sidebar_node_modules-\@docusaurus-theme-classic-lib-next-theme-DocSidebar-styles-module {
+  [class^='sidebar_'] {
     padding-top: calc(
       var(--ifm-navbar-height) + (var(--xtm-site-navbar-height)) + 1px
     ) !important;
   }
 
-  .tableOfContents_node_modules-\@docusaurus-theme-classic-lib-next-theme-TOC-styles-module {
+  [class^='tableOfContents_'] {
     max-height: calc(
       100vh -
         (
@@ -205,7 +205,7 @@
     ) !important;
   }
 
-  .docSidebarContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme-DocPage-styles-module {
+  [class^='docSidebarContainer_'] {
     margin-top: calc(
       -1 * (var(--ifm-navbar-height) + (var(--xtm-site-navbar-height) + 1px))
     ) !important;
