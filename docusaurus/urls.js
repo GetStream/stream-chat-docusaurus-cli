@@ -14,7 +14,7 @@ module.exports = {
       {
         returnLink: true,
         label: 'Return to Stream',
-        href: `${ROOT}/chat/docs/`,
+        href: ROOT,
       },
       {
         label: 'Chat Overview',
