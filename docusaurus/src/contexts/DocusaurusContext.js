@@ -27,7 +27,9 @@ export const DocusaurusContextProvider = ({ children }) => {
   }, [location.pathname]);
 
   const platform = folderMapping[locationPlatform];
-  const metaTitle = `Stream Chat - ${platform} SDK Docs`;
+  const metaTitle = platform
+    ? `Stream Chat - ${platform} SDK Docs`
+    : siteConfig.title;
 
   return (
     <DocusaurusContext.Provider
