@@ -63,7 +63,7 @@ const SiteNavbar = () => {
       <div className="site-navbar__inner">
         <ul className="site-navbar__breadcrumbs">
           <li>
-            <a href={`${website.root}chat`}>CHAT</a>
+            <a href={`${website.root}chat/`}>CHAT</a>
           </li>
           <li className="separator">»</li>
           <li>
@@ -73,7 +73,7 @@ const SiteNavbar = () => {
             <>
               <li className="separator">»</li>
               <li>
-                <Link to={`${docs.root}${locationPlatform}`}>
+                <Link to={`${docs.root}${locationPlatform}/`}>
                   {platform} UI Components
                 </Link>
               </li>
