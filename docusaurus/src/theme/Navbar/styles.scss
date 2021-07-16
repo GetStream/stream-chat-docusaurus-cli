@@ -100,6 +100,8 @@
 
     > .navbar__link__custom-dropdown--sdks,
     > .navbar__link__custom-dropdown--version {
+      position: relative;
+      display: block;
       width: 100%;
       color: var(--ifm-color-content);
       padding-right: calc(var(--ifm-navbar-item-padding-horizontal) + 1.1em);
