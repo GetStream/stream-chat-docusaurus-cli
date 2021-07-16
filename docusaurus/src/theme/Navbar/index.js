@@ -35,35 +35,44 @@ const SiteNavbar = () => {
 
   const breadcrumbsWithSeparators = useMemo(
     () =>
-      breadcrumbs
-        .map((breadcrumb) => breadcrumb.label)
-        .join('___»___')
-        .split('___'),
+      breadcrumbs.flatMap((value, index, array) =>
+        array.length - 1 !== index && value.type !== 'category'
+          ? [value, { type: 'separator' }]
+          : value
+      ),
     [breadcrumbs]
   );
 
   const breadcrumbItems = useMemo(
     () =>
       breadcrumbsWithSeparators.map((item, i) => {
-        if (item === '»') {
+        if (item.type === 'separator') {
           return (
             <li key={i} className="separator">
-              {item}
+              »
+            </li>
+          );
+        } else if (item.type === 'category') {
+          return (
+            <li key={i} className="category">
+              {item.label}:
             </li>
           );
         }
 
-        return <li key={i}>{item}</li>;
+        return <li key={i}>{item.label}</li>;
       }),
     [breadcrumbsWithSeparators]
   );
+
+  console.log(breadcrumbItems);
 
   return (
     <nav className="site-navbar">
       <div className="site-navbar__inner">
         <ul className="site-navbar__breadcrumbs">
           <li>
-            <a href={`${website.root}chat/`}>CHAT</a>
+            <a href={`${website.root}chat/`}>Chat</a>
           </li>
           <li className="separator">»</li>
           <li>
