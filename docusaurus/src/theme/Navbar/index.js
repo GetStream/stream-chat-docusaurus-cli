@@ -65,8 +65,6 @@ const SiteNavbar = () => {
     [breadcrumbsWithSeparators]
   );
 
-  console.log(breadcrumbItems);
-
   return (
     <nav className="site-navbar">
       <div className="site-navbar__inner">
