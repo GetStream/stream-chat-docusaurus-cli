@@ -179,7 +179,8 @@ const parseMdxData = (
         // components and parse it as mdx in order to extract its data for the search
         await Promise.all(
           usedImportedComponents.map(async (usedImportedComponent) => {
-            const componentPath = `${path}/${mdxImportedComponents[usedImportedComponent]}`;
+            const pathWithoutFileName = path.includes('.md') ? path.substring(0, path.lastIndexOf("/")); : path;
+            const componentPath = `${pathWithoutFileName}/${mdxImportedComponents[usedImportedComponent]}`;
             const importedComponentSyntaxTree = await extractSyntaxTree(
               componentPath
             );
