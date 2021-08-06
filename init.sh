@@ -1,4 +1,6 @@
 #!/bin/bash
+set -eo pipefail  # if a command fails it stops the execution
+
 package=stream-chat-docusaurus
 
 build() {
