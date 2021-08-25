@@ -112,6 +112,7 @@ module.exports = {
       },
     ],
   },
+  github_root: GITHUB_ROOT,
   github: {
     android: `${GITHUB_ROOT}/stream-chat-android/`,
     flutter: `${GITHUB_ROOT}/stream-chat-flutter/`,
