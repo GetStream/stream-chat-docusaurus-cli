@@ -6,8 +6,8 @@
  */
 import React, { useMemo } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { Context as DocusaurusContext } from '@docusaurus/docusaurusContext';
 import { useLocation } from '@docusaurus/router';
-import DocusaurusContext from '@docusaurus/context';
 
 import { folderMapping } from '../../constants';
 import URLS from '../../urls';
