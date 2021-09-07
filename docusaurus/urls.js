@@ -6,7 +6,7 @@ module.exports = {
     root: '/chat/docs/sdk/',
   },
   website: {
-    root: `${ROOT}/`,
+    root: `${ROOT}`,
     cms_docs: `${ROOT}/chat/docs/`,
     signup: `${ROOT}/accounts/signup/`,
     // Not needed anymore but will keep it commented in case these values return in another place
