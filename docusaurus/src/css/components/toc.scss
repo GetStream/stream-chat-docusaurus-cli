@@ -44,3 +44,18 @@ html[data-theme='dark'] {
     }
   }
 }
+
+// Mobile top ToC
+[class^="tocCollapsible"] {
+  position: relative;
+
+  & > button {
+    @include mixins.faux-select;
+    @include mixins.menu-sublist-icon(relative);
+    font-size: 0.813rem;
+
+    & + div[class*="tocCollapsibleContent"] {
+      @include mixins.faux-select-dropdown;
+    }
+  }
+}

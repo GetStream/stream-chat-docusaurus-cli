@@ -50,3 +50,35 @@
     display: none;
   }
 }
+
+@mixin faux-select-dropdown {
+  position: absolute;
+  padding: 0.5rem;
+  width: 100%;
+  z-index: var(--ifm-z-index-dropdown);
+  background-color: var(--ifm-dropdown-background-color);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: var(--ifm-global-shadow-md);
+  transition-property: opacity, transform, visibility;
+  transition-duration: var(--ifm-transition-fast);
+  transition-timing-function: var(--ifm-transition-timing-default);
+
+  & > ul {
+    border-top: none;
+    padding: 0;
+
+    & li {
+      margin: 0;
+      padding: 0;
+
+      & > a {
+        color: var(--ifm-dropdown-link-color);
+        display: block;
+        font-size: 0.875rem;
+        margin-top: 0.2rem;
+        padding: 0.25rem 0.5rem;
+        white-space: nowrap;
+      }
+    }
+  }
+}
