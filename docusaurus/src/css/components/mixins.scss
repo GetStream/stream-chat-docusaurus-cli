@@ -25,6 +25,25 @@
   }
 }
 
+@mixin dropdown-arrow {
+  &::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    border: none;
+    background: var(--ifm-menu-link-sublist-icon) 50% 50% / 1rem 1rem no-repeat;
+    filter: var(--ifm-menu-link-sublist-icon-filter);
+    height: 1.25rem;
+    width: 1.25rem;
+    transform: rotate(180deg);
+    transition: transform var(--ifm-transition-fast);
+  }
+  &:hover::after {
+    transform: rotate(0);
+  }
+}
+
 @mixin down-arrow($color, $width, $height) {
   width: 0; 
   height: 0;
@@ -42,6 +61,9 @@
   
   &:hover {
     box-shadow: var(--docsearch-searchbox-shadow);
+    a::after {
+      transform: rotate(0);
+    }
   }
 }
 

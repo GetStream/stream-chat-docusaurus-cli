@@ -1,7 +1,7 @@
 @use '../../css/components/mixins.scss';
 
 :root {
-  --ifm-navbar-shadow: 0px 2px 18px rgba(0, 0, 0, 0.04);
+  --ifm-navbar-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.04);
   --xtm-site-navbar-display: none;
   --xtm-site-navbar-height: 1.875rem;
 }
@@ -25,7 +25,6 @@
 }
 
 .navbar {
-  box-shadow: none;
   z-index: calc(var(--ifm-z-index-fixed) + 15);
 
   &__brand {
@@ -34,7 +33,7 @@
 
   &__logo {
     height: 1.25rem;
-    transform: translateY(-0.25rem);
+    transform: translateY(-0.1rem);
     margin-right: 0.2rem;
   }
 
@@ -105,13 +104,7 @@
       width: 100%;
       color: var(--ifm-color-content);
       padding-right: calc(var(--ifm-navbar-item-padding-horizontal) + 1.1em);
-
-      &:after {
-        @include mixins.down-arrow(var(--ifm-color-secondary-darker), 4px, 3px);
-        right: 1rem;
-        position: absolute;
-        top: 55%;
-      }
+      @include mixins.dropdown-arrow;
     }
 
     &__menu {
@@ -166,7 +159,11 @@
     &__back {
       display: none;
     }
-    
+
+    &__close svg {
+      transform: scale(0.75);
+    }
+
     &__items {
       // Removing the two-pages sidebar
       &--show-secondary {
@@ -175,7 +172,6 @@
       .menu:first-child {
         display: none;
       }
-
 
       > .menu > .menu__list {
         > * {
@@ -187,6 +183,31 @@
 
         .navbar__link__mobile {
           display: block;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 996px) {
+  .navbar {
+    &--fixed-top {
+      .navbar__inner .navbar__items {
+        button.navbar__toggle {
+          margin-right: 1rem;
+          > svg {
+            transform: scale(0.75);
+          }
+        }
+        .navbar__brand {
+          margin-right: 0.5rem;
+
+          .navbar__title {
+            display: none;
+          }
+        }
+        .navbar__item.dropdown.dropdown--hoverable {
+          display: inline-block;
         }
       }
     }
