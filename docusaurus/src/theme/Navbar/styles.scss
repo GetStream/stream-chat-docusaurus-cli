@@ -127,36 +127,9 @@
 
   // Mobile sidebar
   .navbar-sidebar {
-    .menu {
-      &__link {
-        &--sublist {
-          @include mixins.menu-sublist-icon(relative);
-
-          &.navbar__link__custom-dropdown--sdks,
-          &.navbar__link__custom-dropdown--version {
-            @include mixins.faux-select;
-          }
-        }
-
-        &.navbar__link__custom-dropdown--sdks {
-          margin-top: 1.325rem;
-          &::before {
-            @include mixins.menu-main-item;
-            content: 'SDKS';
-            position: absolute;
-            top: -1.325rem;
-            left: 0;
-          }
-        }
-
-        // Hide DocVersion link if there aren't any
-        &.navbar__link__custom-dropdown--version:not([role='button']) {
-          display: none;
-        }
-      }
-    }
-
-    &__back {
+    // Removing the two-pages sidebar
+    &__back,
+    &__items .menu:first-child {
       display: none;
     }
 
@@ -165,24 +138,83 @@
     }
 
     &__items {
-      // Removing the two-pages sidebar
       &--show-secondary {
         transform: none;
       }
-      .menu:first-child {
-        display: none;
-      }
+    }
 
-      > .menu > .menu__list {
-        > * {
-          margin-bottom: 1.325rem;
-          .menu__link:not(.menu__link--sublist) {
-            padding-left: 0;
+    // Menu list styles
+    .menu {
+      padding: 1rem 0;
+      font-size: 0.875rem;
+
+      > ul.theme-doc-sidebar-menu {
+        position: relative;
+        // Styles for 'main' item
+        > li.theme-doc-sidebar-item-link:not(:nth-last-child(-n+4)),
+        > li.theme-doc-sidebar-item-category:not(:nth-last-child(-n+4)) {
+          > a.menu__link {
+            @include mixins.menu-main-item;
           }
         }
 
-        .navbar__link__mobile {
-          display: block;
+        // custom Stream footer with website's links
+      > .menu__list-item:nth-last-child(-n+4):not(:last-child) {
+        .menu__link {
+          --ifm-menu-color: var(--ifm-link-color);
+          font-weight: 700;
+          &::after {
+            display: none;
+          }
+        }
+      }
+  
+      > .menu__list-item:last-child {
+        margin: 1rem 0;
+  
+        .menu__link {
+          --ifm-menu-color: rgba(0,0,0,0.6);
+          font-size: 0.813rem;
+          pointer-events: none;
+  
+          &::after {
+            display: none;
+          }
+        }
+      }
+      }
+
+      // needed to keep the active higlight line on the left 😩
+      a.menu__link--sublist + ul.menu__list {
+        margin-left: 10px;
+        position: unset;
+        .menu__list-item {
+          .menu__link:not(.menu__link--sublist) {
+            position: unset;
+          }
+        }
+      }
+
+      .menu__link--sublist {
+        @include mixins.menu-sublist-icon(relative);
+        margin-bottom: 0;
+        align-items: center;
+      }
+
+      .menu__link {
+        &--active {
+          font-weight: bold;
+        }
+        &--active[tabindex="0"]:not(&--sublist) {
+          // active-item's height is calculated based on line-height: 1.25rem + vertical padding
+          @include mixins.active-item(3px, calc(2 * var(--ifm-menu-link-padding-vertical) + 1.25rem), unset);
+          &::before {
+            // vertically align vertical line based on li margin
+            transform: translate(0px, -4px);
+          }
+        }
+        &:active {
+          background-color: var(--ifm-color-secondary-background);
         }
       }
     }
