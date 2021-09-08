@@ -145,11 +145,6 @@
           }
         }
 
-        &--active {
-          color: var(--ifm-color-primary);
-          font-weight: 700;
-        }
-
         &.navbar__link__custom-dropdown--sdks {
           margin-top: 1.325rem;
           &::before {
@@ -168,8 +163,19 @@
       }
     }
 
+    &__back {
+      display: none;
+    }
+    
     &__items {
-      padding: 1rem;
+      // Removing the two-pages sidebar
+      &--show-secondary {
+        transform: none;
+      }
+      .menu:first-child {
+        display: none;
+      }
+
 
       > .menu > .menu__list {
         > * {
