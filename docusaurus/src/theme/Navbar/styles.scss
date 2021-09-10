@@ -147,12 +147,11 @@
     .menu {
       padding: 1rem 0;
       font-size: 0.875rem;
-
-      > ul.theme-doc-sidebar-menu {
+      > ul.menu__list {
         position: relative;
         // Styles for 'main' item
-        > li.theme-doc-sidebar-item-link:not(:nth-last-child(-n+4)),
-        > li.theme-doc-sidebar-item-category:not(:nth-last-child(-n+4)) {
+        > li.menu__list-item:not(:nth-last-child(-n+4)) {
+          margin-bottom: 1rem;
           > a.menu__link {
             @include mixins.menu-main-item;
           }
@@ -202,6 +201,12 @@
       }
 
       .menu__link {
+        > span {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
         &--active {
           font-weight: bold;
         }

@@ -58,4 +58,13 @@ html[data-theme='dark'] {
       @include mixins.faux-select-dropdown;
     }
   }
+
+  .table-of-contents li ul {
+    margin-left: var(--ifm-toc-padding-horizontal);
+    margin-top: 0;
+  }
+
+  .table-of-contents__link {
+    white-space: normal!important;
+  }
 }
