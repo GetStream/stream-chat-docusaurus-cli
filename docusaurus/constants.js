@@ -4,6 +4,7 @@ const folderMapping = {
   ios: 'iOS',
   react: 'React',
   reactnative: 'React Native',
+  angular: 'Angular',
 };
 
 const platformMapping = {
@@ -20,6 +21,7 @@ const languageMapping = {
   ios: 'swift',
   react: 'javascript',
   reactnative: 'javascript',
+  angular: 'javascript',
 };
 
 const DOCUSAURUS_INDEX =
