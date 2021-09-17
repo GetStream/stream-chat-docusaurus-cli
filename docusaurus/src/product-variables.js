@@ -39,6 +39,7 @@ module.exports = {
       ios: `${GITHUB_ROOT}/stream-chat-swift/`,
       react: `${GITHUB_ROOT}/stream-chat-react/`,
       reactnative: `${GITHUB_ROOT}/stream-chat-react-native/`,
+      angular: `${GITHUB_ROOT}/stream-chat-angular/`,
     },
     docusaurus: {
       title: 'Chat Messaging',
