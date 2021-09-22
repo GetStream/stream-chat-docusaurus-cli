@@ -70,7 +70,7 @@ const SiteNavbar = () => {
       <div className="site-navbar__inner">
         <ul className="site-navbar__breadcrumbs">
           <li>
-            <a href={`${website.root}chat/`}>Chat</a>
+            <a href={`${website.root}/chat/`}>Chat</a>
           </li>
           <li className="separator">»</li>
           <li>

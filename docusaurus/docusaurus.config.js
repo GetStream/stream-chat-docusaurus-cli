@@ -109,6 +109,8 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   return {
     label: readableSDK,
     id: strippedSDK,
+    docsPluginId: strippedSDK,
+    docId: 'none',
     to: `${strippedSDK}/`,
     type: 'doc',
   };
@@ -120,15 +122,14 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   className: 'navbar__link__custom-dropdown--version',
 }));
 
-const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
-  href: URLS.github[id],
-  platform: id,
+const navbarGithubItem = {
   label: 'github',
+  href: URLS.github_root,
   position: 'left',
   className: 'navbar__link__github',
   'aria-label': 'Github repository',
   mobile: false,
-}));
+};
 
 // const navbarMobileItems = URLS.website.main.map((item) => ({
 //   href: item.href,
@@ -157,7 +158,7 @@ if (navbarSDKItems.length > 1) {
 
 navbarItems.push(
   ...navbarVersionItems,
-  ...navbarGithubItems
+  navbarGithubItem
   // ...navbarMobileItems
 );
 
