@@ -8,6 +8,17 @@ const {
 } = require('@docusaurus/utils');
 const slugs = require('github-slugger')();
 const { platformMapping, IGNORED_DIRECTORIES } = require('../constants');
+const productVariables = require('./product-variables');
+
+const {
+  algolia: {
+    parentSection: {
+      name: parent_section_name,
+      slug: parent_section_slug,
+      id: parent_section_id,
+    },
+  },
+} = productVariables[process.env.PRODUCT];
 
 const extractSyntaxTree = (path) => {
   // This function takes care of transforming the .md/.mdx file into an
@@ -320,9 +331,6 @@ const extractDocsData = async (docsContent) => {
             .join(' > ');
           const section_slug = sectionsSlug;
           const section_id = sectionsSlug;
-          const parent_section_name = 'Chat API Docs';
-          const parent_section_slug = 'chat_docs';
-          const parent_section_id = 'chat_docs';
           const platform = platformMapping[sdkKey];
           const content_serialized_text = pageData && pageData.text.join('\n');
           const code_sample = pageData && pageData.code.join('\n');

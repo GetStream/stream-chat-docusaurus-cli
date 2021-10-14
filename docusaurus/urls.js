@@ -1,13 +1,18 @@
 const ROOT = 'https://getstream.io';
 const GITHUB_ROOT = 'https://github.com/GetStream';
 
+const productVariables = require('./src/product-variables');
+
+const PRODUCT = process.env.PRODUCT;
+const { github } = productVariables[PRODUCT];
+
 module.exports = {
   docs: {
-    root: '/chat/docs/sdk/',
+    root: `/${PRODUCT}/docs/sdk/`,
   },
   website: {
     root: `${ROOT}`,
-    cms_docs: `${ROOT}/chat/docs/`,
+    cms_docs: `${ROOT}/${PRODUCT}/docs/`,
     signup: `${ROOT}/accounts/signup/`,
     // Not needed anymore but will keep it commented in case these values return in another place
     // main: [
@@ -113,11 +118,5 @@ module.exports = {
     ],
   },
   github_root: GITHUB_ROOT,
-  github: {
-    android: `${GITHUB_ROOT}/stream-chat-android/`,
-    flutter: `${GITHUB_ROOT}/stream-chat-flutter/`,
-    ios: `${GITHUB_ROOT}/stream-chat-swift/`,
-    react: `${GITHUB_ROOT}/stream-chat-react/`,
-    reactnative: `${GITHUB_ROOT}/stream-chat-react-native/`,
-  },
+  github,
 };

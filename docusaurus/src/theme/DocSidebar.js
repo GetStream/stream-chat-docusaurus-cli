@@ -5,7 +5,7 @@ import { useBreadcrumbsContext } from '../hooks/useBreadcrumbsContext';
 const WEB_LINKS = [
   ['Contact Support', 'https://getstream.io/contact/support/'],
   ['Maker Account', 'https://getstream.io/maker-account/'],
-  ['Mobile Chat Kit', 'https://getstream.io/chat/ux-kit/'],
+  ['Mobile Chat Kit', 'https://getstream.io/chat/ux-kit/'], // activity feeds ux kit ???
   [
     <>
       © Stream.IO, Inc. <br /> All Rights Reserved.
