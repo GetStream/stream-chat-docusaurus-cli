@@ -8,8 +8,12 @@ import { folderMapping } from '../../../constants';
 import { docs, website } from '../../../urls';
 
 import URLS from '../../../urls';
+import productVariables from '../../product-variables';
 
 import './styles.scss';
+
+const PRODUCT = process.env.PRODUCT;
+const { productTitle } = productVariables[PRODUCT];
 
 export default function Navbar(props) {
   return (
@@ -70,7 +74,7 @@ const SiteNavbar = () => {
       <div className="site-navbar__inner">
         <ul className="site-navbar__breadcrumbs">
           <li>
-            <a href={`${website.root}/chat/`}>Chat</a>
+            <a href={`${website.root}/${PRODUCT}/`}>{productTitle}</a>
           </li>
           <li className="separator">»</li>
           <li>

@@ -12,7 +12,14 @@ const path = require('path');
 
 const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
 const URLS = require('./urls');
+const productVariables = require('./src/product-variables');
 const Icons = require('./admonition-icons');
+
+const PRODUCT = process.env.PRODUCT;
+const {
+  productTitle,
+  docusaurus: { title: navbarTitle },
+} = productVariables[PRODUCT];
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
@@ -184,8 +191,8 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   organizationName: 'GetStream',
   plugins,
-  projectName: 'stream-chat',
-  tagline: 'Stream Chat official component SDKs',
+  projectName: `stream-${PRODUCT}`,
+  tagline: `Stream ${productTitle} official component SDKs`,
   themeConfig: {
     // Docusaurus forces us to pass these values even if they are not internally used.
     // Theyre only used to show/hide the search bar in our case.
@@ -206,10 +213,10 @@ module.exports = {
     navbar: {
       items: navbarItems,
       logo: {
-        alt: 'Chat docs logo',
+        alt: 'Stream docs logo',
         src: 'img/logo.svg',
       },
-      title: 'Chat Messaging',
+      title: navbarTitle,
     },
     metadatas: [{ name: 'twitter:card', content: 'summary_large_image' }],
   },
@@ -226,6 +233,6 @@ module.exports = {
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
-  title: 'Stream Chat - Component SDK Docs',
+  title: `Stream ${productTitle} - Component SDK Docs`,
   url: URLS.website.root,
 };

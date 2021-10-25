@@ -11,6 +11,9 @@ import { useLocation } from '@docusaurus/router';
 
 import { folderMapping } from '../../constants';
 import URLS from '../../urls';
+import productVariables from '../product-variables';
+
+const { productTitle } = productVariables[process.env.PRODUCT];
 
 // Dynamically overrides docusaurus context
 // Used to have unique SEO tags for SDK.
@@ -28,7 +31,7 @@ export const DocusaurusContextProvider = ({ children }) => {
 
   const platform = folderMapping[locationPlatform];
   const metaTitle = platform
-    ? `Stream Chat - ${platform} SDK Docs`
+    ? `Stream ${productTitle} - ${platform} SDK Docs`
     : siteConfig.title;
 
   return (

@@ -9,8 +9,6 @@ import URLS from '../../../urls';
 
 import './styles.scss';
 
-const baseUrl = '/chat/docs/sdk';
-
 function GithubReleaseLink({ activeVersion, href }) {
   return (
     activeVersion.name !== 'current' && (
@@ -34,7 +32,9 @@ function CustomNavbarItem(props) {
 
   const selectedSDK = useMemo(() => {
     if (label === 'SDK' && items.length) {
-      return items.find((item) => pathname.includes(`${baseUrl}/${item.id}/`));
+      return items.find((item) =>
+        pathname.includes(`${URLS.docs.root}${item.id}/`)
+      );
     }
   }, [items, label, pathname]);
 
@@ -48,7 +48,7 @@ function CustomNavbarItem(props) {
     type === 'docsVersionDropdown' &&
     pathname
       .replace(' ', '')
-      .search(new RegExp(`${baseUrl}/${docsPluginId}/.*`, 'g')) === -1
+      .search(new RegExp(`${URLS.docs.root}${docsPluginId}/.*`, 'g')) === -1
   ) {
     return null;
   }
@@ -94,7 +94,7 @@ const PlatformNavbarItem = ({ items, ...props }) => {
 const PlatformLabel = ({ id, label }) => (
   <span className="navbar__link__sdk">
     <img
-      src={`${baseUrl}/icon/${id}.svg`}
+      src={`${URLS.docs.root}icon/${id}.svg`}
       alt={`${label} logo`}
       className="navbar__link__sdk__icon"
     />
