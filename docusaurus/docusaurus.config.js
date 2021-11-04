@@ -7,6 +7,10 @@ require('dotenv').config({
   path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
 });
 
+if (!process.env.PRODUCT) {
+  process.env.PRODUCT = 'chat';
+}
+
 const fs = require('fs');
 const path = require('path');
 
