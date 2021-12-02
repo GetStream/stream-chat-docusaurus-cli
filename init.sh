@@ -24,15 +24,15 @@ init() {
     cd docusaurus
 
     # finding and symlinking directorys (d) and files (f) within the SDK repo docusaurus directory
-    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type d -exec ln -s {} \;
-    find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type f -exec ln -s {} \;
+    find "$STREAM_SDK_PATH"/docusaurus -maxdepth 1 -mindepth 1 -type d -exec ln -s {} \;
+    find "$STREAM_SDK_PATH"/docusaurus -maxdepth 1 -mindepth 1 -type f -exec ln -s {} \;
 
     yarn
     if [[ -z "${CUSTOM_INSTALLS}" ]]; then
         echo "No custom installs to add, proceeding.."
     else
         echo "Found custom plugins to install: $CUSTOM_INSTALLS"
-        yarn add $CUSTOM_INSTALLS
+        yarn add "$CUSTOM_INSTALLS"
     fi
     cd ..
 }
@@ -72,19 +72,19 @@ version() {
     fi
 
     cd docusaurus
-    yarn docusaurus docs:version:$SDK_NAME $NEW_VERSION;
+    yarn docusaurus docs:version:"$SDK_NAME" "$NEW_VERSION";
 
     if [ ! -d "$STREAM_SDK_PATH/docusaurus/${SDK_NAME}_versioned_docs" ]; then
-        cp -r $SDK_NAME* $STREAM_SDK_PATH/docusaurus
-        rm -rf $SDK_NAME*
-        find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type d -regex ".*/${SDK_NAME}_version.*" -exec ln -s {} \;
-        find $STREAM_SDK_PATH/docusaurus -maxdepth 1 -mindepth 1 -type f -regex ".*/${SDK_NAME}_version.*" -exec ln -s {} \;
+        cp -r "$SDK_NAME"* "$STREAM_SDK_PATH"/docusaurus
+        rm -rf "$SDK_NAME"*
+        find "$STREAM_SDK_PATH"/docusaurus -maxdepth 1 -mindepth 1 -type d -regex ".*/${SDK_NAME}_version.*" -exec ln -s {} \;
+        find "$STREAM_SDK_PATH"/docusaurus -maxdepth 1 -mindepth 1 -type f -regex ".*/${SDK_NAME}_version.*" -exec ln -s {} \;
     fi
 }
 
 usage() {
-    echo "$package - a CLI tool to build, manage, and test Stream Docusaurus documentation`echo $'\n '`"
-    echo "npx $package [options]`echo $'\n '`"
+    echo "$package - a CLI tool to build, manage, and test Stream Docusaurus documentation$(echo $'\n ')"
+    echo "npx $package [options]$(echo $'\n ')"
     echo "options:"
     echo "-h, --help                                show brief help"
     echo "-i, --init                                initialize docusaurus workspace"
@@ -104,7 +104,7 @@ main() {
                 shift
                 ;;
             -c=*|--custom-installs=*)
-                CUSTOM_INSTALLS=`echo "${1#*=}" | tr ',' ' '`
+                CUSTOM_INSTALLS=$(echo "${1#*=}" | tr ',' ' ')
                 shift
                 ;;
             -h|--help)
@@ -137,10 +137,10 @@ main() {
     done
 
     # capture the current execution path
-    export STREAM_SDK_PATH=`pwd`
+    export STREAM_SDK_PATH=$(pwd)
 
     # move execution to the package directory
-    cd $(dirname $(dirname $0)"/"$(readlink $0))
+    cd $(dirname $(dirname "$0")"/"$(readlink "$0"))
 
     if [[ ${INIT} == true ]]; then
         init
@@ -169,5 +169,5 @@ main() {
 }
 
 echo "Stream Chat Docusaurus CLI"
-main $*
+main "$*"
 exit 0
