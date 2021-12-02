@@ -39,6 +39,9 @@ const CUSTOM_CSS_FILES = fs
   .readdirSync(CUSTOM_CSS_PATH)
   .map((file) => `${CUSTOM_CSS_PATH}/${file}`);
 
+const findCustomPluginIndex = (pluginId) => CUSTOM_PLUGINS.findIndex(plugin => plugin[0] === pluginId)
+const extractCustomPlugin = (pluginId) => CUSTOM_PLUGINS.splice(findCustomPluginIndex(pluginId), 1).pop();
+
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
   const sidebarPathWithoutExtension = `${STREAM_SDK_DOCUSAURUS_PATH}/sidebars-${folderMapping[
@@ -54,9 +57,9 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
     ? jsSidebarPath
     : jsonSidebarPath;
 
-  return [
-    '@docusaurus/plugin-content-docs',
-    {
+  const pluginId = '@docusaurus/plugin-content-docs';
+
+  const defaultConfiguration = {
       sidebarItemsGenerator: async function ({
         defaultSidebarItemsGenerator,
         ...args
@@ -99,7 +102,21 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
           },
         },
       },
-    },
+    }
+
+
+  /**
+   * Merge configuration from a custom plugin file if one exists
+   * with the same plugin ID.
+   *
+   * This allows an SDK to provide their own configuration for
+   * this plugin.
+   * */
+  const customConfiguration = extractCustomPlugin(pluginId).pop();
+
+  return [
+    pluginId,
+    {...defaultConfiguration, ...customConfiguration},
   ];
 });
 
