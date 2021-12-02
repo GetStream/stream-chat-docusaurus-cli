@@ -147,12 +147,6 @@ const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
   mobile: false,
 }));
 
-// const navbarMobileItems = URLS.website.main.map((item) => ({
-//   href: item.href,
-//   label: item.label,
-//   className: 'navbar__link__mobile',
-// }));
-
 const navbarItems = [
   {
     href: URLS.website.signup,
@@ -175,7 +169,6 @@ if (navbarSDKItems.length > 1) {
 navbarItems.push(
   ...navbarVersionItems,
   ...navbarGithubItems
-  // ...navbarMobileItems
 );
 
 const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS];
