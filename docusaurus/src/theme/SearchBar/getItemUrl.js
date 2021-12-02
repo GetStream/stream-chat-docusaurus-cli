@@ -1,6 +1,6 @@
 import url from 'url';
 
-import { website } from '../../../urls';
+import { website, docs } from '../../../urls';
 import { CMS_INDEX } from '../../../constants';
 
 export const getItemUrl = ({ item, platform, cmsPlatform, locationQuery }) => {
@@ -12,8 +12,8 @@ export const getItemUrl = ({ item, platform, cmsPlatform, locationQuery }) => {
     })}${!!headerId ? `#${headerId}` : ''}`;
   }
 
-  return `/chat/docs/sdk${url.format({
-    pathname: item.slug === '' ? `/${platform}/` : `/${platform}/${item.slug}/`,
+  return `${docs.root}${url.format({
+    pathname: item.slug === '' ? `${platform}/` : `${platform}/${item.slug}/`,
     query: locationQuery,
   })}${!!headerId ? `#${headerId}` : ''}`;
 };

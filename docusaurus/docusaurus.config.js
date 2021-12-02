@@ -7,12 +7,23 @@ require('dotenv').config({
   path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
 });
 
+if (!process.env.PRODUCT) {
+  process.env.PRODUCT = 'chat';
+}
+
 const fs = require('fs');
 const path = require('path');
 
 const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
 const URLS = require('./urls');
+const productVariables = require('./src/product-variables');
 const Icons = require('./admonition-icons');
+
+const PRODUCT = process.env.PRODUCT;
+const {
+  productTitle,
+  docusaurus: { title: navbarTitle },
+} = productVariables[PRODUCT];
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
 
@@ -126,6 +137,8 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   return {
     label: readableSDK,
     id: strippedSDK,
+    docsPluginId: strippedSDK,
+    docId: 'none',
     to: `${strippedSDK}/`,
     type: 'doc',
   };
@@ -137,15 +150,14 @@ const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   className: 'navbar__link__custom-dropdown--version',
 }));
 
-const navbarGithubItems = navbarSDKItems.map(({ id }) => ({
-  href: URLS.github[id],
-  platform: id,
+const navbarGithubItem = {
   label: 'github',
+  href: URLS.github_root,
   position: 'left',
   className: 'navbar__link__github',
   'aria-label': 'Github repository',
   mobile: false,
-}));
+};
 
 const navbarItems = [
   {
@@ -168,7 +180,7 @@ if (navbarSDKItems.length > 1) {
 
 navbarItems.push(
   ...navbarVersionItems,
-  ...navbarGithubItems
+  navbarGithubItem
 );
 
 const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS];
@@ -193,8 +205,8 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   organizationName: 'GetStream',
   plugins,
-  projectName: 'stream-chat',
-  tagline: 'Stream Chat official component SDKs',
+  projectName: `stream-${PRODUCT}`,
+  tagline: `Stream ${productTitle} official component SDKs`,
   themeConfig: {
     // Docusaurus forces us to pass these values even if they are not internally used.
     // Theyre only used to show/hide the search bar in our case.
@@ -215,10 +227,10 @@ module.exports = {
     navbar: {
       items: navbarItems,
       logo: {
-        alt: 'Chat docs logo',
+        alt: 'Stream docs logo',
         src: 'img/logo.svg',
       },
-      title: 'Chat Messaging',
+      title: navbarTitle,
     },
     metadatas: [{ name: 'twitter:card', content: 'summary_large_image' }],
   },
@@ -235,6 +247,6 @@ module.exports = {
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
-  title: 'Stream Chat - Component SDK Docs',
+  title: `Stream ${productTitle} - Component SDK Docs`,
   url: URLS.website.root,
 };
