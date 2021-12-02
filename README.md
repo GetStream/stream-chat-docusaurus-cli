@@ -49,6 +49,37 @@ module.exports = () => {
 };
 ```
 
+### SDK-specific config for `@docusaurus/plugin-content-docs`
+
+We have common configuration of docusaurus docs in `docusaurus/docusaurus.config.js`. To modify the configuration, you can create a plugin file in your docusaurus directory as described above, with one of the plugins using `@docusaurus/plugin-content-docs` as the plugin ID.
+
+The object defined for the plugin will be merged with the default configuration.
+
+For example for React Native, there is a file at `/docusaurus/docusaurus-content-docs.plugin.js` with the following content:
+
+``` js
+module.exports = {
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        lastVersion: "3.0.0",
+        versions: {
+          current: {
+            label: '4.0.0',
+            banner: 'unreleased',
+            path: '4.0.0'
+          },
+          '3.0.0': {
+            label: '3.0.0',
+          }
+        }
+      }
+    ]
+  ]
+}
+```
+
 ## Sidebars
 
 You can add your own sidebar instead of the auto-generated default by creating a `sidebars-{SDK_NAME}.(js|json)` file within your `docusaurus` directory. For example on `React` the file would be `sidebars-react.(js|json)` and for `React Native` you would do `sidebars-react-native.(js|json)`.
