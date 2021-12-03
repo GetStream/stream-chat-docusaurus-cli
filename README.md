@@ -55,7 +55,7 @@ We have common configuration of docusaurus docs in `docusaurus/docusaurus.config
 
 The object defined for the plugin will be merged with the default configuration.
 
-For example for React Native, there is a file at `/docusaurus/docusaurus-content-docs.plugin.js` with the following content:
+For example for React Native, there is a file at `/docusaurus/reactnative-docusaurus-content-docs.plugin.js` with the following content:
 
 ``` js
 module.exports = {
@@ -63,15 +63,15 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        lastVersion: "3.0.0",
+        lastVersion: "3.x.x",
         versions: {
           current: {
             label: '4.0.0',
             banner: 'unreleased',
             path: '4.0.0'
           },
-          '3.0.0': {
-            label: '3.0.0',
+          '3.x.x': {
+            label: '3.x.x',
           }
         }
       }
