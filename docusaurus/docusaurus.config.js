@@ -159,7 +159,7 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
    * we don't do any extra validation here for this.
    * */
   const customPlugin = getCustomPluginForSDK(strippedSDK, pluginId);
-  const customConfiguration = customPlugin[1];
+  const customConfiguration = customPlugin ? customPlugin[1] : {};
 
   return [pluginId, { ...defaultConfiguration, ...customConfiguration }];
 });
