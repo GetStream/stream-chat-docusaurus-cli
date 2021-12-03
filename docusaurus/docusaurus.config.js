@@ -25,9 +25,8 @@ const {
   docusaurus: { title: navbarTitle },
 } = productVariables[PRODUCT];
 
-const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
-const getCustomPluginRegexWithPrefix = (prefix) =>
-  new RegExp(`^${prefix}-docusaurus.*\.plugin.js$`);
+const getCustomPluginRegExp = (prefix = '') =>
+  new RegExp(`^${prefix}docusaurus.*\.plugin.js$`);
 
 const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
@@ -39,7 +38,7 @@ const SDK_FOLDERS = DOCS_DIR.filter((file) => {
 });
 
 const CUSTOM_PLUGIN_FILES = DOCUSAURUS_DIR.filter((file) =>
-  CUSTOM_PLUGIN_REGEX.test(file)
+  getCustomPluginRegExp().test(file)
 );
 
 const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
@@ -47,20 +46,29 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
   return sdkConfig.plugins;
 }).flat();
 
+/**
+ * Named to indicate that this is used with any plugin file
+ * with a prefix that is an SDK name, although in reality
+ * it can be any prefix.
+ *
+ * If it's needed to ensure that the prefix is an SDK name,
+ * the parameter to getCustomPluginRegex could be this:
+ *
+ * ```
+ * `(${Object.keys(foldermapping).join('|')})-`
+ * ```
+ * */
 const SDK_CUSTOM_PLUGINS = DOCUSAURUS_DIR.filter((file) =>
-  getCustomPluginRegexWithPrefix('.*').test(file)
-).reduce((acc, file) => {
-  const p = require(path.join(STREAM_SDK_DOCUSAURUS_PATH, file));
-  return { ...acc, [file]: p.plugins };
+  getCustomPluginRegExp('.*-').test(file)
+).reduce((files, file) => {
+  const pluginModule = require(path.join(STREAM_SDK_DOCUSAURUS_PATH, file));
+  return { ...files, [file]: pluginModule.plugins };
 }, {});
 
-const getSdkCustomPlugins = (sdk) =>
+const getCustomPluginFilesForSDK = (sdk) =>
   Object.keys(SDK_CUSTOM_PLUGINS)
-    .filter((file) => getCustomPluginRegexWithPrefix(sdk).test(file))
-    .map((file) => {
-      console.log({ SDK_CUSTOM_PLUGINS });
-      return SDK_CUSTOM_PLUGINS[file];
-    });
+    .filter((file) => getCustomPluginRegExp(`${sdk}-`).test(file))
+    .map((file) => SDK_CUSTOM_PLUGINS[file]);
 
 const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css/components');
 const CUSTOM_CSS_FILES = fs
@@ -69,10 +77,10 @@ const CUSTOM_CSS_FILES = fs
 
 const pluginWithId = (pluginId) => (plugin) => plugin[0] === pluginId;
 const fileWithPluginId = (pluginId) => (files) =>
-  Array.from(files).find(pluginWithId(pluginId));
+  Array.from(files).find(pluginWithId(pluginId)) ?? [];
 
-const extractCustomPlugin = (sdk, pluginId) =>
-  getSdkCustomPlugins(sdk)
+const getCustomPluginForSDK = (sdk, pluginId) =>
+  getCustomPluginFilesForSDK(sdk)
     .find(fileWithPluginId(pluginId))
     .find(pluginWithId(pluginId));
 
@@ -149,7 +157,7 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
    * and since docusaurus validates the plugins during a build,
    * we don't do any extra validation here for this.
    * */
-  const customPlugin = extractCustomPlugin(strippedSDK, pluginId);
+  const customPlugin = getCustomPluginForSDK(strippedSDK, pluginId);
   const customConfiguration = customPlugin[1];
 
   return [pluginId, { ...defaultConfiguration, ...customConfiguration }];
