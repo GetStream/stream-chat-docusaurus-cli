@@ -26,7 +26,8 @@ const {
 } = productVariables[PRODUCT];
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
-const getCustomPluginRegexWithPrefix = (prefix) => new RegExp(`^${prefix}-docusaurus.*\.plugin.js$`);
+const getCustomPluginRegexWithPrefix = (prefix) =>
+  new RegExp(`^${prefix}-docusaurus.*\.plugin.js$`);
 
 const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
@@ -46,29 +47,34 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
   return sdkConfig.plugins;
 }).flat();
 
-const SDK_CUSTOM_PLUGINS = DOCUSAURUS_DIR.filter(
-  (file) => getCustomPluginRegexWithPrefix('.*').test(file)
-).reduce((acc, file ) => { const p = require(path.join(STREAM_SDK_DOCUSAURUS_PATH, file)); return { ...acc, [ file ]: p.plugins }}, {})
+const SDK_CUSTOM_PLUGINS = DOCUSAURUS_DIR.filter((file) =>
+  getCustomPluginRegexWithPrefix('.*').test(file)
+).reduce((acc, file) => {
+  const p = require(path.join(STREAM_SDK_DOCUSAURUS_PATH, file));
+  return { ...acc, [file]: p.plugins };
+}, {});
 
-const getSdkCustomPlugins = (sdk) => Object.keys(SDK_CUSTOM_PLUGINS).filter(
-  (file) => getCustomPluginRegexWithPrefix(sdk).test(file)
-).map(
-  (file) => { console.log({ SDK_CUSTOM_PLUGINS }); return SDK_CUSTOM_PLUGINS[file] })
+const getSdkCustomPlugins = (sdk) =>
+  Object.keys(SDK_CUSTOM_PLUGINS)
+    .filter((file) => getCustomPluginRegexWithPrefix(sdk).test(file))
+    .map((file) => {
+      console.log({ SDK_CUSTOM_PLUGINS });
+      return SDK_CUSTOM_PLUGINS[file];
+    });
 
 const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css/components');
 const CUSTOM_CSS_FILES = fs
   .readdirSync(CUSTOM_CSS_PATH)
   .map((file) => `${CUSTOM_CSS_PATH}/${file}`);
 
-const pluginWithId = (pluginId) => (plugin) => plugin[0] === pluginId
-const fileWithPluginId = (pluginId) => (files) => Array.from(files).find(pluginWithId(pluginId))
+const pluginWithId = (pluginId) => (plugin) => plugin[0] === pluginId;
+const fileWithPluginId = (pluginId) => (files) =>
+  Array.from(files).find(pluginWithId(pluginId));
 
-
-const extractCustomPlugin = (sdk, pluginId) => getSdkCustomPlugins(sdk)
-  .find(fileWithPluginId(pluginId))
- .find(pluginWithId(pluginId))
-
-
+const extractCustomPlugin = (sdk, pluginId) =>
+  getSdkCustomPlugins(sdk)
+    .find(fileWithPluginId(pluginId))
+    .find(pluginWithId(pluginId));
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
@@ -88,7 +94,7 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const pluginId = '@docusaurus/plugin-content-docs';
 
   const defaultConfiguration = {
-    sidebarItemsGenerator: async function({
+    sidebarItemsGenerator: async function ({
       defaultSidebarItemsGenerator,
       ...args
     }) {
@@ -102,8 +108,8 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
     routeBasePath: strippedSDK,
     ...(fs.existsSync(sidebarPath)
       ? {
-        sidebarPath: require.resolve(sidebarPath),
-      }
+          sidebarPath: require.resolve(sidebarPath),
+        }
       : {}),
     admonitions: {
       infima: true,
@@ -130,8 +136,7 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
         },
       },
     },
-  }
-
+  };
 
   /**
    * Merge configuration from a custom plugin file if one exists
@@ -147,10 +152,7 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const customPlugin = extractCustomPlugin(strippedSDK, pluginId);
   const customConfiguration = customPlugin[1];
 
-  return [
-    pluginId,
-    { ...defaultConfiguration, ...customConfiguration},
-  ];
+  return [pluginId, { ...defaultConfiguration, ...customConfiguration }];
 });
 
 const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
@@ -200,10 +202,7 @@ if (navbarSDKItems.length > 1) {
   });
 }
 
-navbarItems.push(
-  ...navbarVersionItems,
-  navbarGithubItem
-);
+navbarItems.push(...navbarVersionItems, navbarGithubItem);
 
 const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS];
 
