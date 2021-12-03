@@ -169,5 +169,5 @@ main() {
 }
 
 echo "Stream Chat Docusaurus CLI"
-main "$*"
+main $*
 exit 0
