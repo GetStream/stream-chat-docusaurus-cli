@@ -26,6 +26,7 @@ const {
 } = productVariables[PRODUCT];
 
 const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
+const getCustomPluginRegexWithPrefix = (prefix) => new RegExp(`^${prefix}-docusaurus.*\.plugin.js$`);
 
 const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
@@ -45,13 +46,29 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
   return sdkConfig.plugins;
 }).flat();
 
+const SDK_CUSTOM_PLUGINS = DOCUSAURUS_DIR.filter(
+  (file) => getCustomPluginRegexWithPrefix('.*').test(file)
+).reduce((acc, file ) => { const p = require(path.join(STREAM_SDK_DOCUSAURUS_PATH, file)); return { ...acc, [ file ]: p.plugins }}, {})
+
+const getSdkCustomPlugins = (sdk) => Object.keys(SDK_CUSTOM_PLUGINS).filter(
+  (file) => getCustomPluginRegexWithPrefix(sdk).test(file)
+).map(
+  (file) => { console.log({ SDK_CUSTOM_PLUGINS }); return SDK_CUSTOM_PLUGINS[file] })
+
 const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css/components');
 const CUSTOM_CSS_FILES = fs
   .readdirSync(CUSTOM_CSS_PATH)
   .map((file) => `${CUSTOM_CSS_PATH}/${file}`);
 
-const findCustomPluginIndex = (pluginId) => CUSTOM_PLUGINS.findIndex(plugin => plugin[0] === pluginId)
-const extractCustomPlugin = (pluginId) => CUSTOM_PLUGINS.splice(findCustomPluginIndex(pluginId), 1).pop();
+const pluginWithId = (pluginId) => (plugin) => plugin[0] === pluginId
+const fileWithPluginId = (pluginId) => (files) => Array.from(files).find(pluginWithId(pluginId))
+
+
+const extractCustomPlugin = (sdk, pluginId) => getSdkCustomPlugins(sdk)
+  .find(fileWithPluginId(pluginId))
+ .find(pluginWithId(pluginId))
+
+
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
@@ -71,49 +88,49 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const pluginId = '@docusaurus/plugin-content-docs';
 
   const defaultConfiguration = {
-      sidebarItemsGenerator: async function ({
-        defaultSidebarItemsGenerator,
-        ...args
-      }) {
-        const sidebarItems = await defaultSidebarItemsGenerator(args);
-        return sidebarItems.filter((item) => {
-          return !IGNORED_DIRECTORIES.includes(item.label);
-        });
-      },
-      id: strippedSDK,
-      path: `${STREAM_SDK_DOCUSAURUS_PATH}/docs/${SDK}`,
-      routeBasePath: strippedSDK,
-      ...(fs.existsSync(sidebarPath)
-        ? {
-            sidebarPath: require.resolve(sidebarPath),
-          }
-        : {}),
-      admonitions: {
-        infima: true,
-        customTypes: {
-          note: {
-            ifmClass: 'note',
-            svg: Icons.note,
-          },
-          tip: {
-            ifmClass: 'tip',
-            svg: Icons.tip,
-          },
-          info: {
-            ifmClass: 'info',
-            svg: Icons.info,
-          },
-          caution: {
-            ifmClass: 'warning',
-            svg: Icons.caution,
-          },
-          danger: {
-            ifmClass: 'danger',
-            svg: Icons.danger,
-          },
+    sidebarItemsGenerator: async function({
+      defaultSidebarItemsGenerator,
+      ...args
+    }) {
+      const sidebarItems = await defaultSidebarItemsGenerator(args);
+      return sidebarItems.filter((item) => {
+        return !IGNORED_DIRECTORIES.includes(item.label);
+      });
+    },
+    id: strippedSDK,
+    path: `${STREAM_SDK_DOCUSAURUS_PATH}/docs/${SDK}`,
+    routeBasePath: strippedSDK,
+    ...(fs.existsSync(sidebarPath)
+      ? {
+        sidebarPath: require.resolve(sidebarPath),
+      }
+      : {}),
+    admonitions: {
+      infima: true,
+      customTypes: {
+        note: {
+          ifmClass: 'note',
+          svg: Icons.note,
+        },
+        tip: {
+          ifmClass: 'tip',
+          svg: Icons.tip,
+        },
+        info: {
+          ifmClass: 'info',
+          svg: Icons.info,
+        },
+        caution: {
+          ifmClass: 'warning',
+          svg: Icons.caution,
+        },
+        danger: {
+          ifmClass: 'danger',
+          svg: Icons.danger,
         },
       },
-    }
+    },
+  }
 
 
   /**
@@ -122,12 +139,17 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
    *
    * This allows an SDK to provide their own configuration for
    * this plugin.
+   *
+   * The plugins are structured as ['pluginId', configurationObject]
+   * and since docusaurus validates the plugins during a build,
+   * we don't do any extra validation here for this.
    * */
-  const customConfiguration = extractCustomPlugin(pluginId).pop();
+  const customPlugin = extractCustomPlugin(strippedSDK, pluginId);
+  const customConfiguration = customPlugin[1];
 
   return [
     pluginId,
-    {...defaultConfiguration, ...customConfiguration},
+    { ...defaultConfiguration, ...customConfiguration},
   ];
 });
 
