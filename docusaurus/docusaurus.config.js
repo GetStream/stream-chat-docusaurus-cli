@@ -77,12 +77,13 @@ const CUSTOM_CSS_FILES = fs
 
 const pluginWithId = (pluginId) => (plugin) => plugin[0] === pluginId;
 const fileWithPluginId = (pluginId) => (files) =>
-  Array.from(files).find(pluginWithId(pluginId)) ?? [];
+  Array.from(files).find(pluginWithId(pluginId));
+
+const getPluginFileForSDK = (sdk, pluginId) =>
+  getCustomPluginFilesForSDK(sdk).find(fileWithPluginId(pluginId)) ?? [];
 
 const getCustomPluginForSDK = (sdk, pluginId) =>
-  getCustomPluginFilesForSDK(sdk)
-    .find(fileWithPluginId(pluginId))
-    .find(pluginWithId(pluginId));
+  getPluginFileForSDK(sdk, pluginId).find(pluginWithId(pluginId));
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
