@@ -1,24 +1,21 @@
 name: compress
 
 on:
-  push:
+  pull_request:
     branches:
       - staging
 
 jobs:
-  compress_docusaurus:
+  remind_about_tarball:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/github-script@v5
         with:
-          node-version: '14'
-      - name: Build
-        id: build
-        run: |
-          rm docusaurus.tar.gz; tar --exclude='./docusaurus/node_modules' -czf docusaurus.tar.gz ./docusaurus
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add docusaurus.tar.gz
-          git commit -m "Update compressed docusaurus file"
-          git push
+          github-token: ${{ sectrets.PAT_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'If you changed anything in the `docusaurus/` directory, remember to also update the docusaurus tarball. In the root of the directory, run `rm docusaurus.tar.gz && tar --exclude='./docusaurus/node_modules' -czf docusaurus.tar.gz ./docusaurus`.'
+            })
