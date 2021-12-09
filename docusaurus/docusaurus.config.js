@@ -7,14 +7,26 @@ require('dotenv').config({
   path: __dirname + `/${STREAM_SDK_DOCUSAURUS_PATH}/.env`,
 });
 
+if (!process.env.PRODUCT) {
+  process.env.PRODUCT = 'chat';
+}
+
 const fs = require('fs');
 const path = require('path');
 
 const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
 const URLS = require('./urls');
+const productVariables = require('./src/product-variables');
 const Icons = require('./admonition-icons');
 
-const CUSTOM_PLUGIN_REGEX = /^docusaurus.*\.plugin.js$/;
+const PRODUCT = process.env.PRODUCT;
+const {
+  productTitle,
+  docusaurus: { title: navbarTitle },
+} = productVariables[PRODUCT];
+
+const getCustomPluginRegExp = (prefix = '') =>
+  new RegExp(`^${prefix}docusaurus.*\.plugin.js$`);
 
 const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
@@ -26,7 +38,7 @@ const SDK_FOLDERS = DOCS_DIR.filter((file) => {
 });
 
 const CUSTOM_PLUGIN_FILES = DOCUSAURUS_DIR.filter((file) =>
-  CUSTOM_PLUGIN_REGEX.test(file)
+  getCustomPluginRegExp().test(file)
 );
 
 const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
@@ -34,10 +46,44 @@ const CUSTOM_PLUGINS = CUSTOM_PLUGIN_FILES.map((file) => {
   return sdkConfig.plugins;
 }).flat();
 
+/**
+ * Named to indicate that this is used with any plugin file
+ * with a prefix that is an SDK name, although in reality
+ * it can be any prefix.
+ *
+ * If it's needed to ensure that the prefix is an SDK name,
+ * the parameter to getCustomPluginRegex could be this:
+ *
+ * ```
+ * `(${Object.keys(foldermapping).join('|')})-`
+ * ```
+ * */
+const SDK_CUSTOM_PLUGINS = DOCUSAURUS_DIR.filter((file) =>
+  getCustomPluginRegExp('.*-').test(file)
+).reduce((files, file) => {
+  const pluginModule = require(path.join(STREAM_SDK_DOCUSAURUS_PATH, file));
+  return { ...files, [file]: pluginModule.plugins };
+}, {});
+
+const getCustomPluginFilesForSDK = (sdk) =>
+  Object.keys(SDK_CUSTOM_PLUGINS)
+    .filter((file) => getCustomPluginRegExp(`${sdk}-`).test(file))
+    .map((file) => SDK_CUSTOM_PLUGINS[file]);
+
 const CUSTOM_CSS_PATH = path.join(__dirname, 'src/css/components');
 const CUSTOM_CSS_FILES = fs
   .readdirSync(CUSTOM_CSS_PATH)
   .map((file) => `${CUSTOM_CSS_PATH}/${file}`);
+
+const pluginWithId = (pluginId) => (plugin) => plugin[0] === pluginId;
+const fileWithPluginId = (pluginId) => (files) =>
+  Array.from(files).find(pluginWithId(pluginId));
+
+const getPluginFileForSDK = (sdk, pluginId) =>
+  getCustomPluginFilesForSDK(sdk).find(fileWithPluginId(pluginId)) ?? [];
+
+const getCustomPluginForSDK = (sdk, pluginId) =>
+  getPluginFileForSDK(sdk, pluginId).find(pluginWithId(pluginId));
 
 const defaultPlugins = SDK_FOLDERS.map((SDK) => {
   const strippedSDK = SDK.toLowerCase().replace(' ', '');
@@ -54,53 +100,68 @@ const defaultPlugins = SDK_FOLDERS.map((SDK) => {
     ? jsSidebarPath
     : jsonSidebarPath;
 
-  return [
-    '@docusaurus/plugin-content-docs',
-    {
-      sidebarItemsGenerator: async function ({
-        defaultSidebarItemsGenerator,
-        ...args
-      }) {
-        const sidebarItems = await defaultSidebarItemsGenerator(args);
-        return sidebarItems.filter((item) => {
-          return !IGNORED_DIRECTORIES.includes(item.label);
-        });
-      },
-      id: strippedSDK,
-      path: `${STREAM_SDK_DOCUSAURUS_PATH}/docs/${SDK}`,
-      routeBasePath: strippedSDK,
-      ...(fs.existsSync(sidebarPath)
-        ? {
-            sidebarPath: require.resolve(sidebarPath),
-          }
-        : {}),
-      admonitions: {
-        infima: true,
-        customTypes: {
-          note: {
-            ifmClass: 'note',
-            svg: Icons.note,
-          },
-          tip: {
-            ifmClass: 'tip',
-            svg: Icons.tip,
-          },
-          info: {
-            ifmClass: 'info',
-            svg: Icons.info,
-          },
-          caution: {
-            ifmClass: 'warning',
-            svg: Icons.caution,
-          },
-          danger: {
-            ifmClass: 'danger',
-            svg: Icons.danger,
-          },
+  const pluginId = '@docusaurus/plugin-content-docs';
+
+  const defaultConfiguration = {
+    sidebarItemsGenerator: async function ({
+      defaultSidebarItemsGenerator,
+      ...args
+    }) {
+      const sidebarItems = await defaultSidebarItemsGenerator(args);
+      return sidebarItems.filter((item) => {
+        return !IGNORED_DIRECTORIES.includes(item.label);
+      });
+    },
+    id: strippedSDK,
+    path: `${STREAM_SDK_DOCUSAURUS_PATH}/docs/${SDK}`,
+    routeBasePath: strippedSDK,
+    ...(fs.existsSync(sidebarPath)
+      ? {
+          sidebarPath: require.resolve(sidebarPath),
+        }
+      : {}),
+    admonitions: {
+      infima: true,
+      customTypes: {
+        note: {
+          ifmClass: 'note',
+          svg: Icons.note,
+        },
+        tip: {
+          ifmClass: 'tip',
+          svg: Icons.tip,
+        },
+        info: {
+          ifmClass: 'info',
+          svg: Icons.info,
+        },
+        caution: {
+          ifmClass: 'warning',
+          svg: Icons.caution,
+        },
+        danger: {
+          ifmClass: 'danger',
+          svg: Icons.danger,
         },
       },
     },
-  ];
+  };
+
+  /**
+   * Merge configuration from a custom plugin file if one exists
+   * with the same plugin ID.
+   *
+   * This allows an SDK to provide their own configuration for
+   * this plugin.
+   *
+   * The plugins are structured as ['pluginId', configurationObject]
+   * and since docusaurus validates the plugins during a build,
+   * we don't do any extra validation here for this.
+   * */
+  const customPlugin = getCustomPluginForSDK(strippedSDK, pluginId);
+  const customConfiguration = customPlugin ? customPlugin[1] : {};
+
+  return [pluginId, { ...defaultConfiguration, ...customConfiguration }];
 });
 
 const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
@@ -131,12 +192,6 @@ const navbarGithubItem = {
   mobile: false,
 };
 
-// const navbarMobileItems = URLS.website.main.map((item) => ({
-//   href: item.href,
-//   label: item.label,
-//   className: 'navbar__link__mobile',
-// }));
-
 const navbarItems = [
   {
     href: URLS.website.signup,
@@ -156,11 +211,7 @@ if (navbarSDKItems.length > 1) {
   });
 }
 
-navbarItems.push(
-  ...navbarVersionItems,
-  navbarGithubItem
-  // ...navbarMobileItems
-);
+navbarItems.push(...navbarVersionItems, navbarGithubItem);
 
 const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS];
 
@@ -184,8 +235,8 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   organizationName: 'GetStream',
   plugins,
-  projectName: 'stream-chat',
-  tagline: 'Stream Chat official component SDKs',
+  projectName: `stream-${PRODUCT}`,
+  tagline: `Stream ${productTitle} official component SDKs`,
   themeConfig: {
     // Docusaurus forces us to pass these values even if they are not internally used.
     // Theyre only used to show/hide the search bar in our case.
@@ -206,10 +257,10 @@ module.exports = {
     navbar: {
       items: navbarItems,
       logo: {
-        alt: 'Chat docs logo',
+        alt: 'Stream docs logo',
         src: 'img/logo.svg',
       },
-      title: 'Chat Messaging',
+      title: navbarTitle,
     },
     metadatas: [{ name: 'twitter:card', content: 'summary_large_image' }],
   },
@@ -226,6 +277,6 @@ module.exports = {
     '@docusaurus/theme-live-codeblock',
     '@docusaurus/theme-search-algolia',
   ],
-  title: 'Stream Chat - Component SDK Docs',
+  title: `Stream ${productTitle} - Component SDK Docs`,
   url: URLS.website.root,
 };

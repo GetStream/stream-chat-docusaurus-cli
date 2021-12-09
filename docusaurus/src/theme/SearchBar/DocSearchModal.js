@@ -19,6 +19,13 @@ import {
   CMS_INDEX,
 } from '../../../constants';
 import environment from '../../environment';
+import productVariables from '../../product-variables';
+
+const {
+  algolia: {
+    parentSection: { slug: parentSectionSlug },
+  },
+} = productVariables[process.env.PRODUCT];
 
 const algoliaClient = algoliasearch(
   environment.ALGOLIA_APP_ID,
@@ -121,7 +128,7 @@ export function DocSearchModal({
                 type: 'default',
                 query,
                 params: {
-                  filters: `parent_section_slug:chat_docs AND platform:${platformMapping[locationPlatform]} AND version:${activeVersion.name}`,
+                  filters: `parent_section_slug:${parentSectionSlug} AND platform:${platformMapping[locationPlatform]} AND version:${activeVersion.name}`,
                 },
               },
               {
@@ -129,7 +136,7 @@ export function DocSearchModal({
                 type: 'default',
                 query,
                 params: {
-                  filters: `parent_section_slug:chat_docs AND platforms:${platformMapping[locationPlatform]}`,
+                  filters: `parent_section_slug:${parentSectionSlug} AND platforms:${platformMapping[locationPlatform]}`,
                 },
               },
             ])
