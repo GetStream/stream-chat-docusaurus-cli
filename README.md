@@ -149,3 +149,17 @@ import messageList from '../assets/message_list.png'
 ```
 
 ![Example ImageShowcase desktop](./assets/images/Example_showcase.png)
+
+You can also add border to the images using the boolean prop `border` like the following:
+
+```jsx
+<ImageShowcase
+  border
+  items={[
+    { image: image1, caption: <span>Images with border 🙂</span>, alt: 'Example of custom message' },
+    { image: image2, caption: <span>Another one!</span>, alt: 'Example of custom message part 2' },
+  ]}
+/>
+```
+
+![Example ImageShowcase with border](./assets/images/Example_showcase_border.png)
