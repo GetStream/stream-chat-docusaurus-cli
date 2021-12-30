@@ -7,6 +7,7 @@
 
 import React, { useState, useRef, useCallback, useMemo } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useGlobalData from '@docusaurus/useGlobalData';
 import Head from '@docusaurus/Head';
 import { DocSearchButton, useDocSearchKeyboardEvents } from '@docsearch/react';
 import { translate } from '@docusaurus/Translate';
@@ -25,7 +26,9 @@ function DocSearch({ contextualSearch, ...props }) {
 
   const location = useLocation();
   const locationPlatform = useMemo(() => {
-    const [urlPlatform] = location.pathname.replace(URLS.docs.root, '').split('/');
+    const [urlPlatform] = location.pathname
+      .replace(URLS.docs.root, '')
+      .split('/');
     return urlPlatform;
   }, [location.pathname]);
 
@@ -46,6 +49,11 @@ function DocSearch({ contextualSearch, ...props }) {
     onInput,
     searchButtonRef,
   });
+
+  const globalData = useGlobalData();
+  const SDKS = globalData['docusaurus-plugin-content-docs'];
+
+  if (!SDKS[locationPlatform]) return null;
 
   const translatedSearchLabel = translate({
     id: 'theme.SearchBar.label',

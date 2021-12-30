@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import OriginalDocSidebar from '@theme-original/DocSidebar';
+import { useBreadcrumbsContext } from '../hooks/useBreadcrumbsContext';
 
 const WEB_LINKS = [
   ['Contact Support', 'https://getstream.io/contact/support/'],
   ['Maker Account', 'https://getstream.io/maker-account/'],
-  ['Mobile Chat Kit', 'https://getstream.io/chat/ux-kit/'],
+  ['Mobile Chat Kit', 'https://getstream.io/chat/ux-kit/'], // activity feeds ux kit ???
   [
     <>
       © Stream.IO, Inc. <br /> All Rights Reserved.
@@ -12,22 +13,6 @@ const WEB_LINKS = [
     '/',
   ],
 ];
-
-// TODO: Remove it once
-// https://github.com/facebook/docusaurus/issues/3372#issuecomment-857931379 its released
-const addTrailingSlash = (sidebarItems) => {
-  return sidebarItems.map(({ href, ...props }) => {
-    if (props.items) {
-      return { ...props, items: addTrailingSlash(props.items), href };
-    }
-
-    if (href[href.length - 1] !== '/') {
-      href = href + '/';
-    }
-
-    return { href, ...props };
-  });
-};
 
 const addTitle = (sidebarItems) => {
   return sidebarItems.map(({ label, items, ...props }) => ({
@@ -38,18 +23,22 @@ const addTitle = (sidebarItems) => {
 };
 
 export default function DocSidebar({ sidebar, ...props }) {
+  const { setSidebar } = useBreadcrumbsContext();
+
+  useEffect(() => {
+    setSidebar(sidebar);
+  }, [sidebar]);
+
   const sidebarItems = useMemo(
     () =>
-      addTitle(
-        addTrailingSlash([
-          ...sidebar.map((category) => ({ ...category, collapsed: false })),
-          ...WEB_LINKS.map(([label, href]) => ({
-            type: 'link',
-            label,
-            href,
-          })),
-        ])
-      ),
+      addTitle([
+        ...sidebar.map((category) => ({ ...category, collapsed: false })),
+        ...WEB_LINKS.map(([label, href]) => ({
+          type: 'link',
+          label,
+          href,
+        })),
+      ]),
     [sidebar]
   );
 

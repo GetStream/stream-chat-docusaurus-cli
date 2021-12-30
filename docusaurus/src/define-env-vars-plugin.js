@@ -9,6 +9,7 @@ const OPTIONAL_VARIABLES = [
   'ALGOLIA_API_KEY',
   'WEBSITE_BASE_URL',
   'DEPLOYMENT_ENV',
+  'PRODUCT',
 ];
 
 const filteredVariables = Object.keys(environment).reduce((acc, item) => {
@@ -24,11 +25,12 @@ module.exports = function () {
       return {
         plugins: [
           new webpack.EnvironmentPlugin({
-            ...filteredVariables,
             ALGOLIA_APP_ID: 'DEFAULT',
             ALGOLIA_API_KEY: 'DEFAULT',
             WEBSITE_BASE_URL: 'DEFAULT',
             DEPLOYMENT_ENV: 'staging',
+            PRODUCT: 'chat', // either "chat" or "activity-feeds"
+            ...filteredVariables,
           }),
         ],
         module: {

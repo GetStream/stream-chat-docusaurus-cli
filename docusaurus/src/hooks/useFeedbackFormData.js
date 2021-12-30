@@ -31,10 +31,7 @@ export const FeedbackFormProvider = ({ children, title }) => {
 };
 
 const extractTitle = (element) =>
-  element &&
-  element.innerText
-    .substring(0, element.innerText.indexOf('#'))
-    .replace('\n', '');
+  element && element.innerText.replace('#', '').replace('\n', '');
 
 export const useFeedbackFormData = (lastHeaderTitle) => {
   const history = useHistory();
@@ -61,7 +58,7 @@ export const useFeedbackFormData = (lastHeaderTitle) => {
     }));
     if (pageHeader) {
       headers.unshift({
-        value: pageHeader.innerText,
+        value: extractTitle(pageHeader),
         isPageHeader: true,
       });
     }

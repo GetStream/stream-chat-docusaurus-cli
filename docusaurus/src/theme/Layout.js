@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-
 import OriginalLayout from '@theme-original/Layout';
 import { ToastContainer } from 'react-toastify';
 
+import URLS from '../../urls';
+import { AuthContextProvider } from '../contexts/AuthContext';
+
+const isBrowser = typeof window !== `undefined`;
+const isProd = process.env.DEPLOYMENT_ENV === 'production';
+
 export default function Layout(props) {
-  const [canRender, setCanRender] = useState(
-    process.env.DEPLOYMENT_ENV !== 'production'
-  );
+  const isRootPath = isBrowser && window.location.pathname === URLS.docs.root;
+  const [canRender, setCanRender] = useState(!isProd || !isRootPath);
+
   // whick redirect for home page. this should happen here in order to avoid
   // rendering the layout when redirecting.
   useEffect(() => {
-    if (
-      process.env.DEPLOYMENT_ENV === 'production' &&
-      window.location.pathname === '/chat/docs/sdk/'
-    ) {
-      window.location.replace('https://getstream.io/chat/docs/');
-    } else {
+    if (isProd && isRootPath) {
+      window.location.replace(URLS.website.cms_docs);
+    } else if (!canRender) {
       setCanRender(true);
     }
   }, []);
@@ -25,9 +27,9 @@ export default function Layout(props) {
   }
 
   return (
-    <>
+    <AuthContextProvider>
       <ToastContainer />
       <OriginalLayout {...props} />
-    </>
+    </AuthContextProvider>
   );
 }

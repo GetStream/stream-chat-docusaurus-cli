@@ -3,7 +3,7 @@ name: Triggers production deployment workflow
 on:
   push:
     branches:
-      - main
+      - production
 
 jobs:
   trigger_docs_deploy:
@@ -16,4 +16,4 @@ jobs:
           curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/deploy-production.yml/dispatches \
           -H 'Accept: application/vnd.github.v3+json' \
           -u ":$PAT_TOKEN" \
-          --data '{"ref": "main"}'
+          --data '{"ref": "production"}'

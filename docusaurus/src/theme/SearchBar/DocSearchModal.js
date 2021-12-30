@@ -10,6 +10,7 @@ import { Hits } from './Hits';
 
 import { useTouchEvents } from './useTouchEvents';
 import { useTrapFocus } from './useTrapFocus';
+import { getItemUrl } from './getItemUrl';
 
 import {
   platformMapping,
@@ -18,6 +19,13 @@ import {
   CMS_INDEX,
 } from '../../../constants';
 import environment from '../../environment';
+import productVariables from '../../product-variables';
+
+const {
+  algolia: {
+    parentSection: { slug: parentSectionSlug },
+  },
+} = productVariables[process.env.PRODUCT];
 
 const algoliaClient = algoliasearch(
   environment.ALGOLIA_APP_ID,
@@ -120,7 +128,7 @@ export function DocSearchModal({
                 type: 'default',
                 query,
                 params: {
-                  filters: `parent_section_slug:chat_docs AND platform:${platformMapping[locationPlatform]} AND version:${activeVersion.name}`,
+                  filters: `parent_section_slug:${parentSectionSlug} AND platform:${platformMapping[locationPlatform]} AND version:${activeVersion.name}`,
                 },
               },
               {
@@ -128,7 +136,7 @@ export function DocSearchModal({
                 type: 'default',
                 query,
                 params: {
-                  filters: `parent_section_slug:chat_docs AND platforms:${platformMapping[locationPlatform]}`,
+                  filters: `parent_section_slug:${parentSectionSlug} AND platforms:${platformMapping[locationPlatform]}`,
                 },
               },
             ])
@@ -168,6 +176,14 @@ export function DocSearchModal({
                       // Needed in order to know if it should show the tree icon in search results
                       includes_slug_parent: !group[item.slug][0].header_id,
                     }));
+                },
+                getItemUrl({ item }) {
+                  return getItemUrl({
+                    item,
+                    platform: locationPlatform,
+                    cmsPlatform: platformMapping[locationPlatform],
+                    locationQuery,
+                  });
                 },
               }));
             });
