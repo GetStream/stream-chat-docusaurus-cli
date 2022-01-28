@@ -1,5 +1,5 @@
 import React from 'react';
-
+import clsx from 'clsx';
 import styles from './styles.scss';
 
 /**
@@ -8,10 +8,11 @@ import styles from './styles.scss';
  * @param {string} items[].image
  * @param {string} [items[].alt]
  * @param {string} [items[].caption]
+ * @param {boolean} border
  */
-const ImageShowcase = ({ items }) => (
+const ImageShowcase = ({ items, border }) => (
   <div className='image-showcase-wrapper'>
-    <div className='image-showcase'>
+    <div className={clsx('image-showcase', border && 'image-showcase--with-border')}>
       {items.map(({ image, alt, caption }, key) => (
         <figure key={key}>
           <img src={image} alt={alt} loading='lazy' />
