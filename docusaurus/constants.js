@@ -13,6 +13,7 @@ const platformMapping = {
   ios: 'ios-swift',
   react: 'react',
   reactnative: 'react-native',
+  angular: 'angular'
 };
 
 const languageMapping = {
