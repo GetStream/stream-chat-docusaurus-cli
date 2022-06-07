@@ -19,4 +19,7 @@ index
   .then(({ objectIDs }) => {
     console.log(`Updated ${DOCUSAURUS_INDEX} Algolia index for: `, objectIDs);
   })
-  .catch((e) => console.log('ERROR: ', e));
+  .catch((error) => {
+    console.error(`Error while replacing object with Algolia: ${ error }`);
+    process.exit(1);
+  });

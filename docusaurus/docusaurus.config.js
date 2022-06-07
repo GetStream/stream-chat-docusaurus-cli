@@ -262,7 +262,7 @@ module.exports = {
       },
       title: navbarTitle,
     },
-    metadatas: [{ name: 'twitter:card', content: 'summary_large_image' }],
+    metadata: [{ name: 'twitter:card', content: 'summary_large_image' }],
   },
   themes: [
     [
