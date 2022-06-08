@@ -216,7 +216,12 @@ navbarItems.push(...navbarVersionItems, navbarGithubItem);
 const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS];
 
 if (process.env.DEPLOYMENT_ENV === 'production') {
-  plugins.push('@docusaurus/plugin-google-gtag');
+  plugins.push([
+    '@docusaurus/plugin-google-gtag',
+    {
+      trackingID: process.env.GOOGLE_TAG_TRACKING_ID || 'DEFAULT',
+    },
+  ]);
 }
 
 plugins.push(
@@ -247,9 +252,6 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: true,
-    },
-    gtag: {
-      trackingID: process.env.GOOGLE_TAG_TRACKING_ID || 'DEFAULT',
     },
     liveCodeBlock: {
       playgroundPosition: 'bottom',
