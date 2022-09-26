@@ -26,6 +26,7 @@ init() {
     # finding and symlinking directorys (d) and files (f) within the SDK repo docusaurus directory
     find "$STREAM_SDK_PATH"/docusaurus -maxdepth 1 -mindepth 1 -type d -exec ln -s {} \;
     find "$STREAM_SDK_PATH"/docusaurus -maxdepth 1 -mindepth 1 -type f -exec ln -s {} \;
+    ln -s ../shared/;
 
     yarn
     if [[ -z "${CUSTOM_INSTALLS}" ]]; then
