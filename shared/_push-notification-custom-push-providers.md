@@ -1,0 +1,1 @@
+While Stream Chat doesn't have first class integration for Push providers besides Firebase, APN, Huawei and Xiaomi, it is entirely possible to integrate with additional providers using [Webhooks](https://getstream.io/chat/docs/webhooks_overview/).
