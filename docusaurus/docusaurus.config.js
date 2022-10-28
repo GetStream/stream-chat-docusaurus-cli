@@ -236,7 +236,7 @@ module.exports = {
   baseUrl: URLS.docs.root,
   trailingSlash: true,
   favicon: 'https://getstream.imgix.net/images/favicons/favicon-96x96.png',
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw', // SDK developers would like to have an error when the links are broken.
   onBrokenMarkdownLinks: 'warn',
   organizationName: 'GetStream',
   plugins,

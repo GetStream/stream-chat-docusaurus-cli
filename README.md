@@ -260,3 +260,10 @@ slug: /
 hide_from_search: true
 ---
 ```
+### Broken Links
+
+Docusaurus reports about broken links and broken markdown links while running the project locally or when creating a production build(`yarn build`).
+
+The broken markdown links are reported by Docusarus when you run your project locally by `yarn start`(for SDK developers - `npx stream-chat-docusaurus -s`) command. You can change the behaviour of the Docusaurus when it detects a broken Markdown link by setting [`onBrokenMarkdownLinks`](https://docusaurus.io/docs/api/docusaurus-config#onBrokenMarkdownLinks) on `docusaurus.config.js`. It accepts the following types: `'ignore' | 'log' | 'warn' | 'throw'`.
+
+The broken links are only reported by Docusaurs when you create the production build using `yarn build`(for SDK developers - `npx stream-chat-docusaurus -b`) command. You can change the behavious of the Docusarus when it detects a broken links by setting [`onBrokenLinks`](https://docusaurus.io/docs/api/docusaurus-config#onBrokenLinks) on `docusaurus.config.js`. It accepts the following types: `'ignore' | 'log' | 'warn' | 'throw'`.
