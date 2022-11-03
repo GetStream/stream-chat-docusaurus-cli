@@ -141,6 +141,34 @@ module.exports = {
 
 You can add your own sidebar instead of the auto-generated default by creating a `sidebars-{SDK_NAME}.(js|json)` file within your `docusaurus` directory. For example on `React` the file would be `sidebars-react.(js|json)` and for `React Native` you would do `sidebars-react-native.(js|json)`.
 
+## Shared content
+
+To share content between multiple SDKs, put markdown files in the `shared` directory. When you run `npx stream-chat-docusaurus -i`, the script will symlink it on the same level as the SDK root directories: 
+
+```sh
+- docusaurus
+    - React
+    - Android
+    - iOS
+    - shared # this will be symlink to the shared directory
+```
+
+Then, import and render the shared content using mdx:
+
+```mdx
+import SharedContent from '../../../shared/_example-shared-content.md'
+// ... 
+<SharedContent />
+```
+
+> NOTE: the [stream-chat-docusaurus website](https://github.com/GetStream/stream-chat-docusaurus/) uses the `staging` branch of `stream-chat-docusaurus-cli` for [its staging deployment](https://staging.getstream.io/chat/docs/sdk/react/). To ensure that the setup works, you need to follow the following workflow:
+
+- Write and test locally shared content using the `staging` branch for `stream-chat-docusaurus-cli` (this repository). 
+- Commit/push those changes **before committing/pushing** the staging content changes for your SDK.
+- Once you're ready to publish to production, *merge* the staging branch of this repository to production first. 
+- Then, publish the SDK content as usual. 
+- Ensure that you monitor and check that the Github workflows have finished successfully.
+
 ## Markdown Features Stream theme
 
 Aside from [Docusaurus' components](https://docusaurus.io/docs/next/markdown-features/), you can use our customized components.
