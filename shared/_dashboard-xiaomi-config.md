@@ -1,4 +1,4 @@
-Follow this guide to get push notifications from Stream Chat using  [Xiaomi Mi Push](http://mipush.global.xiaomi.com/).
+Follow this guide to get push notifications from Stream Chat using [Xiaomi Mi Push](http://mipush.global.xiaomi.com/).
 
 ## Setting up Notifications on the Stream Dashboard
 
@@ -25,4 +25,3 @@ Find and select the **Xiaomi** switch. Paste your **App ID** and **App secret**,
 ![Setting up your Xiaomi App ID and App Secret on the Stream Dashboard](./assets/notifications_xiaomi_setup_step_4.png)
 
 That's all you need to configure on the dashboard. You can now set up the client-side integration.
-

@@ -143,7 +143,7 @@ You can add your own sidebar instead of the auto-generated default by creating a
 
 ## Shared content
 
-To share content between multiple SDKs, put markdown files in the `shared` directory. When you run `npx stream-chat-docusaurus -i`, the script will symlink it on the same level as the SDK root directories: 
+To share content between multiple SDKs, put markdown files in the `shared` directory. When you run `npx stream-chat-docusaurus -i`, the script will symlink it on the same level as the SDK root directories:
 
 ```sh
 - docusaurus
@@ -157,16 +157,18 @@ Then, import and render the shared content using mdx:
 
 ```mdx
 import SharedContent from '../../../shared/_example-shared-content.md'
-// ... 
-<SharedContent />
+// ...
+<SharedContent /
+
+>
 ```
 
 > NOTE: the [stream-chat-docusaurus website](https://github.com/GetStream/stream-chat-docusaurus/) uses the `staging` branch of `stream-chat-docusaurus-cli` for [its staging deployment](https://staging.getstream.io/chat/docs/sdk/react/). To ensure that the setup works, you need to follow the following workflow:
 
-- Write and test locally shared content using the `staging` branch for `stream-chat-docusaurus-cli` (this repository). 
+- Write and test locally shared content using the `staging` branch for `stream-chat-docusaurus-cli` (this repository).
 - Commit/push those changes **before committing/pushing** the staging content changes for your SDK.
-- Once you're ready to publish to production, *merge* the staging branch of this repository to production first. 
-- Then, publish the SDK content as usual. 
+- Once you're ready to publish to production, _merge_ the staging branch of this repository to production first.
+- Then, publish the SDK content as usual.
 - Ensure that you monitor and check that the Github workflows have finished successfully.
 
 ## Markdown Features Stream theme
@@ -241,8 +243,16 @@ You can also add border to the images using the boolean prop `border` like the f
 <ImageShowcase
   border
   items={[
-    { image: image1, caption: <span>Images with border 🙂</span>, alt: 'Example of custom message' },
-    { image: image2, caption: <span>Another one!</span>, alt: 'Example of custom message part 2' },
+    {
+      image: image1,
+      caption: <span>Images with border 🙂</span>,
+      alt: 'Example of custom message',
+    },
+    {
+      image: image2,
+      caption: <span>Another one!</span>,
+      alt: 'Example of custom message part 2',
+    },
   ]}
 />
 ```
