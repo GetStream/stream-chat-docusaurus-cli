@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
+const fs = require('fs');
+const path = require('path');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
 
@@ -11,25 +13,22 @@ if (!process.env.PRODUCT) {
   process.env.PRODUCT = 'chat';
 }
 
-const fs = require('fs');
-const path = require('path');
-
 const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
 const URLS = require('./urls');
 const productVariables = require('./src/product-variables');
 const Icons = require('./admonition-icons');
-
-const PRODUCT = process.env.PRODUCT;
-const {
-  productTitle,
-  docusaurus: { title: navbarTitle },
-} = productVariables[PRODUCT];
 
 const getCustomPluginRegExp = (prefix = '') =>
   new RegExp(`^${prefix}docusaurus.*\.plugin.js$`);
 
 const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
+
+const PRODUCT = process.env.PRODUCT;
+const {
+  productTitle,
+  docusaurus: { title: navbarTitle },
+} = productVariables[PRODUCT];
 
 const SDK_FOLDERS = DOCS_DIR.filter((file) => {
   return fs

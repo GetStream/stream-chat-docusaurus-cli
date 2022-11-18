@@ -45,4 +45,25 @@ module.exports = {
       title: 'Chat Messaging',
     },
   },
+  video: {
+    productTitle: 'Video',
+    algolia: {
+      parentSection: {
+        name: 'Video API Docs',
+        slug: 'video_docs',
+        id: 'video_docs',
+      },
+    },
+    github: {
+      android: `${GITHUB_ROOT}/stream-video-android/`,
+      flutter: `${GITHUB_ROOT}/stream-video-flutter/`,
+      ios: `${GITHUB_ROOT}/stream-video-swift/`,
+      react: `${GITHUB_ROOT}/stream-video-js/`,
+      reactnative: `${GITHUB_ROOT}/stream-video-js/`,
+      angular: `${GITHUB_ROOT}/stream-video-js/`,
+    },
+    docusaurus: {
+      title: 'Video',
+    },
+  },
 };
