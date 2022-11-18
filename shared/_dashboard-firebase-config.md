@@ -27,4 +27,3 @@ Scroll down and enable the **Firebase** switch. Paste the content of the _json_ 
 ![Setting up your Firebase Credentials on the Stream Dashboard](./assets/notifications_firebase_setup_step_4.png)
 
 That's the server-side setup done. You can now receive push notifications from Stream Chat on the client side. To register devices and process these notifications, follow the steps below.
-

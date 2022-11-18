@@ -13,6 +13,7 @@ This is the main payload which will be sent to each configured provider:
   "id": "d152f6c1-8c8c-476d-bfd6-59c15c20548a",
   "channel_type": "messaging",
   "channel_id": "company-chat",
-  "cid": "messaging:company-chat"
+  "cid": "messaging:company-chat",
+  "receiver_id": "company-chat-user1"
 }
 ```
