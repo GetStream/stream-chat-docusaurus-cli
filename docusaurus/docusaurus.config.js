@@ -13,19 +13,6 @@ if (!process.env.PRODUCT) {
   process.env.PRODUCT = 'chat';
 }
 
-const configPath = path.join(
-  process.env.STREAM_SDK_PATH,
-  'docusaurus',
-  'docs.config.js'
-);
-
-if (fs.existsSync(require.resolve(configPath))) {
-  const config = require(configPath);
-  if (config.product) {
-    process.env.PRODUCT = config.product;
-  }
-}
-
 const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
 const URLS = require('./urls');
 const productVariables = require('./src/product-variables');
