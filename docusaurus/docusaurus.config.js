@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
+const fs = require('fs');
+const path = require('path');
 
 const STREAM_SDK_DOCUSAURUS_PATH = '../docusaurus';
 
@@ -11,25 +13,35 @@ if (!process.env.PRODUCT) {
   process.env.PRODUCT = 'chat';
 }
 
-const fs = require('fs');
-const path = require('path');
+const configPath = path.join(
+  process.env.STREAM_SDK_PATH,
+  'docusaurus',
+  'docs.config.js'
+);
+
+if (fs.existsSync(require.resolve(configPath))) {
+  const config = require(configPath);
+  if (config.product) {
+    process.env.PRODUCT = config.product;
+  }
+}
 
 const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
 const URLS = require('./urls');
 const productVariables = require('./src/product-variables');
 const Icons = require('./admonition-icons');
 
-const PRODUCT = process.env.PRODUCT;
-const {
-  productTitle,
-  docusaurus: { title: navbarTitle },
-} = productVariables[PRODUCT];
-
 const getCustomPluginRegExp = (prefix = '') =>
   new RegExp(`^${prefix}docusaurus.*\.plugin.js$`);
 
 const DOCUSAURUS_DIR = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
+
+const PRODUCT = process.env.PRODUCT;
+const {
+  productTitle,
+  docusaurus: { title: navbarTitle },
+} = productVariables[PRODUCT];
 
 const SDK_FOLDERS = DOCS_DIR.filter((file) => {
   return fs
