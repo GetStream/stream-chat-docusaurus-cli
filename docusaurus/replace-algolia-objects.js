@@ -1,11 +1,23 @@
-require('dotenv');
-
+const dotenv = require('dotenv');
+const path = require('path');
 const algoliasearch = require('algoliasearch/lite');
-
 const json = require('./algolia-objects.json');
 
+const contentEnvPath = path.join(__dirname, '/.env');
+if (path.exitSync(contentEnvPath)) {
+  dotenv.config({ path: contentEnvPath });
+}
+
 const DOCUSAURUS_INDEX =
-  process.env.DEPLOYMENT_ENV === 'production' ? 'DOCUSAURUS' : 'DOCUSAURUS_STG';
+  process.env.PRODUCT === 'chat'
+    ? process.env.DEPLOYMENT_ENV === 'production'
+      ? 'DOCUSAURUS'
+      : 'DOCUSAURUS_STG'
+    : process.env.PRODUCT === 'video'
+    ? process.env.DEPLOYMENT_ENV === 'production'
+      ? 'DOCUSAURUS_VIDEO'
+      : 'DOCUSAURUS_VIDEO_STG'
+    : 'NEVER';
 
 const client = algoliasearch(
   process.env.ALGOLIA_APP_ID,
@@ -20,6 +32,6 @@ index
     console.log(`Updated ${DOCUSAURUS_INDEX} Algolia index for: `, objectIDs);
   })
   .catch((error) => {
-    console.error(`Error while replacing object with Algolia: ${ error }`);
+    console.error(`Error while replacing object with Algolia: ${error}`);
     process.exit(1);
   });
