@@ -1,10 +1,11 @@
 const dotenv = require('dotenv');
 const path = require('path');
+const fs = require('fs');
 const algoliasearch = require('algoliasearch/lite');
 const json = require('./algolia-objects.json');
 
 const contentEnvPath = path.join(__dirname, '/.env');
-if (path.exitSync(contentEnvPath)) {
+if (fs.existsSync(contentEnvPath)) {
   dotenv.config({ path: contentEnvPath });
 }
 
