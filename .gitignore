@@ -3,3 +3,4 @@ npm-debug.*
 yarn-error.log
 .DS_Store
 /.log/
+.docusaurus
