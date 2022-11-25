@@ -63,7 +63,8 @@ main() {
     if [ ${#NEW_VERSION} == 0 ] || [ ${#SDK_NAME} == 0 ]; then
       echo "Missing NEW_VERSION or SDK_NAME. Skipping versioning.."
     else
-      yarn docusaurus docs:version:"$SDK_NAME" "$NEW_VERSION";
+      cd $PACKAGE_DIR
+      npm docusaurus docs:version:"$SDK_NAME" "$NEW_VERSION";
 
       if [ ! -d "$CURRENT_WORKING_PATH/docusaurus/${SDK_NAME}_versioned_docs" ]; then
         cp -r "$SDK_NAME"* "$CURRENT_WORKING_PATH"/docusaurus
@@ -91,13 +92,15 @@ main() {
   trap cleanup EXIT
 
   if [[ ${START} == true ]]; then
-    yarn --cwd $PACKAGE_DIR start;
+    cd $PACKAGE_DIR
+    npm run start;
   fi
 
   if [[ ${BUILD} == true ]]; then
-    yarn --cwd $PACKAGE_DIR build;
-    rm -rf build/
-    rm algolia-objects.json
+    cd $PACKAGE_DIR
+    npm run build;
+    rm -rf $CURRENT_WORKING_PATH/build/
+    rm -rf $CURRENT_WORKING_PATH/algolia-objects.json
     mv -f $PACKAGE_DIR/build $CURRENT_WORKING_PATH/
     mv -f $PACKAGE_DIR/algolia-objects.json $CURRENT_WORKING_PATH/
   fi
