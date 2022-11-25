@@ -89,6 +89,125 @@ const FEATURES = [
   },
 ];
 
+const SAMPLE_APPS = [
+  {
+    name: 'Zoom Clone',
+    description: 'TODO',
+    implementations: [
+      {
+        name: 'React',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+      {
+        name: 'Angular',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+      { name: 'iOS', description: 'TODO', demoLink: 'TODO', codeLink: 'TODO' },
+      {
+        name: 'Android',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+      {
+        name: 'Flutter',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+    ],
+  },
+  {
+    name: 'Messenger Clone',
+    description: 'TODO',
+    implementations: [
+      {
+        name: 'React',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+      {
+        name: 'Angular',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+      { name: 'iOS', description: 'TODO', demoLink: 'TODO', codeLink: 'TODO' },
+      {
+        name: 'Android',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+      {
+        name: 'Flutter',
+        description: 'TODO',
+        demoLink: 'TODO',
+        codeLink: 'TODO',
+      },
+    ],
+  },
+];
+
+const SDK_DOCS = [
+  {
+    name: 'React',
+    link: 'react/basics/getting-started',
+    icon: 'TODO',
+    highlights: [
+      { name: 'Overview', link: 'TODO' },
+      { name: 'Architecture', link: 'TODO' },
+    ],
+  },
+  {
+    name: 'React Native',
+    link: 'react-native/basics/getting-started',
+    icon: 'TODO',
+    highlights: [{ name: 'Overview' }, { name: 'Architecture' }],
+  },
+  {
+    name: 'iOS',
+    link: 'ios/basics/getting-started',
+    icon: 'TODO',
+    highlights: [
+      { name: 'Overview', link: 'TODO' },
+      { name: 'Architecture', link: 'TODO' },
+    ],
+  },
+  {
+    name: 'Android',
+    link: 'android/basics/getting-started',
+    icon: 'TODO',
+    highlights: [
+      { name: 'Overview', link: 'TODO' },
+      { name: 'Architecture', link: 'TODO' },
+    ],
+  },
+  {
+    name: 'Flutter',
+    link: 'flutter/basics/getting-started',
+    icon: 'TODO',
+    highlights: [
+      { name: 'Overview', link: 'TODO' },
+      { name: 'Architecture', link: 'TODO' },
+    ],
+  },
+  {
+    name: 'Angular',
+    link: 'flutter/basics/getting-started',
+    icon: 'TODO',
+    highlights: [
+      { name: 'Overview', link: 'TODO' },
+      { name: 'Architecture', link: 'TODO' },
+    ],
+  },
+];
+
 const Tutorial = ({ title, description, link }) => (
   <a href={link} className={styles.tutorialTile}>
     <div className="tutorial-tile">
@@ -131,6 +250,53 @@ export const Home = () => {
                   <a href={link}>{name}</a>
                 </li>
               ))}
+            </div>
+          ))}
+        </div>
+
+        <hr />
+        <h2>Example Applications</h2>
+        {SAMPLE_APPS.map(({ name, description, implementations }) => (
+          <>
+            <h3>{name}</h3>
+            <p>{description}</p>
+            <div class={styles.sampleAppImplementationsBlock}>
+              {implementations.map(
+                ({ name, description, demoLink, codeLink }) => (
+                  <div className={styles.sampleAppImplementationTile}>
+                    <h4>{name}</h4>
+                    <p>{description}</p>
+                    <ul className={styles.demoCodePair}>
+                      <li>
+                        <a href={demoLink}>Demo</a>
+                      </li>
+                      <li>
+                        <a href={codeLink}>Code</a>
+                      </li>
+                    </ul>
+                  </div>
+                )
+              )}
+            </div>
+          </>
+        ))}
+
+        <hr />
+        <h2>SDK Docs</h2>
+        <div class={styles.sdkBlock}>
+          {SDK_DOCS.map(({ name, link, icon, highlights }) => (
+            <div className={styles.sdkTile}>
+              {icon}
+              <h3>
+                <a href={link}>{name}</a>
+              </h3>
+              <ul>
+                {highlights.map(({ name, link }) => (
+                  <li>
+                    <a href={link}>{name}</a>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
