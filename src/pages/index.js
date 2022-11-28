@@ -300,6 +300,48 @@ export const Home = () => {
             </div>
           ))}
         </div>
+        <hr />
+        <h2>Streaming and broadcasting</h2>
+        <p>
+          Build iteractive video experiences with our streaming and
+          broadcasting.
+        </p>
+        <ul>
+          <li>
+            <a href="TODO">Streaming compared to broadcasting</a>
+          </li>
+          <li>
+            <a href="TODO">Live streaming</a>
+          </li>
+          <li>
+            <a href="TODO">Broadcasting</a>
+          </li>
+        </ul>
+        <hr />
+        <h2>Calls content review and analysis</h2>
+        <p>
+          Audit, troubleshoot and analyze the conversations happening at your
+          platform.
+        </p>
+        <ul>
+          <li>
+            <a href="TODO">Overview</a>
+          </li>
+          <li>
+            <a href="TODO">Reference</a>
+          </li>
+        </ul>
+        <hr />
+        <h2>Call troubleshooting</h2>
+        <p>Pinpoint and fix issues with your video calls.</p>
+        <ul>
+          <li>
+            <a href="TODO">Overview</a>
+          </li>
+          <li>
+            <a href="TODO">Reference</a>
+          </li>
+        </ul>
       </main>
     </Layout>
   );
