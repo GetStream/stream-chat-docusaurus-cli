@@ -20,17 +20,11 @@ cd stream-chat-docusaurus-cli
 npm install -g
 ```
 
-**Note**: The package is not published yet so this won't be installed using the npm/yarn command.
-
 Within the same directory level of your SDK that the `docusaurus` directory described above lives you can run CLI commands. Make sure you have at least the directory structure described above as well as at least 1 markdown file.
-
-### Initializing
-
-To initialize the docusaurus setup (which you will need to always do before anything else), you can utilize `npx` and run this command `npx stream-chat-docusaurus -i`. If there are any custom packages you need to install for custom plugin setups you can utilize the `-c` option and add a comma separated list of packages that will be installed on initialization (ex: `npx stream-chat-docusaurus -i -c=docusaurus-plugin-typedoc,typedoc,typedoc-plugin-markdown,typescript`).
 
 ### Starting
 
-To locally run the docusaurus setup and see your documentation you can run `npx stream-chat-docusaurus -s`. This command can be chained with the `-i` initialization command in 1 step by running `npx stream-chat-docusaurus -i -s`.
+To run the site locally and see your documentation, run `npx stream-chat-docusaurus -s`. 
 
 ### Environment variables
 
@@ -42,7 +36,7 @@ To cut a new version of your docs simply type in `npx stream-chat-docusaurus -nv
 
 ### Building
 
-To locally build your docusaurus static files to see if it succeeds you should run `npx stream-chat-docusaurus -b`. The `-b` flag builds the static files.
+To build the site in production mode, run `npx stream-chat-docusaurus -b`. The `-b` flag builds the static files to a `build` directory.
 
 ### MDX
 
@@ -75,36 +69,6 @@ slug: /
 ### Assets
 
 You can add local assets to your docs by adding them within an `assets` folder within your SDK named directory (ex: `docusaurus/docs/Android/assets/some-asset.png`) and then utilize them through local paths within your markdown files. For more info, reference the docusaurus documentation [here](https://docusaurus.io/docs/markdown-features/assets).
-
-## Plugins
-
-You can add your own plugins in addition to the default set by creating a `docusaurus{SDK_NAME}.plugin.js` file within your `docusaurus` directory.
-
-The custom plugin file (example name: `docusaurusReact.plugin.js`) should be in a format like this where you can add multiple plugins. `cwd` is the root path to your SDK (outside of the `docusaurus` directory described in [Local SDK setup](#Local-SDK-setup))
-
-```js
-const cwd = process.env.STREAM_SDK_PATH;
-module.exports = () => {
-  return {
-    plugins: [
-      [
-        path.join(cwd, 'docusaurus/node_modules/docusaurus-plugin-typedoc'),
-
-        {
-          entryPoints: [path.join(cwd, 'docusaurus/src/index.ts')],
-          tsconfig: path.join(cwd, 'docusaurus/tsconfig.json'),
-          docsRoot: path.join(cwd, 'docusaurus/docs'),
-          out: 'docusaurus/api',
-          sidebar: {
-            sidebarFile: path.join(cwd, 'docusaurus/typedoc-sidebar.js'),
-            fullNames: false,
-          },
-        },
-      ],
-    ],
-  };
-};
-```
 
 ### SDK-specific config for `@docusaurus/plugin-content-docs`
 
@@ -143,7 +107,7 @@ You can add your own sidebar instead of the auto-generated default by creating a
 
 ## Shared content
 
-To share content between multiple SDKs, put markdown files in the `shared` directory. When you run `npx stream-chat-docusaurus -i`, the script will symlink it on the same level as the SDK root directories:
+To share content between multiple SDKs, put markdown files in the `shared` directory. During run, it will be symlinked next to your content.
 
 ```sh
 - docusaurus
@@ -157,10 +121,8 @@ Then, import and render the shared content using mdx:
 
 ```mdx
 import SharedContent from '../../../shared/_example-shared-content.md'
-// ...
-<SharedContent /
 
->
+<SharedContent />
 ```
 
 > NOTE: the [stream-chat-docusaurus website](https://github.com/GetStream/stream-chat-docusaurus/) uses the `staging` branch of `stream-chat-docusaurus-cli` for [its staging deployment](https://staging.getstream.io/chat/docs/sdk/react/). To ensure that the setup works, you need to follow the following workflow:

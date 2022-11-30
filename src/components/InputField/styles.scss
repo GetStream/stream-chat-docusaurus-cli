@@ -1,0 +1,15 @@
+.inputField {
+  display: flex;
+  flex-direction: column;
+
+  .input {
+    &.inputField-error {
+      border-color: red;
+    }
+  }
+
+  .errorMessage {
+    color: red;
+    font-size: 11px;
+  }
+}

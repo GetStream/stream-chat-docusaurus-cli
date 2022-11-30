@@ -1,0 +1,83 @@
+@mixin label($color: var(--xtm-secondary-color)) {
+  color: $color;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: small;
+
+  & + * {
+    // Avoid changing element weight if a <strong> is used
+    font-weight: inherit;
+
+    &::after {
+      content: '*';
+      color: $color;
+    }
+  }
+}
+
+.markdown .heading {
+  .description {
+    color: var(--xtm-secondary-color);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: none;
+
+    font-size: x-small;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    top: 40%;
+  }
+}
+
+.label {
+  &,
+  &.note {
+    @include label(var(--xtm-secondary-color));
+  }
+
+  &.required {
+    @include label(var(--ifm-color-danger));
+  }
+
+  &.caution {
+    @include label(var(--ifm-color-warning-darkest));
+  }
+
+  &.success {
+    @include label(var(--ifm-color-success-darkest));
+  }
+
+  &.info {
+    @include label(var(--ifm-color-info-darkest));
+  }
+}
+
+.markdown .heading {
+  .label {
+    font-size: x-small;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    top: 40%;
+  }
+}
+
+.table-of-contents {
+  &__link {
+    .label,
+    .description {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .markdown .heading {
+    .label {
+      top: calc(100% + 5px);
+      left: 0;
+    }
+  }
+}
