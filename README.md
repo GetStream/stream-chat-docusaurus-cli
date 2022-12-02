@@ -15,6 +15,10 @@ git clone https://github.com/getstream/stream-chat-docusaurus-cli
 
 cd stream-chat-docusaurus-cli
 
+# Install dependencies
+
+yarn
+
 # Run the install command
 
 npm install -g
