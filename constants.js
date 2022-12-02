@@ -5,6 +5,8 @@ const folderMapping = {
   react: 'React',
   reactnative: 'React Native',
   angular: 'Angular',
+  platform: 'Platform Capabilities',
+  overview: 'Features Overview',
 };
 
 const platformMapping = {
@@ -13,7 +15,9 @@ const platformMapping = {
   ios: 'ios-swift',
   react: 'react',
   reactnative: 'react-native',
-  angular: 'angular'
+  angular: 'angular',
+  overview: 'overview',
+  platform: 'platform',
 };
 
 const languageMapping = {
