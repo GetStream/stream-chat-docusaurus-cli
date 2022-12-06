@@ -208,15 +208,6 @@ const SDK_DOCS = [
   },
 ];
 
-const Tutorial = ({ title, description, link }) => (
-  <a href={link} className={styles.tutorialTile}>
-    <div className="tutorial-tile">
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  </a>
-);
-
 export const Home = () => {
   const { siteConfig = {} } = useDocusaurusContext();
   const globalData = useGlobalData();
@@ -227,15 +218,24 @@ export const Home = () => {
         What's that?
       </header>
       <main>
-        <h2>Get Started</h2>
-        <p>
-          Get some quick taste of the capabilities of the Stream video platfom
-          with our interactive tutorials.
-        </p>
-        <div class={styles.tutorialBlock}>
-          {TUTORIALS.map(({ sdk, link, description }) => (
-            <Tutorial title={sdk} link={link} description={description} />
-          ))}
+        <div className={styles.stageContainer}>
+          <div className={styles.stageDescription}>
+            <h2>Get Started</h2>
+            <p>
+              Get some quick taste of the capabilities of the Stream video
+              platfom with our interactive tutorials.
+            </p>
+          </div>
+          <div className={styles.stageBlocks}>
+            {TUTORIALS.map(({ sdk, link, description }) => (
+              <a href={link} className={styles.stageBlock}>
+                <div>
+                  <h3>{sdk}</h3>
+                  <p>{description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
         <hr />
         <h2>Features Overview</h2>
