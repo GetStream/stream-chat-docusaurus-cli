@@ -35,6 +35,17 @@ const CMS_INDEX = 'DOCS';
 
 const IGNORED_DIRECTORIES = ['common-content'];
 
+const SDK_ORDER = [
+  'Overview',
+  'Platform',
+  'react',
+  'ios',
+  'android',
+  'reactnative',
+  'flutter',
+  'angular',
+];
+
 module.exports = {
   IGNORED_DIRECTORIES,
   DOCUSAURUS_INDEX,
@@ -42,4 +53,5 @@ module.exports = {
   folderMapping,
   platformMapping,
   languageMapping,
+  SDK_ORDER,
 };
