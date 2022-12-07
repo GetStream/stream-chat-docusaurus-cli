@@ -11,32 +11,34 @@ const TUTORIALS = [
   {
     sdk: 'React',
     link: 'react/basics/tutorial',
-    description: "Let's build an 1:1 video calling web app",
+    description: 'Build a video calling web appplication for the browser.',
   },
   {
     sdk: 'React Native',
     link: 'react-native/basics/tutorial',
-    description: "Let's build an 1:1 video calling mobile app",
+    description:
+      'Build an video calling mobile app that works on both iOS and Android.',
   },
   {
     sdk: 'iOS',
     link: 'ios/basics/tutorial',
-    description: "Let's build an 1:1 video calling mobile app",
+    description: 'Build an iOS video calling app using Swift.',
   },
   {
     sdk: 'Android',
     link: 'android/basics/tutorial',
-    description: "Let's build an 1:1 video calling mobile app",
+    description:
+      'Build an Android video calling app using Kotlin and Jetpack Compose.',
   },
   {
     sdk: 'Flutter',
     link: 'flutter/basics/tutorial',
-    description: "Let's build an 1:1 video calling mobile app",
+    description: 'Build a cross-platform video calling app using Flutter.',
   },
   {
     sdk: 'Angular',
     link: 'angular/basics/tutorial',
-    description: "Let's build an 1:1 video calling web app",
+    description: "Build a video calling app using Google's Angular framework.",
   },
 ];
 
@@ -55,37 +57,72 @@ const TUTORIALS = [
 // { name: 'Dynascale' },
 const FEATURES = [
   {
-    name: 'Group Calls',
+    name: 'Ringing calls',
     link: 'TODO',
-    description: 'TODO',
+    description:
+      'Ringing calls are a great way to let your users know that someone is trying to reach them, emulating the traditional phone call experience.',
     icon: 'TODO',
     links: [
-      { name: 'React', link: 'TODO' },
-      { name: 'Angular', link: 'TODO' },
       { name: 'iOS', link: 'TODO' },
+      { name: 'Android', link: 'TODO' },
+      { name: 'Flutter', link: 'TODO' },
+      { name: 'React Native', link: 'TODO' },
+      { name: 'React', link: 'TODO' },
+      { name: 'React Native', link: 'TODO' },
     ],
   },
   {
-    name: '1:1 Calls',
+    name: 'Meeting calls',
     link: 'TODO',
-    description: 'TODO',
+    description:
+      'Implement collaborative meetings with multiple participants, deep linking, screen sharing, and more.',
     icon: 'TODO',
     links: [
-      { name: 'React', link: 'TODO' },
-      { name: 'Angular', link: 'TODO' },
       { name: 'iOS', link: 'TODO' },
+      { name: 'Android', link: 'TODO' },
+      { name: 'Flutter', link: 'TODO' },
+      { name: 'React Native', link: 'TODO' },
+      { name: 'React', link: 'TODO' },
+      { name: 'React Native', link: 'TODO' },
     ],
   },
   {
     name: 'Edge network',
     link: 'TODO',
-    description: 'TODO',
+    description:
+      'Stream runs an edge network of servers around the world. This optimizes the latency and reliability of the video calling experience. Zoom and Agora have a similar architecture.',
+    icon: 'TODO',
+  },
+  {
+    name: 'Screen sharing',
+    description:
+      'Our platform allows call participants to shair to share your screen along with their video.',
     icon: 'TODO',
     links: [
       { name: 'React', link: 'TODO' },
       { name: 'Angular', link: 'TODO' },
-      { name: 'iOS', link: 'TODO' },
     ],
+  },
+  {
+    name: 'Livestreaming',
+    link: 'TODO',
+    description:
+      'Publish the combined video and audio of all participants through RTMP in real time.',
+    icon: 'TODO',
+  },
+  {
+    name: 'Broadcasting',
+    link: 'TODO',
+    description:
+      'Broadcast the combined video and audio of all participants to a storage of your choice in HLS format.',
+    icon: 'TODO',
+  },
+  {
+    name: 'Geofencing',
+    link: 'TODO',
+    description:
+      'You can restrict where your traffic is replayed on the video edge network. For example, you can set a policy to only use servers in Canada, or the EU depending your data requirements',
+    icon: 'TODO',
   },
 ];
 
@@ -214,44 +251,45 @@ export const Home = () => {
 
   return (
     <Layout description="TODO" title={`TODO`}>
-      <header className={clsx('hero hero--primary', styles.heroBanner)}>
-        What's that?
-      </header>
       <main>
         <div className={styles.stageContainer}>
           <div className={styles.stageDescription}>
             <h2>Get Started</h2>
             <p>
-              Get some quick taste of the capabilities of the Stream video
+              Get some quick taste of the capabilities of the Stream video call
               platfom with our interactive tutorials.
             </p>
           </div>
           <div className={styles.stageBlocks}>
             {TUTORIALS.map(({ sdk, link, description }) => (
               <a href={link} className={styles.stageBlock}>
-                <div>
-                  <h3>{sdk}</h3>
-                  <p>{description}</p>
-                </div>
+                <h3>{sdk}</h3>
+                <p>{description}</p>
+                <p className={styles.startTutorial}>Start tutorial</p>
               </a>
             ))}
           </div>
         </div>
-        <hr />
-        <h2>Features Overview</h2>
+        <div className={styles.stageContainer}>
+          <div className={styles.stageDescription}>
+            <h2>Features Overview</h2>
+          </div>
 
-        <div class={styles.featureBlock}>
-          {FEATURES.map(({ name, link, description, icon, links }) => (
-            <div className={styles.featureTile}>
-              <h3>{name}</h3>
-              <p>{description}</p>
-              {links.map(({ name, link }) => (
-                <li>
-                  <a href={link}>{name}</a>
-                </li>
-              ))}
-            </div>
-          ))}
+          <div class={styles.stageBlocks}>
+            {FEATURES.map(({ name, link, description, icon, links }) => (
+              <div className={styles.stageBlockWide}>
+                <h3>{name}</h3>
+                <p>{description}</p>
+                <ul className={styles.linkList}>
+                  {links?.map(({ name, link }) => (
+                    <li>
+                      <a href={link}>{name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         <hr />
