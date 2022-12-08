@@ -15,7 +15,7 @@ const TUTORIALS = [
   },
   {
     sdk: 'React Native',
-    link: 'react-native/basics/tutorial',
+    link: 'reactnative/basics/tutorial',
     description:
       'Build an video calling mobile app that works on both iOS and Android.',
   },
