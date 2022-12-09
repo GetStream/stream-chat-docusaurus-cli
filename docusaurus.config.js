@@ -251,8 +251,21 @@ if (process.env.DEPLOYMENT_ENV === 'production') {
   ]);
 }
 
+/**
+ * For video, we want to embed the homepage in the content repository.
+ */
+if (process.env.SOURCE_HOMEPAGE) {
+  plugins.push([
+    '@docusaurus/plugin-content-pages',
+    {
+      path: path.join(STREAM_SDK_DOCUSAURUS_PATH, 'pages'),
+    },
+  ]);
+} else {
+  plugins.push('@docusaurus/plugin-content-pages');
+}
+
 plugins.push(
-  '@docusaurus/plugin-content-pages',
   'docusaurus-plugin-sass',
   path.resolve(__dirname, 'src/symlink-docusaurus'),
   path.resolve(__dirname, 'src/define-env-vars-plugin'),
@@ -268,7 +281,7 @@ module.exports = {
   organizationName: 'GetStream',
   plugins,
   projectName: `stream-${PRODUCT}`,
-  tagline: `Stream ${productTitle} official component SDKs`,
+  tagline: `Stream ${productTitle} Component SDKs`,
   themeConfig: {
     // Docusaurus forces us to pass these values even if they are not internally used.
     // Theyre only used to show/hide the search bar in our case.

@@ -43,6 +43,14 @@
   margin: 1rem auto;
   margin-top: 5rem;
 }
+
+.stageTitle {
+  max-width: 1440px;
+  text-align: center;
+  margin: 1rem auto;
+  margin-top: 5rem;
+}
+
 .stageContainer:nth-child(even) {
   background-color: #f9f9f9;
 }
@@ -113,4 +121,17 @@ a.stageBlock .startTutorial {
 
 .stageBlockWide .linkList {
   margin-top: auto;
+}
+
+.sampleAppImplementation .demoCodePair {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sampleAppImplementation .demoCodePair li:last-child {
+  margin-left: auto;
 }
