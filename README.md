@@ -15,9 +15,13 @@ git clone https://github.com/getstream/stream-chat-docusaurus-cli
 
 cd stream-chat-docusaurus-cli
 
-# Run the install command
+# Install dependencies
 
-npm install -g
+yarn
+
+# link the package so that npx picks it
+
+npm link
 ```
 
 Within the same directory level of your SDK that the `docusaurus` directory described above lives you can run CLI commands. Make sure you have at least the directory structure described above as well as at least 1 markdown file.

@@ -5,8 +5,9 @@ const folderMapping = {
   react: 'React',
   reactnative: 'React Native',
   angular: 'Angular',
+  clientjs: 'Client JS',
   platform: 'Platform Capabilities',
-  overview: 'Features Overview',
+  overview: 'Features Overview'
 };
 
 const platformMapping = {
