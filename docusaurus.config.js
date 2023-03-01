@@ -16,7 +16,11 @@ if (!process.env.PRODUCT) {
   process.env.PRODUCT = 'chat';
 }
 
-const { folderMapping, IGNORED_DIRECTORIES } = require('./constants');
+const {
+  folderMapping,
+  IGNORED_DIRECTORIES,
+  SDK_ORDER,
+} = require('./constants');
 const URLS = require('./urls');
 const productVariables = require('./src/product-variables');
 const Icons = require('./admonition-icons');
@@ -33,10 +37,16 @@ const {
   docusaurus: { title: navbarTitle },
 } = productVariables[PRODUCT];
 
-const SDK_FOLDERS = DOCS_DIR.filter((file) => {
+let SDK_FOLDERS = DOCS_DIR.filter((file) => {
   return fs
     .lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`)
     .isDirectory();
+});
+
+SDK_FOLDERS = SDK_FOLDERS.sort((a, b) => {
+  const aIndex = SDK_ORDER.indexOf(a.toLowerCase()) ?? 1000;
+  const bIndex = SDK_ORDER.indexOf(b.toLowerCase()) ?? 1000;
+  return aIndex - bIndex;
 });
 
 const CUSTOM_PLUGIN_FILES = DOCUSAURUS_DIR_CONTENTS.filter((file) =>
@@ -179,6 +189,20 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   };
 });
 
+// create sections in the dropdown by inserting two dividers.
+if (process.env.PRODUCT === 'video') {
+  navbarSDKItems.splice(2, 0, {
+    label: 'SDKs',
+    className: 'navbar__break',
+    href: '#',
+  });
+  navbarSDKItems.splice(0, 0, {
+    label: 'Fundamentals',
+    className: 'navbar__break',
+    href: '#',
+  });
+}
+
 const navbarVersionItems = SDK_FOLDERS.map((SDK) => ({
   docsPluginId: SDK.toLowerCase().replace(' ', ''),
   type: 'docsVersionDropdown',
@@ -205,9 +229,10 @@ const navbarItems = [
 ];
 
 if (navbarSDKItems.length > 1) {
+  const label = process.env.PRODUCT === 'video' ? 'Video docs' : 'SDK';
   navbarItems.push({
     items: navbarSDKItems,
-    label: 'SDK',
+    label,
     className: 'navbar__link__custom-dropdown--sdks',
     position: 'left',
   });
@@ -226,8 +251,21 @@ if (process.env.DEPLOYMENT_ENV === 'production') {
   ]);
 }
 
+/**
+ * For video, we want to embed the homepage in the content repository.
+ */
+if (process.env.SOURCE_HOMEPAGE) {
+  plugins.push([
+    '@docusaurus/plugin-content-pages',
+    {
+      path: path.join(STREAM_SDK_DOCUSAURUS_PATH, 'pages'),
+    },
+  ]);
+} else {
+  plugins.push('@docusaurus/plugin-content-pages');
+}
+
 plugins.push(
-  '@docusaurus/plugin-content-pages',
   'docusaurus-plugin-sass',
   path.resolve(__dirname, 'src/symlink-docusaurus'),
   path.resolve(__dirname, 'src/define-env-vars-plugin'),
@@ -243,7 +281,7 @@ module.exports = {
   organizationName: 'GetStream',
   plugins,
   projectName: `stream-${PRODUCT}`,
-  tagline: `Stream ${productTitle} official component SDKs`,
+  tagline: `Stream ${productTitle} Component SDKs`,
   themeConfig: {
     // Docusaurus forces us to pass these values even if they are not internally used.
     // Theyre only used to show/hide the search bar in our case.

@@ -62,6 +62,15 @@
     }
   }
 
+  .navbar__break,
+  .navbar_break:hover {
+    color: inherit !important;
+    cursor: default;
+    font-size: 0.7em !important;
+    margin-top: 0.9rem;
+    opacity: 0.5;
+  }
+
   &__link {
     @include mixins.remove-external-icon;
     font-size: 0.813rem;
@@ -150,7 +159,7 @@
       > ul.menu__list {
         position: relative;
         // Styles for 'main' item
-        > li.menu__list-item:not(:nth-last-child(-n+4)) {
+        > li.menu__list-item:not(:nth-last-child(-n + 4)) {
           margin-bottom: 1rem;
           > a.menu__link {
             @include mixins.menu-main-item;
@@ -158,29 +167,29 @@
         }
 
         // custom Stream footer with website's links
-      > .menu__list-item:nth-last-child(-n+4):not(:last-child) {
-        .menu__link {
-          --ifm-menu-color: var(--ifm-link-color);
-          font-weight: 700;
-          &::after {
-            display: none;
+        > .menu__list-item:nth-last-child(-n + 4):not(:last-child) {
+          .menu__link {
+            --ifm-menu-color: var(--ifm-link-color);
+            font-weight: 700;
+            &::after {
+              display: none;
+            }
           }
         }
-      }
-  
-      > .menu__list-item:last-child {
-        margin: 1rem 0;
-  
-        .menu__link {
-          --ifm-menu-color: rgba(0,0,0,0.6);
-          font-size: 0.813rem;
-          pointer-events: none;
-  
-          &::after {
-            display: none;
+
+        > .menu__list-item:last-child {
+          margin: 1rem 0;
+
+          .menu__link {
+            --ifm-menu-color: rgba(0, 0, 0, 0.6);
+            font-size: 0.813rem;
+            pointer-events: none;
+
+            &::after {
+              display: none;
+            }
           }
         }
-      }
       }
 
       // needed to keep the active higlight line on the left 😩
@@ -210,9 +219,13 @@
         &--active {
           font-weight: bold;
         }
-        &--active[tabindex="0"]:not(&--sublist) {
+        &--active[tabindex='0']:not(&--sublist) {
           // active-item's height is calculated based on line-height: 1.25rem + vertical padding
-          @include mixins.active-item(3px, calc(2 * var(--ifm-menu-link-padding-vertical) + 1.25rem), unset);
+          @include mixins.active-item(
+            3px,
+            calc(2 * var(--ifm-menu-link-padding-vertical) + 1.25rem),
+            unset
+          );
           &::before {
             // vertically align vertical line based on li margin
             transform: translate(0px, -4px);
