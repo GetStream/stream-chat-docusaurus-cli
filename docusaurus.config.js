@@ -272,6 +272,20 @@ plugins.push(
   path.resolve(__dirname, 'src/build-algolia-objects')
 );
 
+plugins.push(() => ({
+  // lock the React version to that used by docusaurus
+  name: 'resolve-react',
+  configureWebpack() {
+    return {
+      resolve: {
+        alias: {
+          react: path.resolve('./node_modules/react'),
+        },
+      },
+    };
+  },
+}),);
+
 module.exports = {
   baseUrl: URLS.docs.root,
   trailingSlash: true,
