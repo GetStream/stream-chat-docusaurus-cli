@@ -191,13 +191,8 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
 
 // create sections in the dropdown by inserting two dividers.
 if (process.env.PRODUCT === 'video') {
-  navbarSDKItems.splice(2, 0, {
-    label: 'SDKs',
-    className: 'navbar__break',
-    href: '#',
-  });
   navbarSDKItems.splice(0, 0, {
-    label: 'Fundamentals',
+    label: 'SDKs',
     className: 'navbar__break',
     href: '#',
   });

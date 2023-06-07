@@ -6,7 +6,6 @@ const folderMapping = {
   reactnative: 'React Native',
   angular: 'Angular',
   api: 'API',
-  overview: 'Features Overview',
 };
 
 const platformMapping = {
@@ -16,7 +15,6 @@ const platformMapping = {
   react: 'react',
   reactnative: 'react-native',
   angular: 'angular',
-  overview: 'overview',
   api: 'api',
 };
 
@@ -37,7 +35,6 @@ const CMS_INDEX = 'DOCS';
 const IGNORED_DIRECTORIES = ['common-content'];
 
 const SDK_ORDER = [
-  'Overview',
   'react',
   'ios',
   'android',
