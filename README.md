@@ -24,7 +24,7 @@ Within the same directory level of your SDK that the `docusaurus` directory desc
 
 ### Starting
 
-To run the site locally and see your documentation, run `npx stream-chat-docusaurus -s`. 
+To run the site locally and see your documentation, run `npx stream-chat-docusaurus -s`.
 
 ### Environment variables
 
@@ -110,17 +110,14 @@ You can add your own sidebar instead of the auto-generated default by creating a
 To share content between multiple SDKs, put markdown files in the `shared` directory. During run, it will be symlinked next to your content.
 
 ```sh
-- docusaurus
-    - React
-    - Android
-    - iOS
-    - shared # this will be symlink to the shared directory
+- shared
+    - <your-shared-file> # this will be symlink to the shared directory
 ```
 
 Then, import and render the shared content using mdx:
 
 ```mdx
-import SharedContent from '../../../shared/_example-shared-content.md'
+import SharedContent from '../../../shared/_example-shared-content.md';
 
 <SharedContent />
 ```
