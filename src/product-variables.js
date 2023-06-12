@@ -38,7 +38,7 @@ module.exports = {
       flutter: `${GITHUB_ROOT}/stream-chat-flutter/`,
       ios: `${GITHUB_ROOT}/stream-chat-swift/`,
       react: `${GITHUB_ROOT}/stream-chat-react/`,
-      // reactnative: `${GITHUB_ROOT}/stream-chat-react-native/`,
+      reactnative: `${GITHUB_ROOT}/stream-chat-react-native/`,
       angular: `${GITHUB_ROOT}/stream-chat-angular/`,
     },
     docusaurus: {
@@ -59,7 +59,7 @@ module.exports = {
       flutter: `${GITHUB_ROOT}/stream-video-flutter/`,
       ios: `${GITHUB_ROOT}/stream-video-swift/`,
       react: `${GITHUB_ROOT}/stream-video-js/`,
-      reactnative: `${GITHUB_ROOT}/stream-video-js/`,
+      // reactnative: `${GITHUB_ROOT}/stream-video-js/`,
       angular: `${GITHUB_ROOT}/stream-video-js/`,
     },
     docusaurus: {
