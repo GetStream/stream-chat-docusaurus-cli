@@ -38,6 +38,9 @@ const {
 } = productVariables[PRODUCT];
 
 let SDK_FOLDERS = DOCS_DIR.filter((file) => {
+  if (PRODUCT === 'video' && file === 'reactnative') {
+    return false;
+  }
   return fs
     .lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`)
     .isDirectory();
