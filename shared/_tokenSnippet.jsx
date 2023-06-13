@@ -1,21 +1,19 @@
 import React from 'react';
 
-const url = 'https://stream-calls-dogfood.vercel.app/api/auth/create-token?';
+const BASE_URL = 'https://stream-calls-dogfood.vercel.app/api/call/sample?';
 
-async function tokenProvider(userId, apiKey) {
-  const constructedUrl = constructUrl(userId, apiKey);
+async function callAPI(sampleApp) {
+  const constructedUrl = constructUrl(sampleApp);
   const response = await fetch(constructedUrl);
   const resultObject = await response.json();
-  let token = resultObject.token;
-  return token;
+  return resultObject;
 }
 
-function constructUrl(userId, apiKey) {
+function constructUrl(sampleApp) {
   return (
-    url +
+    BASE_URL +
     new URLSearchParams({
-      api_key: apiKey,
-      user_id: userId,
+      app_type: sampleApp,
     })
   );
 }
@@ -24,45 +22,48 @@ export class TokenSnippet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: 'Loading token...',
-      userId: props.name ?? 'testUser',
-      apiKey: getAPIKey(props.sampleApp),
-      callType: getCallType(props.sampleApp),
-      callId: 'Loading call ID...',
-      sampleApp: props.sampleApp ?? 'audio-sample',
+      sampleApp: props.sampleApp,
+      userId: 'Loading ...',
+      userName: 'Creating user name ...',
+      callId: 'Creating random call ID ...',
+      callType: 'Loading call type ...',
+      apiKey: 'Waiting for an API key ...',
+      token: 'Token is generated ...',
+      deepLink: 'Link is created ...',
     };
   }
 
   componentDidMount() {
-    tokenProvider(this.state.userId, getAPIKey(this.state.sampleApp)).then(
-      (token) => {
-        this.setState({ ...this.state, token: token });
-      }
-    );
+    callAPI(this.state.sampleApp).then((result) => {
+      this.setState({
+        ...this.state,
+        ...result,
+      });
+    });
   }
 
   render() {
     const snippetStyle = {
       padding: '2rem',
       border: '2px solid #e3e3e3',
-      'border-radius': '1rem',
+      borderRadius: '1rem',
       margin: '2rem 0',
     };
 
     const tableStyles = {
       width: '100%',
-      'overflow-x': 'scroll',
+      overflowX: 'scroll',
     };
 
     const textStyle = {
       display: 'inline-block',
-      'margin-bottom': '1rem',
+      marginBottom: '1rem',
     };
 
     const spanStyle = {
       display: 'flex',
-      'align-items': 'center',
-      'justify-content': 'space-between',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     };
 
     const linkStyle = {
@@ -70,7 +71,7 @@ export class TokenSnippet extends React.Component {
       background: '#005fff',
       color: 'white',
       padding: '0.25rem 1rem',
-      'border-radius': '0.5rem',
+      borderRadius: '0.5rem',
     };
 
     return (
@@ -113,7 +114,7 @@ export class TokenSnippet extends React.Component {
           <a
             taret="_blank"
             rel="noreferrer noopener"
-            href={`https://stream-video-demo.vercel.app/?id=${this.state.callId}`}
+            href={this.state.deepLink}
             style={linkStyle}
           >
             Join Call
@@ -122,22 +123,4 @@ export class TokenSnippet extends React.Component {
       </div>
     );
   }
-}
-
-function getAPIKey(sampleApp) {
-  let apiKey = '';
-  if (sampleApp === 'audio-sample') {
-    apiKey = 'hd8szvscpxvd';
-  }
-
-  return apiKey;
-}
-
-function getCallType(sampleApp) {
-  let callType = '';
-  if (sampleApp === 'audio-sample') {
-    callType = 'audio_room';
-  }
-
-  return callType;
 }
