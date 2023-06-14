@@ -84,17 +84,18 @@ export class TokenSnippet extends React.Component {
     }
 
     const joinCallSpan = (
-        <span style={spanStyle}>
-        For testing you can join the call on our web-app:{' '}
-        <a
-          target="_blank"
-          rel="noreferrer noopener"
-          href={`https://stream-video-demo.vercel.app/?id=${this.state.callId}`}
-          style={linkStyle}
-        >
-          Join Call
-        </a>
-        </span>
+      <span style={spanStyle}>
+      For testing you can join the call on our web-app:{' '}
+      <a
+        taret="_blank"
+        rel="noreferrer noopener"
+        href={this.state.deepLink}
+        style={linkStyle}
+      >
+        Join Call
+      </a>
+    </span>
+
       );
 
     const credentialsTable = (
