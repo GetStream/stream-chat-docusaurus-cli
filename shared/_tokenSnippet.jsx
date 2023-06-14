@@ -3,6 +3,8 @@ import './tokenSnippet.css';
 
 const BASE_URL = 'https://stream-calls-dogfood.vercel.app/api/call/sample?';
 
+const STORAGE_KEY = 'tokenSnippetData';
+
 async function callAPI(sampleApp) {
   const constructedUrl = constructUrl(sampleApp);
   const response = await fetch(constructedUrl);
@@ -37,13 +39,23 @@ export class TokenSnippet extends React.Component {
   }
 
   componentDidMount() {
-    callAPI(this.state.sampleApp).then((result) => {
+    const storedData = sessionStorage.getItem(STORAGE_KEY);
+    if (storedData) {
       this.setState({
         ...this.state,
         loadingFinished: true,
-        ...result,
+        ...JSON.parse(storedData),
       });
-    });
+    } else {
+      callAPI(this.state.sampleApp).then((result) => {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+        this.setState({
+          ...this.state,
+          loadingFinished: true,
+          ...result,
+        });
+      });
+    }
   }
 
   render() {
