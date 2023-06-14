@@ -48,12 +48,24 @@ export class TokenSnippet extends React.Component {
       });
     } else {
       callAPI(this.state.sampleApp).then((result) => {
-        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result));
-        this.setState({
-          ...this.state,
-          loadingFinished: true,
-          ...result,
-        });
+        const savedData = sessionStorage.getItem(STORAGE_KEY);
+        // We're checking again if another component might have written
+        // the data in the meantime. This is not ideal, but it works for now.
+        // (This happens for multiple elements on the same page)
+        if (savedData) {
+          this.setState({
+            ...this.state,
+            loadingFinished: true,
+            ...JSON.parse(savedData),
+          });
+        } else {
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+          this.setState({
+            ...this.state,
+            loadingFinished: true,
+            ...result,
+          });
+        }
       });
     }
   }
