@@ -30,6 +30,7 @@ export class TokenSnippet extends React.Component {
       apiKey: 'Waiting for an API key ...',
       token: 'Token is generated ...',
       deepLink: 'Link is created ...',
+      displayStyle: props.displayStyle ?? 'full'
     };
   }
 
@@ -43,6 +44,7 @@ export class TokenSnippet extends React.Component {
   }
 
   render() {
+
     const snippetStyle = {
       padding: '2rem',
       border: '2px solid #e3e3e3',
@@ -73,13 +75,37 @@ export class TokenSnippet extends React.Component {
       padding: '0.25rem 1rem',
       borderRadius: '0.5rem',
     };
+    const labelColumnStyle = {
+      white_space: 'nowrap',
+      width: '120px'
+    }
+    const valueColumnStyle = {
+      width: '99%',
+    }
 
-    return (
-      <div style={snippetStyle}>
+    const joinCallSpan = (
+        <span style={spanStyle}>
+        For testing you can join the call on our web-app:{' '}
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href={`https://stream-video-demo.vercel.app/?id=${this.state.callId}`}
+          style={linkStyle}
+        >
+          Join Call
+        </a>
+        </span>
+      );
+
+    const credentialsTable = (
+      <div>
         <span style={textStyle}>
           Here are credentials to try out the app with:
         </span>
-        <table style={tableStyles}>
+      <table style={tableStyles}>
+        <col  style={labelColumnStyle} />
+
+        <col  style={valueColumnStyle} />
           <thead>
             <tr>
               <th>Property</th>
@@ -109,17 +135,17 @@ export class TokenSnippet extends React.Component {
             </tr>
           </tbody>
         </table>
-        <span style={spanStyle}>
-          For testing you can join the call on our web-app:{' '}
-          <a
-            taret="_blank"
-            rel="noreferrer noopener"
-            href={this.state.deepLink}
-            style={linkStyle}
-          >
-            Join Call
-          </a>
-        </span>
+
+        </div>
+    );
+
+    return (
+      <div style={snippetStyle}>
+        { this.state.displayStyle === 'full' && credentialsTable }
+        { this.state.displayStyle === 'credentials' && credentialsTable }
+        
+        { this.state.displayStyle === 'full' && joinCallSpan }
+        { this.state.displayStyle === 'join' && joinCallSpan }
       </div>
     );
   }
