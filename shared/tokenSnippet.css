@@ -1,0 +1,71 @@
+.snippetStyle {
+  padding: 2rem;
+  border: 2px solid #e3e3e3;
+  border-radius: 1rem;
+  margin: 2rem 0;
+}
+
+.snippetStyle:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.snippetTable {
+  width: 100%;
+}
+
+.snippetTable tr {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+}
+
+.tokenStyle {
+  width: 100%;
+  overflow-x: scroll;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.tokenStyle span {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tokenStyle button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #005fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 200ms ease-in-out;
+}
+
+.tokenStyle button:hover {
+  background: hsl(218, 100%, 30%);
+  color: white;
+}
+
+.joinCallLink {
+  display: inline-block;
+  background: hsl(218, 100%, 50%);
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: all 200ms ease-in-out;
+}
+
+.joinCallRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.joinCallLink:hover {
+  background: hsl(218, 100%, 30%);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
