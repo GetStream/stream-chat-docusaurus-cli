@@ -1,4 +1,5 @@
 import React from 'react';
+import './tokenSnippet.css';
 
 const BASE_URL = 'https://stream-calls-dogfood.vercel.app/api/call/sample?';
 
@@ -22,6 +23,7 @@ export class TokenSnippet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loadingFinished: false,
       sampleApp: props.sampleApp,
       userId: 'Loading ...',
       userName: 'Creating user name ...',
@@ -30,7 +32,7 @@ export class TokenSnippet extends React.Component {
       apiKey: 'Waiting for an API key ...',
       token: 'Token is generated ...',
       deepLink: 'Link is created ...',
-      displayStyle: props.displayStyle ?? 'full'
+      displayStyle: props.displayStyle ?? 'full',
     };
   }
 
@@ -38,115 +40,78 @@ export class TokenSnippet extends React.Component {
     callAPI(this.state.sampleApp).then((result) => {
       this.setState({
         ...this.state,
+        loadingFinished: true,
         ...result,
       });
     });
   }
 
   render() {
+    const showTable =
+      this.state.displayStyle === 'full' ||
+      this.state.displayStyle === 'credentials';
 
-    const snippetStyle = {
-      padding: '2rem',
-      border: '2px solid #e3e3e3',
-      borderRadius: '1rem',
-      margin: '2rem 0',
-    };
-
-    const tableStyles = {
-      width: '100%',
-      overflowX: 'scroll',
-    };
-
-    const textStyle = {
-      display: 'inline-block',
-      marginBottom: '1rem',
-    };
-
-    const spanStyle = {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    };
-
-    const linkStyle = {
-      display: 'inline-block',
-      background: '#005fff',
-      color: 'white',
-      padding: '0.25rem 1rem',
-      borderRadius: '0.5rem',
-    };
-    const labelColumnStyle = {
-      white_space: 'nowrap',
-      width: '120px'
-    }
-    const valueColumnStyle = {
-      width: '99%',
-    }
-
-    const joinCallSpan = (
-      <span style={spanStyle}>
-      For testing you can join the call on our web-app:{' '}
-      <a
-        taret="_blank"
-        rel="noreferrer noopener"
-        href={this.state.deepLink}
-        style={linkStyle}
-      >
-        Join Call
-      </a>
-    </span>
-
-      );
-
-    const credentialsTable = (
-      <div>
-        <span style={textStyle}>
-          Here are credentials to try out the app with:
-        </span>
-      <table style={tableStyles}>
-        <col  style={labelColumnStyle} />
-
-        <col  style={valueColumnStyle} />
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>API Key</td>
-              <td>{this.state.apiKey}</td>
-            </tr>
-            <tr>
-              <td>Token</td>
-              <td style={tableStyles}>{this.state.token}</td>
-            </tr>
-            <tr>
-              <td>User ID</td>
-              <td>{this.state.userId}</td>
-            </tr>
-            <tr>
-              <td>Call ID</td>
-              <td>{this.state.callId}</td>
-            </tr>
-            <tr>
-              <td>Call Type</td>
-              <td>{this.state.callType}</td>
-            </tr>
-          </tbody>
-        </table>
-
-        </div>
-    );
+    const showJoinLink =
+      this.state.displayStyle === 'full' || this.state.displayStyle === 'join';
 
     return (
-      <div style={snippetStyle}>
-        { this.state.displayStyle === 'full' && credentialsTable }
-        { this.state.displayStyle === 'credentials' && credentialsTable }
-        
-        { this.state.displayStyle === 'full' && joinCallSpan }
-        { this.state.displayStyle === 'join' && joinCallSpan }
+      <div className="snippetStyle">
+        {showTable && (
+          <div>
+            <p>Here are credentials to try out the app with:</p>
+            <table className="snippetTable">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>API Key</td>
+                  <td>{this.state.apiKey}</td>
+                </tr>
+                <tr>
+                  <td>Token</td>
+                  <td className="tokenStyle">
+                    <span> {this.state.token}</span>
+                    {this.state.loadingFinished && (
+                      <button
+                        onClick={() =>
+                          navigator.clipboard.writeText(this.state.token)
+                        }
+                      >
+                        Copy
+                      </button>
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <td>User ID</td>
+                  <td>{this.state.userId}</td>
+                </tr>
+                <tr>
+                  <td>Call ID</td>
+                  <td>{this.state.callId}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {showJoinLink && (
+          <span className="joinCallRow">
+            For testing you can join the call on our web-app:{' '}
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href={this.state.deepLink}
+              className="joinCallLink"
+            >
+              Join Call
+            </a>
+          </span>
+        )}
       </div>
     );
   }
