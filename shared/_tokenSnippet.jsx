@@ -3,7 +3,7 @@ import './tokenSnippet.css';
 
 const BASE_URL = 'https://stream-calls-dogfood.vercel.app/api/call/sample?';
 
-const STORAGE_KEY = 'tokenSnippetData';
+const STORAGE_KEY = 'tokenSnippetDataFor';
 
 async function callAPI(sampleApp) {
   const constructedUrl = constructUrl(sampleApp);
@@ -39,7 +39,7 @@ export class TokenSnippet extends React.Component {
   }
 
   componentDidMount() {
-    const storedData = sessionStorage.getItem(STORAGE_KEY);
+    const storedData = sessionStorage.getItem(STORAGE_KEY + this.state.sampleApp);
     if (storedData) {
       this.setState({
         ...this.state,
@@ -48,7 +48,7 @@ export class TokenSnippet extends React.Component {
       });
     } else {
       callAPI(this.state.sampleApp).then((result) => {
-        const savedData = sessionStorage.getItem(STORAGE_KEY);
+        const savedData = sessionStorage.getItem(STORAGE_KEY + this.state.sampleApp);
         // We're checking again if another component might have written
         // the data in the meantime. This is not ideal, but it works for now.
         // (This happens for multiple elements on the same page)
@@ -59,7 +59,7 @@ export class TokenSnippet extends React.Component {
             ...JSON.parse(savedData),
           });
         } else {
-          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+          sessionStorage.setItem(STORAGE_KEY + this.state.sampleApp, JSON.stringify(result));
           this.setState({
             ...this.state,
             loadingFinished: true,
