@@ -10,12 +10,13 @@ const isProd = process.env.DEPLOYMENT_ENV === 'production';
 
 export default function Layout(props) {
   const isRootPath = isBrowser && window.location.pathname === URLS.docs.root;
+  const shouldRedirect = isBrowser && window.location.pathname !== '/video/docs/'
   const [canRender, setCanRender] = useState(!isProd || !isRootPath);
 
   // whick redirect for home page. this should happen here in order to avoid
   // rendering the layout when redirecting.
   useEffect(() => {
-    if (isProd && isRootPath) {
+    if (isProd && isRootPath && shouldRedirect) {
       window.location.replace(URLS.website.cms_docs);
     } else if (!canRender) {
       setCanRender(true);

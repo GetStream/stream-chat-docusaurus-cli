@@ -5,6 +5,7 @@ const folderMapping = {
   react: 'React',
   reactnative: 'React Native',
   angular: 'Angular',
+  api: 'API',
 };
 
 const platformMapping = {
@@ -13,7 +14,8 @@ const platformMapping = {
   ios: 'ios-swift',
   react: 'react',
   reactnative: 'react-native',
-  angular: 'angular'
+  angular: 'angular',
+  api: 'api',
 };
 
 const languageMapping = {
@@ -23,6 +25,7 @@ const languageMapping = {
   react: 'javascript',
   reactnative: 'javascript',
   angular: 'javascript',
+  api: 'javascript',
 };
 
 const DOCUSAURUS_INDEX =
@@ -31,6 +34,16 @@ const CMS_INDEX = 'DOCS';
 
 const IGNORED_DIRECTORIES = ['common-content'];
 
+const SDK_ORDER = [
+  'react',
+  'ios',
+  'android',
+  'reactnative',
+  'flutter',
+  'angular',
+  'api',
+];
+
 module.exports = {
   IGNORED_DIRECTORIES,
   DOCUSAURUS_INDEX,
@@ -38,4 +51,5 @@ module.exports = {
   folderMapping,
   platformMapping,
   languageMapping,
+  SDK_ORDER,
 };

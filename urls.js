@@ -8,7 +8,7 @@ const { github } = productVariables[PRODUCT];
 
 module.exports = {
   docs: {
-    root: `/${PRODUCT}/docs/sdk/`,
+    root: PRODUCT === 'video' ? '/video/docs/' : `/${PRODUCT}/docs/sdk/`,
   },
   website: {
     root: `${ROOT}`,
