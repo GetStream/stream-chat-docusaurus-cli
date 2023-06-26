@@ -1,6 +1,7 @@
 @use '../../css/components/mixins.scss';
 
 :root {
+  --ifm-navbar-height: 6rem;
   --ifm-navbar-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.04);
   --xtm-site-navbar-display: none;
   --xtm-site-navbar-height: 1.875rem;
@@ -57,6 +58,8 @@
 
   // Hide DocVersion link if there aren't any
   &__items {
+    flex: auto;
+
     > a.navbar__link__custom-dropdown--version {
       display: none;
     }
@@ -119,6 +122,11 @@
     height: 2.25rem;
     min-width: 11.25rem;
     margin-right: 0.5rem;
+
+    @media (max-width: 768px) {
+      flex: 1;
+      min-width: 0;
+    }
 
     > .navbar__link__custom-dropdown--sdks,
     > .navbar__link__custom-dropdown--version {
@@ -269,9 +277,6 @@
           .navbar__title {
             display: none;
           }
-        }
-        .navbar__item.dropdown.dropdown--hoverable {
-          display: inline-block;
         }
       }
     }
