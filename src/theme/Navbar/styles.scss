@@ -83,7 +83,18 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.32px;
-      color: var(--ifm-color-primary);
+      color: var(--ifm-color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.25rem 2rem !important;
+      border-radius: 21px;
+      background-color: var(--ifm-color-primary);
+
+      &:hover {
+        color: var(--ifm-color-white);
+        opacity: 0.8;
+      }
     }
 
     &__github {
@@ -103,8 +114,11 @@
 
   .dropdown {
     @include mixins.faux-select;
+    display: flex;
+    align-items: center;
+    height: 2.25rem;
     min-width: 11.25rem;
-    margin-right: 1.25rem;
+    margin-right: 0.5rem;
 
     > .navbar__link__custom-dropdown--sdks,
     > .navbar__link__custom-dropdown--version {

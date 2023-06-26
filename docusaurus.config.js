@@ -32,6 +32,7 @@ const DOCUSAURUS_DIR_CONTENTS = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH);
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`);
 
 const PRODUCT = process.env.PRODUCT;
+const label = PRODUCT === 'video' ? 'Video docs' : 'SDK';
 const {
   productTitle,
   docusaurus: { title: navbarTitle },
@@ -218,6 +219,18 @@ const navbarGithubItem = {
 
 const navbarItems = [
   {
+    ...(navbarSDKItems.length > 1 && {
+      items: navbarSDKItems,
+      label,
+      className: 'navbar__link__custom-dropdown--sdks',
+      position: 'right',
+    }),
+  },
+  {
+    type: 'search',
+    position: 'right',
+  },
+  {
     href: URLS.website.signup,
     label: 'Sign Up',
     position: 'right',
@@ -225,16 +238,6 @@ const navbarItems = [
     mobile: false,
   },
 ];
-
-if (navbarSDKItems.length > 1) {
-  const label = process.env.PRODUCT === 'video' ? 'Video docs' : 'SDK';
-  navbarItems.push({
-    items: navbarSDKItems,
-    label,
-    className: 'navbar__link__custom-dropdown--sdks',
-    position: 'left',
-  });
-}
 
 navbarItems.push(...navbarVersionItems, navbarGithubItem);
 
