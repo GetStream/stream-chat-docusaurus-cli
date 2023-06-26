@@ -28,8 +28,11 @@ const languageMapping = {
   api: 'javascript',
 };
 
-const DOCUSAURUS_INDEX =
-  process.env.DEPLOYMENT_ENV === 'production' ? 'DOCUSAURUS' : 'DOCUSAURUS_STG';
+const PRODUCT = process.env.PRODUCT;
+let DOCUSAURUS_INDEX =
+  process.env.DEPLOYMENT_ENV === 'production'
+    ? `DOCUSAURUS${PRODUCT === 'video' ? '_VIDEO' : ''}`
+    : `DOCUSAURUS${PRODUCT === 'video' ? '_VIDEO' : ''}_STG`;
 const CMS_INDEX = 'DOCS';
 
 const IGNORED_DIRECTORIES = ['common-content'];
