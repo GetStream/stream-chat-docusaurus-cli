@@ -60,7 +60,7 @@ module.exports = {
       ios: `${GITHUB_ROOT}/stream-video-swift/`,
       react: `${GITHUB_ROOT}/stream-video-js/`,
       reactnative: `${GITHUB_ROOT}/stream-video-js/`,
-      angular: `${GITHUB_ROOT}/stream-video-js/`,
+      // angular: `${GITHUB_ROOT}/stream-video-js/`,
     },
     docusaurus: {
       title: 'Video',
