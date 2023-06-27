@@ -87,3 +87,7 @@
   font-style: italic;
   padding: 5px;
 }
+
+.DocSearch-Dropdown {
+  padding: 0;
+}
