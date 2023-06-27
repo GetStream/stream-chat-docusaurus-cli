@@ -90,4 +90,5 @@
 
 .DocSearch-Dropdown {
   padding: 0;
+  overflow-x: hidden;
 }

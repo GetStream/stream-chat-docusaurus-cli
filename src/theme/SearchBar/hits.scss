@@ -4,12 +4,12 @@ html[data-theme='light'] .DocSearch-Hit {
   --codeblock-background: rgba(0, 18, 49, 1);
   --docsearch-modal-background: white;
   --docsearch-hit-background: #fff;
-  --docsearch-selected-item-background: #e3e3e3;
+  --docsearch-selected-item-text: #fff;
+  --docsearch-selected-item-background: #005fff;
 }
 
 html[data-theme='dark'] .DocSearch-Hit {
   --codeblock-background: rgba(230, 230, 230, 0.1);
-  --docsearch-selected-item-background: black;
 }
 
 .DocSearch-Modal {
@@ -38,14 +38,16 @@ html[data-theme='dark'] .DocSearch-Hit {
   .DocSearch-Hit-Container {
     height: auto;
     padding: calc(var(--docsearch-spacing) / 2) 0;
+    color: inherit;
   }
 
   .DocSearch-Hit-Container em {
-    color: var(--idm-color-black);
+    color: var(--ifm-color-black);
     background: rgba(0, 224, 255, 0.2);
     font-style: normal;
   }
 
+  .DocSearch-Hit-type-icon svg,
   .DocSearch-Hit-icon svg {
     color: var(--docsearch-primary-color);
   }
@@ -58,7 +60,7 @@ html[data-theme='dark'] .DocSearch-Hit {
   }
 
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon {
-    color: var(--docsearch-text-color);
+    color: var(--docsearch-hit-background);
   }
 
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-Tree {
@@ -101,6 +103,6 @@ html[data-theme='dark'] .DocSearch-Hit {
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-title,
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-path,
   .DocSearch-Hit[aria-selected='true'] mark {
-    color: var(--docsearch-text-color) !important;
+    color: var(--docsearch-selected-item-text) !important;
   }
 }
