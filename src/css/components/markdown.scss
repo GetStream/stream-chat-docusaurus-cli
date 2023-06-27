@@ -3,7 +3,8 @@
     font-size: 1.125rem;
   }
 
-  ul, ol {
+  ul,
+  ol {
     font-size: 0.875rem;
   }
   ol {
@@ -15,12 +16,13 @@
     font-size: 0.875rem;
     table-layout: fixed;
   }
-  
+
   table tr {
     border: var(--ifm-table-border-width) solid var(--ifm-table-border-color);
   }
-  
-  table th, table td {
+
+  table th,
+  table td {
     text-align: unset;
     border: none;
   }
@@ -28,8 +30,8 @@
   h2.heading {
     --ifm-h2-font-size: 1.75rem;
   }
- 
-   h3.heading {
-     --ifm-h3-font-size: 1.375rem;
-   }
+
+  h3.heading {
+    --ifm-h3-font-size: 1.375rem;
+  }
 }
