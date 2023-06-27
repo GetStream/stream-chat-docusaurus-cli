@@ -59,6 +59,7 @@ html[data-theme='dark'] .DocSearch-Hit {
     stroke-width: 1.5px;
   }
 
+  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-type-icon,
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon {
     color: var(--docsearch-hit-background);
   }
