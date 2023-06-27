@@ -59,11 +59,6 @@ html[data-theme='dark'] .DocSearch-Hit {
     stroke-width: 1.5px;
   }
 
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-type-icon,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon {
-    color: var(--docsearch-hit-background);
-  }
-
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-Tree {
     color: var(--docsearch-muted-color) !important;
   }
@@ -99,7 +94,10 @@ html[data-theme='dark'] .DocSearch-Hit {
   }
 
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-action,
+  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-type-icon,
+  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-type-icon svg,
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon,
+  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon svg,
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-text,
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-title,
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-path,
