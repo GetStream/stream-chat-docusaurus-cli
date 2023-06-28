@@ -232,14 +232,6 @@ const navbarGithubItem = {
 
 const navbarItems = [
   {
-    ...(navbarSDKItems.length > 1 && {
-      items: navbarSDKItems,
-      label,
-      className: 'navbar__link__custom-dropdown--sdks',
-      position: 'right',
-    }),
-  },
-  {
     type: 'search',
     position: 'right',
   },
@@ -250,9 +242,18 @@ const navbarItems = [
     className: 'navbar__link__sign-up',
     mobile: false,
   },
+  ...navbarVersionItems,
+  navbarGithubItem,
 ];
 
-navbarItems.push(...navbarVersionItems, navbarGithubItem);
+if (navbarSDKItems.length > 1) {
+  navbarItems.unshift({
+    items: navbarSDKItems,
+    label,
+    className: 'navbar__link__custom-dropdown--sdks',
+    position: 'right',
+  });
+}
 
 const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS];
 
