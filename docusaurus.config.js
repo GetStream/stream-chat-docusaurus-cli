@@ -20,6 +20,8 @@ const {
   folderMapping,
   IGNORED_DIRECTORIES,
   SDK_ORDER,
+  ignoredVideoSDKsStaging,
+  ignoredVideoSDKsProduction,
 } = require('./constants');
 const URLS = require('./urls');
 const productVariables = require('./src/product-variables');
@@ -39,9 +41,20 @@ const {
 } = productVariables[PRODUCT];
 
 let SDK_FOLDERS = DOCS_DIR.filter((file) => {
-  if (PRODUCT === 'video' && file === 'reactnative') {
-    return false;
+  if (PRODUCT === 'video') {
+    if (
+      process.env.DEPLOYMENT_ENV === 'production' &&
+      ignoredVideoSDKsProduction.includes(file)
+    ) {
+      return false;
+    } else if (
+      process.env.DEPLOYMENT_ENV === 'staging' &&
+      ignoredVideoSDKsStaging.includes(file)
+    ) {
+      return false;
+    }
   }
+
   return fs
     .lstatSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs/${file}`)
     .isDirectory();
@@ -193,7 +206,7 @@ const navbarSDKItems = SDK_FOLDERS.map((SDK) => {
   };
 });
 
-// create sections in the dropdown by inserting two dividers.
+// We have one section in the dropdown, which says 'SDK'.
 if (process.env.PRODUCT === 'video') {
   navbarSDKItems.splice(0, 0, {
     label: 'SDKs',
