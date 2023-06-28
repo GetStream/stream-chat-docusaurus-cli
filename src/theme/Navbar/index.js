@@ -102,17 +102,6 @@ const SiteNavbar = () => {
               key={i}
             >
               <a href={href} target="_blank">
-                {contact && (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 16 16"
-                    fill="#000"
-                  >
-                    <path d="M1.3 3.7v-1c0-.4.3-.7.7-.7h12c.4 0 .7.3.7.7v10.6c0 .4-.3.7-.7.7H2a.7.7 0 01-.7-.7v-.6h12V4.9L8 9.7l-6.7-6zM0 6.7h3.3V8H0V6.7zM0 10h5.3v1.3H0V10z" />
-                  </svg>
-                )}
                 {label}
               </a>
             </li>

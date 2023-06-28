@@ -16,10 +16,6 @@
     "url": "https://github.com/GetStream/stream-chat-docusaurus-cli/issues"
   },
   "homepage": "https://github.com/GetStream/stream-chat-docusaurus-cli#readme",
-  "prettier": {
-    "useTabs": false,
-    "singleQuote": true
-  },
   "scripts": {
     "build": "node --max_old_space_size=32000 node_modules/@docusaurus/core/bin/docusaurus build",
     "clear": "docusaurus clear",
