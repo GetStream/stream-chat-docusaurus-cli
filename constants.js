@@ -47,6 +47,9 @@ const SDK_ORDER = [
   'api',
 ];
 
+const ignoredVideoSDKsStaging = ['angular'];
+const ignoredVideoSDKsProduction = ['angular', 'reactnative'];
+
 module.exports = {
   IGNORED_DIRECTORIES,
   DOCUSAURUS_INDEX,
@@ -55,4 +58,6 @@ module.exports = {
   platformMapping,
   languageMapping,
   SDK_ORDER,
+  ignoredVideoSDKsStaging,
+  ignoredVideoSDKsProduction,
 };
