@@ -1,16 +1,14 @@
-import React from 'react';
+import React from "react"
 
-import { useFeedbackFormData } from '../../hooks/useFeedbackFormData';
-
-import ConfusedIcon from './confused-icon.svg';
-
-import './styles.scss';
+import { useFeedbackFormData } from "../../hooks/useFeedbackFormData"
+import ConfusedIcon from "./confused-icon.svg"
+import "./styles.scss"
 
 export const FeedbackFormButton = ({ lastHeaderTitle }) => {
-  const { goToFeedbackForm } = useFeedbackFormData(lastHeaderTitle);
+  const { goToFeedbackForm } = useFeedbackFormData(lastHeaderTitle)
 
   return (
-    <div className='docFeedback'>
+    <div className="docFeedback">
       <button
         type="button"
         aria-label="Feedback button"
@@ -21,5 +19,5 @@ export const FeedbackFormButton = ({ lastHeaderTitle }) => {
         Feedback
       </button>
     </div>
-  );
-};
+  )
+}

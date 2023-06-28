@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react"
 
-import OriginalDocPaginator from '@theme-original/DocPaginator';
+import OriginalDocPaginator from "@theme-original/DocPaginator"
 
-import { FeedbackForm } from '../../components/FeedbackForm';
-import { FeedbackFormButton } from '../../components/FeedbackFormButton';
+import { FeedbackForm } from "../../components/FeedbackForm"
+import { FeedbackFormButton } from "../../components/FeedbackFormButton"
 
 export default function DocPaginator(props) {
   return (
@@ -12,5 +12,5 @@ export default function DocPaginator(props) {
       <OriginalDocPaginator {...props} />
       <FeedbackForm />
     </>
-  );
+  )
 }

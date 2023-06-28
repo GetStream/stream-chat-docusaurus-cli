@@ -6,4 +6,4 @@ module.exports = {
   ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY,
   WEBSITE_BASE_URL: process.env.WEBSITE_BASE_URL,
   PRODUCT: process.env.PRODUCT,
-};
+}

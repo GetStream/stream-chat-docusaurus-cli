@@ -1,22 +1,24 @@
-import React from 'react';
-import clsx from 'clsx';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useGlobalData from '@docusaurus/useGlobalData';
-import styles from './styles.module.css';
+import React from "react"
 
-import { folderMapping } from '../../constants';
+import clsx from "clsx"
+
+import Link from "@docusaurus/Link"
+import useBaseUrl from "@docusaurus/useBaseUrl"
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
+import useGlobalData from "@docusaurus/useGlobalData"
+import Layout from "@theme/Layout"
+
+import { folderMapping } from "../../constants"
+import styles from "./styles.module.css"
 
 const Feature = ({ title }) => {
-  const platform = `${title.toLowerCase().replace(' ', '')}`;
+  const platform = `${title.toLowerCase().replace(" ", "")}`
   return (
-    <div className={clsx('col col--2', styles.feature)}>
+    <div className={clsx("col col--2", styles.feature)}>
       <div className={styles.buttons}>
         <Link
           className={clsx(
-            'button button--outline button--secondary button--lg',
+            "button button--outline button--secondary button--lg",
             styles.getStarted
           )}
           to={useBaseUrl(`${platform}/`)}
@@ -25,23 +27,23 @@ const Feature = ({ title }) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export const Home = () => {
-  const { siteConfig = {} } = useDocusaurusContext();
-  const globalData = useGlobalData();
+  const { siteConfig = {} } = useDocusaurusContext()
+  const globalData = useGlobalData()
 
   const SDK_FOLDERS = Object.values(
-    globalData['docusaurus-plugin-content-docs'] || {}
-  ).map(({ path }) => folderMapping[path.substring(path.lastIndexOf('/') + 1)]);
+    globalData["docusaurus-plugin-content-docs"] || {}
+  ).map(({ path }) => folderMapping[path.substring(path.lastIndexOf("/") + 1)])
 
   return (
     <Layout
       description="Description will go into a meta tag in <head />"
       title={`Hello from ${siteConfig.title}`}
     >
-      <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
@@ -61,7 +63,7 @@ export const Home = () => {
         )}
       </main>
     </Layout>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

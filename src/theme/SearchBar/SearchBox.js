@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react"
 
-import { SearchIcon } from './icons/SearchIcon';
-import { LoadingIcon } from './icons/LoadingIcon';
+import { LoadingIcon } from "./icons/LoadingIcon"
+import { SearchIcon } from "./icons/SearchIcon"
 
 function SearchBoxComponent(props) {
   const { onReset } = props.getFormProps({
     inputElement: props.inputRef.current,
-  });
+  })
   return (
     <>
       <form
         className="DocSearch-Form"
-        onSubmit={(event) => {
-          event.preventDefault();
+        onSubmit={event => {
+          event.preventDefault()
         }}
         onReset={onReset}
       >
@@ -42,7 +42,7 @@ function SearchBoxComponent(props) {
         Cancel
       </button>
     </>
-  );
+  )
 }
 
-export const SearchBox = SearchBoxComponent;
+export const SearchBox = SearchBoxComponent

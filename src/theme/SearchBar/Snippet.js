@@ -1,13 +1,13 @@
-import { createElement } from 'react';
+import { createElement } from "react"
 
 function getPropertyByPath(object, path) {
-  if (!path) return object;
-  const parts = path.split('.');
+  if (!path) return object
+  const parts = path.split(".")
 
-  return parts.reduce((current, key) => current && current[key], object);
+  return parts.reduce((current, key) => current && current[key], object)
 }
 
-export function Snippet({ hit, attribute, tagName = 'span', ...rest }) {
+export function Snippet({ hit, attribute, tagName = "span", ...rest }) {
   return createElement(tagName, {
     ...rest,
     dangerouslySetInnerHTML: {
@@ -15,5 +15,5 @@ export function Snippet({ hit, attribute, tagName = 'span', ...rest }) {
         getPropertyByPath(hit, `_snippetResult.${attribute}.value`) ||
         getPropertyByPath(hit, attribute),
     },
-  });
+  })
 }

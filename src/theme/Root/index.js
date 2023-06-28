@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react"
 
-import OriginalRoot from '@theme-original/Root';
+import OriginalRoot from "@theme-original/Root"
 
-import { DocusaurusContextProvider } from '../../contexts/DocusaurusContext';
-import { BreadcrumbsContextProvider } from '../../contexts/BreadcrumbsContext';
+import { BreadcrumbsContextProvider } from "../../contexts/BreadcrumbsContext"
+import { DocusaurusContextProvider } from "../../contexts/DocusaurusContext"
 
 export default function DocItem(props) {
   return (
@@ -12,5 +12,5 @@ export default function DocItem(props) {
         <OriginalRoot {...props} />
       </BreadcrumbsContextProvider>
     </DocusaurusContextProvider>
-  );
+  )
 }

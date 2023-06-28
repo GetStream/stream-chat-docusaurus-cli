@@ -1,13 +1,14 @@
-import React, { forwardRef } from 'react';
-import clsx from 'clsx';
+import React, { forwardRef } from "react"
 
-import './styles.scss';
+import clsx from "clsx"
+
+import "./styles.scss"
 
 const InputFieldComponent = (
   {
     id,
     name,
-    type = 'text',
+    type = "text",
     value,
     placeholder,
     label,
@@ -29,7 +30,7 @@ const InputFieldComponent = (
         placeholder={placeholder}
         type={type}
         required={required}
-        className={clsx('input', error && 'inputField-error')}
+        className={clsx("input", error && "inputField-error")}
         onChange={onChange}
         ref={ref}
         autoFocus={autoFocus}
@@ -44,7 +45,7 @@ const InputFieldComponent = (
       {error && <span className="errorMessage">{error}</span>}
       {help && !error && <span className="helpMessage">{help}</span>}
     </div>
-  );
-};
+  )
+}
 
-export const InputField = forwardRef(InputFieldComponent);
+export const InputField = forwardRef(InputFieldComponent)

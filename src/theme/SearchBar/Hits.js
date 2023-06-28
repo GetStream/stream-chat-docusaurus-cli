@@ -1,26 +1,24 @@
-import React from 'react';
+import React from "react"
 
-import Link from '@docusaurus/Link';
+import Link from "@docusaurus/Link"
 
-import { Snippet } from './Snippet';
-import { SourceIcon } from './icons/SourceIcon';
-import { GoToExternal } from './icons/GoToExternal';
-import { getItemUrl } from './getItemUrl';
-
-import { CMS_INDEX, languageMapping } from '../../../constants';
-
-import './hits.scss';
+import { CMS_INDEX, languageMapping } from "../../../constants"
+import { getItemUrl } from "./getItemUrl"
+import "./hits.scss"
+import { GoToExternal } from "./icons/GoToExternal"
+import { SourceIcon } from "./icons/SourceIcon"
+import { Snippet } from "./Snippet"
 
 export function Hits(props) {
   if (!props.collections) {
-    return null;
+    return null
   }
 
-  return props.collections.map((collection) => (
+  return props.collections.map(collection => (
     <section className="DocSearch-Hits" key={collection.source.sourceId}>
       <div className="DocSearch-Hit-source">
-        {collection.items[0].section_name}{' '}
-        {collection.items[0].index === CMS_INDEX && '(old website)'}
+        {collection.items[0].section_name}{" "}
+        {collection.items[0].index === CMS_INDEX && "(old website)"}
       </div>
 
       <ul {...props.getListProps()}>
@@ -37,11 +35,11 @@ export function Hits(props) {
               getItemProps={props.getItemProps}
               closeSearchModal={props.closeSearchModal}
             />
-          );
+          )
         })}
       </ul>
     </section>
-  ));
+  ))
 }
 
 export function Hit({
@@ -52,24 +50,24 @@ export function Hit({
   closeSearchModal,
   children,
 }) {
-  const url = getItemUrl({ item: hit, platform, cmsPlatform, locationQuery });
+  const url = getItemUrl({ item: hit, platform, cmsPlatform, locationQuery })
 
   if (hit.index === CMS_INDEX) {
     return (
-      <a target="_blank" href={url} style={{ textDecoration: 'none' }}>
+      <a target="_blank" href={url} style={{ textDecoration: "none" }}>
         {children}
       </a>
-    );
+    )
   }
   return (
     <Link
       to={url}
       onClick={closeSearchModal}
-      style={{ textDecoration: 'none' }}
+      style={{ textDecoration: "none" }}
     >
       {children}
     </Link>
-  );
+  )
 }
 
 function Result({
@@ -82,30 +80,30 @@ function Result({
   locationQuery,
   closeSearchModal,
 }) {
-  const action = React.useRef(null);
-  const title = item._highlightResult.name;
-  const snippetResult = item._snippetResult;
-  const path = snippetResult && snippetResult.content_serialized_text;
+  const action = React.useRef(null)
+  const title = item._highlightResult.name
+  const snippetResult = item._snippetResult
+  const path = snippetResult && snippetResult.content_serialized_text
   const codeSnippet =
     snippetResult &&
     (snippetResult[`code_sample_${languageMapping[platform]}`] ||
-      snippetResult.code_sample);
+      snippetResult.code_sample)
 
-  const istLastItemOnSlug = item.slug !== collection.items[index + 1]?.slug;
+  const istLastItemOnSlug = item.slug !== collection.items[index + 1]?.slug
 
-  const shouldHavePath = item.includes_slug_parent && !!item.header_id;
+  const shouldHavePath = item.includes_slug_parent && !!item.header_id
 
   return (
     <li
       className={[
-        'DocSearch-Hit',
-        item.parent_section_id && 'DocSearch-Hit--Child',
+        "DocSearch-Hit",
+        item.parent_section_id && "DocSearch-Hit--Child",
       ]
         .filter(Boolean)
-        .join(' ')}
+        .join(" ")}
       onTransitionEnd={() => {
         if (action.current) {
-          action.current();
+          action.current()
         }
       }}
       {...getItemProps({
@@ -143,11 +141,11 @@ function Result({
             <div
               className={
                 !shouldHavePath
-                  ? 'DocSearch-Hit-type-icon'
-                  : 'DocSearch-Hit-icon'
+                  ? "DocSearch-Hit-type-icon"
+                  : "DocSearch-Hit-icon"
               }
             >
-              <SourceIcon type={!item.header_id ? 'section' : undefined} />
+              <SourceIcon type={!item.header_id ? "section" : undefined} />
             </div>
           </>
           <div className="DocSearch-Hit-content-wrapper">
@@ -161,7 +159,7 @@ function Result({
               hit={path}
               attribute="value"
             />
-            {codeSnippet && codeSnippet.matchLevel !== 'none' && (
+            {codeSnippet && codeSnippet.matchLevel !== "none" && (
               <Snippet
                 className="DocSearch-Hit-code"
                 hit={codeSnippet}
@@ -175,5 +173,5 @@ function Result({
         </div>
       </Hit>
     </li>
-  );
+  )
 }
