@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import OriginalDocSidebar from '@theme-original/DocSidebar';
-import { useBreadcrumbsContext } from '../hooks/useBreadcrumbsContext';
+import { useBreadcrumbsContext } from '../../hooks/useBreadcrumbsContext';
 
 const WEB_LINKS = [
   ['Contact Support', 'https://getstream.io/contact/support/'],

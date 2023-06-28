@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useLocation, Link } from '@docusaurus/router';
+import { useLocation } from '@docusaurus/router';
 import useGlobalData from '@docusaurus/useGlobalData';
 import OriginalNavbarItem from '@theme-original/NavbarItem';
 import { useActiveVersion } from '@theme/hooks/useDocs';

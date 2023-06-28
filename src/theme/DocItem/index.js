@@ -2,7 +2,7 @@ import React from 'react';
 
 import OriginalDocItem from '@theme-original/DocItem';
 
-import { FeedbackFormProvider } from '../hooks/useFeedbackFormData';
+import { FeedbackFormProvider } from '../../hooks/useFeedbackFormData';
 
 export default function DocItem(props) {
   return (
