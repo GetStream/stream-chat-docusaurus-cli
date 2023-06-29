@@ -71,8 +71,6 @@
 
   // Hide DocVersion link if there aren't any
   &__items {
-    flex: auto;
-
     > a.navbar__link__custom-dropdown--version {
       display: none;
     }
@@ -112,7 +110,7 @@
         opacity: 0.8;
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 480px) {
         display: none !important;
       }
     }
@@ -135,13 +133,14 @@
   .dropdown {
     @include mixins.faux-select;
     display: flex;
+    flex: 1;
     align-items: center;
     height: 2.25rem;
-    min-width: 11.25rem;
     margin-right: 0.5rem;
 
-    @media (max-width: 768px) {
-      min-width: 0;
+    @media (min-width: 767px) {
+      flex: auto;
+      max-width: 11.25rem;
     }
 
     > .navbar__link__custom-dropdown--sdks,
