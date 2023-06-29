@@ -251,7 +251,7 @@ if (navbarSDKItems.length > 1) {
     items: navbarSDKItems,
     label,
     className: "navbar__link__custom-dropdown--sdks",
-    position: "right",
+    position: "left",
   })
 }
 

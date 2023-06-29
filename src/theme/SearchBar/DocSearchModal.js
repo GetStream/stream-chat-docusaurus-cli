@@ -114,7 +114,7 @@ export function DocSearchModal({
       createAutocomplete({
         id: "search",
         defaultActiveItemId: 0,
-        placeholder: "Search",
+        placeholder: "Search Docs",
         onStateChange({ state, setCollections }) {
           if (!state.query && state.collections.length > 0) {
             return setCollections([])

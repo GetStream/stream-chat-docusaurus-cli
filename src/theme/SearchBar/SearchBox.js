@@ -26,7 +26,7 @@ function SearchBoxComponent(props) {
 
         <input
           className="DocSearch-Input"
-          placeholder="Search"
+          placeholder="Search Docs"
           type="search"
           {...props.getInputProps({
             inputElement: props.inputRef.current,
