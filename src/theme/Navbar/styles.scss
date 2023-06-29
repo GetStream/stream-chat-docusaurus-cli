@@ -172,6 +172,13 @@
         color: var(--ifm-color-primary);
       }
 
+      &:first-child {
+        &.navbar__break,
+        &.navbar_break:hover {
+          margin-top: 0;
+        }
+      }
+
       &__api,
       &__stream {
         @include mixins.faux-select-dropdown-icon;
