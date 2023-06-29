@@ -34,7 +34,6 @@ const DOCUSAURUS_DIR_CONTENTS = fs.readdirSync(STREAM_SDK_DOCUSAURUS_PATH)
 const DOCS_DIR = fs.readdirSync(`${STREAM_SDK_DOCUSAURUS_PATH}/docs`)
 
 const PRODUCT = process.env.PRODUCT
-const label = PRODUCT === "video" ? "Video docs" : "SDK"
 const {
   productTitle,
   docusaurus: { title: navbarTitle },
@@ -250,7 +249,7 @@ const navbarItems = [
 if (navbarSDKItems.length > 1) {
   navbarItems.unshift({
     items: navbarSDKItems,
-    label,
+    label: "SDK",
     className: "navbar__link__custom-dropdown--sdks",
     position: "left",
   })

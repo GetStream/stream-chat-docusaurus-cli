@@ -93,11 +93,13 @@ const PlatformNavbarItem = ({ items, ...props }) => {
 
 const PlatformLabel = ({ id, label }) => (
   <span className="navbar__link__sdk">
-    <img
-      src={`${URLS.docs.root}icon/${id}.svg`}
-      alt={`${label} logo`}
-      className="navbar__link__sdk__icon"
-    />
+    {id && (
+      <img
+        src={`${URLS.docs.root}icon/${id}.svg`}
+        alt={`${label} logo`}
+        className="navbar__link__sdk__icon"
+      />
+    )}
     {label}
   </span>
 )
