@@ -208,7 +208,7 @@ const navbarSDKItems = SDK_FOLDERS.map(SDK => {
 
 // We have one section in the dropdown, which says 'SDK'.
 if (process.env.PRODUCT === "video") {
-  navbarSDKItems.splice(0, 0, {
+  navbarSDKItems.unshift({
     label: "SDKs",
     className: "navbar__break",
     href: "#",

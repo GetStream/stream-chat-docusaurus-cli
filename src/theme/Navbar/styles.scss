@@ -205,6 +205,7 @@
       font-size: 0.875rem;
       > ul.menu__list {
         position: relative;
+
         // Styles for 'main' item
         > li.menu__list-item:not(:nth-last-child(-n + 4)) {
           margin-bottom: 1rem;

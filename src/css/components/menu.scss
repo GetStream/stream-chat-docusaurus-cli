@@ -4,7 +4,7 @@
 :root {
   --doc-sidebar-width: 265px !important;
   --ifm-menu-color-background-active: transparent;
-  --ifm-menu-color: #000000;
+  --ifm-menu-color: #7e7e7e;
   --ifm-menu-color-active: #000000;
   --ifm-menu-link-padding-vertical: 0.25rem;
   --ifm-menu-link-padding-horizontal: 1rem;
@@ -171,11 +171,14 @@ html[data-theme="dark"] {
       }
     }
 
-    .theme-doc-sidebar-item-link-level-2,
-    .theme-doc-sidebar-item-link-level-3,
-    .theme-doc-sidebar-item-link-level-4 {
-      a {
-        border-left: 1px solid rgba(0, 0, 0, 0.1);
+    .theme-doc-sidebar-item-category-level,
+    .theme-doc-sidebar-item-link-level {
+      &-2,
+      &-3,
+      &-4 {
+        a {
+          border-left: 1px solid rgba(0, 0, 0, 0.1);
+        }
       }
     }
   }
