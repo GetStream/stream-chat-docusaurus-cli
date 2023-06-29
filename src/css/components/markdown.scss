@@ -43,10 +43,10 @@
     max-height: 600px;
     object-fit: contain;
     background-color: #edeeeb;
-    border-radius: 16px;
+    border-radius: 1rem;
 
     @media (min-width: 997px) {
-      padding: 36px;
+      padding: 2.25rem;
     }
   }
 }
