@@ -1,4 +1,4 @@
-@use '../../css/components/mixins.scss';
+@use "../../css/components/mixins.scss";
 
 :root {
   --ifm-navbar-height: 6rem;
@@ -43,7 +43,7 @@
 
     &::after {
       display: inline-block;
-      content: 'docs';
+      content: "docs";
       text-transform: uppercase;
       font-size: 0.5rem;
       color: var(--ifm-color-primary);
@@ -98,12 +98,16 @@
         color: var(--ifm-color-white);
         opacity: 0.8;
       }
+
+      @media (max-width: 768px) {
+        display: none !important;
+      }
     }
 
     &__github {
       width: 13px;
       height: 13px;
-      background: url('/icon/github.svg') no-repeat;
+      background: url("/icon/github.svg") no-repeat;
 
       &:hover {
         opacity: 0.8;
@@ -124,7 +128,6 @@
     margin-right: 0.5rem;
 
     @media (max-width: 768px) {
-      flex: 1;
       min-width: 0;
     }
 
@@ -241,7 +244,7 @@
         &--active {
           font-weight: bold;
         }
-        &--active[tabindex='0']:not(&--sublist) {
+        &--active[tabindex="0"]:not(&--sublist) {
           // active-item's height is calculated based on line-height: 1.25rem + vertical padding
           @include mixins.active-item(
             3px,
@@ -284,13 +287,13 @@
 }
 
 @media (min-width: 997px) {
-  [class^='sidebar_'] {
+  [class^="sidebar_"] {
     padding-top: calc(
       var(--ifm-navbar-height) + (var(--xtm-site-navbar-height)) + 1px
     ) !important;
   }
 
-  [class^='tableOfContents_'] {
+  [class^="tableOfContents_"] {
     max-height: calc(
       100vh -
         (
@@ -303,7 +306,7 @@
     ) !important;
   }
 
-  [class^='docSidebarContainer_'] {
+  [class^="docSidebarContainer_"] {
     margin-top: calc(
       -1 * (var(--ifm-navbar-height) + (var(--xtm-site-navbar-height) + 1px))
     ) !important;
@@ -397,7 +400,7 @@
         }
 
         &::before {
-          content: '«';
+          content: "«";
           color: var(--ifm-color-primary);
           margin-right: 0.2rem;
         }
@@ -434,7 +437,7 @@
         @include mixins.down-arrow(var(--ifm-color-secondary-darker), 4px, 3px);
         cursor: pointer;
         margin: 2px 0 0 0.5rem;
-        content: '';
+        content: "";
       }
     }
   }

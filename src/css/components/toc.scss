@@ -1,4 +1,4 @@
-@use './mixins.scss';
+@use "./mixins.scss";
 
 :root {
   --ifm-toc-padding-vertical: 0.5rem;
@@ -6,7 +6,7 @@
   --ifm-toc-link-color: #000000;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --ifm-toc-link-color: #c4c4c4;
 }
 
@@ -45,7 +45,7 @@ html[data-theme='dark'] {
 }
 
 // Mobile top ToC
-[class^='tocCollapsible'] {
+[class^="tocCollapsible"] {
   position: relative;
 
   & > button {
@@ -53,7 +53,7 @@ html[data-theme='dark'] {
     @include mixins.menu-sublist-icon(relative);
     font-size: 0.813rem;
 
-    & + div[class*='tocCollapsibleContent'] {
+    & + div[class*="tocCollapsibleContent"] {
       @include mixins.faux-select-dropdown;
     }
   }

@@ -1,4 +1,4 @@
-@use './mixins.scss';
+@use "./mixins.scss";
 
 /* Menu/sidebar related variables */
 :root {
@@ -11,7 +11,7 @@
   --xtm-sidebar-footer-height: auto;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --ifm-menu-color: #c4c4c4;
   --ifm-menu-color-active: #ffffff;
 }
@@ -21,7 +21,7 @@ html[data-theme='dark'] {
   @include mixins.remove-external-icon;
 }
 
-[class^='docSidebarContainer'] {
+[class^="docSidebarContainer"] {
   .menu {
     padding: 1.125rem 4px 0 0;
     font-size: 0.875rem;
@@ -127,7 +127,7 @@ html[data-theme='dark'] {
                 }
               }
 
-              &--active[tabindex='0']:not(&--sublist) {
+              &--active[tabindex="0"]:not(&--sublist) {
                 // active-item's height is calculated based on line-height: 20px + vertical padding
                 @include mixins.active-item(
                   3px,

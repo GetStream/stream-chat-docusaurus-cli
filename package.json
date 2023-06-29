@@ -26,8 +26,8 @@
     "swizzle": "docusaurus swizzle",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts}\"",
-    "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,ts}\"",
+    "prettier": "prettier --config .prettierrc --write \"**/*.{js,ts,css,scss}\"",
+    "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,ts,css,scss}\"",
     "prettier-docs": "prettier --config .prettierrc --write \"**/*.md\"",
     "postinstall": "husky install"
   },

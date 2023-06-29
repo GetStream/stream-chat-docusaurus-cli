@@ -1,6 +1,6 @@
-@use '../../css/components/mixins.scss';
+@use "../../css/components/mixins.scss";
 
-html[data-theme='light'] .DocSearch-Hit {
+html[data-theme="light"] .DocSearch-Hit {
   --codeblock-background: rgba(0, 18, 49, 1);
   --docsearch-modal-background: white;
   --docsearch-hit-background: #fff;
@@ -8,7 +8,7 @@ html[data-theme='light'] .DocSearch-Hit {
   --docsearch-selected-item-background: #005fff;
 }
 
-html[data-theme='dark'] .DocSearch-Hit {
+html[data-theme="dark"] .DocSearch-Hit {
   --codeblock-background: rgba(230, 230, 230, 0.1);
 }
 
@@ -30,7 +30,7 @@ html[data-theme='dark'] .DocSearch-Hit {
     box-shadow: none;
   }
 
-  .DocSearch-Hit[aria-selected='true'] a {
+  .DocSearch-Hit[aria-selected="true"] a {
     background-color: var(--docsearch-selected-item-background);
     color: var(--docsearch-text-color);
   }
@@ -59,7 +59,7 @@ html[data-theme='dark'] .DocSearch-Hit {
     stroke-width: 1.5px;
   }
 
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-Tree {
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-Tree {
     color: var(--docsearch-muted-color) !important;
   }
 
@@ -77,7 +77,7 @@ html[data-theme='dark'] .DocSearch-Hit {
     margin-top: 1rem;
     padding: 1rem;
     width: 100%;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
     white-space: initial;
     color: var(--docsearch-muted-color);
   }
@@ -89,19 +89,19 @@ html[data-theme='dark'] .DocSearch-Hit {
     visibility: hidden;
   }
 
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-external-icon {
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-external-icon {
     visibility: visible;
   }
 
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-action,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-type-icon,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-type-icon svg,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-icon svg,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-text,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-title,
-  .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-path,
-  .DocSearch-Hit[aria-selected='true'] mark {
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-action,
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-type-icon,
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-type-icon svg,
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-icon,
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-icon svg,
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-text,
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-title,
+  .DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-path,
+  .DocSearch-Hit[aria-selected="true"] mark {
     color: var(--docsearch-selected-item-text) !important;
   }
 }

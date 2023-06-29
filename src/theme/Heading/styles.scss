@@ -6,7 +6,7 @@
  */
 
 // overwriting docusaurus theme classic styles
-h1[class^='docTitle'] {
+h1[class^="docTitle"] {
   font-size: var(--ifm-h1-font-size);
 }
 
@@ -30,7 +30,7 @@ h1[class^='docTitle'] {
   transition: opacity var(--ifm-transition-fast);
   font-weight: 300;
   padding-left: 0.5rem;
-  
+
   &:hover {
     opacity: 1;
     text-decoration: none;
