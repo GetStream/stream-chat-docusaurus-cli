@@ -29,13 +29,25 @@
   z-index: calc(var(--ifm-z-index-fixed) + 15);
 
   &__brand {
-    margin-right: 1.875rem;
+    width: 53px;
+    height: 46px;
+    margin-right: 1rem !important;
+    background-repeat: contain;
+    background-image: url("/img/logo-active.svg");
+    border-radius: 0.5rem;
   }
 
   &__logo {
-    height: 1.25rem;
-    transform: translateY(-0.1rem);
-    margin-right: 0.2rem;
+    height: 100%;
+    margin: 0;
+
+    img {
+      width: 100%;
+    }
+
+    &:hover {
+      opacity: 0;
+    }
   }
 
   &__title {
