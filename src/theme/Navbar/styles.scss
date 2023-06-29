@@ -159,6 +159,9 @@
     }
 
     &__link {
+      display: flex;
+      align-items: center;
+
       &--active {
         background: none;
         font-weight: 700;
@@ -167,6 +170,35 @@
       &:hover {
         background: none;
         color: var(--ifm-color-primary);
+      }
+
+      &__api,
+      &__stream {
+        @include mixins.faux-select-dropdown-icon;
+      }
+
+      &__android {
+        @include mixins.faux-select-dropdown-icon(android);
+      }
+
+      &__angular {
+        @include mixins.faux-select-dropdown-icon(angular);
+      }
+
+      &__flutter {
+        @include mixins.faux-select-dropdown-icon(flutter);
+      }
+
+      &__ios {
+        @include mixins.faux-select-dropdown-icon(ios);
+      }
+
+      &__react {
+        @include mixins.faux-select-dropdown-icon(react);
+      }
+
+      &__reactnative {
+        @include mixins.faux-select-dropdown-icon(reactnative);
       }
     }
   }

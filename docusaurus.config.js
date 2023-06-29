@@ -199,6 +199,7 @@ const navbarSDKItems = SDK_FOLDERS.map(SDK => {
   return {
     label: readableSDK,
     id: strippedSDK,
+    className: `dropdown__link__${strippedSDK}`,
     docsPluginId: strippedSDK,
     docId: "none",
     to: `${strippedSDK}/`,

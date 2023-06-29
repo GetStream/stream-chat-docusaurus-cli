@@ -105,3 +105,17 @@
     }
   }
 }
+
+@mixin faux-select-dropdown-icon($icon: stream) {
+  &:before {
+    content: " ";
+    width: 16px;
+    height: 16px;
+    display: inline;
+    margin-right: 0.5rem;
+    background-image: url("/icon/" + $icon + ".svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
