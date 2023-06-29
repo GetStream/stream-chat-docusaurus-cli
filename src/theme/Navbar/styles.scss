@@ -30,17 +30,15 @@
   z-index: calc(var(--ifm-z-index-fixed) + 15);
 
   &__brand {
-    width: 53px;
-    height: 46px;
-    margin-right: 1rem !important;
-    background-repeat: contain;
+    margin-right: 1rem;
     background-image: url("/img/logo-active.svg");
+    background-repeat: no-repeat;
     border-radius: 0.5rem;
   }
 
   &__logo {
     height: 100%;
-    margin: 0;
+    margin-right: 1rem;
 
     img {
       width: 100%;
@@ -205,7 +203,6 @@
       font-size: 0.875rem;
       > ul.menu__list {
         position: relative;
-
         // Styles for 'main' item
         > li.menu__list-item:not(:nth-last-child(-n + 4)) {
           margin-bottom: 1rem;

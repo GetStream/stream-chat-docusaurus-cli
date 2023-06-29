@@ -63,7 +63,7 @@ module.exports = {
       // angular: `${GITHUB_ROOT}/stream-video-js/`,
     },
     docusaurus: {
-      title: "Video",
+      title: "Voice & Video",
     },
   },
 }
