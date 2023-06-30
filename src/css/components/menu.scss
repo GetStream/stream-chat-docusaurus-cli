@@ -81,6 +81,7 @@ html[data-theme="dark"] {
 
           .menu__link--active:not(.menu__link--sublist) {
             color: var(--ifm-menu-color-active);
+            font-weight: bold;
             @include mixins.active-item(3px);
           }
 
@@ -112,6 +113,13 @@ html[data-theme="dark"] {
           &-item {
             &:not(:first-child) {
               margin: 0;
+
+              .menu__list-item-collapsible {
+                font-size: unset;
+                font-weight: unset;
+                letter-spacing: unset;
+                text-transform: none;
+              }
             }
 
             a.menu__link {
@@ -168,6 +176,15 @@ html[data-theme="dark"] {
         svg path {
           stroke-width: 4px;
         }
+      }
+    }
+
+    .theme-doc-sidebar-item-category-level-1 {
+      .menu__list-item-collapsible {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.0825rem;
+        text-transform: uppercase;
       }
     }
 

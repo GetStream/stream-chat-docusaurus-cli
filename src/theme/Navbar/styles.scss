@@ -32,8 +32,8 @@
   &__brand {
     margin-right: 1rem;
     background-image: url("/img/logo-active.svg");
+    background-size: 53px 44px;
     background-repeat: no-repeat;
-    border-radius: 0.5rem;
   }
 
   &__logo {
@@ -162,7 +162,7 @@
 
       &--active {
         background: none;
-        font-weight: 700;
+        font-weight: bold;
       }
 
       &:hover {
