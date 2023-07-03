@@ -30,14 +30,6 @@ function CustomNavbarItem(props) {
 
   const { isLoggedIn } = useAuthContext()
 
-  // Add platform label with icon
-  const sdks =
-    items &&
-    useMemo(
-      () => items.map(sdk => ({ ...sdk, label: PlatformLabel(sdk) })),
-      [items]
-    )
-
   const selectedSDK = useMemo(() => {
     if (label === "SDK" && items.length) {
       return items.find(item =>
@@ -45,6 +37,12 @@ function CustomNavbarItem(props) {
       )
     }
   }, [items, label, pathname])
+
+  if (selectedSDK) {
+    return (
+      <PlatformNavbarItem {...itemProps} label={PlatformLabel(selectedSDK)} />
+    )
+  }
 
   if (
     type === "docsVersionDropdown" &&
@@ -81,9 +79,16 @@ function CustomNavbarItem(props) {
     <OriginalNavbarItem
       {...itemProps}
       docId={activeVersion && activeVersion.mainDocId}
-      items={sdks}
     />
   )
+}
+
+const PlatformNavbarItem = ({ items, ...props }) => {
+  const sdks = useMemo(
+    () => items.map(sdk => ({ ...sdk, label: PlatformLabel(sdk) })),
+    [items]
+  )
+  return <OriginalNavbarItem {...props} items={sdks} />
 }
 
 const PlatformLabel = ({ id, label }) => (
