@@ -21,7 +21,7 @@ html[data-theme="dark"] {
   @include mixins.remove-external-icon;
 }
 
-[class^="docSidebarContainer"] {
+[class*="docSidebarContainer_"] {
   .menu {
     padding: 1.125rem 4px 0 0;
     font-size: 0.875rem;

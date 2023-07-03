@@ -9,17 +9,18 @@ import "./styles.scss"
 
 export const FeedbackForm = () => {
   const { header, setHeader, headers } = useFeedbackFormData()
-  const sections = useMemo(() => {
-    return headers.map(({ value }) => ({
-      label: value,
-      value,
-    }))
-  }, [headers])
+
+  const sections = headers.map(({ value }) => ({
+    label: value,
+    value,
+  }))
 
   const { submitHandler, loading, success, error, data, fieldChangeHandler } =
     useFeedbackForm(
       { email: "", feedback: "" },
-      header.isPageHeader && header.value.replace(/\s+/g, "-").toLowerCase()
+      header &&
+        header.isPageHeader &&
+        header.value.replace(/\s+/g, "-").toLowerCase()
     )
 
   useToast(
@@ -42,10 +43,11 @@ export const FeedbackForm = () => {
           value={data.email}
           error={error && error.email}
         />
+
         <select
           className="input"
           name="sections"
-          value={header.value}
+          value={header && header.value}
           onChange={a => setHeader(a.target.value)}
         >
           <option value="Select section" disabled>
