@@ -1,8 +1,8 @@
 import React, { useMemo } from "react"
 
 import clsx from "clsx"
-import { Link } from "react-router-dom"
 
+import Link from "@docusaurus/Link"
 import { useLocation } from "@docusaurus/router"
 import OriginalNavbar from "@theme-original/Navbar"
 

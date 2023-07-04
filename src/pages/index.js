@@ -1,8 +1,8 @@
 import React from "react"
 
 import clsx from "clsx"
-import Link from "react-router-dom"
 
+import Link from "@docusaurus/Link"
 import useBaseUrl from "@docusaurus/useBaseUrl"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import useGlobalData from "@docusaurus/useGlobalData"

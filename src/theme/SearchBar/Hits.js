@@ -1,6 +1,6 @@
 import React from "react"
 
-import Link from "react-router-dom"
+import Link from "@docusaurus/Link"
 
 import { CMS_INDEX, languageMapping } from "../../../constants"
 import { getItemUrl } from "./getItemUrl"
