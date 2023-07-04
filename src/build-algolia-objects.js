@@ -323,9 +323,11 @@ const extractDocsData = async docsContent => {
           // and in the url it uses next
           const slug = sdkContentVersion.isLast
             ? sdkDocVersion.slug.substring(1)
-            : `${sdkContentVersion.versionLabel.toLowerCase()}/${sdkDocVersion.slug.substring(
-                1
-              )}`
+            : `${
+                sdkContentVersion.versionLabel
+                  ? `${sdkContentVersion.versionLabel.toLowerCase()}/`
+                  : ""
+              }${sdkDocVersion.slug.substring(1)}`
           const section_name = sections
             .map(section_slug => capitalizeFirstLetter(section_slug))
             .join(" > ")
