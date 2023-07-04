@@ -273,6 +273,9 @@ module.exports = {
   plugins,
   projectName: `stream-${PRODUCT}`,
   tagline: `Stream ${productTitle} Component SDKs`,
+  markdown: {
+    mermaid: true,
+  },
   themeConfig: {
     // Docusaurus forces us to pass these values even if they are not internally used.
     // Theyre only used to show/hide the search bar in our case.
@@ -314,6 +317,7 @@ module.exports = {
     ],
     "@docusaurus/theme-live-codeblock",
     "@docusaurus/theme-search-algolia",
+    "@docusaurus/theme-mermaid",
   ],
   title: `Stream ${productTitle} - Component SDK Docs`,
   url: URLS.website.root,
