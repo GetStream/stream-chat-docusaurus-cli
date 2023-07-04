@@ -25,7 +25,6 @@ const {
 } = require("./constants")
 const URLS = require("./urls")
 const productVariables = require("./src/product-variables")
-const Icons = require("./admonition-icons")
 
 const getCustomPluginRegExp = (prefix = "") =>
   new RegExp(`^${prefix}docusaurus.*\.plugin.js$`)
