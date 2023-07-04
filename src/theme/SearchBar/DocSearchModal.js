@@ -4,8 +4,11 @@ import algoliasearch from "algoliasearch/lite"
 import url from "url"
 
 import { createAutocomplete } from "@algolia/autocomplete-core"
+import {
+  useActivePlugin,
+  useActiveVersion,
+} from "@docusaurus/plugin-content-docs/client"
 import { useLocation } from "@docusaurus/router"
-import { useActivePlugin, useActiveVersion } from "@theme/hooks/useDocs"
 
 import {
   CMS_INDEX,
