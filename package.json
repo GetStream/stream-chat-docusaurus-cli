@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/GetStream/stream-chat-docusaurus-cli#readme",
   "scripts": {
-    "build": "node --max_old_space_size=32000 node_modules/@docusaurus/core/bin/docusaurus build",
+    "build": "NODE_OPTIONS=\"--max-old-space-size=32000\" docusaurus build",
     "clear": "docusaurus clear",
     "deploy": "docusaurus deploy",
     "docusaurus": "docusaurus",
