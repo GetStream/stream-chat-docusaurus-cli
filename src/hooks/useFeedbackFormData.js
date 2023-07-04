@@ -50,6 +50,33 @@ export const useFeedbackFormData = lastHeaderTitle => {
     isPageHeader: true,
   })
 
+  useEffect(() => {
+    const pageHeader = document.querySelector("h1")
+    const headersAnchors = Array.from(document.querySelectorAll("h2.heading"))
+    const headers = headersAnchors.map(item => ({
+      value: extractTitle(item),
+      isPageHeader: false,
+    }))
+    if (pageHeader) {
+      headers.unshift({
+        value: extractTitle(pageHeader),
+        isPageHeader: true,
+      })
+    }
+
+    const lastHeaderTitleString = extractTitle(lastHeaderTitle)
+
+    const headerIndex = headers.findIndex(
+      item => item.value === lastHeaderTitleString
+    )
+    const prevHeader = lastHeaderTitle
+      ? headers[headerIndex - 1]
+      : headers[headers.length - 1]
+
+    setHeaders(headers)
+    setCurrentHeader(prevHeader)
+  }, [])
+
   const header = useMemo(() => {
     return headers.find(item => item.value === clickedButtonHeader)
   }, [headers, clickedButtonHeader])

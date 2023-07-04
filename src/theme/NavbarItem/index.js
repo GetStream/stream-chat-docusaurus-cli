@@ -1,9 +1,9 @@
 import React, { useMemo } from "react"
 
-import { useActiveVersion } from "@docusaurus/plugin-content-docs/client"
 import { useLocation } from "@docusaurus/router"
 import useGlobalData from "@docusaurus/useGlobalData"
 import OriginalNavbarItem from "@theme-original/NavbarItem"
+import { useActiveVersion } from "@theme/hooks/useDocs"
 
 import URLS from "../../../urls"
 import { useAuthContext } from "../../hooks/useAuthContext"

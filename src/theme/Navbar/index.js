@@ -2,12 +2,12 @@ import React, { useMemo } from "react"
 
 import clsx from "clsx"
 
-import Link from "@docusaurus/Link"
-import { useLocation } from "@docusaurus/router"
+import { Link, useLocation } from "@docusaurus/router"
 import OriginalNavbar from "@theme-original/Navbar"
 
 import { folderMapping } from "../../../constants"
-import URLS, { docs, website } from "../../../urls"
+import { docs, website } from "../../../urls"
+import URLS from "../../../urls"
 import { useBreadcrumbsContext } from "../../hooks/useBreadcrumbsContext"
 import productVariables from "../../product-variables"
 import "./styles.scss"

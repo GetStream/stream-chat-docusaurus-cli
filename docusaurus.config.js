@@ -143,12 +143,36 @@ const defaultPlugins = SDK_FOLDERS.map(SDK => {
     id: strippedSDK,
     path: `${STREAM_SDK_DOCUSAURUS_PATH}/docs/${SDK}`,
     routeBasePath: strippedSDK,
-    breadcrumbs: false,
     ...(fs.existsSync(sidebarPath)
       ? {
           sidebarPath: require.resolve(sidebarPath),
         }
       : {}),
+    admonitions: {
+      infima: true,
+      customTypes: {
+        note: {
+          ifmClass: "note",
+          svg: Icons.note,
+        },
+        tip: {
+          ifmClass: "tip",
+          svg: Icons.tip,
+        },
+        info: {
+          ifmClass: "info",
+          svg: Icons.info,
+        },
+        caution: {
+          ifmClass: "warning",
+          svg: Icons.caution,
+        },
+        danger: {
+          ifmClass: "danger",
+          svg: Icons.danger,
+        },
+      },
+    },
   }
 
   /**
@@ -273,9 +297,6 @@ module.exports = {
   plugins,
   projectName: `stream-${PRODUCT}`,
   tagline: `Stream ${productTitle} Component SDKs`,
-  markdown: {
-    mermaid: true,
-  },
   themeConfig: {
     // Docusaurus forces us to pass these values even if they are not internally used.
     // Theyre only used to show/hide the search bar in our case.
@@ -286,11 +307,6 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: true,
-    },
-    docs: {
-      sidebar: {
-        hideable: true,
-      },
     },
     liveCodeBlock: {
       playgroundPosition: "bottom",
@@ -304,6 +320,7 @@ module.exports = {
       title: navbarTitle,
     },
     metadata: [{ name: "twitter:card", content: "summary_large_image" }],
+    hideableSidebar: true,
   },
   themes: [
     [
@@ -317,7 +334,6 @@ module.exports = {
     ],
     "@docusaurus/theme-live-codeblock",
     "@docusaurus/theme-search-algolia",
-    "@docusaurus/theme-mermaid",
   ],
   title: `Stream ${productTitle} - Component SDK Docs`,
   url: URLS.website.root,

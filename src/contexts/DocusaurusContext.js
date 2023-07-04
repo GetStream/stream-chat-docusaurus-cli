@@ -6,7 +6,7 @@
  */
 import React, { useMemo } from "react"
 
-import { Context as DocusaurusContext } from "@docusaurus/core/lib/client/docusaurusContext"
+import { Context as DocusaurusContext } from "@docusaurus/docusaurusContext"
 import { useLocation } from "@docusaurus/router"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 

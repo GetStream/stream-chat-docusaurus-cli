@@ -1,28 +1,50 @@
-/*
-When the navbar is sticky, ensure that on anchor click,
-the browser does not scroll that anchor behind the navbar
-See https://twitter.com/JoshWComeau/status/1332015868725891076
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-.anchorWithStickyNavbar {
-  scroll-margin-top: calc(var(--ifm-navbar-height) + 0.5rem);
+
+// overwriting docusaurus theme classic styles
+h1[class^="docTitle"] {
+  font-size: var(--ifm-h1-font-size);
 }
 
-.anchorWithHideOnScrollNavbar {
-  scroll-margin-top: 0.5rem;
+.heading {
+  position: relative;
 }
 
-:global(.hash-link) {
+.anchor {
+  display: block;
+  position: relative;
+  top: -0.5rem;
+}
+
+.hash-link:focus,
+*:hover > .hash-link {
+  opacity: 0.7;
+}
+
+.hash-link {
   opacity: 0;
-  padding-left: 0.5rem;
   transition: opacity var(--ifm-transition-fast);
-  user-select: none;
+  font-weight: 300;
+  padding-left: 0.5rem;
+
+  &:hover {
+    opacity: 1;
+    text-decoration: none;
+  }
 }
 
-:global(.hash-link::before) {
-  content: "#";
+.enhancedAnchor {
+  top: calc(var(--ifm-navbar-height) * -1 - 0.5rem);
 }
 
-:global(.hash-link:focus),
-:global(*:hover > .hash-link) {
-  opacity: 1;
+@media (min-width: 1600px) {
+  .hash-link {
+    padding-left: 0;
+    left: -1.5rem;
+    position: absolute;
+  }
 }

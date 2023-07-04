@@ -308,7 +308,13 @@
 }
 
 @media (min-width: 997px) {
-  [class*="tableOfContents_"] {
+  [class^="sidebar_"] {
+    padding-top: calc(
+      var(--ifm-navbar-height) + (var(--xtm-site-navbar-height)) + 1px
+    ) !important;
+  }
+
+  [class^="tableOfContents_"] {
     max-height: calc(
       100vh -
         (
@@ -318,6 +324,12 @@
     ) !important;
     top: calc(
       var(--ifm-navbar-height) + (var(--xtm-site-navbar-height)) + 1px + 1rem
+    ) !important;
+  }
+
+  [class^="docSidebarContainer_"] {
+    margin-top: calc(
+      -1 * (var(--ifm-navbar-height) + (var(--xtm-site-navbar-height) + 1px))
     ) !important;
   }
 }
