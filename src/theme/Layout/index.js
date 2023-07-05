@@ -8,7 +8,6 @@ import URLS from "../../../urls"
 import { AuthContextProvider } from "../../contexts/AuthContext"
 
 const isBrowser = typeof window !== `undefined`
-const isStaging = process.env.DEPLOYMENT_ENV === "staging"
 const isProd = process.env.DEPLOYMENT_ENV === "production"
 
 export default function Layout(props) {
@@ -16,8 +15,6 @@ export default function Layout(props) {
   const shouldRedirect =
     isBrowser && window.location.pathname !== "/video/docs/"
   const [canRender, setCanRender] = useState(!isProd || !isRootPath)
-
-  console.log(isStaging, isRootPath, shouldRedirect)
 
   // whick redirect for home page. this should happen here in order to avoid
   // rendering the layout when redirecting.
