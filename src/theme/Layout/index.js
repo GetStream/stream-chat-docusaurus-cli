@@ -16,6 +16,14 @@ export default function Layout(props) {
     isBrowser && window.location.pathname !== "/video/docs/"
   const [canRender, setCanRender] = useState(!isProd || !isRootPath)
 
+  console.log(
+    isProd,
+    process.env,
+    process.env.DEPLOYMENT_ENV,
+    isRootPath,
+    shouldRedirect
+  )
+
   // whick redirect for home page. this should happen here in order to avoid
   // rendering the layout when redirecting.
   useEffect(() => {
