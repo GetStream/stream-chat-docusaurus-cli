@@ -28,8 +28,8 @@ module.exports = function () {
             ALGOLIA_APP_ID: "DEFAULT",
             ALGOLIA_API_KEY: "DEFAULT",
             WEBSITE_BASE_URL: "DEFAULT",
-            DEPLOYMENT_ENV: "staging",
-            PRODUCT: "chat", // either "chat" or "activity-feeds"
+            DEPLOYMENT_ENV: process.env.DEPLOYMENT_ENV ?? "staging",
+            PRODUCT: process.env.PRODUCT ?? "chat",
             ...filteredVariables,
           }),
         ],
