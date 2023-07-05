@@ -16,6 +16,10 @@ if (!process.env.PRODUCT) {
   process.env.PRODUCT = "chat"
 }
 
+if (!process.env.DEPLOYMENT_ENV) {
+  process.env.DEPLOYMENT_ENV = "staging"
+}
+
 const {
   folderMapping,
   IGNORED_DIRECTORIES,
