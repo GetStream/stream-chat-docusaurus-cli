@@ -1,11 +1,11 @@
 :root {
-  --xtm-doc-column-size: calc(100% / 10); 
+  --xtm-doc-column-size: calc(100% / 10);
 }
 
 @media (min-width: 997px) and (max-width: 1440px) {
   main[class^="docMainContainer"] {
     .container {
-      max-width: none;   
+      max-width: none;
       .row {
         & > .col:first-child {
           max-width: calc(var(--xtm-doc-column-size) * 7) !important;

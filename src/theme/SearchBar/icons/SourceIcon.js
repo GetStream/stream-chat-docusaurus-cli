@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react"
 
 export function SourceIcon(props) {
   switch (props.type) {
-    case 'section':
-      return <SectionIcon />;
-    case 'content':
-      return <ContentIcon />;
+    case "section":
+      return <SectionIcon />
+    case "content":
+      return <ContentIcon />
     default:
-      return <AnchorIcon />;
+      return <AnchorIcon />
   }
 }
 
@@ -22,7 +22,7 @@ function SectionIcon() {
         strokeLinejoin="round"
       />
     </svg>
-  );
+  )
 }
 
 function AnchorIcon() {
@@ -37,7 +37,7 @@ function AnchorIcon() {
         strokeLinejoin="round"
       />
     </svg>
-  );
+  )
 }
 
 function ContentIcon() {
@@ -51,5 +51,5 @@ function ContentIcon() {
         strokeLinejoin="round"
       />
     </svg>
-  );
+  )
 }

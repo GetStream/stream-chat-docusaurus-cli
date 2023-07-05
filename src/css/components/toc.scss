@@ -1,4 +1,4 @@
-@use './mixins.scss';
+@use "./mixins.scss";
 
 :root {
   --ifm-toc-padding-vertical: 0.5rem;
@@ -6,8 +6,8 @@
   --ifm-toc-link-color: #000000;
 }
 
-html[data-theme='dark'] {
-  --ifm-toc-link-color: #C4C4C4;
+html[data-theme="dark"] {
+  --ifm-toc-link-color: #c4c4c4;
 }
 
 .table-of-contents {
@@ -17,14 +17,14 @@ html[data-theme='dark'] {
     position: relative;
     padding: 0 var(--ifm-toc-padding-horizontal);
     margin: var(--ifm-toc-padding-vertical) 0;
-    
+
     ul {
       position: relative;
       padding-left: 0;
       margin-left: calc(-1 * var(--ifm-toc-padding-horizontal));
       margin-top: calc(-1 * var(--ifm-toc-padding-vertical));
       background: var(--ifm-background-color);
-      
+
       li {
         padding: 0 calc(2 * var(--ifm-toc-padding-horizontal));
 
@@ -36,7 +36,6 @@ html[data-theme='dark'] {
   }
 
   &__link {
-
     &--active {
       color: var(--ifm-toc-link-color);
       font-weight: 700;
@@ -65,6 +64,6 @@ html[data-theme='dark'] {
   }
 
   .table-of-contents__link {
-    white-space: normal!important;
+    white-space: normal !important;
   }
 }

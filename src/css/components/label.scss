@@ -10,7 +10,7 @@
     font-weight: inherit;
 
     &::after {
-      content: '*';
+      content: "*";
       color: $color;
     }
   }

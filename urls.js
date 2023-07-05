@@ -1,14 +1,14 @@
-const ROOT = 'https://getstream.io';
-const GITHUB_ROOT = 'https://github.com/GetStream';
+const ROOT = "https://getstream.io"
+const GITHUB_ROOT = "https://github.com/GetStream"
 
-const productVariables = require('./src/product-variables');
+const productVariables = require("./src/product-variables")
 
-const PRODUCT = process.env.PRODUCT;
-const { github } = productVariables[PRODUCT];
+const PRODUCT = process.env.PRODUCT
+const { github } = productVariables[PRODUCT]
 
 module.exports = {
   docs: {
-    root: PRODUCT === 'video' ? '/video/docs/' : `/${PRODUCT}/docs/sdk/`,
+    root: PRODUCT === "video" ? "/video/docs/" : `/${PRODUCT}/docs/sdk/`,
   },
   website: {
     root: `${ROOT}`,
@@ -107,16 +107,16 @@ module.exports = {
     secondary: [
       {
         contact: true,
-        label: 'Contact Sales',
+        label: "Contact Sales",
         href: `${ROOT}/contact/`,
       },
       {
         contact: true,
-        label: 'Contact Support',
+        label: "Contact Support",
         href: `${ROOT}/contact/support/`,
       },
     ],
   },
   github_root: GITHUB_ROOT,
   github,
-};
+}

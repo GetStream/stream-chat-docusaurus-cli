@@ -1,52 +1,53 @@
-@use './mixins.scss';
+@use "./mixins.scss";
 
 /* Menu/sidebar related variables */
 :root {
-  --doc-sidebar-width: 265px!important;
+  --doc-sidebar-width: 265px !important;
   --ifm-menu-color-background-active: transparent;
-  --ifm-menu-color: #000000;
+  --ifm-menu-color: #7e7e7e;
   --ifm-menu-color-active: #000000;
   --ifm-menu-link-padding-vertical: 0.25rem;
   --ifm-menu-link-padding-horizontal: 1rem;
   --xtm-sidebar-footer-height: auto;
 }
 
-html[data-theme='dark'] {
+html[data-theme="dark"] {
   --ifm-menu-color: #c4c4c4;
-  --ifm-menu-color-active: #FFFFFF;
+  --ifm-menu-color-active: #ffffff;
 }
 
-// Remove external links from menu & mobile menu 
+// Remove external links from menu & mobile menu
 .menu__link {
   @include mixins.remove-external-icon;
 }
 
-[class^="docSidebarContainer"] {
+[class*="docSidebarContainer_"] {
   .menu {
     padding: 1.125rem 4px 0 0;
     font-size: 0.875rem;
-  
+
     .menu__link:hover {
       background: none;
       color: var(--ifm-link-hover-color);
     }
-  
+
     .menu__link {
       display: block;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+      padding: var(--ifm-menu-link-padding-vertical)
+        var(--ifm-menu-link-padding-horizontal);
       border-radius: 0;
-  
+
       &--sublist {
         padding-right: calc(var(--ifm-menu-link-padding-horizontal) + 0.5rem);
       }
     }
-  
+
     > .menu__list {
       // custom Stream footer with website's links
-      > .menu__list-item:nth-last-child(-n+4):not(:last-child) {
+      > .menu__list-item:nth-last-child(-n + 4):not(:last-child) {
         .menu__link {
           --ifm-menu-color: var(--ifm-link-color);
           font-weight: 700;
@@ -55,65 +56,77 @@ html[data-theme='dark'] {
           }
         }
       }
-  
+
       > .menu__list-item:last-child {
         margin: 1rem 0;
-  
+
         .menu__link {
-          --ifm-menu-color: rgba(0,0,0,0.6);
+          --ifm-menu-color: rgba(0, 0, 0, 0.6);
           font-size: 0.813rem;
           pointer-events: none;
-  
+
           &::after {
             display: none;
           }
         }
       }
-  
-      > .menu__list-item:not(:nth-last-child(-n+4)) {
+
+      > .menu__list-item:not(:nth-last-child(-n + 4)) {
         // main item style is only applied to first items
         margin-bottom: 1.5rem;
-  
+
         > .menu__link {
           @include mixins.menu-main-item;
           white-space: normal;
 
           .menu__link--active:not(.menu__link--sublist) {
             color: var(--ifm-menu-color-active);
+            font-weight: bold;
             @include mixins.active-item(3px);
           }
-  
+
           &--sublist {
             @include mixins.menu-sublist-icon;
 
             span {
               vertical-align: middle;
             }
-            
+
             &::after {
               right: 1rem;
               opacity: 0;
-              transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+              transition: all var(--ifm-transition-fast)
+                var(--ifm-transition-timing-default);
               vertical-align: middle;
             }
-            
+
             &:hover::after {
               opacity: 1;
             }
           }
-  
         }
-        
+
         .menu__list {
           margin-left: 0px;
           position: relative;
 
           &-item {
+            &:not(:first-child) {
+              margin: 0;
+
+              .menu__list-item-collapsible {
+                font-size: unset;
+                font-weight: unset;
+                letter-spacing: unset;
+                text-transform: none;
+              }
+            }
+
             a.menu__link {
               &--active {
                 font-weight: bold;
               }
-              
+
               &--sublist {
                 @include mixins.menu-sublist-icon;
                 &::after {
@@ -121,17 +134,21 @@ html[data-theme='dark'] {
                   vertical-align: middle;
                 }
               }
-              
+
               &--active[tabindex="0"]:not(&--sublist) {
                 // active-item's height is calculated based on line-height: 20px + vertical padding
-                @include mixins.active-item(3px, calc(2 * var(--ifm-menu-link-padding-vertical) + 20px), unset);
+                @include mixins.active-item(
+                  3px,
+                  calc(2 * var(--ifm-menu-link-padding-vertical) + 20px),
+                  unset
+                );
                 &::before {
                   // vertically align vertical line based on li margin
                   transform: translate(0px, -4px);
                 }
               }
             }
-            
+
             // needed to keep the active higlight line on the left 😩
             a.menu__link--sublist + ul.menu__list {
               margin-left: 10px;
@@ -146,17 +163,38 @@ html[data-theme='dark'] {
         }
       }
     }
-  
+
     &--responsive {
       .menu__button {
         background-color: var(--ifm-color-primary);
         border-color: var(--ifm-color-primary);
-        box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.32) 0px 3px 13px 0px;
+        box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+          rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.32) 0px 3px 13px 0px;
         color: var(--ifm-color-white);
         padding: 0.5rem 1rem;
         border-radius: 99px;
         svg path {
           stroke-width: 4px;
+        }
+      }
+    }
+
+    .theme-doc-sidebar-item-category-level-1 {
+      .menu__list-item-collapsible {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.0825rem;
+        text-transform: uppercase;
+      }
+    }
+
+    .theme-doc-sidebar-item-category-level,
+    .theme-doc-sidebar-item-link-level {
+      &-2,
+      &-3,
+      &-4 {
+        a {
+          border-left: 1px solid rgba(0, 0, 0, 0.1);
         }
       }
     }
@@ -171,6 +209,6 @@ html[data-theme='dark'] {
 
 @media (min-width: 1600px) {
   :root {
-    --doc-sidebar-width: calc((100vw / 12) * 2)!important;
+    --doc-sidebar-width: calc((100vw / 12) * 2) !important;
   }
 }

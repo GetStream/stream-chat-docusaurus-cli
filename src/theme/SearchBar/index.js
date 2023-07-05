@@ -4,43 +4,42 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import React, { useCallback, useMemo, useRef, useState } from "react"
 
-import React, { useState, useRef, useCallback, useMemo } from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useGlobalData from '@docusaurus/useGlobalData';
-import Head from '@docusaurus/Head';
-import { DocSearchButton, useDocSearchKeyboardEvents } from '@docsearch/react';
-import { translate } from '@docusaurus/Translate';
-import { useLocation } from '@docusaurus/router';
+import { DocSearchButton, useDocSearchKeyboardEvents } from "@docsearch/react"
+import Head from "@docusaurus/Head"
+import { useLocation } from "@docusaurus/router"
+import { translate } from "@docusaurus/Translate"
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
+import useGlobalData from "@docusaurus/useGlobalData"
 
-import { DocSearchModal } from './DocSearchModal';
+import URLS from "../../../urls"
+import { DocSearchModal } from "./DocSearchModal"
 
-import('@docsearch/react/style');
-import('./styles.css');
-
-import URLS from '../../../urls';
+import("@docsearch/react/style")
+import("./styles.css")
 
 function DocSearch({ contextualSearch, ...props }) {
-  const searchButtonRef = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const searchButtonRef = useRef(null)
+  const [isOpen, setIsOpen] = useState(false)
 
-  const location = useLocation();
+  const location = useLocation()
   const locationPlatform = useMemo(() => {
     const [urlPlatform] = location.pathname
-      .replace(URLS.docs.root, '')
-      .split('/');
-    return urlPlatform;
-  }, [location.pathname]);
+      .replace(URLS.docs.root, "")
+      .split("/")
+    return urlPlatform
+  }, [location.pathname])
 
   const onOpen = useCallback(() => {
-    setIsOpen(true);
-  }, [setIsOpen]);
+    setIsOpen(true)
+  }, [setIsOpen])
 
   const onClose = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
+    setIsOpen(false)
+  }, [setIsOpen])
 
-  const onInput = useCallback(() => {}, []);
+  const onInput = useCallback(() => {}, [])
 
   useDocSearchKeyboardEvents({
     isOpen,
@@ -48,18 +47,18 @@ function DocSearch({ contextualSearch, ...props }) {
     onClose,
     onInput,
     searchButtonRef,
-  });
+  })
 
-  const globalData = useGlobalData();
-  const SDKS = globalData['docusaurus-plugin-content-docs'];
+  const globalData = useGlobalData()
+  const SDKS = globalData["docusaurus-plugin-content-docs"]
 
-  if (!SDKS[locationPlatform]) return null;
+  if (!SDKS[locationPlatform]) return null
 
   const translatedSearchLabel = translate({
-    id: 'theme.SearchBar.label',
-    message: 'Search',
-    description: 'The ARIA label and placeholder for search button',
-  });
+    id: "theme.SearchBar.label",
+    message: "Search Docs",
+    description: "The ARIA label and placeholder for search button",
+  })
 
   return (
     <>
@@ -89,12 +88,12 @@ function DocSearch({ contextualSearch, ...props }) {
         <DocSearchModal onClose={onClose} locationPlatform={locationPlatform} />
       )}
     </>
-  );
+  )
 }
 
 function SearchBar() {
-  const { siteConfig } = useDocusaurusContext();
-  return <DocSearch {...siteConfig.themeConfig.algolia} />;
+  const { siteConfig } = useDocusaurusContext()
+  return <DocSearch {...siteConfig.themeConfig.algolia} />
 }
 
-export default SearchBar;
+export default SearchBar

@@ -1,7 +1,7 @@
 @mixin active-item($width: 2px, $height: 100%, $top: 0) {
   &::before {
     position: absolute;
-    content: '';
+    content: "";
     top: $top;
     left: 0;
     height: $height;
@@ -28,7 +28,7 @@
 @mixin dropdown-arrow {
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     right: 0;
     border: none;
@@ -45,7 +45,7 @@
 }
 
 @mixin down-arrow($color, $width, $height) {
-  width: 0; 
+  width: 0;
   height: 0;
   border-top: $width solid $color;
   border-left: $height solid transparent;
@@ -55,10 +55,11 @@
 @mixin faux-select {
   position: relative;
   border-radius: 6px;
-  border: 1px solid #E4E4E4;
+  border: 1px solid #e4e4e4;
   cursor: pointer;
-  transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
-  
+  transition: all var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+
   &:hover {
     box-shadow: var(--docsearch-searchbox-shadow);
     a::after {
@@ -68,7 +69,7 @@
 }
 
 @mixin remove-external-icon {
-  & svg[class^=iconExternalLink] {
+  & svg[class^="iconExternalLink"] {
     display: none;
   }
 }
@@ -102,5 +103,19 @@
         white-space: nowrap;
       }
     }
+  }
+}
+
+@mixin faux-select-dropdown-icon($icon: stream) {
+  &:before {
+    content: " ";
+    width: 16px;
+    height: 16px;
+    display: inline;
+    margin-right: 0.5rem;
+    background-image: url("/icon/" + $icon + ".svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }

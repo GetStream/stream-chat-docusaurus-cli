@@ -1,19 +1,19 @@
-import React, { useMemo } from 'react';
-import clsx from 'clsx';
-import OriginalNavbar from '@theme-original/Navbar';
-import { useLocation, Link } from '@docusaurus/router';
+import React, { useMemo } from "react"
 
-import { useBreadcrumbsContext } from '../../hooks/useBreadcrumbsContext';
-import { folderMapping } from '../../../constants';
-import { docs, website } from '../../../urls';
+import clsx from "clsx"
 
-import URLS from '../../../urls';
-import productVariables from '../../product-variables';
+import Link from "@docusaurus/Link"
+import { useLocation } from "@docusaurus/router"
+import OriginalNavbar from "@theme-original/Navbar"
 
-import './styles.scss';
+import { folderMapping } from "../../../constants"
+import URLS, { docs, website } from "../../../urls"
+import { useBreadcrumbsContext } from "../../hooks/useBreadcrumbsContext"
+import productVariables from "../../product-variables"
+import "./styles.scss"
 
-const PRODUCT = process.env.PRODUCT;
-const { productTitle } = productVariables[PRODUCT];
+const PRODUCT = process.env.PRODUCT
+const { productTitle } = productVariables[PRODUCT]
 
 export default function Navbar(props) {
   return (
@@ -21,53 +21,53 @@ export default function Navbar(props) {
       <OriginalNavbar {...props} />
       <SiteNavbar />
     </>
-  );
+  )
 }
 
 const SiteNavbar = () => {
-  const { breadcrumbs } = useBreadcrumbsContext();
+  const { breadcrumbs } = useBreadcrumbsContext()
 
-  const location = useLocation();
+  const location = useLocation()
   const locationPlatform = useMemo(() => {
     const [urlPlatform] = location.pathname
-      .replace(URLS.docs.root, '')
-      .split('/');
-    return urlPlatform;
-  }, [location.pathname]);
+      .replace(URLS.docs.root, "")
+      .split("/")
+    return urlPlatform
+  }, [location.pathname])
 
-  const platform = folderMapping[locationPlatform];
+  const platform = folderMapping[locationPlatform]
 
   const breadcrumbsWithSeparators = useMemo(
     () =>
       breadcrumbs.flatMap((value, index, array) =>
-        array.length - 1 !== index && value.type !== 'category'
-          ? [value, { type: 'separator' }]
+        array.length - 1 !== index && value.type !== "category"
+          ? [value, { type: "separator" }]
           : value
       ),
     [breadcrumbs]
-  );
+  )
 
   const breadcrumbItems = useMemo(
     () =>
       breadcrumbsWithSeparators.map((item, i) => {
-        if (item.type === 'separator') {
+        if (item.type === "separator") {
           return (
             <li key={i} className="separator">
               »
             </li>
-          );
-        } else if (item.type === 'category') {
+          )
+        } else if (item.type === "category") {
           return (
             <li key={i} className="category">
               {item.label}:
             </li>
-          );
+          )
         }
 
-        return <li key={i}>{item.label}</li>;
+        return <li key={i}>{item.label}</li>
       }),
     [breadcrumbsWithSeparators]
-  );
+  )
 
   return (
     <nav className="site-navbar">
@@ -89,30 +89,19 @@ const SiteNavbar = () => {
                 </Link>
               </li>
               <li className="separator">»</li>
-              {breadcrumbItems.map((item) => item)}
+              {breadcrumbItems.map(item => item)}
             </>
           )}
         </ul>
         <ul className="site-navbar__secondary">
           {URLS.website.secondary.map(({ contact, label, href }, i) => (
             <li
-              className={clsx('site-navbar__item', {
-                'site-navbar__item--contact': contact,
+              className={clsx("site-navbar__item", {
+                "site-navbar__item--contact": contact,
               })}
               key={i}
             >
               <a href={href} target="_blank">
-                {contact && (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 16 16"
-                    fill="#000"
-                  >
-                    <path d="M1.3 3.7v-1c0-.4.3-.7.7-.7h12c.4 0 .7.3.7.7v10.6c0 .4-.3.7-.7.7H2a.7.7 0 01-.7-.7v-.6h12V4.9L8 9.7l-6.7-6zM0 6.7h3.3V8H0V6.7zM0 10h5.3v1.3H0V10z" />
-                  </svg>
-                )}
                 {label}
               </a>
             </li>
@@ -120,5 +109,5 @@ const SiteNavbar = () => {
         </ul>
       </div>
     </nav>
-  );
-};
+  )
+}

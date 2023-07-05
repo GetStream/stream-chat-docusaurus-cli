@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 export function Footer() {
   return (
@@ -35,7 +35,7 @@ export function Footer() {
         </li>
       </ul>
     </>
-  );
+  )
 }
 
 function CommandIcon(props) {
@@ -51,5 +51,5 @@ function CommandIcon(props) {
         {props.children}
       </g>
     </svg>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-const GITHUB_ROOT = 'https://github.com/GetStream';
+const GITHUB_ROOT = "https://github.com/GetStream"
 
 module.exports = {
-  'activity-feeds': {
-    productTitle: 'Activity Feeds',
+  "activity-feeds": {
+    productTitle: "Activity Feeds",
     // Algolia stuff
     algolia: {
       parentSection: {
-        name: 'Activity Feeds API Docs',
-        slug: 'activity_feeds_docs',
-        id: 'activity_feeds_docs',
+        name: "Activity Feeds API Docs",
+        slug: "activity_feeds_docs",
+        id: "activity_feeds_docs",
       },
     },
     // GitHub stuff
@@ -21,16 +21,16 @@ module.exports = {
     },
     // Docusaurus (config) stuff
     docusaurus: {
-      title: 'Activity Feeds',
+      title: "Activity Feeds",
     },
   },
   chat: {
-    productTitle: 'Chat',
+    productTitle: "Chat",
     algolia: {
       parentSection: {
-        name: 'Chat API Docs',
-        slug: 'chat_docs',
-        id: 'chat_docs',
+        name: "Chat API Docs",
+        slug: "chat_docs",
+        id: "chat_docs",
       },
     },
     github: {
@@ -42,16 +42,16 @@ module.exports = {
       angular: `${GITHUB_ROOT}/stream-chat-angular/`,
     },
     docusaurus: {
-      title: 'Chat Messaging',
+      title: "Chat Messaging",
     },
   },
   video: {
-    productTitle: 'Video',
+    productTitle: "Video",
     algolia: {
       parentSection: {
-        name: 'Video API Docs',
-        slug: 'video_docs',
-        id: 'video_docs',
+        name: "Video API Docs",
+        slug: "video_docs",
+        id: "video_docs",
       },
     },
     github: {
@@ -63,7 +63,7 @@ module.exports = {
       // angular: `${GITHUB_ROOT}/stream-video-js/`,
     },
     docusaurus: {
-      title: 'Video',
+      title: "Voice & Video",
     },
   },
-};
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 export function LoadingIcon() {
   return (
@@ -19,5 +19,5 @@ export function LoadingIcon() {
         </g>
       </g>
     </svg>
-  );
+  )
 }

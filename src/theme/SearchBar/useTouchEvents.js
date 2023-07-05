@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 export function useTouchEvents({
   getEnvironmentProps,
@@ -8,21 +8,21 @@ export function useTouchEvents({
 }) {
   React.useEffect(() => {
     if (!(panelElement && formElement && inputElement)) {
-      return undefined;
+      return undefined
     }
 
     const { onTouchStart, onTouchMove } = getEnvironmentProps({
       panelElement,
       formElement,
       inputElement,
-    });
+    })
 
-    window.addEventListener('touchstart', onTouchStart);
-    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener("touchstart", onTouchStart)
+    window.addEventListener("touchmove", onTouchMove)
 
     return () => {
-      window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove', onTouchMove);
-    };
-  }, [getEnvironmentProps, panelElement, formElement, inputElement]);
+      window.removeEventListener("touchstart", onTouchStart)
+      window.removeEventListener("touchmove", onTouchMove)
+    }
+  }, [getEnvironmentProps, panelElement, formElement, inputElement])
 }

@@ -1,33 +1,32 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react"
 
-import { LoadingSpinner } from '../LoadingSpinner';
-import { InputField } from '../InputField';
-import { useFeedbackForm } from '../../hooks/useFeedbackForm';
-import { useFeedbackFormData } from '../../hooks/useFeedbackFormData';
-import { useToast } from '../../hooks/useToast';
-
-import './styles.scss';
+import { useFeedbackForm } from "../../hooks/useFeedbackForm"
+import { useFeedbackFormData } from "../../hooks/useFeedbackFormData"
+import { useToast } from "../../hooks/useToast"
+import { InputField } from "../InputField"
+import { LoadingSpinner } from "../LoadingSpinner"
+import "./styles.scss"
 
 export const FeedbackForm = () => {
-  const { header, setHeader, headers } = useFeedbackFormData();
+  const { header, setHeader, headers } = useFeedbackFormData()
   const sections = useMemo(() => {
     return headers.map(({ value }) => ({
       label: value,
       value,
-    }));
-  }, [headers]);
+    }))
+  }, [headers])
 
   const { submitHandler, loading, success, error, data, fieldChangeHandler } =
     useFeedbackForm(
-      { email: '', feedback: '' },
-      header.isPageHeader && header.value.replace(/\s+/g, '-').toLowerCase()
-    );
+      { email: "", feedback: "" },
+      header.isPageHeader && header.value.replace(/\s+/g, "-").toLowerCase()
+    )
 
   useToast(
     error && error.detail,
-    success ? 'Thanks for helping us to get better!' : '',
-    'feedback-form'
-  );
+    success ? "Thanks for helping us to get better!" : "",
+    "feedback-form"
+  )
 
   return (
     <div className="docFeedback__form" id="feedback-form">
@@ -47,10 +46,12 @@ export const FeedbackForm = () => {
           className="input"
           name="sections"
           value={header.value}
-          onChange={(a) => setHeader(a.target.value)}
+          onChange={a => setHeader(a.target.value)}
         >
-          <option value="Select section" disabled>Section:</option>
-          {sections.map((sectionItem) => (
+          <option value="Select section" disabled>
+            Section:
+          </option>
+          {sections.map(sectionItem => (
             <option key={sectionItem.value} value={sectionItem.value}>
               {sectionItem.label}
             </option>
@@ -66,9 +67,9 @@ export const FeedbackForm = () => {
           required
         />
         <button className="button button--primary" type="submit">
-          {loading ? <LoadingSpinner size={18} /> : 'SUBMIT'}
+          {loading ? <LoadingSpinner size={18} /> : "SUBMIT"}
         </button>
       </form>
     </div>
-  );
-};
+  )
+}

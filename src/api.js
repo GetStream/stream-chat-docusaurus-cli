@@ -1,52 +1,52 @@
-import { WEBSITE_BASE_URL } from './environment';
+import { WEBSITE_BASE_URL } from "./environment"
 
 function getCSRFToken() {
-  const matches = document.cookie.match(new RegExp('csrftoken=([^;]+)', 'i'));
-  return matches ? matches[1] : '';
+  const matches = document.cookie.match(new RegExp("csrftoken=([^;]+)", "i"))
+  return matches ? matches[1] : ""
 }
 
 const fetchApi = async (method, path, body) => {
   const response = await fetch(`${WEBSITE_BASE_URL}/${path}/`, {
     method,
     body,
-    credentials: 'include',
-    headers: { 'x-csrftoken': getCSRFToken() },
-  });
+    credentials: "include",
+    headers: { "x-csrftoken": getCSRFToken() },
+  })
 
-  let data;
+  let data
   if (response.status !== 204) {
     try {
-      data = await response.json();
+      data = await response.json()
     } catch (err) {
-      console.error(response, err);
+      console.error(response, err)
     }
   }
 
-  if (response.ok) return data;
+  if (response.ok) return data
 
   const err = new Error(
     `Request failed with status ${response.status}: ${response.statusText}`
-  );
-  err.data = data;
-  err.status = response.status;
-  err.response = response;
-  throw err;
-};
+  )
+  err.data = data
+  err.status = response.status
+  err.response = response
+  throw err
+}
 
-export const getAPIErrorMsg = (error) => {
+export const getAPIErrorMsg = error => {
   if (error && error.data) {
-    return error.data;
+    return error.data
   }
   return {
-    detail: 'Something went wrong. Please try again or contact support!',
-  };
-};
+    detail: "Something went wrong. Please try again or contact support!",
+  }
+}
 
-export const apiDocFeedback = (data) => {
-  return fetchApi('POST', 'api/docs_cms/feedback', data);
-};
+export const apiDocFeedback = data => {
+  return fetchApi("POST", "api/docs_cms/feedback", data)
+}
 
-export const apiGetUser = () => fetchApi('GET', 'api/accounts/user');
+export const apiGetUser = () => fetchApi("GET", "api/accounts/user")
 
 export const apiGetPublicUserToken = () =>
-  fetchApi('GET', 'api/core/chat_docs_credentials'); // activity feeds credentials ???
+  fetchApi("GET", "api/core/chat_docs_credentials") // activity feeds credentials ???

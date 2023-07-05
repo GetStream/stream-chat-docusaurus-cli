@@ -1,6 +1,7 @@
-@use '../../css/components/mixins.scss';
+@use "../../css/components/mixins.scss";
 
 :root {
+  --ifm-navbar-height: 6rem;
   --ifm-navbar-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.04);
   --xtm-site-navbar-display: none;
   --xtm-site-navbar-height: 1.875rem;
@@ -25,16 +26,28 @@
 }
 
 .navbar {
+  align-items: center;
   z-index: calc(var(--ifm-z-index-fixed) + 15);
 
   &__brand {
-    margin-right: 1.875rem;
+    margin-right: 1rem;
+    background-image: url("/img/logo-active.svg");
+    background-size: 51px 44px;
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
   }
 
   &__logo {
-    height: 1.25rem;
-    transform: translateY(-0.1rem);
-    margin-right: 0.2rem;
+    height: 100%;
+    margin-right: 1rem;
+
+    img {
+      width: 100%;
+    }
+
+    &:hover {
+      opacity: 0;
+    }
   }
 
   &__title {
@@ -42,7 +55,7 @@
 
     &::after {
       display: inline-block;
-      content: 'docs';
+      content: "docs";
       text-transform: uppercase;
       font-size: 0.5rem;
       color: var(--ifm-color-primary);
@@ -83,13 +96,28 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.32px;
-      color: var(--ifm-color-primary);
+      color: var(--ifm-color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.25rem 2rem !important;
+      border-radius: 21px;
+      background-color: var(--ifm-color-primary);
+
+      &:hover {
+        color: var(--ifm-color-white);
+        opacity: 0.8;
+      }
+
+      @media (max-width: 480px) {
+        display: none !important;
+      }
     }
 
     &__github {
       width: 13px;
       height: 13px;
-      background: url('/icon/github.svg') no-repeat;
+      background: url("/icon/github.svg") no-repeat;
 
       &:hover {
         opacity: 0.8;
@@ -103,8 +131,16 @@
 
   .dropdown {
     @include mixins.faux-select;
-    min-width: 11.25rem;
-    margin-right: 1.25rem;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 2.25rem;
+    margin-right: 0.5rem;
+
+    @media (min-width: 767px) {
+      flex: auto;
+      max-width: 11.25rem;
+    }
 
     > .navbar__link__custom-dropdown--sdks,
     > .navbar__link__custom-dropdown--version {
@@ -122,14 +158,24 @@
     }
 
     &__link {
+      display: flex;
+      align-items: center;
+
       &--active {
         background: none;
-        font-weight: 700;
+        font-weight: bold;
       }
 
       &:hover {
         background: none;
         color: var(--ifm-color-primary);
+      }
+
+      &:first-child {
+        &.navbar__break,
+        &.navbar_break:hover {
+          margin-top: 0;
+        }
       }
     }
   }
@@ -219,7 +265,7 @@
         &--active {
           font-weight: bold;
         }
-        &--active[tabindex='0']:not(&--sublist) {
+        &--active[tabindex="0"]:not(&--sublist) {
           // active-item's height is calculated based on line-height: 1.25rem + vertical padding
           @include mixins.active-item(
             3px,
@@ -256,22 +302,13 @@
             display: none;
           }
         }
-        .navbar__item.dropdown.dropdown--hoverable {
-          display: inline-block;
-        }
       }
     }
   }
 }
 
 @media (min-width: 997px) {
-  [class^='sidebar_'] {
-    padding-top: calc(
-      var(--ifm-navbar-height) + (var(--xtm-site-navbar-height)) + 1px
-    ) !important;
-  }
-
-  [class^='tableOfContents_'] {
+  [class*="tableOfContents_"] {
     max-height: calc(
       100vh -
         (
@@ -281,12 +318,6 @@
     ) !important;
     top: calc(
       var(--ifm-navbar-height) + (var(--xtm-site-navbar-height)) + 1px + 1rem
-    ) !important;
-  }
-
-  [class^='docSidebarContainer_'] {
-    margin-top: calc(
-      -1 * (var(--ifm-navbar-height) + (var(--xtm-site-navbar-height) + 1px))
     ) !important;
   }
 }
@@ -378,7 +409,7 @@
         }
 
         &::before {
-          content: '«';
+          content: "«";
           color: var(--ifm-color-primary);
           margin-right: 0.2rem;
         }
@@ -415,7 +446,7 @@
         @include mixins.down-arrow(var(--ifm-color-secondary-darker), 4px, 3px);
         cursor: pointer;
         margin: 2px 0 0 0.5rem;
-        content: '';
+        content: "";
       }
     }
   }

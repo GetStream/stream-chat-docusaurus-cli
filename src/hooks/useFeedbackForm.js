@@ -1,52 +1,52 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from "react"
 
-import { apiDocFeedback, getAPIErrorMsg } from '../api';
+import { apiDocFeedback, getAPIErrorMsg } from "../api"
 
 export const useFeedbackForm = (initialState, section) => {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(undefined);
-  const [data, setData] = useState(initialState);
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(undefined)
+  const [data, setData] = useState(initialState)
 
   const fieldChangeHandler = useCallback(
-    (e) => setData((d) => ({ ...d, [e.target.name]: e.target.value })),
+    e => setData(d => ({ ...d, [e.target.name]: e.target.value })),
     []
-  );
+  )
 
   const submitHandler = useCallback(
-    async (e) => {
-      e.preventDefault();
-      if (success) return;
-      if (error) setError(undefined);
+    async e => {
+      e.preventDefault()
+      if (success) return
+      if (error) setError(undefined)
 
-      const formData = new FormData();
+      const formData = new FormData()
 
       for (let key in data) {
-        formData.append(key, data[key]);
+        formData.append(key, data[key])
       }
 
-      const sectionHash = section ? `#${section}` : '';
+      const sectionHash = section ? `#${section}` : ""
 
-      formData.append('page_url', `${window.location.href}${sectionHash}`);
+      formData.append("page_url", `${window.location.href}${sectionHash}`)
 
-      setLoading(true);
+      setLoading(true)
 
       try {
-        await apiDocFeedback(formData);
+        await apiDocFeedback(formData)
 
-        setSuccess(true);
-        resetForm(e.target);
+        setSuccess(true)
+        resetForm(e.target)
         setTimeout(() => {
-          setSuccess(false);
-          setData(initialState);
-        }, 3000);
+          setSuccess(false)
+          setData(initialState)
+        }, 3000)
       } catch (err) {
-        setError(getAPIErrorMsg(err));
+        setError(getAPIErrorMsg(err))
       }
-      setLoading(false);
+      setLoading(false)
     },
     [data, success, error]
-  );
+  )
 
-  return { submitHandler, fieldChangeHandler, loading, success, error, data };
-};
+  return { submitHandler, fieldChangeHandler, loading, success, error, data }
+}

@@ -82,23 +82,23 @@ For example for React Native, there is a file at `/docusaurus/reactnative-docusa
 module.exports = {
   plugins: [
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        lastVersion: '3.x.x',
+        lastVersion: "3.x.x",
         versions: {
           current: {
-            label: '4.0.0',
-            banner: 'unreleased',
-            path: '4.0.0',
+            label: "4.0.0",
+            banner: "unreleased",
+            path: "4.0.0",
           },
-          '3.x.x': {
-            label: '3.x.x',
+          "3.x.x": {
+            label: "3.x.x",
           },
         },
       },
     ],
   ],
-};
+}
 ```
 
 ## Sidebars
@@ -117,7 +117,7 @@ To share content between multiple SDKs, put markdown files in the `shared` direc
 Then, import and render the shared content using mdx:
 
 ```mdx
-import SharedContent from '../../../shared/_example-shared-content.md';
+import SharedContent from "../../../shared/_example-shared-content.md"
 
 <SharedContent />
 ```
@@ -171,13 +171,13 @@ To make use of the `<ImageShowcase />` component, remember to add the correct im
 Example of how to use it:
 
 ```jsx
-import ImageShowcase from '@site/src/components/ImageShowcase';
+import ImageShowcase from "@site/src/components/ImageShowcase"
 
-import channelList from '../assets/channel_list.png';
-import messageInput from '../assets/message_input.png';
-import messageList from '../assets/message_list.png';
+import channelList from "../assets/channel_list.png"
+import messageInput from "../assets/message_input.png"
+import messageList from "../assets/message_list.png"
 
-<ImageShowcase
+;<ImageShowcase
   items={[
     {
       image: channelList,
@@ -186,12 +186,12 @@ import messageList from '../assets/message_list.png';
           <code>ChannelList</code> can be used with no props
         </span>
       ),
-      alt: 'Example of how to use channelList component',
+      alt: "Example of how to use channelList component",
     },
-    { image: messageInput, caption: 'Message input design' },
-    { image: messageList, caption: 'Message list sample' },
+    { image: messageInput, caption: "Message input design" },
+    { image: messageList, caption: "Message list sample" },
   ]}
-/>;
+/>
 ```
 
 ![Example ImageShowcase desktop](./assets/images/Example_showcase.png)
@@ -205,12 +205,12 @@ You can also add border to the images using the boolean prop `border` like the f
     {
       image: image1,
       caption: <span>Images with border 🙂</span>,
-      alt: 'Example of custom message',
+      alt: "Example of custom message",
     },
     {
       image: image2,
       caption: <span>Another one!</span>,
-      alt: 'Example of custom message part 2',
+      alt: "Example of custom message part 2",
     },
   ]}
 />

@@ -1,19 +1,19 @@
-import url from 'url';
+import url from "url"
 
-import { website, docs } from '../../../urls';
-import { CMS_INDEX } from '../../../constants';
+import { CMS_INDEX } from "../../../constants"
+import { docs, website } from "../../../urls"
 
 export const getItemUrl = ({ item, platform, cmsPlatform, locationQuery }) => {
-  const headerId = item.header_id.replace('_', '-');
+  const headerId = item.header_id.replace("_", "-")
   if (item.index === CMS_INDEX) {
     return `${website.cms_docs}${url.format({
       pathname: `${cmsPlatform}/${item.slug}/`,
       query: locationQuery,
-    })}${!!headerId ? `#${headerId}` : ''}`;
+    })}${!!headerId ? `#${headerId}` : ""}`
   }
 
   return `${docs.root}${url.format({
-    pathname: item.slug === '' ? `${platform}/` : `${platform}/${item.slug}/`,
+    pathname: item.slug === "" ? `${platform}/` : `${platform}/${item.slug}/`,
     query: locationQuery,
-  })}${!!headerId ? `#${headerId}` : ''}`;
-};
+  })}${!!headerId ? `#${headerId}` : ""}`
+}

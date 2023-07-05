@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 export function SearchIcon() {
   return (
@@ -16,5 +16,5 @@ export function SearchIcon() {
         fill="#005FFF"
       />
     </svg>
-  );
+  )
 }
