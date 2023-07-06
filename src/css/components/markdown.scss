@@ -1,20 +1,22 @@
 .markdown {
-  > p:first-child {
-    font-size: 1.125rem;
-  }
+  p {
+    img {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      width: 100%;
+      max-height: 600px;
+      object-fit: scale-down;
+      background-color: #edeeeb;
 
-  img {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    max-height: 600px;
-    object-fit: contain;
-    background-color: #edeeeb;
+      @media (min-width: 997px) {
+        padding: 2.25rem;
+        border-radius: 1rem;
+      }
+    }
 
-    @media (min-width: 997px) {
-      padding: 2.25rem;
-      border-radius: 1rem;
+    &:first-child {
+      font-size: 1.125rem;
     }
   }
 
@@ -22,29 +24,37 @@
   ol {
     font-size: 0.875rem;
   }
+
   ol {
     list-style-type: decimal;
+  }
+
+  li {
+    img {
+      padding: 0;
+    }
   }
 
   table {
     display: table;
     font-size: 0.875rem;
     table-layout: fixed;
-  }
+    overflow: auto;
 
-  table tr {
-    border: var(--ifm-table-border-width) solid var(--ifm-table-border-color);
-
-    img {
-      padding: 0;
-      border-radius: 0;
+    th,
+    td {
+      text-align: unset;
+      border: none;
     }
-  }
 
-  table th,
-  table td {
-    text-align: unset;
-    border: none;
+    tr {
+      border: var(--ifm-table-border-width) solid var(--ifm-table-border-color);
+
+      img {
+        padding: 0;
+        border-radius: 0;
+      }
+    }
   }
 
   h2.heading {
