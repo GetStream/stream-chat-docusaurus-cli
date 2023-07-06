@@ -305,6 +305,10 @@
       }
     }
   }
+
+  [class*="searchBox"] {
+    position: initial;
+  }
 }
 
 @media (min-width: 997px) {
