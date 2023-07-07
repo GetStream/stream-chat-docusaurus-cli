@@ -24,25 +24,11 @@ function GithubReleaseLink({ activeVersion, href }) {
 }
 
 function CustomNavbarItem(props) {
-  const { docsPluginId, label, type, items } = props
+  const { docsPluginId, label, type } = props
   const { location, locationPlatform, activeVersion, ...itemProps } = props
   const { pathname } = location
 
   const { isLoggedIn } = useAuthContext()
-
-  const selectedSDK = useMemo(() => {
-    if (label === "SDK" && items.length) {
-      return items.find(item =>
-        pathname.includes(`${URLS.docs.root}${item.id}/`)
-      )
-    }
-  }, [items, label, pathname])
-
-  if (selectedSDK) {
-    return (
-      <PlatformNavbarItem {...itemProps} label={PlatformLabel(selectedSDK)} />
-    )
-  }
 
   if (
     type === "docsVersionDropdown" &&
@@ -83,27 +69,6 @@ function CustomNavbarItem(props) {
   )
 }
 
-const PlatformNavbarItem = ({ items, ...props }) => {
-  const sdks = useMemo(
-    () => items.map(sdk => ({ ...sdk, label: PlatformLabel(sdk) })),
-    [items]
-  )
-  return <OriginalNavbarItem {...props} items={sdks} />
-}
-
-const PlatformLabel = ({ id, label }) => (
-  <span className="navbar__link__sdk">
-    {id && (
-      <img
-        src={`${URLS.docs.root}icon/${id}.svg`}
-        alt={`${label} logo`}
-        className="navbar__link__sdk__icon"
-      />
-    )}
-    {label}
-  </span>
-)
-
 function NavbarItemWithActiveVersion(props) {
   const { docsPluginId, locationPlatform } = props
   const activeVersion = useActiveVersion(docsPluginId || locationPlatform)
@@ -112,7 +77,7 @@ function NavbarItemWithActiveVersion(props) {
 }
 
 export default function NavbarItem(props) {
-  const { docsPluginId, label, type, items } = props
+  const { docsPluginId } = props
   const location = useLocation()
   const locationPlatform = useMemo(() => {
     const [urlPlatform] = location.pathname
