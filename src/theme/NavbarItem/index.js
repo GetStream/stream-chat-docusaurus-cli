@@ -84,10 +84,7 @@ function CustomNavbarItem(props) {
 }
 
 const PlatformNavbarItem = ({ items, ...props }) => {
-  const sdks = useMemo(
-    () => items.map(sdk => ({ ...sdk, label: PlatformLabel(sdk) })),
-    [items]
-  )
+  const sdks = useMemo(() => items.map(sdk => ({ ...sdk })), [items])
   return <OriginalNavbarItem {...props} items={sdks} />
 }
 
