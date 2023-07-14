@@ -2,14 +2,26 @@ import React, { useEffect, useState } from "react"
 
 import { ToastContainer } from "react-toastify"
 
+import Head from "@docusaurus/Head"
 import OriginalLayout from "@theme-original/Layout"
 
 import URLS from "../../../urls"
-import { AuthContextProvider } from "../../contexts/AuthContext"
 import { DataLayer } from "../../components/DataLayer"
+import { AuthContextProvider } from "../../contexts/AuthContext"
 
 const isBrowser = typeof window !== `undefined`
 const isProd = process.env.DEPLOYMENT_ENV === "production"
+
+const trackingScript =
+  isProd &&
+  process.env.GOOGLE_TAG_TRACKING_ID &&
+  `
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${process.env.GOOGLE_TAG_TRACKING_ID}');
+`
 
 export default function Layout(props) {
   const isRootPath = isBrowser && window.location.pathname === URLS.docs.root
@@ -33,7 +45,12 @@ export default function Layout(props) {
 
   return (
     <AuthContextProvider>
-      <DataLayer/>
+      <Head>
+        {isProd && (
+          <script data-cookieconsent="ignore">{trackingScript}</script>
+        )}
+      </Head>
+      <DataLayer />
       <ToastContainer />
       <OriginalLayout {...props} />
     </AuthContextProvider>
