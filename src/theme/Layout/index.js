@@ -6,6 +6,7 @@ import OriginalLayout from "@theme-original/Layout"
 
 import URLS from "../../../urls"
 import { AuthContextProvider } from "../../contexts/AuthContext"
+import { DataLayer } from "../../components/DataLayer"
 
 const isBrowser = typeof window !== `undefined`
 const isProd = process.env.DEPLOYMENT_ENV === "production"
@@ -32,6 +33,7 @@ export default function Layout(props) {
 
   return (
     <AuthContextProvider>
+      <DataLayer/>
       <ToastContainer />
       <OriginalLayout {...props} />
     </AuthContextProvider>
