@@ -9,11 +9,20 @@ jobs:
   trigger_docs_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Triggers docs deployment workflow
+      - name: Triggers chat docs deployment workflow
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           curl -X POST https://api.github.com/repos/GetStream/stream-chat-docusaurus/actions/workflows/deploy-production.yml/dispatches \
+          -H 'Accept: application/vnd.github.v3+json' \
+          -u ":$PAT_TOKEN" \
+          --data '{"ref": "production"}'
+
+      - name: Triggers video docs deployment workflow
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          curl -X POST https://api.github.com/repos/GetStream/stream-video-docusaurus/actions/workflows/deploy-production.yml/dispatches \
           -H 'Accept: application/vnd.github.v3+json' \
           -u ":$PAT_TOKEN" \
           --data '{"ref": "production"}'
