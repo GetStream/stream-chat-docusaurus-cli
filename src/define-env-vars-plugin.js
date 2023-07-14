@@ -29,8 +29,7 @@ module.exports = function () {
             ALGOLIA_API_KEY: "DEFAULT",
             ALGOLIA_APP_ID: "DEFAULT",
             DEPLOYMENT_ENV: process.env.DEPLOYMENT_ENV ?? "staging",
-            GOOGLE_TAG_TRACKING_ID:
-              process.env.GOOGLE_TAG_TRACKING_ID || "DEFAULT",
+            GOOGLE_TAG_TRACKING_ID: process.env.GOOGLE_TAG_TRACKING_ID ?? "",
             PRODUCT: process.env.PRODUCT ?? "chat",
             WEBSITE_BASE_URL: "DEFAULT",
             ...filteredVariables,
