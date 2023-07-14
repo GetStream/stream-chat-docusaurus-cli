@@ -5,11 +5,12 @@ const environment = require("./environment")
 // We are limiting ourselves to the ones declared in the environment.js file
 
 const OPTIONAL_VARIABLES = [
-  "ALGOLIA_APP_ID",
   "ALGOLIA_API_KEY",
-  "WEBSITE_BASE_URL",
+  "ALGOLIA_APP_ID",
   "DEPLOYMENT_ENV",
+  "GOOGLE_TAG_TRACKING_ID",
   "PRODUCT",
+  "WEBSITE_BASE_URL",
 ]
 
 const filteredVariables = Object.keys(environment).reduce((acc, item) => {
@@ -25,11 +26,12 @@ module.exports = function () {
       return {
         plugins: [
           new webpack.EnvironmentPlugin({
-            ALGOLIA_APP_ID: "DEFAULT",
             ALGOLIA_API_KEY: "DEFAULT",
-            WEBSITE_BASE_URL: "DEFAULT",
+            ALGOLIA_APP_ID: "DEFAULT",
             DEPLOYMENT_ENV: process.env.DEPLOYMENT_ENV ?? "staging",
+            GOOGLE_TAG_TRACKING_ID: process.env.GOOGLE_TAG_TRACKING_ID ?? "",
             PRODUCT: process.env.PRODUCT ?? "chat",
+            WEBSITE_BASE_URL: "DEFAULT",
             ...filteredVariables,
           }),
         ],
