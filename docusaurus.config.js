@@ -236,15 +236,6 @@ if (navbarSDKItems.length > 1) {
 
 const plugins = [...defaultPlugins, ...CUSTOM_PLUGINS]
 
-if (process.env.DEPLOYMENT_ENV === "production") {
-  plugins.push([
-    "@docusaurus/plugin-google-gtag",
-    {
-      trackingID: process.env.GOOGLE_TAG_TRACKING_ID || "DEFAULT",
-    },
-  ])
-}
-
 /**
  * For video, we want to embed the homepage in the content repository.
  */
