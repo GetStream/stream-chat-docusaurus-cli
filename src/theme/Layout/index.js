@@ -46,13 +46,6 @@ export default function Layout(props) {
   return (
     <AuthContextProvider>
       <Head>
-        {isProd && (
-          <script
-            async
-            key="gtmPreload"
-            src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
-          ></script>
-        )}
         {trackingScript && (
           <script data-cookieconsent="ignore">{trackingScript}</script>
         )}
