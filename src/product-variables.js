@@ -46,10 +46,10 @@ module.exports = {
     },
   },
   video: {
-    productTitle: "Video",
+    productTitle: "Video & Audio",
     algolia: {
       parentSection: {
-        name: "Video API Docs",
+        name: "Video & Audio API Docs",
         slug: "video_docs",
         id: "video_docs",
       },
@@ -63,7 +63,7 @@ module.exports = {
       // angular: `${GITHUB_ROOT}/stream-video-js/`,
     },
     docusaurus: {
-      title: "Voice & Video",
+      title: "Video & Audio",
     },
   },
 }
