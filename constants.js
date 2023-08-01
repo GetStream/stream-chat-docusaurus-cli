@@ -6,6 +6,7 @@ const folderMapping = {
   reactnative: "React Native",
   angular: "Angular",
   api: "API",
+  javascript: "JavaScript",
 }
 
 const platformMapping = {
@@ -16,6 +17,7 @@ const platformMapping = {
   reactnative: "react-native",
   angular: "angular",
   api: "api",
+  javascript: "javascript",
 }
 
 const languageMapping = {
@@ -26,6 +28,7 @@ const languageMapping = {
   reactnative: "javascript",
   angular: "javascript",
   api: "javascript",
+  javascript: "javascript",
 }
 
 const PRODUCT = process.env.PRODUCT
