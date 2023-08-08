@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useMemo } from "react"
 
 import { useLocation } from "@docusaurus/router"
 
+import urls from "../../../urls"
 import { AuthContext } from "../../contexts/AuthContext"
 
 export const getPlanName = name => {
@@ -23,7 +24,7 @@ export const DataLayer = ({}) => {
 
   const platform = useMemo(() => {
     const [urlPlatform] = location.pathname
-      .replace(URLS.docs.root, "")
+      .replace(urls.docs.root, "")
       .split("/")
     return urlPlatform
   }, [location.pathname])
