@@ -23,10 +23,21 @@ export const DataLayer = ({}) => {
   const org = getSelectedOrg()
 
   const platform = useMemo(() => {
+    // splits out the platform from the pathname
     const [urlPlatform] = location.pathname
       .replace(urls.docs.root, "")
       .split("/")
+
+    // exception for React Native
+    if (urlPlatform === "reactnative") {
+      return "React Native"
+    }
+
+    // returns the platform with capitalized first letters
     return urlPlatform
+      .split("-")
+      .map(item => item.charAt(0).toUpperCase() + item.slice(1))
+      .join(" ")
   }, [location.pathname])
 
   useEffect(() => {
