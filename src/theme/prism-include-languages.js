@@ -20,13 +20,13 @@ const prismIncludeLanguages = PrismObject => {
     })
     magicComments.push({
       className: "docusaurus-highlight-removed-code-lines",
-      line: "Next line is removed",
-      block: { start: "Removed lines start", end: "Removed lines end" },
+      line: "removed-line",
+      block: { start: "removed-block-start", end: "removed-block-end" },
     })
     magicComments.push({
       className: "docusaurus-highlight-added-code-lines",
-      line: "Next line is added",
-      block: { start: "Added lines start", end: "Added lines end" },
+      line: "added-line",
+      block: { start: "added-block-start", end: "added-block-end" },
     })
 
     require("prismjs/components/prism-kotlin")
