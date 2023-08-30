@@ -21,6 +21,8 @@
   grid-template-columns: 25px 1fr;
 
   img.navbar__link__sdk__icon {
+    width: 18px;
+    height: 18px;
     align-self: center;
   }
 }
@@ -197,6 +199,10 @@
 
       &__ios {
         @include mixins.faux-select-dropdown-icon(ios);
+      }
+
+      &__javascript {
+        @include mixins.faux-select-dropdown-icon(javascript);
       }
 
       &__react {
