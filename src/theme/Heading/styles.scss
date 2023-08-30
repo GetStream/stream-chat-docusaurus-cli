@@ -7,6 +7,17 @@ See https://twitter.com/JoshWComeau/status/1332015868725891076
   scroll-margin-top: calc(var(--ifm-navbar-height) + 0.5rem);
 }
 
+.flexHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flexHeading .label.description {
+  order: 2;
+  font-size: 0.65rem;
+}
+
 .anchorWithHideOnScrollNavbar {
   scroll-margin-top: 0.5rem;
 }
