@@ -51,7 +51,7 @@ const SDK_ORDER = [
 ]
 
 const ignoredVideoSDKsStaging = ["angular"]
-const ignoredVideoSDKsProduction = ["angular", "reactnative"]
+const ignoredVideoSDKsProduction = ["angular"]
 
 module.exports = {
   IGNORED_DIRECTORIES,
