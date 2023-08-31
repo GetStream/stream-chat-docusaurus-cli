@@ -10,12 +10,25 @@ import siteConfig from "@generated/docusaurus.config"
 const prismIncludeLanguages = PrismObject => {
   if (ExecutionEnvironment.canUseDOM) {
     const {
-      themeConfig: { prism: { additionalLanguages = [] } = {} },
+      themeConfig: {
+        prism: { additionalLanguages = [], magicComments = [] } = {},
+      },
     } = siteConfig
     window.Prism = PrismObject
     additionalLanguages.forEach(lang => {
       require(`prismjs/components/prism-${lang}`) // eslint-disable-line
     })
+    magicComments.push({
+      className: "docusaurus-highlight-removed-code-lines",
+      line: "removed-line",
+      block: { start: "removed-block-start", end: "removed-block-end" },
+    })
+    magicComments.push({
+      className: "docusaurus-highlight-added-code-lines",
+      line: "added-line",
+      block: { start: "added-block-start", end: "added-block-end" },
+    })
+
     require("prismjs/components/prism-kotlin")
     require("prismjs/components/prism-swift")
     require("prismjs/components/prism-java")

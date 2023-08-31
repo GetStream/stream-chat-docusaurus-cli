@@ -162,6 +162,38 @@ html[data-theme="dark"] {
   padding: 0 var(--ifm-pre-padding);
 }
 
+.docusaurus-highlight-removed-code-lines {
+  background-color: #453a45;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+.docusaurus-highlight-removed-code-lines::before {
+  content: "−";
+  color: #fff;
+  display: inline-block;
+  width: 1em;
+  // margin-right: 0.5em;
+  text-align: right;
+}
+
+.docusaurus-highlight-added-code-lines {
+  background-color: #354947;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+.docusaurus-highlight-added-code-lines::before {
+  content: "+";
+  color: #fff;
+  display: inline-block;
+  width: 1em;
+  // margin-right: 0.5em;
+  text-align: right;
+}
+
 // Overrides default from infima once we need this spacing otherwise feedback form button
 // gets too close to the markdown section
 // !important needed because new docusaurus version sets it to 0 with a !important flag
