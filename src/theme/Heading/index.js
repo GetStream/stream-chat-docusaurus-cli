@@ -37,7 +37,7 @@ export default function Heading({ as: As, id, ...props }) {
         {...props}
         ref={headingRef}
         className={clsx(
-          "anchor",
+          "anchor flexHeading",
           hideOnScroll
             ? "anchorWithHideOnScrollNavbar"
             : "anchorWithStickyNavbar"
