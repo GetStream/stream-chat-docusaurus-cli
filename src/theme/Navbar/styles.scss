@@ -240,7 +240,7 @@
       > ul.menu__list {
         position: relative;
         // Styles for 'main' item
-        > li.menu__list-item:not(:nth-last-child(-n + 4)) {
+        > li.menu__list-item:not(:nth-last-child(-n + 5)) {
           margin-bottom: 1rem;
           > a.menu__link {
             @include mixins.menu-main-item;
@@ -248,7 +248,7 @@
         }
 
         // custom Stream footer with website's links
-        > .menu__list-item:nth-last-child(-n + 4):not(:last-child) {
+        > .menu__list-item:nth-last-child(-n + 5):not(:last-child) {
           .menu__link {
             --ifm-menu-color: var(--ifm-link-color);
             font-weight: 700;
