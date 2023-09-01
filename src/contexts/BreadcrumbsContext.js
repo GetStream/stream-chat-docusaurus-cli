@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from "react"
 
 import { useLocation } from "@docusaurus/router"
 
+import URLS from "../../urls"
+
 export const BreadcrumbsContext = React.createContext()
 
 const removeTrailingSlash = string => {
@@ -42,6 +44,7 @@ export const BreadcrumbsContextProvider = ({ children }) => {
   const [breadcrumbs, setBreadcrumbs] = useState([])
   const [sidebar, setSidebar] = useState([])
   const { pathname } = useLocation()
+  const [urlPlatform] = pathname.replace(URLS.docs.root, "").split("/")
 
   const extarctBreadcrumbs = useCallback((localSidebar, localPathname) => {
     const pathObjects = extractPathObjects(localSidebar, localPathname)
@@ -56,8 +59,9 @@ export const BreadcrumbsContextProvider = ({ children }) => {
     () => ({
       breadcrumbs,
       setSidebar,
+      urlPlatform,
     }),
-    [breadcrumbs, setSidebar]
+    [breadcrumbs, setSidebar, urlPlatform]
   )
 
   return (
