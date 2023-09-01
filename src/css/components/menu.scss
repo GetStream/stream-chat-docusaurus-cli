@@ -47,7 +47,7 @@ html[data-theme="dark"] {
 
     > .menu__list {
       // custom Stream footer with website's links
-      > .menu__list-item:nth-last-child(-n + 4):not(:last-child) {
+      > .menu__list-item:nth-last-child(-n + 5):not(:last-child) {
         .menu__link {
           --ifm-menu-color: var(--ifm-link-color);
           font-weight: 700;
@@ -71,7 +71,7 @@ html[data-theme="dark"] {
         }
       }
 
-      > .menu__list-item:not(:nth-last-child(-n + 4)) {
+      > .menu__list-item:not(:nth-last-child(-n + 5)) {
         // main item style is only applied to first items
         margin-bottom: 1.5rem;
 
