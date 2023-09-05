@@ -7,7 +7,7 @@ import productVariables from "../../product-variables"
 
 const gitLink = urlPlatform => {
   return (
-    productVariables[process.env.PRODUCT]?.gitHub?.[urlPlatform] ||
+    productVariables[process.env.PRODUCT]?.github?.[urlPlatform] ||
     "https://github.com/GetStream/"
   )
 }
