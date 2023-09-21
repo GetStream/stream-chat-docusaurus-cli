@@ -36,6 +36,7 @@ const prismIncludeLanguages = PrismObject => {
     require("prismjs/components/prism-groovy")
     require("prismjs/components/prism-ruby")
     require("prismjs/components/prism-go")
+    require("prismjs/components/prism-csharp")
     delete window.Prism
   }
 }
