@@ -250,5 +250,5 @@ import Video from "../assets/video.mp4";
 
 This would show the video centered in the page with control buttons as below. Just make sure you adapt the `width` style property according to your video file.
 
-<img width="974" alt="Screenshot 2023-10-11 at 14 33 39" src="https://github.com/GetStream/stream-chat-docusaurus-cli/assets/3846977/87b342b8-5e0d-47bd-b175-d7e4dde077de">
+<img width="974" alt="Example Video Showcase" src="https://github.com/GetStream/stream-chat-docusaurus-cli/assets/3846977/87b342b8-5e0d-47bd-b175-d7e4dde077de">
 
