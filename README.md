@@ -242,7 +242,7 @@ import Video from "../assets/video.mp4";
         <video muted controls style={{ maxWidth: "100%" }}>
             <source src={Video} type="video/mp4"/>
             Alas, your browser doesn't support HTML5 video. That's OK! You can still
-            <a href={Video}>download the video</a> and watch it with a video player.
+            <a href={Video}> download the video</a> and watch it with a video player.
         </video>
     </div>
 </div>
