@@ -128,7 +128,7 @@ There are 5 pre-defined user roles, these are:
 - `admin`
 - `call-member`
 
-As mentioned before each user role is associated with a set of call capabilities. You can access the default roles and their capabilities in your [Stream Dashboard](https://dashboard.getstream.io/).
+As mentioned before each user role is associated with a set of call capabilities. You can access the default roles and their capabilities in the [Stream Dashboard](https://dashboard.getstream.io/).
 
 In general, it makes sense to have a solid setup of roles as it makes handling permissions and requests easier.
 
