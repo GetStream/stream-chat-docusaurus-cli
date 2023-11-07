@@ -1,0 +1,14 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#3E282A",
+    "titleBar.activeBackground": "#56383A",
+    "titleBar.activeForeground": "#FCFAFA"
+  },
+  "grammarly.selectors": [
+    {
+      "language": "plaintext",
+      "scheme": "file",
+      "pattern": "shared/video/_call-filters.mdx"
+    }
+  ]
+}
