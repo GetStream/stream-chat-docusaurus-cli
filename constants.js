@@ -7,6 +7,7 @@ const folderMapping = {
   angular: "Angular",
   api: "API",
   javascript: "JavaScript",
+  unity: "Unity",
 }
 
 const platformMapping = {
@@ -18,6 +19,7 @@ const platformMapping = {
   angular: "angular",
   api: "api",
   javascript: "javascript",
+  unity: "Unity",
 }
 
 const languageMapping = {
@@ -29,6 +31,7 @@ const languageMapping = {
   angular: "javascript",
   api: "javascript",
   javascript: "javascript",
+  unity: "Unity",
 }
 
 const PRODUCT = process.env.PRODUCT
