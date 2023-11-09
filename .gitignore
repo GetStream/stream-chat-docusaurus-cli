@@ -5,3 +5,4 @@ yarn-error.log
 /.log/
 .docusaurus
 *_version*
+.vscode/
