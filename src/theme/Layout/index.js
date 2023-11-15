@@ -52,14 +52,14 @@ export default function Layout(props) {
         {/* <!-- Start of HubSpot Embed Code --> */}
         {isProd && (
           <script
-            type="text/javascript"
-            id="hs-script-loader"
             async
             defer
+            id="hs-script-loader"
             src="//js.hs-scripts.com/1854208.js"
+            type="text/javascript"
           />
         )}
-        ,{/* <!-- End of HubSpot Embed Code --> */}
+        {/* <!-- End of HubSpot Embed Code --> */}
       </Head>
       <DataLayer />
       <ToastContainer />
