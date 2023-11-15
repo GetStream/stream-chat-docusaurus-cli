@@ -49,6 +49,17 @@ export default function Layout(props) {
         {trackingScript && (
           <script data-cookieconsent="ignore">{trackingScript}</script>
         )}
+        {/* <!-- Start of HubSpot Embed Code --> */}
+        {isProd && (
+          <script
+            async
+            defer
+            id="hs-script-loader"
+            src="//js.hs-scripts.com/1854208.js"
+            type="text/javascript"
+          />
+        )}
+        {/* <!-- End of HubSpot Embed Code --> */}
       </Head>
       <DataLayer />
       <ToastContainer />
