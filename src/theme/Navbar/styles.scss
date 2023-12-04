@@ -212,6 +212,10 @@
       &__reactnative {
         @include mixins.faux-select-dropdown-icon(reactnative);
       }
+
+      &__unity {
+        @include mixins.faux-select-dropdown-icon(unity);
+      }
     }
   }
 
