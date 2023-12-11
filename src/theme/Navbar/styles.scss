@@ -1,0 +1,502 @@
+@use "../../css/components/mixins.scss";
+
+:root {
+  --ifm-navbar-height: 6rem;
+  --ifm-navbar-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.04);
+  --xtm-site-navbar-display: none;
+  --xtm-site-navbar-height: 1.875rem;
+}
+
+@media (min-width: 997px) {
+  :root {
+    --xtm-site-navbar-display: block;
+    --ifm-navbar-height: 4.5rem;
+    --ifm-navbar-padding-vertical: 1.25rem;
+    --ifm-navbar-padding-horizontal: 1.875rem;
+  }
+}
+
+.navbar__link__sdk {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+
+  img.navbar__link__sdk__icon {
+    width: 18px;
+    height: 18px;
+    align-self: center;
+  }
+}
+
+.navbar {
+  align-items: center;
+  z-index: calc(var(--ifm-z-index-fixed) + 15);
+
+  &__brand {
+    margin-right: 1rem;
+    background-image: url("/img/logo-active.svg");
+    background-size: 51px 44px;
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+  }
+
+  &__logo {
+    height: 100%;
+    margin-right: 1rem;
+
+    img {
+      width: 100%;
+    }
+
+    &:hover {
+      opacity: 0;
+    }
+  }
+
+  &__title {
+    color: var(--ifm-color-black);
+
+    &::after {
+      display: inline-block;
+      content: "docs";
+      text-transform: uppercase;
+      font-size: 0.5rem;
+      color: var(--ifm-color-primary);
+      letter-spacing: 0.83px;
+      background-color: var(--ifm-color-primary-background);
+      transform: translateY(-10px);
+      font-weight: 800;
+      padding: 0 2px;
+      margin-left: 2px;
+    }
+  }
+
+  // Hide DocVersion link if there aren't any
+  &__items {
+    > a.navbar__link__custom-dropdown--version {
+      display: none;
+    }
+  }
+
+  .navbar__break,
+  .navbar_break:hover {
+    color: inherit !important;
+    cursor: default;
+    font-size: 0.7em !important;
+    margin-top: 0.9rem;
+    opacity: 0.5;
+  }
+
+  &__link {
+    @include mixins.remove-external-icon;
+    font-size: 0.813rem;
+
+    &:hover {
+      color: var(--ifm-color-primary-darkest);
+    }
+
+    &__sign-up {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.32px;
+      color: var(--ifm-color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.25rem 2rem !important;
+      border-radius: 21px;
+      background-color: var(--ifm-color-primary);
+
+      &:hover {
+        color: var(--ifm-color-white);
+        opacity: 0.8;
+      }
+
+      @media (max-width: 480px) {
+        display: none !important;
+      }
+    }
+
+    &__github {
+      width: 13px;
+      height: 13px;
+      background: url("/icon/github.svg") no-repeat;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    &__mobile {
+      display: none;
+    }
+  }
+
+  .dropdown {
+    @include mixins.faux-select;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 2.25rem;
+    margin-right: 0.5rem;
+
+    @media (min-width: 767px) {
+      flex: auto;
+      max-width: 11.25rem;
+    }
+
+    > .navbar__link__custom-dropdown--sdks,
+    > .navbar__link__custom-dropdown--version {
+      position: relative;
+      display: block;
+      width: 100%;
+      color: var(--ifm-color-content);
+      padding-right: calc(var(--ifm-navbar-item-padding-horizontal) + 1.1em);
+      @include mixins.dropdown-arrow;
+    }
+
+    &__menu {
+      top: calc(100% + 2px);
+      width: 100%;
+    }
+
+    &__link {
+      display: flex;
+      align-items: center;
+
+      &--active {
+        background: none;
+        font-weight: bold;
+      }
+
+      &:hover {
+        background: none;
+        color: var(--ifm-color-primary);
+      }
+
+      &:first-child {
+        &.navbar__break,
+        &.navbar_break:hover {
+          margin-top: 0;
+        }
+      }
+
+      &__api,
+      &__stream {
+        @include mixins.faux-select-dropdown-icon;
+      }
+
+      &__android {
+        @include mixins.faux-select-dropdown-icon(android);
+      }
+
+      &__angular {
+        @include mixins.faux-select-dropdown-icon(angular);
+      }
+
+      &__flutter {
+        @include mixins.faux-select-dropdown-icon(flutter);
+      }
+
+      &__ios {
+        @include mixins.faux-select-dropdown-icon(ios);
+      }
+
+      &__javascript {
+        @include mixins.faux-select-dropdown-icon(javascript);
+      }
+
+      &__react {
+        @include mixins.faux-select-dropdown-icon(react);
+      }
+
+      &__reactnative {
+        @include mixins.faux-select-dropdown-icon(reactnative);
+      }
+
+      &__unity {
+        @include mixins.faux-select-dropdown-icon(unity);
+      }
+    }
+  }
+
+  // Mobile sidebar
+  .navbar-sidebar {
+    // Removing the two-pages sidebar
+    &__back,
+    &__items .menu:first-child {
+      display: none;
+    }
+
+    &__close svg {
+      transform: scale(0.75);
+    }
+
+    &__items {
+      &--show-secondary {
+        transform: none;
+      }
+    }
+
+    // Menu list styles
+    .menu {
+      padding: 1rem 0;
+      font-size: 0.875rem;
+      > ul.menu__list {
+        position: relative;
+        // Styles for 'main' item
+        > li.menu__list-item:not(:nth-last-child(-n + 5)) {
+          margin-bottom: 1rem;
+          > a.menu__link {
+            @include mixins.menu-main-item;
+          }
+        }
+
+        // custom Stream footer with website's links
+        > .menu__list-item:nth-last-child(-n + 5):not(:last-child) {
+          .menu__link {
+            --ifm-menu-color: var(--ifm-link-color);
+            font-weight: 700;
+            &::after {
+              display: none;
+            }
+          }
+        }
+
+        > .menu__list-item:last-child {
+          margin: 1rem 0;
+
+          .menu__link {
+            --ifm-menu-color: rgba(0, 0, 0, 0.6);
+            font-size: 0.813rem;
+            pointer-events: none;
+
+            &::after {
+              display: none;
+            }
+          }
+        }
+      }
+
+      // needed to keep the active higlight line on the left 😩
+      a.menu__link--sublist + ul.menu__list {
+        margin-left: 10px;
+        position: unset;
+        .menu__list-item {
+          .menu__link:not(.menu__link--sublist) {
+            position: unset;
+          }
+        }
+      }
+
+      .menu__link--sublist {
+        @include mixins.menu-sublist-icon(relative);
+        margin-bottom: 0;
+        align-items: center;
+      }
+
+      .menu__link {
+        > span {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        &--active {
+          font-weight: bold;
+        }
+        &--active[tabindex="0"]:not(&--sublist) {
+          // active-item's height is calculated based on line-height: 1.25rem + vertical padding
+          @include mixins.active-item(
+            3px,
+            calc(2 * var(--ifm-menu-link-padding-vertical) + 1.25rem),
+            unset
+          );
+          &::before {
+            // vertically align vertical line based on li margin
+            transform: translate(0px, -4px);
+          }
+        }
+        &:active {
+          background-color: var(--ifm-color-secondary-background);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 996px) {
+  .navbar {
+    &--fixed-top {
+      .navbar__inner .navbar__items {
+        button.navbar__toggle {
+          margin-right: 1rem;
+          > svg {
+            transform: scale(0.75);
+          }
+        }
+        .navbar__brand {
+          margin-right: 0.5rem;
+
+          .navbar__title {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  [class*="searchBox"] {
+    position: initial;
+  }
+}
+
+@media (min-width: 997px) {
+  [class*="tableOfContents_"] {
+    max-height: calc(
+      100vh -
+        (
+          var(--ifm-navbar-height) - (var(--xtm-site-navbar-height)) - 1px +
+            2rem
+        )
+    ) !important;
+    top: calc(
+      var(--ifm-navbar-height) + (var(--xtm-site-navbar-height)) + 1px + 1rem
+    ) !important;
+  }
+}
+
+.site-navbar {
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  width: 100%;
+  display: var(--xtm-site-navbar-display);
+  background: var(--ifm-navbar-background-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0 var(--ifm-navbar-padding-horizontal);
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  z-index: calc(var(--ifm-z-index-fixed) + 10);
+  box-shadow: 0px 2px 18px rgba(0, 0, 0, 0.04);
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__breadcrumbs,
+  &__secondary {
+    height: var(--xtm-site-navbar-height);
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__breadcrumbs {
+    > li {
+      display: flex;
+      align-items: center;
+
+      &.separator {
+        color: rgba(0, 0, 0, 0.3);
+        margin: 0 10px;
+      }
+      &.category {
+        color: rgba(0, 0, 0, 0.5);
+        margin-right: 10px;
+      }
+
+      a {
+        color: black;
+
+        &:hover {
+          color: var(--ifm-link-color);
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &__item {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 calc(var(--ifm-navbar-padding-horizontal) / 2);
+
+    a {
+      color: var(--ifm-color-black);
+      opacity: 0.5;
+      text-decoration: none;
+      transition-property: opacity, color, fill;
+      transition-duration: var(--ifm-transition-fast);
+      transition-timing-function: var(--ifm-transition-timing-default);
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &--return {
+      display: flex;
+      padding-left: 0;
+      padding-right: var(--ifm-navbar-padding-horizontal);
+      margin-right: calc(var(--ifm-navbar-padding-horizontal) / 2);
+      box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.04);
+
+      a {
+        opacity: 1;
+
+        &:hover {
+          color: var(--ifm-color-primary);
+        }
+
+        &::before {
+          content: "«";
+          color: var(--ifm-color-primary);
+          margin-right: 0.2rem;
+        }
+      }
+    }
+
+    &--contact {
+      padding-right: 0;
+
+      a {
+        display: flex;
+        align-items: center;
+        opacity: 1;
+        color: var(--ifm-color-primary);
+
+        &:hover {
+          color: var(--ifm-color-primary-darkest);
+
+          svg {
+            fill: var(--ifm-color-primary-darkest);
+          }
+        }
+
+        svg {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    &.dropdown--hoverable {
+      position: relative;
+
+      &:after {
+        @include mixins.down-arrow(var(--ifm-color-secondary-darker), 4px, 3px);
+        cursor: pointer;
+        margin: 2px 0 0 0.5rem;
+        content: "";
+      }
+    }
+  }
+
+  &__dropdown {
+    &__item {
+      padding: 0.5rem;
+    }
+  }
+}

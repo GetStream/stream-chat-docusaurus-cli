@@ -1,0 +1,38 @@
+:root {
+  --ifm-button-padding-horizontal: 1rem;
+  --ifm-button-font-weight: 800;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  appearance: none;
+  border: 1px solid #e9ebee;
+  border-radius: var(--ifm-global-radius);
+  background-color: var(--ifm-color-white);
+  transition: all var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+  font-family: inherit;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+
+  &:focus {
+    box-shadow: var(--docsearch-searchbox-shadow);
+    outline: none;
+  }
+}
+
+textarea.input {
+  resize: none;
+}
+
+select.input {
+  background-repeat: no-repeat;
+  background-position: right 1rem top 50%;
+  background-image: url("/icon/select-arrow.png");
+}
+
+button.button {
+  letter-spacing: 0.13em;
+  font-size: 0.75rem;
+}

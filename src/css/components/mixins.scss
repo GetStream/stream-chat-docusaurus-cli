@@ -1,0 +1,121 @@
+@mixin active-item($width: 2px, $height: 100%, $top: 0) {
+  &::before {
+    position: absolute;
+    content: "";
+    top: $top;
+    left: 0;
+    height: $height;
+    width: $width;
+    background-color: var(--ifm-color-info);
+  }
+}
+
+@mixin menu-main-item {
+  color: var(--xtm-secondary-color);
+  font-weight: bold;
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+@mixin menu-sublist-icon($position: absolute) {
+  &::after {
+    background-size: 1rem 1rem;
+    position: $position;
+  }
+}
+
+@mixin dropdown-arrow {
+  &::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    border: none;
+    background: var(--ifm-menu-link-sublist-icon) 50% 50% / 1rem 1rem no-repeat;
+    filter: var(--ifm-menu-link-sublist-icon-filter);
+    height: 1.25rem;
+    width: 1.25rem;
+    transform: rotate(180deg);
+    transition: transform var(--ifm-transition-fast);
+  }
+  &:hover::after {
+    transform: rotate(0);
+  }
+}
+
+@mixin down-arrow($color, $width, $height) {
+  width: 0;
+  height: 0;
+  border-top: $width solid $color;
+  border-left: $height solid transparent;
+  border-right: $height solid transparent;
+}
+
+@mixin faux-select {
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid #e4e4e4;
+  cursor: pointer;
+  transition: all var(--ifm-transition-fast)
+    var(--ifm-transition-timing-default);
+
+  &:hover {
+    box-shadow: var(--docsearch-searchbox-shadow);
+    a::after {
+      transform: rotate(0);
+    }
+  }
+}
+
+@mixin remove-external-icon {
+  & svg[class^="iconExternalLink"] {
+    display: none;
+  }
+}
+
+@mixin faux-select-dropdown {
+  position: absolute;
+  padding: 0.5rem;
+  width: 100%;
+  z-index: var(--ifm-z-index-dropdown);
+  background-color: var(--ifm-dropdown-background-color);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: var(--ifm-global-shadow-md);
+  transition-property: opacity, transform, visibility;
+  transition-duration: var(--ifm-transition-fast);
+  transition-timing-function: var(--ifm-transition-timing-default);
+
+  & > ul {
+    border-top: none;
+    padding: 0;
+
+    & li {
+      margin: 0;
+      padding: 0;
+
+      & > a {
+        color: var(--ifm-dropdown-link-color);
+        display: block;
+        font-size: 0.875rem;
+        margin-top: 0.2rem;
+        padding: 0.25rem 0.5rem;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+@mixin faux-select-dropdown-icon($icon: stream) {
+  &:before {
+    content: " ";
+    width: 16px;
+    height: 16px;
+    display: inline;
+    margin-right: 0.5rem;
+    background-image: url("/icon/" + $icon + ".svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}

@@ -1,0 +1,7 @@
+| Name         | Type                                                                                    | Description                             | Supported operators                                 |
+| ------------ | --------------------------------------------------------------------------------------- | --------------------------------------- | --------------------------------------------------- |
+| `user_id`    | string                                                                                  | User ID                                 | `$in`, `$eq`, `$gt, $gte`, `$lt`, `$lte`, `$exists` |
+| `role`       | string                                                                                  | The role of the user                    | `$in`, `$eq`, `$gt, $gte`, `$lt`, `$lte`, `$exists` |
+| `custom`     | Object                                                                                  | Search in custom user data              | `$in`, `$eq`, `$gt, $gte`, `$lt`, `$lte`, `$exists` |
+| `created_at` | string, must be formatted as an RFC3339 timestamp (for example 2021-01-15T09:30:20.45Z) | Creation time of the user               | `$in`, `$eq`, `$gt, $gte`, `$lt`, `$lte`, `$exists` |
+| `updated_at` | string, must be formatted as an RFC3339 timestamp (for example 2021-01-15T09:30:20.45Z) | The time of the last update of the user | `$in`, `$eq`, `$gt, $gte`, `$lt`, `$lte`, `$exists` |

@@ -1,5 +1,4 @@
-Push notifications can be configured to receive updates when the application is closed or on the background, a perfect way to stay up to date with changes in your chat in real time. Stream Chat sends push notification to channel members that are not online and have at least one registered device. Push notifications are only sent for new messages and not for other events. You can use [Webhooks](https://getstream.io/chat/docs/android/webhooks_overview) to send push notifications on other types of events.
-
+Push notifications can be configured to receive updates when the application is closed or on the background, or even app is in a different contextual screen, a perfect way to stay up to date with changes in your chat in real time. Stream Chat sends push notification to channel members that are not online and have at least one registered device. Push notifications are only sent for new messages and not for other events. You can use [Webhooks](https://getstream.io/chat/docs/android/webhooks_overview) to send push notifications on other types of events.
 
 To receive push notifications from Stream Chat, you'll need to:
 
@@ -17,7 +16,8 @@ Push message delivery behaves according to these rules:
   - They posted at least one message
   - They were mentioned
 - Messages from muted users are not sent.
-- Messages are sent to all registered devices for a user (up to 25) .
+- Messages from mutes channels are not sent.
+- Messages are sent to all registered devices for a user (up to 25).
 - The message doesn't contain the flag `skip_push` as true.
 - `push_notifications` is enabled (default) on the channel type for message is sent.
 

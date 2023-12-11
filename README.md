@@ -20,17 +20,11 @@ cd stream-chat-docusaurus-cli
 npm install -g
 ```
 
-**Note**: The package is not published yet so this won't be installed using the npm/yarn command.
-
 Within the same directory level of your SDK that the `docusaurus` directory described above lives you can run CLI commands. Make sure you have at least the directory structure described above as well as at least 1 markdown file.
-
-### Initializing
-
-To initialize the docusaurus setup (which you will need to always do before anything else), you can utilize `npx` and run this command `npx stream-chat-docusaurus -i`. If there are any custom packages you need to install for custom plugin setups you can utilize the `-c` option and add a comma separated list of packages that will be installed on initialization (ex: `npx stream-chat-docusaurus -i -c=docusaurus-plugin-typedoc,typedoc,typedoc-plugin-markdown,typescript`).
 
 ### Starting
 
-To locally run the docusaurus setup and see your documentation you can run `npx stream-chat-docusaurus -s`. This command can be chained with the `-i` initialization command in 1 step by running `npx stream-chat-docusaurus -i -s`.
+To run the site locally and see your documentation, run `npx stream-chat-docusaurus -s`.
 
 ### Environment variables
 
@@ -42,7 +36,7 @@ To cut a new version of your docs simply type in `npx stream-chat-docusaurus -nv
 
 ### Building
 
-To locally build your docusaurus static files to see if it succeeds you should run `npx stream-chat-docusaurus -b`. The `-b` flag builds the static files.
+To build the site in production mode, run `npx stream-chat-docusaurus -b`. The `-b` flag builds the static files to a `build` directory.
 
 ### MDX
 
@@ -76,36 +70,6 @@ slug: /
 
 You can add local assets to your docs by adding them within an `assets` folder within your SDK named directory (ex: `docusaurus/docs/Android/assets/some-asset.png`) and then utilize them through local paths within your markdown files. For more info, reference the docusaurus documentation [here](https://docusaurus.io/docs/markdown-features/assets).
 
-## Plugins
-
-You can add your own plugins in addition to the default set by creating a `docusaurus{SDK_NAME}.plugin.js` file within your `docusaurus` directory.
-
-The custom plugin file (example name: `docusaurusReact.plugin.js`) should be in a format like this where you can add multiple plugins. `cwd` is the root path to your SDK (outside of the `docusaurus` directory described in [Local SDK setup](#Local-SDK-setup))
-
-```js
-const cwd = process.env.STREAM_SDK_PATH;
-module.exports = () => {
-  return {
-    plugins: [
-      [
-        path.join(cwd, 'docusaurus/node_modules/docusaurus-plugin-typedoc'),
-
-        {
-          entryPoints: [path.join(cwd, 'docusaurus/src/index.ts')],
-          tsconfig: path.join(cwd, 'docusaurus/tsconfig.json'),
-          docsRoot: path.join(cwd, 'docusaurus/docs'),
-          out: 'docusaurus/api',
-          sidebar: {
-            sidebarFile: path.join(cwd, 'docusaurus/typedoc-sidebar.js'),
-            fullNames: false,
-          },
-        },
-      ],
-    ],
-  };
-};
-```
-
 ### SDK-specific config for `@docusaurus/plugin-content-docs`
 
 We have common configuration of docusaurus docs in `docusaurus/docusaurus.config.js`. To modify the configuration, you can create a plugin file in your docusaurus directory as described above, with one of the plugins using `@docusaurus/plugin-content-docs` as the plugin ID.
@@ -118,23 +82,23 @@ For example for React Native, there is a file at `/docusaurus/reactnative-docusa
 module.exports = {
   plugins: [
     [
-      '@docusaurus/plugin-content-docs',
+      "@docusaurus/plugin-content-docs",
       {
-        lastVersion: '3.x.x',
+        lastVersion: "3.x.x",
         versions: {
           current: {
-            label: '4.0.0',
-            banner: 'unreleased',
-            path: '4.0.0',
+            label: "4.0.0",
+            banner: "unreleased",
+            path: "4.0.0",
           },
-          '3.x.x': {
-            label: '3.x.x',
+          "3.x.x": {
+            label: "3.x.x",
           },
         },
       },
     ],
   ],
-};
+}
 ```
 
 ## Sidebars
@@ -143,30 +107,27 @@ You can add your own sidebar instead of the auto-generated default by creating a
 
 ## Shared content
 
-To share content between multiple SDKs, put markdown files in the `shared` directory. When you run `npx stream-chat-docusaurus -i`, the script will symlink it on the same level as the SDK root directories: 
+To share content between multiple SDKs, put markdown files in the `shared` directory. During run, it will be symlinked next to your content.
 
 ```sh
-- docusaurus
-    - React
-    - Android
-    - iOS
-    - shared # this will be symlink to the shared directory
+- shared
+    - <your-shared-file> # this will be symlink to the shared directory
 ```
 
 Then, import and render the shared content using mdx:
 
 ```mdx
-import SharedContent from '../../../shared/_example-shared-content.md'
-// ... 
+import SharedContent from "../../../shared/_example-shared-content.md"
+
 <SharedContent />
 ```
 
 > NOTE: the [stream-chat-docusaurus website](https://github.com/GetStream/stream-chat-docusaurus/) uses the `staging` branch of `stream-chat-docusaurus-cli` for [its staging deployment](https://staging.getstream.io/chat/docs/sdk/react/). To ensure that the setup works, you need to follow the following workflow:
 
-- Write and test locally shared content using the `staging` branch for `stream-chat-docusaurus-cli` (this repository). 
+- Write and test locally shared content using the `staging` branch for `stream-chat-docusaurus-cli` (this repository).
 - Commit/push those changes **before committing/pushing** the staging content changes for your SDK.
-- Once you're ready to publish to production, *merge* the staging branch of this repository to production first. 
-- Then, publish the SDK content as usual. 
+- Once you're ready to publish to production, _merge_ the staging branch of this repository to production first.
+- Then, publish the SDK content as usual.
 - Ensure that you monitor and check that the Github workflows have finished successfully.
 
 ## Markdown Features Stream theme
@@ -210,13 +171,13 @@ To make use of the `<ImageShowcase />` component, remember to add the correct im
 Example of how to use it:
 
 ```jsx
-import ImageShowcase from '@site/src/components/ImageShowcase';
+import ImageShowcase from "@site/src/components/ImageShowcase"
 
-import channelList from '../assets/channel_list.png';
-import messageInput from '../assets/message_input.png';
-import messageList from '../assets/message_list.png';
+import channelList from "../assets/channel_list.png"
+import messageInput from "../assets/message_input.png"
+import messageList from "../assets/message_list.png"
 
-<ImageShowcase
+;<ImageShowcase
   items={[
     {
       image: channelList,
@@ -225,12 +186,12 @@ import messageList from '../assets/message_list.png';
           <code>ChannelList</code> can be used with no props
         </span>
       ),
-      alt: 'Example of how to use channelList component',
+      alt: "Example of how to use channelList component",
     },
-    { image: messageInput, caption: 'Message input design' },
-    { image: messageList, caption: 'Message list sample' },
+    { image: messageInput, caption: "Message input design" },
+    { image: messageList, caption: "Message list sample" },
   ]}
-/>;
+/>
 ```
 
 ![Example ImageShowcase desktop](./assets/images/Example_showcase.png)
@@ -241,8 +202,16 @@ You can also add border to the images using the boolean prop `border` like the f
 <ImageShowcase
   border
   items={[
-    { image: image1, caption: <span>Images with border 🙂</span>, alt: 'Example of custom message' },
-    { image: image2, caption: <span>Another one!</span>, alt: 'Example of custom message part 2' },
+    {
+      image: image1,
+      caption: <span>Images with border 🙂</span>,
+      alt: "Example of custom message",
+    },
+    {
+      image: image2,
+      caption: <span>Another one!</span>,
+      alt: "Example of custom message part 2",
+    },
   ]}
 />
 ```
@@ -260,10 +229,25 @@ slug: /
 hide_from_search: true
 ---
 ```
-### Broken Links
 
-Docusaurus reports about broken links and broken markdown links while running the project locally or when creating a production build(`yarn build`).
+## Adding Video
 
-The broken markdown links are reported by Docusarus when you run your project locally by `yarn start`(for SDK developers - `npx stream-chat-docusaurus -s`) command. You can change the behaviour of the Docusaurus when it detects a broken Markdown link by setting [`onBrokenMarkdownLinks`](https://docusaurus.io/docs/api/docusaurus-config#onBrokenMarkdownLinks) on `docusaurus.config.js`. It accepts the following types: `'ignore' | 'log' | 'warn' | 'throw'`.
+Videos can be added by using the normal html tag. For example, if you would want a video that is centered, you could use the following snippet,
 
-The broken links are only reported by Docusaurs when you create the production build using `yarn build`(for SDK developers - `npx stream-chat-docusaurus -b`) command. You can change the behavious of the Docusarus when it detects a broken links by setting [`onBrokenLinks`](https://docusaurus.io/docs/api/docusaurus-config#onBrokenLinks) on `docusaurus.config.js`. It accepts the following types: `'ignore' | 'log' | 'warn' | 'throw'`.
+```jsx
+import Video from "../assets/video.mp4"
+
+;<div style={{ display: "flex", justifyContent: "center" }}>
+  <div style={{ width: "270px" }}>
+    <video muted controls style={{ maxWidth: "100%" }}>
+      <source src={Video} type="video/mp4" />
+      Alas, your browser doesn't support HTML5 video. That's OK! You can still
+      <a href={Video}> download the video</a> and watch it with a video player.
+    </video>
+  </div>
+</div>
+```
+
+This would show the video centered in the page with control buttons as below. Just make sure you adapt the `width` style property according to your video file.
+
+<img width="974" alt="Example Video Showcase" src="https://github.com/GetStream/stream-chat-docusaurus-cli/assets/3846977/87b342b8-5e0d-47bd-b175-d7e4dde077de">
