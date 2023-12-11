@@ -24,11 +24,11 @@ Next, you need to visit your app's [Stream Dashboard](https://dashboard.getstrea
 
 From there you can create a new configuration by clicking the `New Configuration` button. After selecting the `Firebase` Provider, you will be asked to provide the following information:
 
-| Field Name         | Usage description                                                                                      |
-| ------------------ | ------------------------------------------------------------------------------------------------------ |
-| `Name`             | Used to select this configuration in SDK or API calls.                                                 |
-| `Description`      | Allows you to set a description on the configuration to help identify its usage in your app's context. |
-| `Credentials JSON` | The firebase credentials that will be used to send the push notification.                              |
+| Field Name | Usage description |
+|---|---|
+| `Name` | Used to select this configuration in SDK or API calls. |
+| `Description` | Allows you to set a description on the configuration to help identify its usage in your app's context. |
+| `Credentials JSON` | The firebase credentials that will be used to send the push notification. |
 
 For our example, we are using `firebase` as name and we are filling the remaining information as you can see in the image below:
 

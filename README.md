@@ -235,16 +235,16 @@ hide_from_search: true
 Videos can be added by using the normal html tag. For example, if you would want a video that is centered, you could use the following snippet,
 
 ```jsx
-import Video from "../assets/video.mp4"
+import Video from "../assets/video.mp4";
 
-;<div style={{ display: "flex", justifyContent: "center" }}>
-  <div style={{ width: "270px" }}>
-    <video muted controls style={{ maxWidth: "100%" }}>
-      <source src={Video} type="video/mp4" />
-      Alas, your browser doesn't support HTML5 video. That's OK! You can still
-      <a href={Video}> download the video</a> and watch it with a video player.
-    </video>
-  </div>
+<div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ width: "270px" }}>
+        <video muted controls style={{ maxWidth: "100%" }}>
+            <source src={Video} type="video/mp4"/>
+            Alas, your browser doesn't support HTML5 video. That's OK! You can still
+            <a href={Video}> download the video</a> and watch it with a video player.
+        </video>
+    </div>
 </div>
 ```
 
