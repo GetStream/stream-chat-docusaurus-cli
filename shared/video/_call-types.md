@@ -46,7 +46,7 @@ For these call types, backstage is not enabled, therefore you don't have to expl
 
 The `default` call type can be used for different video-calling apps, such as 1-1 calls, group calls, or meetings with multiple people. Both video and audio are enabled, and backstage is disabled. It has permissions settings in place, where admins and hosts have elevated permissions over other types of users.
 
-:::tip
+:::info
 The `default` type can be used in apps that use regular video calling. Follow [this tutorial](../../tutorials/video-calling) to learn more.
 :::
 
@@ -54,7 +54,7 @@ The `default` type can be used in apps that use regular video calling. Follow [t
 
 The `audio_room` call type is suitable for apps like Clubhouse or Twitter Spaces. It has a pre-configured workflow around requesting permissions to speak for regular listeners. Backstage is enabled, and new calls are going into backstage mode when created. You will need to explicitly call the `goLive` method to make the call active for all participants.
 
-:::tip
+:::info
 You can find a guide on how to handle this and build an application with this [here](../../tutorials/audio-room).
 :::
 
@@ -62,7 +62,7 @@ You can find a guide on how to handle this and build an application with this [h
 
 The `livestream` call type is configured to be used for live streaming apps. Access to calls is granted to all authenticated users, and backstage is enabled by default.
 
-:::tip
+:::info
 To build an example application for this you can take a look at our [live streaming tutorial](../../tutorials/livestream).
 :::
 
@@ -141,7 +141,7 @@ You can change these default capabilities in the dashboard. It is also possible 
 That means that if a user has permission to assign new capabilities they can assign them to other users.
 This is our approach to an effective permission system.
 
-:::tip
+:::info
 If you want to learn more about doing this, head over to the [Permissions and Capabilities](../../guides/permissions-and-moderation) chapter.
 :::
 
