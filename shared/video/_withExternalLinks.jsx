@@ -9,14 +9,19 @@ export default class WithExternalLinks extends React.Component {
    * Replace all the links in the page with the new links.
    *
    * Format:
-   * {
+   * mapping: {
    *   '/tutorials/video-calling/':'https://getstream.io/video/sdk/react/tutorial/video-calling/',
    *   '/tutorials/audio-room/': 'https://getstream.io/video/sdk/react/tutorial/audio-room/',
    *   '/tutorials/livestream/': 'https://getstream.io/video/sdk/react/tutorial/livestreaming/',
-   * }
+   * },
+   *
+   * selectorsToRemove: [
+   *   'div[class^="video-calling-tutorial"]',
+   *   'div[class^="livestream-tutorial"]',
+   * ],
    */
   componentDidMount() {
-    const mapping = this.props.mapping
+    const mapping = this.props.mapping || {}
     const links = document.querySelectorAll("article a")
     links.forEach(link => {
       const href = link.getAttribute("href")
@@ -32,6 +37,14 @@ export default class WithExternalLinks extends React.Component {
           })
         }
       }
+    })
+
+    const selectorsToRemove = this.props.selectorsToRemove || []
+    selectorsToRemove.forEach(selector => {
+      const elements = document.querySelectorAll(selector)
+      elements.forEach(element => {
+        element.remove()
+      })
     })
   }
 
