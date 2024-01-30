@@ -4,6 +4,8 @@ This is a CLI tool to help locally run docusaurus and show SDK documentation
 
 ## Installation and Using the CLI
 
+### Installing
+
 To install the package follow the guide below:
 
 ```bash
@@ -14,6 +16,9 @@ git clone https://github.com/getstream/stream-chat-docusaurus-cli
 # Move into the project directory
 
 cd stream-chat-docusaurus-cli
+
+# Install dependencies
+yarn install
 
 # Run the install command
 
