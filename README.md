@@ -4,6 +4,8 @@ This is a CLI tool to help locally run docusaurus and show SDK documentation
 
 ## Installation and Using the CLI
 
+### Installing
+
 To install the package follow the guide below:
 
 ```bash
@@ -14,6 +16,9 @@ git clone https://github.com/getstream/stream-chat-docusaurus-cli
 # Move into the project directory
 
 cd stream-chat-docusaurus-cli
+
+# Install dependencies
+yarn install
 
 # Run the install command
 
@@ -235,20 +240,19 @@ hide_from_search: true
 Videos can be added by using the normal html tag. For example, if you would want a video that is centered, you could use the following snippet,
 
 ```jsx
-import Video from "../assets/video.mp4";
+import Video from "../assets/video.mp4"
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-    <div style={{ width: "270px" }}>
-        <video muted controls style={{ maxWidth: "100%" }}>
-            <source src={Video} type="video/mp4"/>
-            Alas, your browser doesn't support HTML5 video. That's OK! You can still
-            <a href={Video}> download the video</a> and watch it with a video player.
-        </video>
-    </div>
+;<div style={{ display: "flex", justifyContent: "center" }}>
+  <div style={{ width: "270px" }}>
+    <video muted controls style={{ maxWidth: "100%" }}>
+      <source src={Video} type="video/mp4" />
+      Alas, your browser doesn't support HTML5 video. That's OK! You can still
+      <a href={Video}> download the video</a> and watch it with a video player.
+    </video>
+  </div>
 </div>
 ```
 
 This would show the video centered in the page with control buttons as below. Just make sure you adapt the `width` style property according to your video file.
 
 <img width="974" alt="Example Video Showcase" src="https://github.com/GetStream/stream-chat-docusaurus-cli/assets/3846977/87b342b8-5e0d-47bd-b175-d7e4dde077de">
-
