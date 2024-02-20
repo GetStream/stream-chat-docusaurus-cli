@@ -3,7 +3,7 @@ const folderMapping = {
   flutter: "Flutter",
   ios: "iOS",
   react: "React",
-  reactnative: "React Native",
+  reactnative: "React-Native",
   angular: "Angular",
   api: "API",
   javascript: "JavaScript",

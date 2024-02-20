@@ -12,7 +12,7 @@ import { folderMapping } from "../../constants"
 import styles from "./styles.module.css"
 
 const Feature = ({ title }) => {
-  const platform = `${title.toLowerCase().replace(" ", "")}`
+  const platform = `${title.toLowerCase().replace("-", "")}`
   return (
     <div className={clsx("col col--2", styles.feature)}>
       <div className={styles.buttons}>
