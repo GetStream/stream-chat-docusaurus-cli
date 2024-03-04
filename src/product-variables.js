@@ -59,7 +59,8 @@ module.exports = {
       flutter: `${GITHUB_ROOT}/stream-video-flutter/`,
       ios: `${GITHUB_ROOT}/stream-video-swift/`,
       react: `${GITHUB_ROOT}/stream-video-js/`,
-      // Disable only on production for now. Beware when merging. reactnative: `${GITHUB_ROOT}/stream-video-js/`,
+      reactnative: `${GITHUB_ROOT}/stream-video-js/`,
+      // Disable only on production for now. Beware when merging.
       // angular: `${GITHUB_ROOT}/stream-video-js/`,
     },
     docusaurus: {

@@ -49,6 +49,7 @@ const SDK_ORDER = [
   "android",
   "reactnative",
   "flutter",
+  "javascript",
   "angular",
   "api",
 ]

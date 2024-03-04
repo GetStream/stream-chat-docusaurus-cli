@@ -64,7 +64,7 @@ main() {
       echo "Missing NEW_VERSION or SDK_NAME. Skipping versioning.."
     else
       cd $PACKAGE_DIR
-      npm docusaurus docs:version:"$SDK_NAME" "$NEW_VERSION";
+      npm run docusaurus docs:version:"$SDK_NAME" "$NEW_VERSION";
 
       if [ ! -d "$CURRENT_WORKING_PATH/docusaurus/${SDK_NAME}_versioned_docs" ]; then
         cp -r "$SDK_NAME"* "$CURRENT_WORKING_PATH"/docusaurus
