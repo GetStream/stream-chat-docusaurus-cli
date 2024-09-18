@@ -261,7 +261,6 @@ module.exports = {
   baseUrl: URLS.docs.root,
   trailingSlash: true,
   favicon: "https://getstream.imgix.net/images/favicons/favicon-96x96.png",
-  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   organizationName: "GetStream",
   plugins,
